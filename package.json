@@ -17,6 +17,7 @@
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
+    "create-react-app": "^1.5.2",
     "crypto-js": "^3.1.9-1",
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
@@ -26,6 +27,7 @@
     "express-validator": "^5.0.3",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",
+    "open": "0.0.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
@@ -41,10 +43,17 @@
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.0.6",
+    "style-loader": "^0.20.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./server/server.js"
+    "server": "nodemon ./server/server.js",
+    "client": "webpack --mode development"
   },
   "repository": {
     "type": "git",
