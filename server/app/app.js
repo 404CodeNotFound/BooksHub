@@ -23,10 +23,6 @@ const init = (data) => {
         next();
     });
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../../dist/index.html'));
-    });
-
     return Promise.resolve(server);
 };
 
