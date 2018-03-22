@@ -18,6 +18,10 @@ const UserSchema = new Schema({
         max: [40, "User last name cannot be more than 40 characters long."],
         required: true
     },
+    passHash: {
+        type: String,
+        required: true
+    },
     nationality: String,
     age: Number,
     favourite_quote: String,
