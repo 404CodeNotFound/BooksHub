@@ -4,6 +4,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const path = require('path');
+const auth = require('../config/auth.config');
 
 const init = (data) => {
     const app = express();
@@ -15,12 +16,13 @@ const init = (data) => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(expressValidator());
 
-    require('../config/auth.config')(app, data, passport);
+    auth.init(app, data, passport);
 
     app.use((req, res, next) => {
         res.locals.user = req.user;
         next();
     });
+
     app.use(require('connect-flash')());
     app.use((req, res, next) => {
         res.locals.messages = require('express-messages')(req, res);
@@ -28,6 +30,7 @@ const init = (data) => {
     });
 
     app.post('/login', usersController.login);
+    app.get('/users/:username', auth.authenticate(passport), usersController.getUserProfile);
     
     return Promise.resolve(server);
 };

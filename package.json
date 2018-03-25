@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@types/jsonwebtoken": "^7.2.6",
+    "@types/jwt-simple": "^0.5.33",
     "@types/moment-timezone": "^0.5.4",
     "@types/passport-jwt": "^3.0.1",
     "body-parser": "^1.18.2",
@@ -20,6 +21,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.0.3",
     "jsonwebtoken": "^8.2.0",
+    "jwt-simple": "^0.5.1",
     "moment-timezone": "^0.5.14",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",

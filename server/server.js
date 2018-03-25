@@ -11,6 +11,6 @@ require('./db').init(config.connectionString)
     .then((app) => {
             app.listen(config.port, () => {
             console.log(`Server listening at: ${config.port}`);
-            open(`http://localhost:${config.port}`);
+            // open(`http://localhost:${config.port}`);
         });
 });
