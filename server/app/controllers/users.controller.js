@@ -1,5 +1,5 @@
 const crypto = require('crypto-js');
-const jwt = require('jsonwebtoken');
+const jwt = require('jwt-simple');
 const { secret } = require('../../config/config');
 
 module.exports = (data) => {
@@ -9,21 +9,41 @@ module.exports = (data) => {
             const password = req.body.password;
             //const passHash = crypto.SHA1(username + password).toString();
 
-            const user = data.users.getUserByUsernameAndPassword(username, password);
-            if(!user) {
-              res.status(401)
-                .json({ message:"User was not found!" });
+            data.users.getUserByUsernameAndPassword(username, password)
+                .then(user => {
+                    if (!user) {
+                        res.status(401)
+                            .json({ message: "User was not found!" });
+                    }
+
+                    const payload = { id: user._id };
+                    const token = jwt.encode(payload, secret);
+                    res.status(200)
+                        .json({ message: "ok", token: token });
+
+                    return res;
+                });
+        },
+        getUserProfile(req, res) {
+            const username = req.params.username;
+            if (!username) {
+                res.status(400)
+                    .json({ message: "You should provide username." });
             }
 
-            const payload = { id: user._id };
-            const token = jwt.sign(payload, secret);
-            res.status(200)
-                .json( {message: "ok", token: token });
-             
-            return res;
-        },
-        logout: (req, res) => {
+            data.users.getUserProfile(username)
+                .then(user => {
 
+                    if (!user) {
+                        res.status(404)
+                            .json({ message: "User was not found." });
+                    }
+
+                    res.status(200)
+                        .json({ user: user });
+
+                    return res;
+                });
         }
     }
 }
