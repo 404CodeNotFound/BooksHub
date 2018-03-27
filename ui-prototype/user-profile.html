@@ -9,8 +9,10 @@
     <link href="./css/bootstrap.css" rel="stylesheet" />
     <link href="./css/site.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P"
+        crossorigin="anonymous">
     <link href="./css/list.css" rel="stylesheet" />
 </head>
 
@@ -126,15 +128,31 @@
             <div class="container">
                 <div class="row">
                     <div id="cssmenu" class="col-md-12">
-                        <ul>
-                         <li class="active"><a href="#wishlist">Want to read</a></li>
-                         <li><a href="#currently-reading">Currently reading</a></li>
-                         <li><a href="#already-read">Read</a></li>
-                         <li><a href="#user-reviews">Reviews</a></li>
-                         <li><a href="#user-events">Events</a></li>
-                         <li><a href="#user-joined-events">Joined Events</a></li>
-                         <li><a href="#user-comments">Comments</a></li>
-                         <li><a href="#user-friends">Friends</a></li>
+                        <ul id="wishlist">
+                            <li class="active">
+                                <a href="#wishlist">Want to read</a>
+                            </li>
+                            <li>
+                                <a href="#currently-reading">Currently reading</a>
+                            </li>
+                            <li>
+                                <a href="#already-read">Read</a>
+                            </li>
+                            <li>
+                                <a href="#user-reviews">Reviews</a>
+                            </li>
+                            <li>
+                                <a href="#user-events">Events</a>
+                            </li>
+                            <li>
+                                <a href="#user-joined-events">Joined Events</a>
+                            </li>
+                            <li>
+                                <a href="#user-comments">Comments</a>
+                            </li>
+                            <li>
+                                <a href="#user-friends">Friends</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -144,7 +162,7 @@
                     <h3 class="section-title">Book collections</h3>
                     <div class="section-title-divider"></div>
                 </div>
-                <div class="profile-wishlist" id="wishlist">
+                <div class="profile-wishlist">
                     <h3 class="section-title">
                         <b>Want To Read</b>
                     </h3>
@@ -189,7 +207,7 @@
                     </div>
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="currently-reading">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -208,7 +226,7 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="profile-currently-reading" id="currently-reading">
+                <div class="profile-currently-reading">
                     <h3 class="section-title">
                         <b>Currently Reading</b>
                     </h3>
@@ -250,7 +268,7 @@
                     </div>
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="already-read">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -269,7 +287,7 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="profile-read" id="already-read">
+                <div class="profile-read">
                     <h3 class="section-title">
                         <b>Read books</b>
                     </h3>
@@ -310,7 +328,7 @@
                     </div>
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="user-reviews">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -334,12 +352,12 @@
                     <h3 class="section-title">Reviews</h3>
                     <div class="section-title-divider"></div>
                 </div>
-                <div class="row book-reviews" id="user-reviews">
+                <div class="row book-reviews">
                     <div class="col-xs-12">
                         <div class="mbr-testimonial card">
                             <div class="card-block">
                                 <a class="btn btn-danger btn-xs delete-review" href="#">
-                                        <i class="fas fa-trash-alt"></i>
+                                    <i class="fas fa-trash-alt"></i>
                                 </a>
                                 <p>Really like it! &lt;3</p>
                                 <p style="font-size:1rem">Posted on 2018.03.24</p>
@@ -356,7 +374,7 @@
                     </div>
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="user-events">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -375,35 +393,20 @@
                     </div>
                 </div>
             </div>
-            <div class="container" id="user-events">
-                <div class="row">
-                    <div id="cssmenu" class="col-md-12">
-                        <ul>
-                         <li><a href="#wishlist">Want to read</a></li>
-                         <li><a href="#currently-reading">Currently reading</a></li>
-                         <li><a href="#already-read">Read</a></li>
-                         <li><a href="#user-reviews">Reviews</a></li>
-                         <li class="active"><a href="#user-events">Events</a></li>
-                         <li><a href="#user-joined-events">Joined Events</a></li>
-                         <li><a href="#user-comments">Comments</a></li>
-                         <li><a href="#user-friends">Friends</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="panel" id="books-collections">
                 <div class="col-md-12">
                     <h3 class="section-title">Event collections</h3>
                     <div class="section-title-divider"></div>
                 </div>
-                <div class="profile-read" >
+                <div class="profile-read">
                     <h3 class="section-title">
                         <b>Events</b>
                     </h3>
                     <div class="row">
                         <div class="card col-md-4">
                             <a href="#">
-                                <img width="100px" class="card-img-top img-thumbnail" src=http://booksofwonder.com/images/products/detail/20180325_slider_SQUARE.jpg alt="Card image cap">
+                                <img width="100px" class="card-img-top img-thumbnail" src=http://booksofwonder.com/images/products/detail/20180325_slider_SQUARE.jpg
+                                    alt="Card image cap">
                             </a>
                             <div class="card-block">
                                 <h4 class="card-title">
@@ -440,7 +443,7 @@
 
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="user-joined-events">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -459,14 +462,15 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="profile-read" id="user-joined-events">
+                <div class="profile-read">
                     <h3 class="section-title">
                         <b>Joined Events</b>
                     </h3>
                     <div class="row">
                         <div class="card col-md-4">
                             <a href="#">
-                                <img width="100px" class="card-img-top img-thumbnail" src=http://booksofwonder.com/images/products/detail/20180325_slider_SQUARE.jpg alt="Card image cap">
+                                <img width="100px" class="card-img-top img-thumbnail" src=http://booksofwonder.com/images/products/detail/20180325_slider_SQUARE.jpg
+                                    alt="Card image cap">
                             </a>
                             <div class="card-block">
                                 <h4 class="card-title">
@@ -502,7 +506,7 @@
                     </div>
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="user-comments">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -521,7 +525,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel" id="user-comments">
+            <div class="panel">
                 <div class="col-md-12">
                     <h3 class="section-title">Comments</h3>
                     <div class="section-title-divider"></div>
@@ -531,7 +535,7 @@
                         <div class="mbr-testimonial card">
                             <div class="card-block">
                                 <a class="btn btn-danger btn-xs delete-review" href="#">
-                                        <i class="fas fa-trash-alt"></i>
+                                    <i class="fas fa-trash-alt"></i>
                                 </a>
                                 <p>Free entrance!</p>
                                 <p style="font-size:1rem">Posted on 2018.03.24</p>
@@ -548,7 +552,7 @@
                     </div>
                     <div class="col-md-offset-5 pages total">
                         Page 1 of 1
-                        <div class="pagination-container">
+                        <div class="pagination-container" id="user-friends">
                             <ul class="pagination">
                                 <li class="active">
                                     <a>1</a>
@@ -567,28 +571,12 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div id="cssmenu" class="col-md-12">
-                        <ul>
-                         <li><a href="#wishlist">Want to read</a></li>
-                         <li><a href="#currently-reading">Currently reading</a></li>
-                         <li><a href="#already-read">Read</a></li>
-                         <li><a href="#user-reviews">Reviews</a></li>
-                         <li><a href="#user-events">Events</a></li>
-                         <li><a href="#user-joined-events">Joined Events</a></li>
-                         <li><a href="#user-comments">Comments</a></li>
-                         <li class="active"><a href="#user-friends">Friends</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="panel" id="books-collections">
                 <div class="col-md-12">
                     <h3 class="section-title">Friends</h3>
                     <div class="section-title-divider"></div>
                 </div>
-                <div class="profile-read" id="user-friends">
+                <div class="profile-read">
                     <div class="row">
                         <div class="col-md-2 col-sm-4 text-center">
                             <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
@@ -746,6 +734,11 @@
         </div>
     </div>
     </div>
+    <div class="scroll-top-wrapper ">
+        <span class="scroll-top-inner">
+            <i class="fa fa-2x fa-arrow-circle-up"></i>
+        </span>
+    </div>
     <footer>
         <div class="container">
             <div class="row">
@@ -779,6 +772,37 @@
             </div>
         </div>
     </footer>
+    <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(function () {
+
+                $(document).on('scroll', function () {
+
+                    if ($(window).scrollTop() > 100) {
+                        $('.scroll-top-wrapper').addClass('show');
+                    } else {
+                        $('.scroll-top-wrapper').removeClass('show');
+                    }
+                });
+
+                $('.scroll-top-wrapper').on('click', scrollToTop);
+            });
+
+            function scrollToTop() {
+                verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
+                element = $('body');
+                offset = element.offset();
+                offsetTop = offset.top;
+                $('html, body').animate({ scrollTop: offsetTop }, 500, 'linear');
+            }
+
+        });
+    </script>
 </body>
 
 </html>
