@@ -1,6 +1,7 @@
 /* globals __dirname */
 const express = require('express');
 const passport = require('passport');
+var cors = require('cors')
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const path = require('path');
@@ -15,6 +16,7 @@ const init = (data) => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(expressValidator());
+    app.use(cors());
 
     auth.init(app, data, passport);
 
