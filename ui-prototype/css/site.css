@@ -27,12 +27,6 @@ h2.title, h3.title {
 }
 
 .bounceInLeft, .bounceInRight {
-    background-color: #f0f8ed;
-    border-radius: 9px;
-    box-shadow: 0px 1px 1px 0px;
-}
-
-.bounceInLeft, .bounceInRight {
     margin-left: 3%;
 }
 
@@ -42,6 +36,7 @@ h2.title, h3.title {
 
 .bounceInLeft {
     padding: 45px 35px;
+    border-right: 1px solid #ddd;
 }
 
 h4.card-title a {
@@ -54,7 +49,6 @@ input#search-pattern.form-control {
 
 div.panel.search-panel {
     margin-bottom: 10%;
-    /*padding: 3% 15%;*/
 }
 
 div.panel.search-panel form .genres-filter {
@@ -406,7 +400,11 @@ Colour for hovered stars when decreasing the rating
 }
 
 .book-info {
+    background-color: #f0f8ed;
+    border-radius: 9px;
+    box-shadow: 0px 1px 1px 0px;
     margin-bottom: 6%;
+
 }
 
 .dp
