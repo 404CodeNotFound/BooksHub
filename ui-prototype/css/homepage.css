@@ -233,12 +233,86 @@ blockquote cite:before {
 
 .sidebar {
     margin-top: 1.2%;
+    margin-left: 4%;
     padding: 2% 4%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-size: 0.8rem;
+}
+
+.sidebar .row {
+    margin-bottom: 25%;
 }
 
 #team, .events-recommendations {
     margin: 2%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+/*Sidebar sections title*/
+
+h2 {
+    font: 33px sans-serif;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.no-background {
+    position: relative;
+    overflow: hidden;
+}
+ 
+.no-background span {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    /* *display: inline; */
+    /* *vertical-align: auto; */
+    position: relative;
+    padding: 0 20px;
+}
+
+.no-background span:before, .no-background span:after {
+    content: '';
+    display: block;
+    width: 1000px;
+    position: absolute;
+    top: 0.73em;
+    border-top: 1px solid #333333;
+}
+
+.no-background span:before { right: 100%; }
+.no-background span:after { left: 100%; }
+
+/*Sidebar section title end*/
+
+.bolder {
+    font-weight: bolder;
+}
+
+/*Invitations*/
+#invitations-block{
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+ul.users{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+ul.users li{
+  list-style: none;
+  position: relative;
+  margin: 3px auto !important;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+img.profile-photo{
+  height: 58px;
+  width: 58px;
+  border-radius: 50%;
+}
+/*Invitations end*/
