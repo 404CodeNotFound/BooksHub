@@ -22,7 +22,6 @@
     margin-bottom: 20px;
 }
 
-/* ----- HERO -----*/
 .hero {
     display: table;
     position: relative;
@@ -78,51 +77,45 @@
     color: #fff;
 }
 
-/* ----- HERO END -----*/
-
-/*Top Rated Books*/
-/* ==========================================
-Offers Section
-========================================== */
 #team {
     background: #fff;
-    padding: 80px 15% 60px 15%;
+    padding: 1% 15% 1% 15%;
 }
 
-    #team .member {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+#team .member {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    #team .member .pic {
-        margin-bottom: 15px;
-        overflow: hidden;
-        /*height: 350px;*/
-    }
+#team .member .pic {
+    margin-bottom: 15px;
+    overflow: hidden;
+    /*height: 350px;*/
+}
 
-        #team .member .pic img {
-            max-width: 90%;
-        }
+#team .member .pic img {
+    max-width: 90%;
+}
 
-    #team .member h4 {
-        font-weight: 700;
-        margin-bottom: 2px;
-    }
+#team .member h4 {
+    font-weight: 700;
+    margin-bottom: 2px;
+}
 
-        #team .member h4 a {
-            color: #333333;
-            text-decoration: none;
-        }
+#team .member h4 a {
+    color: #333333;
+    text-decoration: none;
+}
 
-            #team .member h4 a:hover {
-                color: #4eb980;
-            }
+#team .member h4 a:hover {
+    color: #4eb980;
+}
 
-    #team .member span {
-        font-style: italic;
-        display: block;
-        font-size: 13px;
-    }
+#team .member span {
+    font-style: italic;
+    display: block;
+    font-size: 13px;
+}
 
 /*Testimonials*/
 #testimonials {
@@ -172,16 +165,154 @@ blockquote:before {
     font-family: inherit;
 }
 
-    blockquote cite {
-        color: #111;
-        font-size: 2rem;
-        display: block;
-        margin-top: 5px;
-        text-align: right;
-        font-family: 'Playball', cursive;
-    }
+blockquote cite {
+    color: #111;
+    font-size: 2rem;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-family: 'Playball', cursive;
+}
 
 blockquote cite:before {
     content: "\2014 \2009";
 }
 
+/*Homepage (logged user)*/
+.box-item {
+    float: left;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 4%;
+}
+
+.box-item img {
+    width: 150%;
+}
+.box-item .box-post .label a, .box-item .box-post .post-title a {
+    color:#FFF;
+}
+
+.box-item .box-post .post-title a {
+    font-weight: bolder;
+    text-shadow: 1px 2px #4eb980;
+}
+
+.box-item .box-post span.meta {
+    font-family:  sans-serif;
+    font-size: 12px;
+    color: #fff;
+    margin-top: 15px;
+    display: block;
+}
+
+.box-item .box-post span.meta span {
+    margin-right: 15px;
+}
+
+.box-item .box-post {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.events-recommendations {
+    padding: 0 10% 2% 10%;
+}
+
+.background {
+    background: #f6f6f6!important;
+}
+
+.sidebar {
+    margin-top: 1.2%;
+    margin-left: 4%;
+    padding: 2% 4%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-size: 0.8rem;
+}
+
+.sidebar .row {
+    margin-bottom: 25%;
+}
+
+#team, .events-recommendations {
+    margin: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*Sidebar sections title*/
+
+h2 {
+    font: 33px sans-serif;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.no-background {
+    position: relative;
+    overflow: hidden;
+}
+ 
+.no-background span {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    /* *display: inline; */
+    /* *vertical-align: auto; */
+    position: relative;
+    padding: 0 20px;
+}
+
+.no-background span:before, .no-background span:after {
+    content: '';
+    display: block;
+    width: 1000px;
+    position: absolute;
+    top: 0.73em;
+    border-top: 1px solid #333333;
+}
+
+.no-background span:before { right: 100%; }
+.no-background span:after { left: 100%; }
+
+/*Sidebar section title end*/
+
+.bolder {
+    font-weight: bolder;
+}
+
+/*Invitations*/
+#invitations-block{
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+ul.users{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+ul.users li{
+  list-style: none;
+  position: relative;
+  margin: 3px auto !important;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+img.profile-photo{
+  height: 58px;
+  width: 58px;
+  border-radius: 50%;
+}
+/*Invitations end*/
