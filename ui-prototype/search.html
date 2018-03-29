@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <meta charset="utf-16" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search - BooksHub</title>
     <link href="./css/bootstrap.css" rel="stylesheet" />
     <link href="./css/site.css" rel="stylesheet" />
+    <link href="./css/search.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    
 </head>
 
 <body>
@@ -40,30 +40,351 @@
         </div>
     </div>
     <div class="container body-content">
-        <div class="panel search-panel">
-            <div class="container" id="search-form">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" placeholder="Search" />
+        <div class="panel search-panel" id="banner">
+            <div class="container col-md-4 col-md-offset-4 col-sm-10" id="search-form">
+                <div class="row search-input-options">
+                    <div class="col-lg-7 col-sm-8">
+                        <input type="text" class="input input-lg" placeholder="Search" id="search-input-field" />
                     </div>
-                    <div class="col-lg-4" data-toggle="buttons">
+                    <div class="col-lg-5 col-sm-4 text-center" data-toggle="buttons">
                         <label class="btn">
-                            <input type="radio" name="q2" value="Users" />
+                            <input type="radio" name="q2" value="Users" id='users-category' />
                             <i class="fa fa-users"></i>
                         </label>
                         <label class="btn">
-                            <input type="radio" name="q2" value="Books" />
-                            <i class="fa fa-book" checked></i>
+                            <input type="radio" name="q2" value="Books" id='books-category' />
+                            <i class="fa fa-book"></i>
                         </label>
                         <label class="btn">
-                            <input type="radio" name="q2" value="Events" />
+                            <input type="radio" name="q2" value="Events" id='events-category' />
                             <i class="fa fa-calendar"></i>
                         </label>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="panel hide" id="search-results-books">
+            <div class="container filter col-md-3 col-md-offset-1">
+                <div class="row">
+                    <h3>Filter by:</h3>
+                </div>
+                <div class="row">
+                    <h4>Genre</h4>
+                    <div class="checkbox checkbox-success">
+                        <input id="mystery" type="checkbox" />
+                        <label for="mystery">
+                            Mystery
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="romance" type="checkbox" />
+                        <label for="romance">
+                            Romance
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="thriller" type="checkbox" />
+                        <label for="thriller">
+                            Thriller
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="dramma" type="checkbox" />
+                        <label for="dramma">
+                            Dramma
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <h3>Search by:</h3>
+                </div>
+                <div class="row">
+                    <div class="checkbox checkbox-success">
+                        <input id="title" type="checkbox" />
+                        <label for="title">
+                            Title
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="author" type="checkbox" />
+                        <label for="author">
+                            Author
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="language" type="checkbox" />
+                        <label for="language">
+                            Language
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="summary" type="checkbox" />
+                        <label for="summary">
+                            Summary
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-read col-md-8">
+                <h3 class="section-title">
+                    <b>Found Books</b>
+                </h3>
+                <div class="row">
+                    <div class="card col-md-2">
+                        <a href="#">
+                            <img width="100px" class="card-img-top" src=https://images.gr-assets.com/books/1437916050l/26506.jpg alt="Card image cap">
+                        </a>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <a href="#">Sisters</a>
+                            </h4>
+                            <p class="card-text">by
+                                <a href="#">Danielle Steel</a>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Published on 2018.03.23</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card col-md-2">
+                        <a href="#">
+                            <img width="100px" class="card-img-top" src=https://panmacmillan.azureedge.net/pml/panmacmillancorporatesite/media/panmacmillan/cover-images/lucy-diamond/__thumbnails/9781509815661one%20night%20in%20italy_6_jpg_264_400.jpg
+                                alt="Card image cap">
+                        </a>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <a href="#">One night in Italy</a>
+                            </h4>
+                            <p class="card-text">by
+                                <a href="#">Lucy Diamond</a>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Published on 2018.03.23</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-offset-5 pages total">
+                    Page 1 of 1
+                    <div class="pagination-container" id="user-reviews">
+                        <ul class="pagination">
+                            <li class="active">
+                                <a>1</a>
+                            </li>
+                            <li>
+                                <a>2</a>
+                            </li>
+                            <li>
+                                <a>3</a>
+                            </li>
+                            <li>
+                                <a>4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel hide" id="search-results-events">
+            <div class="container filter col-md-3 col-md-offset-1">
+                <div class="row">
+                    <h3>Filter by:</h3>
+                </div>
+                <div class="row">
+                    <h4>Genre</h4>
+                    <div class="checkbox checkbox-success">
+                        <input id="mystery" type="checkbox" />
+                        <label for="mystery">
+                            Mystery
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="romance" type="checkbox" />
+                        <label for="romance">
+                            Romance
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="thriller" type="checkbox" />
+                        <label for="thriller">
+                            Thriller
+                        </label>
+                    </div>
+                    <div class="checkbox checkbox-success">
+                        <input id="dramma" type="checkbox" />
+                        <label for="dramma">
+                            Dramma
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-read col-md-8">
+                <h3 class="section-title">
+                    <b>Found Events</b>
+                </h3>
+                <div class="row">
+                    <div class="card col-md-4">
+                        <a href="#">
+                            <img width="100px" class="card-img-top img-thumbnail" src=http://booksofwonder.com/images/products/detail/20180325_slider_SQUARE.jpg
+                                alt="Card image cap">
+                        </a>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <a href="#">The NYC Teen Author Festival</a>
+                            </h4>
+                            <p class="card-text">
+                                <i class="fas fa-calendar-alt"></i> 25.03.2018
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt"></i> 18 West 18th St Store, New York</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <a href="#">
+                            <img width="100px" class="card-img-top img-thumbnail" src=http://www.taylorbrownfiction.com/wp-content/uploads/2018/01/GoHM-Trade-Reviews-1024x768.jpg
+                                alt="Card image cap">
+                        </a>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <a href="#">Taylor Brown: Gods of Howl Mountain</a>
+                            </h4>
+                            <p class="card-text">
+                                <i class="fas fa-calendar-alt"></i> 23.04.2018
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt"></i> Avid Bookshop 493 Prince Avenue Athens, GA 30601</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-offset-5 pages total">
+                    Page 1 of 1
+                    <div class="pagination-container" id="user-comments">
+                        <ul class="pagination">
+                            <li class="active">
+                                <a>1</a>
+                            </li>
+                            <li>
+                                <a>2</a>
+                            </li>
+                            <li>
+                                <a>3</a>
+                            </li>
+                            <li>
+                                <a>4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel hide" id="search-results-users">
+            <div class="container filter col-md-10 col-md-offset-1">
+                <div class="row">
+                    <h3 class="section-title">Found users</h3>
+                </div>
+                <div class="profile-read">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user1</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user2</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user3</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user4</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user5</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user6</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user7</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user8</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user9</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user10</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-4 text-center">
+                            <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                            <p>
+                                <a href="#">user11</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-5 pages total">
+                        Page 1 of 1
+                        <div class="pagination-container">
+                            <ul class="pagination">
+                                <li class="active">
+                                    <a>1</a>
+                                </li>
+                                <li>
+                                    <a>2</a>
+                                </li>
+                                <li>
+                                    <a>3</a>
+                                </li>
+                                <li>
+                                    <a>4</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <footer>
         <div class="container">
             <div class="row">
@@ -97,6 +418,61 @@
             </div>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        $('#users-category').on('click', (ev) => {
+            let usersIcon = $('.fa-users');
+            if (usersIcon.hasClass('selected')) {
+                usersIcon.removeClass('selected');
+            } else {
+                usersIcon.addClass('selected');
+            }
+        });
+
+        $('#books-category').on('click', (ev) => {
+            let usersIcon = $('.fa-book');
+            if (usersIcon.hasClass('selected')) {
+                usersIcon.removeClass('selected');
+            } else {
+                usersIcon.addClass('selected');
+            }
+        });
+
+        $('#events-category').on('click', (ev) => {
+            let usersIcon = $('.fa-calendar');
+            if (usersIcon.hasClass('selected')) {
+                usersIcon.removeClass('selected');
+            } else {
+                usersIcon.addClass('selected');
+            }
+        });
+
+        $('#search-input-field').keypress((event) => {
+            if (event.key === 'Enter') {
+                let usersIcon = $('.fa-users');
+                let booksIcon = $('.fa-book');
+                let eventsIcon = $('.fa-calendar');
+                
+                let usersResults = $('#search-results-users');
+                usersResults.addClass('hide');
+                let booksResults = $('#search-results-books');
+                booksResults.addClass('hide');
+                let eventsResults = $('#search-results-events');
+                eventsResults.addClass('hide');
+                
+                if (usersIcon.hasClass('selected')) {
+                    usersResults.removeClass('hide');
+                } else if (booksIcon.hasClass('selected')) {
+                    booksResults.removeClass('hide');
+                } else if (eventsIcon.hasClass('selected')) {
+                    eventsResults.removeClass('hide');
+                }
+            }
+
+        })
+
+    </script>
 </body>
 
 </html>
