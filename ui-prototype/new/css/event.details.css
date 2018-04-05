@@ -1,0 +1,40 @@
+.joined-users {
+    margin-right: 0px !important;
+}
+
+#joined-users-text {
+    font-size: 14px;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.dp
+{
+    border:6px solid white;
+    width: 36px;
+    height: 36px;
+    transition: all 0.2s ease-in-out;
+}
+
+.dp:hover
+{
+    border:2px solid white;
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg);  
+    -webkit-transform:rotate(360deg);  
+}
+
+#event-title-section {
+    margin-bottom: 5%;
+}
+
+.btn-main-sm {
+    padding: 10px 10px;
+    background-color: #28a5df;
+    border: 1px solid #28a5df;
+    color: white;
+    border-radius: 5px;
+}
+#post-review-btn {
+    margin-top: 2%;
+}
