@@ -1,0 +1,26 @@
+#login form {
+    background-color: rgba(33, 15, 23, 0.7);
+    padding: 10% 0% 6% 15%;
+    border-radius: 5%;
+}
+#login {
+    margin-top: 8%;
+}
+
+#register h4, #register h2, #login h4, #login h2 {
+    color: white;
+    
+}
+
+.btn-login {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #28a5df;
+    border: none;
+    color: white
+}
+
+label {
+    font-size: 14pt;
+    color: white;
+}

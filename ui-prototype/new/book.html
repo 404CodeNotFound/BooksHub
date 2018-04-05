@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtua - New Amazing HTML5 Template</title>
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/responsee.css">
+  <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+  <link rel="stylesheet" href="css/lightcase.css">
+
+  <!-- CUSTOM STYLE -->
+  <link rel="stylesheet" href="css/template-style.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+
+  <!-- FROM OTHER TEMPLATE -->
+  <!-- PLUGINS CSS STYLE -->
+  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Owl Carousel -->
+  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <!-- Fancy Box -->
+  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <!-- CUSTOM CSS -->
+  <link href="css-other/style.css" rel="stylesheet">
+
+  <!-- FAVICON -->
+  <link href="img/favicon.png" rel="shortcut icon">
+
+  <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+</head>
+
+<body class="size-1280">
+  <!-- HEADER -->
+  <header role="banner" class="position-absolute">
+    <!-- Top Navigation -->
+    <nav class="background-transparent background-primary-dott full-width sticky">
+      <div class="top-nav">
+        <!-- mobile version logo -->
+        <div class="logo hide-l hide-xl hide-xxl">
+          <a href="index.html" class="logo">
+            <!-- Logo White Version -->
+            <img class="logo-white" src="img/logo.svg" alt="">
+            <!-- Logo Dark Version -->
+            <img class="logo-dark" src="img/logo-dark.svg" alt="">
+          </a>
+        </div>
+        <p class="nav-text"></p>
+
+        <!-- left menu items -->
+        <div class="top-nav left-menu">
+          <ul class="right top-ul chevron">
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+            <li>
+              <a href="about-us.html">Books</a>
+            </li>
+            <li>
+              <a href="services.html">Events</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- logo -->
+        <ul class="logo-menu">
+          <a href="index.html" class="logo">
+            <!-- Logo White Version -->
+            <img class="logo-white" src="img/logo.svg" alt="">
+            <!-- Logo Dark Version -->
+            <img class="logo-dark" src="img/logo-dark.svg" alt="">
+          </a>
+        </ul>
+
+        <!-- right menu items -->
+        <div class="top-nav right-menu">
+          <ul class="top-ul chevron">
+            <li>
+              <a>Search</a>
+            </li>
+            <li>
+              <a href="gallery.html">Profile</a>
+            </li>
+            <li>
+              <a href="contact.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main role="main">
+    <article>
+      <!-- Header -->
+      <header class="section background-image text-center" style="background-image:url(img/carousel-02.jpg)">
+        <h1 class="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+          Book Details
+        </h1>
+
+        <!-- white full width arrow object -->
+        <img class="arrow-object" src="img/arrow-object-white.svg" alt="">
+      </header>
+
+      <!-- Section 1 -->
+      <div class="container">
+        <section class="background-white section">
+                <div class="row col-md-12 book-info">
+                        <div class="col-lg-4 col-md-7 col-sm-6 col-xs-12 animated  animation-done bounceInLeft book-cover">
+                            <img alt="Book Cover" src="https://images-na.ssl-images-amazon.com/images/I/51KoFuN6y7L._SX327_BO1,204,203,200_.jpg" id="details-book-cover"
+                                class="img-thumbnail img-responsive">
+                            <div id="book-rating">
+                                <fieldset>
+                                    Rate this book:
+                                </fieldset>
+                                <form action="/ratings" id="rating-form" method="post">
+                                    <fieldset class="rating">
+                                        <input type="radio" value="5" />
+                                        <label title="Rocks!" rate-value='5'></label>
+        
+                                        <input type="radio" value="4" />
+                                        <label title="Pretty good" rate-value='4'></label>
+        
+                                        <input type="radio" value="3" />
+                                        <label title="Meh" rate-value='3'></label>
+        
+                                        <input type="radio" value="2" />
+                                        <label title="Kinda bad" rate-value='2'></label>
+        
+                                        <input type="radio" value="1" />
+                                        <label title="Sucks big time" rate-value='1'></label>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div id="book-recommend-btn">
+                                <input type="submit" value="Recommend to a friend" class="btn-main-sm" />
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-5 col-sm-6 col-xs-12 animated animation-done  bounceInRight">
+                            <h2 class="title">The Rooster Bar</h2>
+                            <h4 class="title">
+                                by
+                                <b>
+                                    <a href="author-details.html">John Grisham</a>
+                                </b>
+                            </h4>
+                            <hr />
+                            <div>Mark, Todd, and Zola came to law school to change the world, to make it a better place. But now, as third-year
+                                students, these close friends realize they have been duped.</div>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Published
+                                </dt>
+        
+                                <dd>
+                                    2018.03.23
+                                </dd>
+        
+                                <dt>
+                                    ISBN
+                                </dt>
+        
+                                <dd>
+                                    0385541171
+                                </dd>
+        
+                                <dt>
+                                    Rating
+                                </dt>
+        
+                                <dd>
+                                    0
+                                    <i class="fa fa-star star" aria-hidden="true"></i>
+                                </dd>
+        
+                                <dt>
+                                    Language
+                                </dt>
+        
+                                <dd>
+                                    English
+                                </dd>
+                                <dt>
+                                    Publisher
+                                </dt>
+        
+                                <dd>
+                                    Paradise press
+                                </dd>
+                            </dl>
+                            <hr />
+                            <div>
+                                <b> Genres: </b>
+                                <span>Mystery</span>
+                                <span>Thriller</span>
+                            </div>
+                            <hr />
+        
+                            <div class="row">
+                                <form action="#" class="col-md-3" id="status-form" method="post">
+                                    <select class="btn btn-warning" name="CurrentStatus">
+                                        <option value="0">CurrentlyReading</option>
+                                        <option value="1">Read</option>
+                                        <option selected="selected" value="2">WantToRead</option>
+                                    </select>
+                                </form>
+                                <div id="stat-message"></div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        
+        </div>
+        <section class="section background-dark">
+                <div class="line text-center">
+                  <i class="icon-sli-heart text-primary text-size-40"></i>
+                  <h2 class="text-size-50 text-m-size-40">
+                    Reviews</h2>
+                  <hr class="break background-primary break-small break-center margin-bottom-50">
+                </div>
+                <div class="line">
+                  <div class="carousel-default owl-carousel carousel-wide-arrows">
+                    <div class="item">
+                      <div class="s-12 m-12 l-7 center text-center">
+                        <div class="text-primary margin-bottom">
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                        </div>
+                        <p class="margin-bottom">Iriure duis autem vel eum dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+                          feugiat nulla facilisis lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                        <p class="text-primary text-size-16">
+                          <strong>Scott Star</strong> / CEO / Company</p>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="s-12 m-12 l-7 center text-center">
+                        <div class="text-primary margin-bottom">
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                        </div>
+                        <p class="margin-bottom">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, lobortis nisl ut aliquip
+                          ex ea commodo consequat vel illum dolore eu feugiat nulla facilisis.</p>
+                        <p class="text-primary text-size-16">
+                          <strong>Mark Stoner</strong> / Web Developer / Company</p>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="s-12 m-12 l-7 center text-center">
+                        <div class="text-primary margin-bottom">
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                          <i class="icon-star text-size-12"></i>
+                        </div>
+                        <p class="margin-bottom">Vulputate velit duis autem vel eum iriure dolor in hendrerit in vulputate lobortis nisl ut aliquip ex ea commodo
+                          consequat velit esse molestie consequat, vel illum dolore eu feugiat nulla.</p>
+                        <p class="text-primary text-size-16">
+                          <strong>Jane Naismith</strong> / Web Designer / Company</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+    </article>
+  </main>
+
+ <!-- FOOTER -->
+ <footer>
+        <!-- Main Footer -->
+        <section class="section background-dark">
+          <div class="line">
+            <div class="margin2x">
+              <div class="s-12 m-6 l-3 xl-5">
+                <h4 class="text-white text-strong">Our Mission</h4>
+                <p>
+                  <b class="text-size-20">Veri fastidii consectetuer</b> ius in, eum alii dicunt omnium eu. Wisi nostrud equidem ut usu.
+                  <b class="text-size-20">Deleniti pertinacia eu est</b>, te his soluta quaestio pericula.
+                </p>
+              </div>
+              <div class="s-12 m-6 l-3 xl-2">
+                <h4 class="text-white text-strong margin-m-top-30">Useful Links</h4>
+                <a class="text-primary-hover" href="page.html">FAQ</a>
+                <br>
+                <a class="text-primary-hover" href="contact.html">Contact Us</a>
+                <br>
+                <a class="text-primary-hover" href="blog.html">Blog</a>
+              </div>
+              <div class="s-12 m-6 l-3 xl-2">
+                <h4 class="text-white text-strong margin-m-top-30">Term of Use</h4>
+                <a class="text-primary-hover" href="page.html">Terms and Conditions</a>
+                <br>
+                <a class="text-primary-hover" href="page.html">Refund Policy</a>
+                <br>
+                <a class="text-primary-hover" href="page.html">Disclaimer</a>
+              </div>
+              <div class="s-12 m-6 l-3 xl-3">
+                <h4 class="text-white text-strong margin-m-top-30">Contact Us</h4>
+                <p>
+                  <i class="icon-sli-screen-smartphone text-primary"></i> 0800 4521 800 50</p>
+                <a class="text-primary-hover" href="mailto:contact@sampledomain.com">
+                  <i class="icon-sli-mouse text-primary"></i> contact@sampledomain.com</a>
+                <br>
+                <a class="text-primary-hover" href="mailto:office@sampledomain.com">
+                  <i class="icon-sli-mouse text-primary"></i> office@sampledomain.com</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="background-dark">
+          <div class="line">
+            <hr class="break margin-top-bottom-0" style="border-color: #777;">
+          </div>
+        </div>
+        <!-- Bottom Footer -->
+        <section class="padding-2x background-dark full-width">
+          <div class="line">
+            <div class="s-12 l-6">
+              <p class="text-size-12">Copyright 2018, Vision Design - graphic zoo</p>
+              <p class="text-size-12">All images have been purchased from Bigstock. Do not use the images in your website.</p>
+            </div>
+            <div class="s-12 l-6">
+              <a class="right text-size-12 text-primary-hover" href="http://www.myresponsee.com" title="Responsee - lightweight responsive framework">Design and coding
+                <br> by Responsee Team</a>
+            </div>
+          </div>
+        </section>
+      </footer>
+      <script type="text/javascript" src="js/responsee.js"></script>
+      <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+      <script type="text/javascript" src="js/template-scripts.js"></script>
+    </body>
+    
+    </html>

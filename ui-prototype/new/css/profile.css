@@ -1,0 +1,107 @@
+.user-dashboard-menu li {
+    margin-bottom: 5px;
+  }
+  
+  .user-dashboard-menu li.active a {
+    background: #28a5df;;
+    color: #fff;
+  }
+  
+  .user-dashboard-menu li.active a:hover {
+    color: #fff;
+  }
+  
+  .user-dashboard-menu li a {
+    padding: 10px;
+    font-size: 15px;
+    display: block;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .user-dashboard-menu li a:hover {
+    color: #28a5df;;
+  }
+  
+  .user-dashboard-menu li a:hover span {
+    background: #5672f9;
+    color: #fff;
+  }
+  
+  .user-dashboard-menu li a i {
+    margin-right: 5px;
+  }
+  
+  .user-dashboard-menu li a span {
+    float: right;
+    background: #F4F7F9;
+    float: right;
+    font-size: 10px;
+    border-radius: 8px;
+    padding: 3px 8px;
+    color: #84919B;
+  }
+
+  .widget {
+    background: #fff;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px 30px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+  }
+
+  .widget.user .image img {
+    width: 157px;
+    height: 157px;
+    border-radius: 100%;
+    border: 7px solid #dedede;
+  }
+
+  .user-dashboard-profile {
+    text-align: center;
+  }
+  
+  .user-dashboard-profile .profile-thumb img {
+    width: 130px;
+    height: auto;
+    margin-left: 25%;    
+    border: 5px solid #F4F7F9;
+  }
+  
+  .user-dashboard-profile h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .user-dashboard-profile .member-time {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  
+  .user-dashboard-profile .btn-contact {
+    background: #1FCA6B;
+  }
+  
+  .user-dashboard-profile .btn-offer {
+    background: #373C4D;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .btn-main-sm {
+    background: #28a5df;;
+    color: #fff !important;
+    border: none;
+    padding: 5px 15px 5px 15px;
+  }
+  
+.btn-main-sm:hover {
+    background: #28a5df;;
+    color: #fff;
+  }
