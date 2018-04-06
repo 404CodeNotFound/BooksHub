@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BooksHub - Book Details</title>
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/responsee.css">
+    <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+    <link rel="stylesheet" href="css/lightcase.css">
+    <link rel="stylesheet" href="css/template-style.css">
+    <link rel="stylesheet" href="css/author.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+    <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+</head>
+
+<body class="size-1280">
+    <header role="banner" class="position-absolute">
+        <nav class="background-transparent background-primary-dott full-width sticky">
+            <div class="top-nav">
+                <!-- mobile version logo -->
+                <div class="logo hide-l hide-xl hide-xxl">
+                    <a href="home.html" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/logo.svg" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/logo-dark.svg" alt="">
+                    </a>
+                </div>
+                <p class="nav-text"></p>
+
+                <!-- left menu items -->
+                <div class="top-nav left-menu">
+                    <ul class="right top-ul chevron">
+                        <li>
+                            <a href="home.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="books.list.html">Books</a>
+                        </li>
+                        <li>
+                            <a href="events.list.html">Events</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- logo -->
+                <ul class="logo-menu">
+                    <a href="home.html" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/logo.svg" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/logo-dark.svg" alt="">
+                    </a>
+                </ul>
+
+                <!-- right menu items -->
+                <div class="top-nav right-menu">
+                    <ul class="top-ul chevron">
+                        <li>
+                            <a href="search.html">Search</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Log in</a>
+                        </li>
+                        <li>
+                            <a href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <article>
+            <header class="section background-image text-center" style="background-image:url(img/carousel-02.jpg)">
+                <h1 class="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                    Author Biography
+                </h1>
+                <img class="arrow-object" src="img/arrow-object-white.svg" alt="">
+            </header>
+
+            <div class="container">
+                <section class="background-white section">
+                    <div class="row author-details">
+                        <div class="panel panel-default">
+                            <div class="row panel-body">
+                                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                    <img alt="User Pic" src="https://static01.nyt.com/images/2016/10/27/books/27BOOKGRISHAM/27BOOKGRISHAM-blog427.jpg" class="img-thumbnail img-responsive">
+                                </div>
+                                <div class="col-md-10 md-offset-1 col-xs-12 col-sm-6 col-lg-8">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <h2>John Grisham</h2>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            <i class="fa fa-envelope one" style="width:50px;"></i>
+                                            <a href="http://www.jgrisham.com/">http://www.jgrisham.com/</a>
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <dl class="container details dl-horizontal">
+                                        <dt>
+                                            Nationality
+                                        </dt>
+
+                                        <dd>
+                                            American </dd>
+
+                                        <dt>
+                                            Age
+                                        </dt>
+
+                                        <dd>
+                                            54 </dd>
+
+                                        <dt>
+                                            Biography
+                                        </dt>
+
+                                        <dd>
+                                            A lawyer by profession and an author by fame, John Grisham is the brilliant American writer of numerous novels best known
+                                            for his legal thrillers. He was born on February 8, 1955 in Jonesboro, Arkansas
+                                            to parents who were never formally educated but encouraged their son to pursue
+                                            an education and prepare himself for college. Grisham settled with his parents
+                                            in Southaven where he spent his younger years.
+                                        </dd>
+                                    </dl>
+                                    <p>
+                                        <a href="#" id="link-to-books">See all books by this author</a>                                        
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class="section background-white" id="books-list">
+                <div class="line text-center">
+                    <i class="icon-sli-book-open text-primary text-size-40"></i>
+                    <h2 class="text-size-50 text-m-size-40">
+                        <strong>Books</strong> by this <strong>Author</strong></h2>
+                    <hr class="break background-primary break-small break-center margin-bottom-50">
+                </div>
+                <div class="container">
+                    <div class="col-md-12 text-center">
+                        <div class="row">
+                            <div class="card col-md-2">
+                                <a href="book.html">
+                                    <img width="100px" class="card-img-top" src=https://images.gr-assets.com/books/1437916050l/26506.jpg alt="Card image cap">
+                                </a>
+                                <div class="card-block">
+                                    <h5 class="card-title">
+                                        <a href="book.html">Sisters</a>
+                                    </h5>
+                                    <p class="card-text">by
+                                        <a href="#">Danielle Steel</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Published on 2018.03.23</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <a href="book.html">
+                                    <img width="100px" class="card-img-top" src=https://panmacmillan.azureedge.net/pml/panmacmillancorporatesite/media/panmacmillan/cover-images/lucy-diamond/__thumbnails/9781509815661one%20night%20in%20italy_6_jpg_264_400.jpg
+                                        alt="Card image cap">
+                                </a>
+                                <div class="card-block">
+                                    <h5 class="card-title">
+                                        <a href="book.html">One night in Italy</a>
+                                    </h5>
+                                    <p class="card-text">by
+                                        <a href="book.html">Lucy Diamond</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Published on 2018.03.23</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <a href="book.html">
+                                    <img width="100px" class="card-img-top" src=https://images.gr-assets.com/books/1437916050l/26506.jpg alt="Card image cap">
+                                </a>
+                                <div class="card-block">
+                                    <h5 class="card-title">
+                                        <a href="book.html">Sisters</a>
+                                    </h5>
+                                    <p class="card-text">by
+                                        <a href="#">Danielle Steel</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Published on 2018.03.23</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <a href="book.html">
+                                    <img width="100px" class="card-img-top" src=https://panmacmillan.azureedge.net/pml/panmacmillancorporatesite/media/panmacmillan/cover-images/lucy-diamond/__thumbnails/9781509815661one%20night%20in%20italy_6_jpg_264_400.jpg
+                                        alt="Card image cap">
+                                </a>
+                                <div class="card-block">
+                                    <h5 class="card-title">
+                                        <a href="book.html">One night in Italy</a>
+                                    </h5>
+                                    <p class="card-text">by
+                                        <a href="book.html">Lucy Diamond</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Published on 2018.03.23</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-5 pages total center">
+                                Page 1 of 1
+                                <div class="pagination-container center">
+                                    <ul class="pagination">
+                                        <li class="active">
+                                            <a>1</a>
+                                        </li>
+                                        <li>
+                                            <a>2</a>
+                                        </li>
+                                        <li>
+                                            <a>3</a>
+                                        </li>
+                                        <li>
+                                            <a>4</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </article>
+    </main>
+    <footer>
+        <section class="section background-dark">
+            <div class="line">
+                <div class="margin2x">
+                    <div class="row text-center">
+                        <ul class="footer-social-info center">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row center copyright">
+                        <br /> Copyright © 2018
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <script>
+        $("#link-to-books").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#books-list").offset().top
+            }, 1000);
+        });
+    </script>
+    <script type="text/javascript" src="js/responsee.js"></script>
+    <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="js/template-scripts.js"></script>
+</body>
+
+</html>

@@ -160,7 +160,8 @@ div.card {
     margin-right: 2px;
 }
 .pagination li.active {
-    background-color: rgba(40, 165, 223, 0.8);    
+    background-color: rgba(40, 165, 223, 0.8);   
+    border-color: rgba(40, 165, 223, 0.8); 
     color: white;
 }
 .pages {
