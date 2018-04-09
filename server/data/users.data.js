@@ -2,7 +2,7 @@ const { User } = require('../models/user')
 module.exports = class UserData {
     getUserByUsernameAndPassword(username, passHash) {
         return new Promise((resolve, reject) => {
-            User.findOne({ 'username': username, 'password': passHash },
+            User.findOne({ 'username': username, 'passHash': passHash },
                 (err, user) => {
                     if (err) {
                         return reject(err);

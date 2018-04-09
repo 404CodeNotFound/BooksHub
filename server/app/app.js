@@ -11,6 +11,7 @@ const init = (data) => {
     const app = express();
     const server = require('http').Server(app);
     const usersController = require('./controllers/users.controller')(data);
+    const requestsController = require('./controllers/requests.controller')(data);
     
     app.use('/libs', express.static('node_modules'));
     app.use(bodyParser.json());
@@ -33,6 +34,7 @@ const init = (data) => {
 
     app.post('/login', usersController.login);
     app.get('/users/:username', auth.authenticate(passport), usersController.getUserProfile);
+    app.get('/users/:username/requests', auth.authenticate(passport), requestsController.getPendingUserRequests);    
     
     return Promise.resolve(server);
 };
