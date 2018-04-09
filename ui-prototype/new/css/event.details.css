@@ -38,3 +38,11 @@
 #post-review-btn {
     margin-top: 2%;
 }
+
+dt {
+    float: left;
+}
+
+dd {
+    margin-left: 15% !important;
+}
