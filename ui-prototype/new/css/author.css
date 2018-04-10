@@ -57,9 +57,9 @@ div.card {
     cursor: pointer;    
 }
 
-.pagination li.active {
-    background-color: rgba(40, 165, 223, 0.8);  
-    border-color:   rgba(40, 165, 223, 0.8);
+.pagination li.active, .pagination li:hover {
+    background-color: #4eb980;  
+    border-color:   #4eb980;
     color: white;
 }
 .pages {
@@ -75,6 +75,22 @@ dd {
 }
 
 #link-to-books {
-    color: rgba(40, 165, 223, 0.8) !important;
+    color: #4eb980 !important;
     font-weight: bold;
+}
+
+#link-to-books:hover {
+    font-size: 1rem;
+    border: 1px solid #4eb980;
+    text-decoration: none;
+    padding: 2% 2%;
+    border-radius: 11%;
+}
+
+.background-image {
+    background-image: url(../img/banner-blurred.jpg);
+}
+
+.icon-sli-book-open.text-primary {
+    color: #4eb980 !important;
 }

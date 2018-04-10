@@ -1,9 +1,9 @@
 .user-dashboard-menu li {
     margin-bottom: 5px;
-  }
+}
   
   .user-dashboard-menu li.active {
-    background: #28a5df;;
+    background: #4eb980;;
     color: #fff;
   }
   
@@ -21,11 +21,11 @@
   }
   
   .user-dashboard-menu li a:hover {
-    color: #28a5df;
+    color: #4eb980;
   }
   
   .user-dashboard-menu li a:hover span {
-    background: #5672f9;
+    background: #4eb980;
     color: #fff;
   }
   
@@ -50,14 +50,14 @@
   }
   
   .btn-main-sm {
-    background: #28a5df;;
+    background: #4eb980;;
     color: #fff !important;
     border: none;
     padding: 5px 15px 5px 15px;
   }
 
   td a {
-      color: #28a5df !important;
+      color: #4eb980 !important;
   }
 
 .pagination {
@@ -72,9 +72,13 @@
     margin-right: 2px;
 }
 .pagination li.active {
-    background-color: rgba(40, 165, 223, 0.8);    
+    background-color: #4eb980;    
     color: white;
 }
 .pages {
     margin-top: 10%;
+}
+
+.background-image {
+  background-image: url(../img/banner-blurred.jpg);
 }

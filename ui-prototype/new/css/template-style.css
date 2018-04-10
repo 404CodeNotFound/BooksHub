@@ -174,7 +174,7 @@ td {border-right:1px solid #fff;}
 .background-primary-hightlight .aside-nav > ul > li.active-item > a:link, .background-primary-hightlight .aside-nav > ul > li.active-item > a:visited,
 .primary-color-primary .background-primary-hightlight .top-nav .active-item > a, .primary-color-primary .background-primary-hightlight .top-nav li a:hover, .primary-color-primary .background-primary-hightlight .aside-nav li a:hover, 
 .primary-color-primary .background-primary-hightlight .aside-nav > ul > li.active-item > a:link, .primary-color-primary .background-primary-hightlight .aside-nav > ul > li.active-item > a:visited {
-  background: #28a5df none repeat scroll 0 0;
+  background: #4eb980 none repeat scroll 0 0;
   color: #fff;
 } 
 .background-dark-hightlight .top-nav .active-item > a, .background-dark-hightlight .top-nav li a:hover, .background-dark-hightlight .aside-nav li a:hover, 
@@ -352,7 +352,7 @@ aside.aside-left {
 } 
 .aside-nav.background-primary-hightlight > ul > li > a:hover, .aside-nav.background-primary-hightlight > ul > li.active-item > a:link, .aside-nav.background-primary-hightlight > ul > li.active-item > a:visited,
 .primary-color-primary .aside-nav.background-primary-hightlight > ul > li > a:hover, .primary-color-primary .aside-nav.background-primary-hightlight > ul > li.active-item > a:link, .primary-color-primary .aside-nav.background-primary-hightlight > ul > li.active-item > a:visited {
-  border-color: #28a5df;
+  border-color: #4eb980;
 }
 .aside-nav.background-dark-hightlight > ul > li > a:hover, .aside-nav.background-dark-hightlight > ul > li.active-item > a:link, .aside-nav.background-dark-hightlight > ul > li.active-item > a:visited,
 .primary-color-dark .aside-nav.background-primary-hightlight > ul > li > a:hover, .primary-color-dark .aside-nav.background-primary-hightlight > ul > li.active-item > a:link, .primary-color-dark .aside-nav.background-primary-hightlight > ul > li.active-item > a:visited {
@@ -392,7 +392,7 @@ aside.aside-left {
   color: #fff !important;
 }
 .text-primary, .text-primary *, .primary-color-primary .text-primary, .primary-color-primary .text-primary * {
-  color: #28a5df !important;
+  color: #4eb980 !important;
 }
 .text-dark, .text-dark *, .primary-color-dark .text-primary, .primary-color-dark .text-primary * {
   color: #454545 !important;
@@ -408,7 +408,7 @@ aside.aside-left {
   color: #fff !important;
 }
 .text-primary-hover:hover, .primary-color-primary .text-primary-hover:hover {
-  color: #28a5df !important;
+  color: #4eb980 !important;
 }
 .text-dark-hover:hover, .primary-color-dark .text-primary-hover:hover {
   color: #454545 !important;
@@ -419,7 +419,7 @@ aside.aside-left {
   background-color: #fff !important;
 }
 .background-primary, .primary-color-primary .background-primary {
-  background-color: #28a5df !important; 
+  background-color: #4eb980 !important; 
 }
 .background-dark, .primary-color-dark .background-primary {
   background-color: #454545 !important; 
@@ -432,7 +432,7 @@ aside.aside-left {
   background-color: rgba(255, 255, 255, 0.85) !important;
 }
 .background-primary.background-transparent, .primary-color-primary .background-primary.background-transparent {
-  background-color: rgba(40, 165, 223, 0.85) !important;
+  background-color: #4eb980 !important;
 }
 .background-dark.background-transparent, .primary-color-dark .background-primary.background-transparent {
   background-color: rgba(0, 38, 51, 0.85) !important;
@@ -443,7 +443,7 @@ aside.aside-left {
   border-color: #fff !important;
 }
 .border-primary, .primary-color-primary .border-primary {
-  border-color: #28a5df !important;
+  border-color: #4eb980 !important;
 }
 .border-dark, .primary-color-dark .border-primary {
   border-color: #282828 !important;
@@ -485,13 +485,13 @@ aside.aside-left {
 .button.button-primary-stroke, a.button.button-primary-stroke, a.button.button-primary-stroke:link, a.button.button-primary-stroke:visited,
 .primary-color-primary .button.button-primary-stroke, .primary-color-primary a.button.button-primary-stroke, .primary-color-primary a.button.button-primary-stroke:link, .primary-color-primary a.button.button-primary-stroke:visited {
   background: none;
-  border: 1px solid #28a5df;
+  border: 1px solid #4eb980;
   box-shadow: none;
-  color: #28a5df;
+  color: #4eb980;
 }
 .button.button-primary-stroke:hover, a.button.button-primary-stroke:hover,
 .primary-color-primary .button.button-primary-stroke:hover, .primary-color-primary a.button.button-primary-stroke:hover {
-  background: #28a5df none repeat scroll 0 0;
+  background: #4eb980 none repeat scroll 0 0;
   color: #fff;
 }
 .button.button-dark-stroke, a.button.button-dark-stroke, a.button.button-dark-stroke:link, a.button.button-dark-stroke:visited,
@@ -520,6 +520,16 @@ aside.aside-left {
 .section-top-small-padding  { 
   padding: 2.5rem  1.25rem 0  1.25rem;
 }
+
+.section .text-primary {
+  color: #4eb980 !important;
+}
+
+.section .text-primary:hover {
+  color: #4eb980 !important;
+  text-decoration: underline;
+}
+
 .float-left {
   float: left;
 }
@@ -823,7 +833,7 @@ a.tab-label, a.tab-label:link, a.tab-label:visited, a.tab-label:hover,
 }
 .background-primary-hightlight a.tab-label.active-btn, .background-primary-hightlight a.tab-label:hover,
 .primary-color-primary .background-primary-hightlight a.tab-label.active-btn, .primary-color-primary .background-primary-hightlight a.tab-label:hover {
-  background: #28a5df none repeat scroll 0 0;
+  background: #4eb980 none repeat scroll 0 0;
   color: #fff;
 }
 
@@ -1555,7 +1565,7 @@ hr.break.background-white, .primary-color-white hr.break-small.background-primar
 hr.break.background-primary, .primary-color-primary hr.break.background-primary {
   background: none!important;
   background-color: none!important;
-  border-top: 2px dotted #28a5df;
+  border-top: 2px dotted #4eb980;
 }
 hr.break.background-dark, .primary-color-dark hr.break.background-primary {
   background: none!important;
@@ -1635,10 +1645,10 @@ nav.fixed .left-menu, nav.fixed .right-menu {
   position: relative;
   text-transform: uppercase;
   transition: all 0.20s linear 0s;
--o-transition: all 0.20s linear 0s;
--ms-transition: all 0.20s linear 0s;
--moz-transition: all 0.20s linear 0s;
--webkit-transition: all 0.20s linear 0s;
+  -o-transition: all 0.20s linear 0s;
+  -ms-transition: all 0.20s linear 0s;
+  -moz-transition: all 0.20s linear 0s;
+  -webkit-transition: all 0.20s linear 0s;
 } 
 
 .top-nav ul ul {
@@ -1683,14 +1693,14 @@ nav.fixed .left-menu, nav.fixed .right-menu {
 
 /* Menu dott color */
 .background-white-dott .top-nav > ul > li > a::before, .primary-color-white .background-primary-dott .top-nav > ul > li > a::before {background: #fff none repeat scroll 0 0;}
-.background-primary-dott .top-nav > ul > li > a::before, .primary-color-primary .background-primary-dott .top-nav > ul > li > a::before {background: #28a5df none repeat scroll 0 0;} 
+.background-primary-dott .top-nav > ul > li > a::before, .primary-color-primary .background-primary-dott .top-nav > ul > li > a::before {background: #4eb980 none repeat scroll 0 0;} 
 .background-dark-dott .top-nav > ul > li > a::before, .primary-color-dark .background-primary-dott .top-nav > ul > li > a::before {background: #434343 none repeat scroll 0 0;}
 
 /* Menu font color */
 .background-white-dott .top-nav > ul ul li.active-item > a, .primary-color-white .background-primary-dott .top-nav > ul ul li.active-item > a,
 .background-white-dott .top-nav > ul ul li > a:hover, .primary-color-white .background-primary-dott .top-nav > ul ul li > a:hover {color: #fff !important;}
 .background-primary-dott .top-nav > ul ul li.active-item > a, .primary-color-primary .background-primary-dott .top-nav > ul ul li.active-item > a,
-.background-primary-dott .top-nav > ul ul li > a:hover, .primary-color-primary .background-primary-dott .top-nav > ul ul li > a:hover {color: #28a5df !important;} 
+.background-primary-dott .top-nav > ul ul li > a:hover, .primary-color-primary .background-primary-dott .top-nav > ul ul li > a:hover {color: #4eb980 !important;} 
 .background-dark-dott .top-nav > ul ul li.active-item > a, .primary-color-dark .background-primary-dott .top-nav > ul ul li.active-item > a,
 .background-dark-dott .top-nav > ul ul li > a:hover, .primary-color-dark .background-primary-dott .top-nav > ul ul li > a:hover {color: #434343 !important;}
 

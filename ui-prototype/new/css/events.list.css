@@ -45,3 +45,7 @@
 .events-recommendations {
     padding: 0 10% 2% 10%;
 }
+
+.background-image {
+    background-image: url(../img/banner-blurred.jpg);
+}

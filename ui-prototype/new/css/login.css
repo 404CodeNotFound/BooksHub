@@ -15,7 +15,7 @@
 .btn-login {
     padding: 10px 20px;
     border-radius: 5px;
-    background-color: #28a5df;
+    background-color: #4eb980;
     border: none;
     color: white
 }
@@ -23,4 +23,8 @@
 label {
     font-size: 14pt;
     color: white;
+}
+
+.background-image-main {
+    background-image: url(../img/banner-blurred.jpg);
 }

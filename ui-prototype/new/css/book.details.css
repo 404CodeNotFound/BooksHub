@@ -45,8 +45,8 @@
 
 .btn-main-sm {
     padding: 10px 10px;
-    background-color: #28a5df;
-    border: 1px solid #28a5df;
+    background-color: #4eb980;
+    border: 1px solid #4eb980;
     color: white;
     border-radius: 5px;
 }
@@ -72,4 +72,13 @@ dt {
 
 dd {
     margin-left: 15% !important;
+}
+
+.background-image {
+    background-image: url(../img/banner-blurred.jpg);
+}
+
+.icon-sli-pencil.text-primary, 
+.icon-sli-speech.text-primary {
+    color: #4eb980 !important;
 }

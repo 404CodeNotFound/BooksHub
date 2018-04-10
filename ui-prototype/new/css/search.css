@@ -16,8 +16,8 @@
 }
 
 .search-input-options {
-    background-color: rgba(40, 165, 223, 0.8);
-    color: rgba(255, 255, 255, 0.6);
+    background-color: #fff;
+    color: #555555;
     margin-top: 15%;
     margin-bottom: 15%;
 }
@@ -28,7 +28,7 @@
 }
 
 .selected {
-    color: white;
+    color: #4eb980;
 }
 
 .checkbox {
@@ -104,8 +104,6 @@
 }
 
 #btn-search {
-    background-color: rgba(0, 0, 0, 0);
-    color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
     margin-top: 40%;
 }
@@ -160,9 +158,9 @@ div.card {
     margin-right: 2px;
     cursor: pointer;    
 }
-.pagination li.active {
-    background-color: rgba(40, 165, 223, 0.8);   
-    border-color: rgba(40, 165, 223, 0.8); 
+.pagination li.active, .pagination li:hover {
+    background-color: #4eb980;   
+    border-color: #4eb980; 
     color: white;
 }
 .pages {
@@ -175,4 +173,8 @@ div.card {
 
 .users img {
     display: initial !important;
+}
+
+.background-image {
+    background-color: #4eb980;
 }

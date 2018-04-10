@@ -4,7 +4,7 @@
   }
   
   .user-dashboard-menu li.active{
-    background: #28a5df;;
+    background: #4eb980;
     color: #fff;
   }
   
@@ -21,11 +21,11 @@
   }
   
   .user-dashboard-menu li:hover {
-    color: #28a5df;;
+    color: #4eb980;
   }
   
   .user-dashboard-menu li:hover span {
-    background: #5672f9;
+    background: #4eb980;
     color: #fff;
   }
   
@@ -45,7 +45,7 @@
 
   .widget {
     background: #fff;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 56px 0px rgba(0, 0, 0, 0.1);
     padding: 25px 30px 30px;
     margin-bottom: 30px;
     border-radius: 2px;
@@ -88,14 +88,14 @@
   }
   
   .btn-main-sm {
-    background: #28a5df;;
+    background: #4eb980;
     color: #fff !important;
     border: none;
     padding: 5px 15px 5px 15px;
   }
   
 .btn-main-sm:hover {
-    background: #28a5df;;
+    background: #4eb980;;
     color: #fff;
   }
 
@@ -112,8 +112,8 @@
     cursor: pointer;
 }
 .pagination li.active {
-    background-color: rgba(40, 165, 223, 0.8);   
-    border-color: rgba(40, 165, 223, 0.8); 
+    background-color: #4eb980;   
+    border-color: #4eb980; 
     color: white;
 }
 
@@ -183,7 +183,7 @@
 }
 
 .for-book a {
-  color: rgb(40, 165, 223) !important;
+  color: #4eb980 !important;
 }
 
 .fa-trash-o {
@@ -193,4 +193,8 @@
 
 .review {
   margin-bottom: 5%;
+}
+
+.background-image {
+  background-color: #4eb980;
 }

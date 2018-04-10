@@ -80,7 +80,7 @@
   </header>
   <main role="main">
     <article>
-      <header class="section background-image text-center" style="background-image:url(img/carousel-02.jpg)">
+      <header class="section background-image text-center">
         <h1 class="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
           Book Details
         </h1>
@@ -125,7 +125,7 @@
               <h4 class="title">
                 by
                 <b>
-                  <a href="author-details.html">John Grisham</a>
+                  <a href="author.html">John Grisham</a>
                 </b>
               </h4>
               <hr />
@@ -199,7 +199,23 @@
         </section>
 
       </div>
-      <section class="section background-dark" id="reviews">
+      <section class="section background-dark" id="review-form">
+        <div class="line text-center">
+          <i class="icon-sli-pencil text-primary text-size-40"></i>
+          <h2 class="text-size-50 text-m-size-40">
+            Leave a Review</h2>
+          <hr class="break background-primary break-small break-center margin-bottom-50">
+        </div>
+        <div class="container">
+          <form action="#" method="post">
+            <textarea class="form-control col-md-6" cols="8" id="Content" name="Content" placeholder="Write your review here..." rows="5"
+              style="min-width: 100%">
+            </textarea>
+            <input type="submit" value="Leave review" id="post-review-btn" class="btn-main-sm btn-block col-md-4 offset-md-4" />
+          </form>
+        </div>
+      </section>
+      <section class="section background-white" id="reviews">
         <div class="line text-center">
           <i class="icon-sli-speech text-primary text-size-40"></i>
           <h2 class="text-size-50 text-m-size-40">
@@ -260,22 +276,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section class="section background-white" id="review-form">
-        <div class="line text-center">
-          <i class="icon-sli-pencil text-primary text-size-40"></i>
-          <h2 class="text-size-50 text-m-size-40">
-            Leave a Review</h2>
-          <hr class="break background-primary break-small break-center margin-bottom-50">
-        </div>
-        <div class="container">
-          <form action="#" method="post">
-            <textarea class="form-control col-md-6" cols="8" id="Content" name="Content" placeholder="Write your review here..." rows="5"
-              style="min-width: 100%">
-            </textarea>
-            <input type="submit" value="Leave review" id="post-review-btn" class="btn-main-sm btn-block col-md-4 offset-md-4" />
-          </form>
         </div>
       </section>
     </article>
