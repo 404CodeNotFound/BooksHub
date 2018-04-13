@@ -73,3 +73,89 @@ dd {
 .map {
     padding-top: 4%;
 }
+
+/*Comments*/
+.mbr-testimonial {
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.mbr-testimonial + * {
+    padding-top: 40px;
+}
+
+.mbr-testimonial.card {
+    background-color: transparent;
+    border: none;
+}
+
+.mbr-testimonial .card-block {
+    background: #f4f4f4;
+    color: #565656;
+    font-family: "Lora";
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 2;
+    padding: 1.875rem;
+    position: relative;
+}
+
+.mbr-testimonial .card-block:after {
+    background-color: inherit;
+    bottom: -7px;
+    content: "";
+    display: block;
+    height: 14px;
+    left: 50%;
+    margin-left: -7px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 14px;
+}
+
+.mbr-testimonial-lg .card-block {
+    padding-bottom: 90px;
+}
+
+.mbr-testimonial .card-footer {
+    background: none;
+    border: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.mbr-testimonial .card-footer:last-child {
+    border-radius: 0;
+}
+
+.mbr-testimonial .comment {
+    font-size: 1.2rem;
+}
+
+.mbr-testimonial .date-posted {
+    font-size: 0.8rem;
+}
+
+.mbr-author-name {
+    color: #2d2d2d;
+    font-family: "Montserrat";
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.3;
+    padding-top: 1.25rem;
+}
+
+.mbr-author img {
+    border-radius: 50%;
+    display: inline;
+}
+
+#reviews .row {
+    margin-bottom: 3%;
+}

@@ -88,3 +88,64 @@ dd {
 #write-review-link {
     margin-left: 2%;
 }
+
+/*Reviews*/
+#reviews {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#reviews .review img {
+    border-radius: 50%;
+    max-width: 60%;
+}
+
+blockquote {
+    margin: 0 0 0px 0;
+    padding: 20px 70px 10px;
+    position: relative;
+    font-size: 1.2rem;
+    border: 0;
+}
+
+blockquote a {
+    text-decoration: none;
+    color: #4eb980;
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 120px;
+    position: absolute;
+    left: 10px;
+    top: -30px;
+    color: #4eb980;
+    font-family: inherit;
+}
+
+blockquote cite {
+    color: #111;
+    font-size: 1.2rem;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-family: 'Playball', cursive;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
+}
+
+@media only screen and (max-width: 600px) {
+    #reviews {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #reviews .review img {
+        max-width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
