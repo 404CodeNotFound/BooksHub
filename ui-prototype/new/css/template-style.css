@@ -10,8 +10,17 @@ p {
   line-height: 1.6rem;
 }
 a, a:link, a:visited, a:hover, a:active { 
-color: #777;
+  color: #777;
 }
+a:hover {
+  font-weight: bolder !important;
+  color: #4eb980 !important;
+}
+
+.card > a:hover {
+  width: 110%;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #000;                                         
   margin-bottom: 15px;
@@ -66,7 +75,7 @@ h6.headline, .h6.headline {
 .text-size-80, .text-xxl-size-80 {font-size: 80px !important;}
 .text-size-90, .text-xxl-size-90 {font-size: 90px !important;}
 .text-size-100, .text-xxl-size-100 {font-size: 100px !important;}                                                                                                                
-.background-green .section-title:after, .primary-color-green .background-primary .section-title:after {color: #fff;}
+.section-title:after, .primary-color-green .background-primary .section-title:after {color: #fff;}
 .text-thin {font-weight: 300;}
 b, strong, .text-strong {font-weight: 700;}
 .text-extra-strong {font-weight: 800;}
@@ -158,9 +167,13 @@ td {border-right:1px solid #fff;}
 }
 
 .background-image-main {
-  height: 690px;
+  height: 800px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.top-nav > ul > li > a:hover {
+  color: #fff !important;
 }
 
 .background-white-hightlight .top-nav .active-item > a, .background-white-hightlight .top-nav li a:hover, .background-white-hightlight .aside-nav li a:hover, 
@@ -675,9 +688,14 @@ visibility:hidden;
 /* More info button */
 a.text-more-info {
   display: block;
-  font-size: 0.85rem;
   margin-top: 0.625rem;
 }
+
+a.text-more-info:hover {
+  color: #4eb980 !important;
+  font-size: 1.1rem;
+}
+
 a.text-more-info:after {
   content: "\f006";
   font-family: mfg;
@@ -688,9 +706,6 @@ a.text-more-info:after {
 -ms-transition: all 0.20s linear 0s;
 -moz-transition: all 0.20s linear 0s;
 -webkit-transition: all 0.20s linear 0s;
-}
-a.text-more-info:hover:after {
-  margin-left: 0.825rem;
 }
 
 /* Carousel */
@@ -854,6 +869,22 @@ form.customform input, form.customform textarea, form.customform select {
 form.customform input:hover, form.customform textarea:hover, form.customform select:hover, form.customform input:focus, form.customform textarea:focus, form.customform select:focus {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 }
+
+.background-grey {
+  background-color: #f9f9f9;
+}
+
+.statistics {
+  margin-top: 2%;
+  padding-bottom: 3%;
+}
+
+.label-success {
+  padding: 1% 1%;
+  background-color: #4eb980;
+  border-radius: 5px;
+}
+
 /* -1366 version */
 @media screen and (max-width:1366px) {
     .margin-xl-bottom {

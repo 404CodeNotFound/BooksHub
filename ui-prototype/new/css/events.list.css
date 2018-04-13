@@ -9,7 +9,7 @@
 .box-item img {
     width: 150%;
 }
-.box-item .box-post .label a, .box-item .box-post .post-title a {
+.box-item .box-post .label a, .box-item .box-post .post-title a, .label-success {
     color:#FFF;
 }
 

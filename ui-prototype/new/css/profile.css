@@ -198,3 +198,12 @@
 .background-image {
   background-color: #4eb980;
 }
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.img-circle:hover {
+  transform: scale(1.4);
+  margin-bottom: 15px;
+}

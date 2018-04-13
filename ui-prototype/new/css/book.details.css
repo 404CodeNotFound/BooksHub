@@ -1,5 +1,7 @@
 #book-rating {
     margin-top: 10%;
+    margin-bottom: 6%;
+    padding-left: 2%;
 }
 
 .rating {
@@ -81,4 +83,8 @@ dd {
 .icon-sli-pencil.text-primary, 
 .icon-sli-speech.text-primary {
     color: #4eb980 !important;
+}
+
+#write-review-link {
+    margin-left: 2%;
 }

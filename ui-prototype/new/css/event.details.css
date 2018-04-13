@@ -1,5 +1,5 @@
 .joined-users {
-    margin-right: 0px !important;
+    margin: 1% 1%;
 }
 
 #joined-users-text {
@@ -11,8 +11,8 @@
 .dp
 {
     border:6px solid white;
-    width: 36px;
-    height: 36px;
+    width: 90px;
+    height: 40px;
     transition: all 0.2s ease-in-out;
 }
 
@@ -49,4 +49,27 @@ dd {
 
 .background-image {
     background-image: url(../img/banner-blurred.jpg);
+}
+
+.no-padding.col-lg-3, .no-padding.col-md-3, .no-padding.col-sm-10, .no-padding.col-lg-6, .no-padding.col-md-6, .no-padding.col-sm-12 {
+     padding-left: 0px; 
+     padding-right: 0px;
+}
+
+.joined-friends {
+    margin-top: 6%;
+    margin-bottom: 6%;
+}
+
+.description {
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+#write-comment, #see-comments {
+    margin-top: 6%;
+}
+
+.map {
+    padding-top: 4%;
 }

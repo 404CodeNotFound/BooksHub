@@ -93,10 +93,10 @@
             <div class="col-lg-4 col-md-7 col-sm-6 col-xs-12 animated  animation-done bounceInLeft book-cover">
               <img alt="Book Cover" src="https://images-na.ssl-images-amazon.com/images/I/51KoFuN6y7L._SX327_BO1,204,203,200_.jpg" id="details-book-cover"
                 class="img-thumbnail img-responsive">
-              <div id="book-rating">
-                <fieldset>
+              <div class="row" id="book-rating">
+                <div class="col-md-4">
                   Rate this book:
-                </fieldset>
+                </div>
                 <form action="/ratings" id="rating-form" method="post">
                   <fieldset class="rating">
                     <input type="radio" value="5" />
@@ -116,8 +116,10 @@
                   </fieldset>
                 </form>
               </div>
-              <div id="book-recommend-btn">
-                <input type="submit" value="Recommend to a friend" class="btn-main-sm" />
+              <div class="row" id="write-review-link">
+                <button class="btn-main-sm"  >
+                  <i class="fa fa-pencil"></i> Write review
+                </button>
               </div>
             </div>
             <div class="col-lg-7 col-md-5 col-sm-6 col-xs-12 animated animation-done  bounceInRight">
@@ -191,15 +193,15 @@
                 <div id="stat-message"></div>
                 <button class="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link">
                   <i class="fa fa-comments"></i> See reviews</button>
-                <button class="btn-main-sm col-md-3 col-sm-12" id="write-review-link">
-                  <i class="fa fa-pencil"></i> Write review</button>
+                <button class="btn-main-sm col-md-3 col-sm-12">
+                  <i class="fa fa-user"></i> Recommend</button>
               </div>
             </div>
           </div>
         </section>
 
       </div>
-      <section class="section background-dark" id="review-form">
+      <section class="section background-grey" id="review-form">
         <div class="line text-center">
           <i class="icon-sli-pencil text-primary text-size-40"></i>
           <h2 class="text-size-50 text-m-size-40">
