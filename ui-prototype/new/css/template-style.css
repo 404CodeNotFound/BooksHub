@@ -173,8 +173,8 @@ td {border-right:1px solid #fff;}
 }
 
 .top-nav > ul > li > a:hover {
-  color: #fff !important;
-}
+  color: #444 !important;
+}  
 
 .background-white-hightlight .top-nav .active-item > a, .background-white-hightlight .top-nav li a:hover, .background-white-hightlight .aside-nav li a:hover, 
 .background-white-hightlight .aside-nav > ul > li.active-item > a:link, .background-white-hightlight .aside-nav > ul > li.active-item > a:visited,
@@ -1646,6 +1646,7 @@ nav.fixed .left-menu, nav.fixed .right-menu {
 .background-transparent {
   background: none;
 }  
+
 .custom-button {
   margin-top: 200px;
   margin-bottom: -20px;

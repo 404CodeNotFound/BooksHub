@@ -207,3 +207,27 @@
   transform: scale(1.4);
   margin-bottom: 15px;
 }
+
+/*Invitations list*/
+
+#invitations {
+  margin: 0 4%;
+}
+
+.people-nearby .nearby-user {
+  padding: 20px 0;
+  border-top: 1px solid #f1f2f2;
+  border-bottom: 1px solid #f1f2f2;
+  margin-bottom: 20px;
+}
+
+img.profile-photo-lg {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.btn-main-green {
+  background-color: #4eb980;
+  color: #fff;
+}
