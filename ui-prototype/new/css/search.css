@@ -224,4 +224,27 @@ div.card {
     .search-input-options {
         margin-top: 50%;
     }
+
+    .filters {
+        margin: 0 !important;
+        padding-left: 20% !important;  
+    }
+
+    .filter {
+        font-size: 12px;
+        width: 50%;
+        float: left;
+    }
+
+    .filter h4 {
+        font-size: 16px !important;
+    }
+
+    .card {
+        margin-right: 7%;
+    }
+
+    #search-results-events h3 {
+        margin-top: 5%;
+    }
 }
