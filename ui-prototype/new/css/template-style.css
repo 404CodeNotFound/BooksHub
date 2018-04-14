@@ -885,6 +885,11 @@ form.customform input:hover, form.customform textarea:hover, form.customform sel
   border-radius: 5px;
 }
 
+.btn-main-green {
+  background-color: #4eb980;
+  color: #fff;
+}
+
 /* -1366 version */
 @media screen and (max-width:1366px) {
     .margin-xl-bottom {

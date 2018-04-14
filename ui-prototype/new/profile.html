@@ -15,8 +15,11 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
+
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body class="size-1280">
@@ -97,7 +100,7 @@
                                 </div>
                                 <h5 class="text-center">Samanta Doe</h5>
                                 <p>samantadoe@gmail.com</p>
-                                <a href="#" class="btn-main-sm">Edit Profile</a>
+                                <button type="button" class="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button>
                             </div>
                             <div class="widget user-dashboard-menu">
                                 <ul>
@@ -538,6 +541,9 @@
                         <div class="row title">
                             <h3>My Events Collection</h3>
                         </div>
+                        <button type="button" class="btn btn-main-green" id="create-event-btn" data-toggle="modal" data-target="#add-event-modal">
+                            <i class="fa fa-plus"></i>Create event
+                        </button>
                         <div class="margin2x">
                             <div class="row">
                                 <div class="col-md-4 margin-bottom-60">
@@ -1489,6 +1495,100 @@
             </section>
         </article>
     </main>
+
+    <div class="modal fade" id="edit-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit your profile</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="UserName">Username</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="UserName" name="UserName" type="text" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="Password">Password</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="Password" name="Password" type="password" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="Email">Email</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="Email" name="Email" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="FirstName">Full Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="FirstName" name="FirstName" type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-main-green" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add-event-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new event</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="event-title">Title</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="event-title" name="Title" type="text" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="event-place">Place</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="event-place" name="Place" type="text" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="event-date">Date</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="event-date" name="Date" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="event-description">Description</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="event-description" name="Description" type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-main-green" data-dismiss="modal">Add</button>
+                    <button type="button" class="btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <section class="section background-dark">

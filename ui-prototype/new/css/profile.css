@@ -100,7 +100,7 @@
   }
 
   .title {
-    margin-bottom: 5%;
+    margin-bottom: 3%;
   }
 
   .pagination li {
@@ -227,7 +227,6 @@ img.profile-photo-lg {
   border-radius: 50%;
 }
 
-.btn-main-green {
-  background-color: #4eb980;
-  color: #fff;
+#create-event-btn {
+  margin-bottom: 3%;
 }
