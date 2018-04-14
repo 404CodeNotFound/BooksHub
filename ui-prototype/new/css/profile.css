@@ -65,7 +65,8 @@
   .user-dashboard-profile .profile-thumb img {
     width: 130px;
     height: auto;
-    margin-left: 25%;    
+    margin-left: auto;
+    margin-right: auto;    
     border: 5px solid #F4F7F9;
   }
   
@@ -229,4 +230,20 @@ img.profile-photo-lg {
 
 #create-event-btn {
   margin-bottom: 3%;
+}
+
+.user {
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  #currently-reading-books, #read-books, #want-to-read-books, #my-events, #joined-events, #reviews, #comments, #invitations {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  #friends {
+    padding-left: 20%;
+    padding-right: 10%;
+  }
 }
