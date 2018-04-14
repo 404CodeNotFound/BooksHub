@@ -256,26 +256,26 @@
                                 <h4>Filter by Genre:</h4>
                             </div>
                             <div class="row checkbox checkbox-success">
-                                <input id="mystery" type="checkbox" />
-                                <label for="mystery">
+                                <input id="mystery-event" type="checkbox" />
+                                <label for="mystery-event">
                                     Mystery
                                 </label>
                             </div>
                             <div class="row checkbox checkbox-success">
-                                <input id="romance" type="checkbox" />
-                                <label for="romance">
+                                <input id="romance-event" type="checkbox" />
+                                <label for="romance-event">
                                     Romance
                                 </label>
                             </div>
                             <div class="row checkbox checkbox-success">
-                                <input id="thriller" type="checkbox" />
-                                <label for="thriller">
+                                <input id="thriller-event" type="checkbox" />
+                                <label for="thriller-event">
                                     Thriller
                                 </label>
                             </div>
                             <div class="row checkbox checkbox-success">
-                                <input id="dramma" type="checkbox" />
-                                <label for="dramma">
+                                <input id="dramma-event" type="checkbox" />
+                                <label for="dramma-event">
                                     Dramma
                                 </label>
                             </div>
@@ -564,6 +564,8 @@
                 booksResults.removeClass('d-none');
             } else if (eventsIcon.hasClass('selected')) {
                 eventsResults.removeClass('d-none');
+            } else {
+                booksResults.removeClass('d-none');                
             }
         }
     </script>
