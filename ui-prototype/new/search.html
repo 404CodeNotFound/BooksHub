@@ -15,8 +15,6 @@
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 </head>
 
 <body class="size-1280">
@@ -489,88 +487,10 @@
     </footer>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
-    <script>
-        $('#users-category').on('click', (ev) => {
-            let usersIcon = $('.fa-users');
-            let booksIcon = $('.fa-book');
-            let eventsIcon = $('.fa-calendar');
-
-            if (usersIcon.hasClass('selected')) {
-                usersIcon.removeClass('selected');
-            } else {
-                booksIcon.removeClass('selected');
-                eventsIcon.removeClass('selected');
-                usersIcon.addClass('selected');
-            }
-        });
-
-        $('#books-category').on('click', (ev) => {
-            let usersIcon = $('.fa-users');
-            let booksIcon = $('.fa-book');
-            let eventsIcon = $('.fa-calendar');
-
-            if (booksIcon.hasClass('selected')) {
-                booksIcon.removeClass('selected');
-            } else {
-                usersIcon.removeClass('selected');
-                eventsIcon.removeClass('selected');
-                booksIcon.addClass('selected');
-            }
-        });
-
-        $('#events-category').on('click', (ev) => {
-            let usersIcon = $('.fa-users');
-            let booksIcon = $('.fa-book');
-            let eventsIcon = $('.fa-calendar');
-
-            if (eventsIcon.hasClass('selected')) {
-                eventsIcon.removeClass('selected');
-            } else {
-                usersIcon.removeClass('selected');
-                booksIcon.removeClass('selected');
-                eventsIcon.addClass('selected');
-            }
-        });
-
-        $('#search-input-field').keypress((event) => {
-            if (event.key === 'Enter') {
-                showResults();
-            }
-
-        });
-
-        $('#btn-search').click(() => {
-            showResults();
-        })
-
-        function showResults() {
-            $('.arrow-object').attr("src", "img/arrow-object-white.svg");
-            let resultsSection = $('#results');
-            resultsSection.removeClass('d-none');
-            let usersIcon = $('.fa-users');
-            let booksIcon = $('.fa-book');
-            let eventsIcon = $('.fa-calendar');
-
-            let usersResults = $('#search-results-users');
-            usersResults.addClass('d-none');
-            let booksResults = $('#search-results-books');
-            booksResults.addClass('d-none');
-            let eventsResults = $('#search-results-events');
-            eventsResults.addClass('d-none');
-
-            if (usersIcon.hasClass('selected')) {
-                usersResults.removeClass('d-none');
-            } else if (booksIcon.hasClass('selected')) {
-                booksResults.removeClass('d-none');
-            } else if (eventsIcon.hasClass('selected')) {
-                eventsResults.removeClass('d-none');
-            } else {
-                booksResults.removeClass('d-none');                
-            }
-        }
-    </script>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/responsee.js"></script>
-    <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="js/template-scripts.js"></script>
 </body>
 

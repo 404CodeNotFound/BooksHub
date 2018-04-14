@@ -40,7 +40,7 @@
                 <div class="top-nav left-menu">
                     <ul class="right top-ul chevron">
                         <li>
-                            <a href="home.html">Home</a>
+                            <a href="home.admin.html">Home</a>
                         </li>
                         <li>
                             <a href="books.list.html">Books</a>
@@ -53,7 +53,7 @@
 
                 <!-- logo -->
                 <ul class="logo-menu">
-                    <a href="home.html" class="logo">
+                    <a href="home.admin.html" class="logo">
                         <!-- Logo White Version -->
                         <img class="logo-white" src="img/book-logo.png" alt="">
                         <!-- Logo Dark Version -->
@@ -68,10 +68,10 @@
                             <a href="search.html">Search</a>
                         </li>
                         <li>
-                            <a href="login.html">Log in</a>
+                            <a href="profile.html">My Profile</a>
                         </li>
                         <li>
-                            <a href="register.html">Register</a>
+                            <a href="admin.panel.html">Admin Panel</a>
                         </li>
                     </ul>
                 </div>
@@ -636,55 +636,7 @@
             </div>
         </section>
     </footer>
-    <script>
-        $('#books-link').click(() => {
-            setNotVisible();
-            let books = $('#books');
-            books.removeClass('d-none');
-            $('#books-link').addClass('active');
-        });
-
-        $('#users-link').click(() => {
-            setNotVisible();
-            let users = $('#users');
-            users.removeClass('d-none');
-            $('#users-link').addClass('active');
-        });
-
-        $('#authors-link').click(() => {
-            setNotVisible();
-            let authors = $('#authors');
-            authors.removeClass('d-none');
-            $('#authors-link').addClass('active');
-        });
-
-        $('#events-link').click(() => {
-            setNotVisible();
-            let events = $('#events');
-            events.removeClass('d-none');
-            $('#events-link').addClass('active');
-        });
-
-        function setNotVisible() {
-            let users = $('#users');
-            users.addClass('d-none');
-            let books = $('#books');
-            books.addClass('d-none');
-            let events = $('#events');
-            events.addClass('d-none');
-            let authors = $('#authors');
-            authors.addClass('d-none');
-
-            let usersLink = $('#users-link');
-            usersLink.removeClass('active');
-            let booksLink = $('#books-link');
-            booksLink.removeClass('active');
-            let eventsLink = $('#events-link');
-            eventsLink.removeClass('active');
-            let authorsLink = $('#authors-link');
-            authorsLink.removeClass('active');
-        }
-    </script>
+    <script type="text/javascript" src="js/admin.panel.js"></script>
     <script type="text/javascript" src="js/responsee.js"></script>
     <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="js/template-scripts.js"></script>

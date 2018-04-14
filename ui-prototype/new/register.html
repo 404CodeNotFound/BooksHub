@@ -115,7 +115,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" class="btn-register" value="Register" />
+                                <input type="submit" class="btn-register" value="Register" id="register-submit"/>
                             </div>
                         </div>
                     </form>
@@ -162,6 +162,14 @@
             </div>
         </section>
     </main>
+    <script>
+        $('#register-submit').click((event) => {
+            event.preventDefault();
+            let location = window.location.href;
+            location = location.replace('register.html', 'login.html');
+            window.location.href = location;    
+        });
+    </script>
     <script type="text/javascript" src="js/responsee.js"></script>
     <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="js/template-scripts.js"></script>
