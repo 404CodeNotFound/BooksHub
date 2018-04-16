@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel Books - BooksHub</title>
+    <link href="./css/bootstrap.css" rel="stylesheet" />
+    <link href="./css/site.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/admin.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">ReadMe</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" title="Search">Search</a>
+                    </li>
+                </ul>
+                <form action="#" class="navbar-right" id="logoutForm" method="post">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                <strong>Admin Panel</strong>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="Details">Hello, admin!</a>
+                        </li>
+                        <li>
+                            <a href="#">Log out</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="toggled" id="wrapper">
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="#">Genres</a>;
+                    </li>
+                    <li>
+                        <a href="#">Books</a>;
+                    </li>
+                    <li>
+                        <a href="#">Users</a>;
+                    </li>
+                    <li>
+                        <a href="#">Authors</a>;
+                    </li>
+                    <li>
+                        <a href="#">Events</a>;
+                    </li>
+                </ul>
+            </div>
+            <div id="page-content-wrapper administration-box">
+                <div class="container-fluid">
+                    <h1>Admin panel</h1>
+                    <p>Choose what you want to administer</p>
+                    <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
+                    <div id="admin-main"></div>
+                </div>
+                <div id="admin-main">
+                    <h2>Books</h2>
+                    <a class="btn btn-success" href="#">+ Add</a>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                PhotoUrl
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                ISBN
+                            </th>
+                            <th>
+                                Published
+                            </th>
+                            <th>
+                                Author
+                            </th>
+                            <th>
+                                Publisher
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                b87c3f7a-9b2e-e811-bcdd-54137993ae8a
+                            </td>
+                            <td>
+                                <img src="https://thecliparts.com/wp-content/uploads/2016/12/dark-blue-book-cover-clipart.png" width="20px" height="20px"
+                                    alt="No image" />
+                            </td>
+                            <td>
+                                The Rooster Bar
+                            </td>
+                            <td>
+                                0385541171
+                            </td>
+                            <td>
+                                2018.03.23
+                            </td>
+                            <td>
+                                John Grisham
+                            </td>
+                            <td>
+                                Paradise press
+                            </td>
+                            <td>
+                                <a href="#">Details |</a>
+                            </td>
+                            <td>
+                                <a data-ajax="true" href="#">Delete |</a>
+                            </td>
+                            <td>
+                                <a href="#">Edit |</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                b77c3f7a-9b2e-e811-bcdd-54137993ae8a
+                            </td>
+                            <td>
+                                <img src="https://thecliparts.com/wp-content/uploads/2016/12/dark-blue-book-cover-clipart.png" width="20px" height="20px"
+                                    alt="No image" />
+                            </td>
+                            <td>
+                                Sisters
+                            </td>
+                            <td>
+                                0385340222
+                            </td>
+                            <td>
+                                2018.03.23
+                            </td>
+                            <td>
+                                Danielle Steel
+                            </td>
+                            <td>
+                                Paradise press
+                            </td>
+                            <td>
+                                <a href="#">Details |</a>
+                            </td>
+                            <td>
+                                <a href="#">Delete |</a>
+                            </td>
+                            <td>
+                                <a href="#">Edit |</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-offset-5 pages total center">
+                            Page 1 of 1
+                            <div class="pagination-container center">
+                                <ul class="pagination">
+                                    <li class="active">
+                                        <a>1</a>
+                                    </li>
+                                    <li>
+                                        <a>2</a>
+                                    </li>
+                                    <li>
+                                        <a>3</a>
+                                    </li>
+                                    <li>
+                                        <a>4</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-containertent">
+                    <ul class="footer-social-info">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-pinterest"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <br />
+                    <br />
+                    <p>Copyright © 2018</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

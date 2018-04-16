@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author - BooksHub Prototype</title>
+
+    <link href="./css/bootstrap.css" rel="stylesheet" />
+    <link href="./css/site.css" rel="stylesheet" />
+    <link href="./css/list.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">BooksHub</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" title="Search">Search</a>
+                    </li>
+                </ul>
+                <form action="#" class="navbar-right" id="logoutForm" method="post">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Hello, someone!</a>
+                        </li>
+                        <li>
+                            <a href="#">Log out</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <h2 class="title">Author details</h2>
+
+        <hr />
+
+        <div class="row author-details">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <img alt="User Pic" src="https://static01.nyt.com/images/2016/10/27/books/27BOOKGRISHAM/27BOOKGRISHAM-blog427.jpg" class="img-thumbnail img-responsive">
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h2>John Grisham</h2>
+                                </div>
+                            </div>
+                            <p>
+                                <i class="fa fa-envelope one" style="width:50px;"></i>
+                                <a href="http://www.jgrisham.com/">http://www.jgrisham.com/</a>
+                            </p>
+                        </div>
+                        <hr>
+                        <dl class="container details dl-horizontal">
+                            <dt>
+                                Nationality
+                            </dt>
+
+                            <dd>
+                                American </dd>
+
+                            <dt>
+                                Age
+                            </dt>
+
+                            <dd>
+                                54 </dd>
+
+                            <dt>
+                                Biography
+                            </dt>
+
+                            <dd>
+                                A lawyer by profession and an author by fame, John Grisham is the brilliant American writer of numerous novels best known
+                                for his legal thrillers. He was born on February 8, 1955 in Jonesboro, Arkansas to parents
+                                who were never formally educated but encouraged their son to pursue an education and prepare
+                                himself for college. Grisham settled with his parents in Southaven where he spent his younger
+                                years.
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" id="books-collections">
+                <div class="col-md-12">
+                    <h3 class="section-title">Books by this author</h3>
+                    <div class="section-title-divider"></div>
+                </div>
+                <div class="profile-wishlist">
+                    <div class="list-group">
+                        <div class="row">
+                            <div class="card col-md-2">
+                                <a href="#">
+                                    <img width="100px" class="card-img-top" src=http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781416550686_9781416550686_hr.jpg
+                                        alt="Card image cap">
+                                </a>
+                                <div class="card-block">
+                                    <h4 class="card-title">
+                                        <a href="#">A hopeless romantic</a>
+                                    </h4>
+                                    <p class="card-text">by
+                                        <a href="#">Harriet Evans</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Published on 2018.03.23</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <a href="#">
+                                    <img width="100px" class="card-img-top" src=https://i.pinimg.com/236x/02/d3/a9/02d3a92fe879ceed3804c58d058fa413--book-marks-adler.jpg
+                                        alt="Card image cap">
+                                </a>
+                                <div class="card-block">
+                                    <h4 class="card-title">
+                                        <a href="#">The last time I saw Paris</a>
+                                    </h4>
+                                    <p class="card-text">by
+                                        <a href="#">Elizabeth Adler</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Published on 2018.03.23</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-5 pages total">
+                        Page 1 of 1
+                        <div class="pagination-container" id="currently-reading">
+                            <ul class="pagination">
+                                <li class="active">
+                                    <a>1</a>
+                                </li>
+                                <li>
+                                    <a>2</a>
+                                </li>
+                                <li>
+                                    <a>3</a>
+                                </li>
+                                <li>
+                                    <a>4</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-containertent">
+                    <ul class="footer-social-info">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-pinterest"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <br />
+                    <br />
+                    <p>Copyright © 2018</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

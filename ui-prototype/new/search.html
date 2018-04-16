@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BooksHub - Search</title>
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/responsee.css">
+    <link rel="stylesheet" href="css/lightcase.css">
+    <link rel="stylesheet" href="css/template-style.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/search.css" />
+    <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+</head>
+
+<body class="size-1280">
+    <header role="banner" class="position-absolute">
+        <nav class="background-transparent background-primary-dott full-width sticky">
+            <div class="top-nav">
+                <!-- mobile version logo -->
+                <div class="logo hide-l hide-xl hide-xxl">
+                    <a href="home.html" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/book-logo.png" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/book-logo.png" alt="">
+                    </a>
+                </div>
+                <p class="nav-text"></p>
+
+                <!-- left menu items -->
+                <div class="top-nav left-menu">
+                    <ul class="right top-ul chevron">
+                        <li>
+                            <a href="home.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="books.list.html">Books</a>
+                        </li>
+                        <li>
+                            <a href="events.list.html">Events</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- logo -->
+                <ul class="logo-menu">
+                    <a href="home.html" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/book-logo-white.png" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/book-logo-white.png" alt="">
+                    </a>
+                </ul>
+
+                <!-- right menu items -->
+                <div class="top-nav right-menu">
+                    <ul class="top-ul chevron">
+                        <li>
+                            <a href="search.html">Search</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Log in</a>
+                        </li>
+                        <li>
+                            <a href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        <header class="section background-image text-center">
+            <div class="search-panel" id="banner">
+                <div class="container col-md-6 col-md-offset-2 col-sm-12" id="search-form">
+                    <div class="row search-input-options">
+                        <div class="search-form">
+                            <div class="row">
+                                <div class="search-input">
+                                    <input type="text" class="input" placeholder="Search..." id="search-input-field" />
+                                </div>
+                                <div class="search-submit">
+                                    <i class="fa fa-search" id="btn-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options" data-toggle="buttons">
+                            <label class="btn">
+                                <input type="radio" name="q2" value="Books" id='books-category' checked />
+                                <span class="icon">
+                                    <i class="fa fa-book"></i>
+                                </span>
+                                <span>
+                                    <small>BOOKS</small>
+                                </span>
+                            </label>
+                            <label class="btn">
+                                <input type="radio" name="q2" value="Events" id='events-category' />
+                                <span class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <span>
+                                    <small>EVENTS</small>
+                                </span>
+                            </label>
+                            <label class="btn">
+                                <input type="radio" name="q2" value="Users" id='users-category' />
+                                <span class="icon">
+                                    <i class="fa fa-users"></i>
+                                </span>
+                                <span>
+                                    <small>USERS</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img class="arrow-object" src="img/arrow-object-dark.svg" alt="">
+        </header>
+
+        <section class="full-width background-white text-center d-none" id="results">
+            <div class="margin2x">
+                <div class="panel container d-none" id="search-results-books">
+                    <div class="row">
+                        <div class="col-md-3 filters">
+                            <div class="filter">
+                                <div class="row">
+                                    <h4>Filter by Genre:</h4>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="mystery" type="checkbox" />
+                                    <label for="mystery">
+                                        Mystery
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="romance" type="checkbox" />
+                                    <label for="romance">
+                                        Romance
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="thriller" type="checkbox" />
+                                    <label for="thriller">
+                                        Thriller
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="dramma" type="checkbox" />
+                                    <label for="dramma">
+                                        Dramma
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter">
+                                <div class="row">
+                                    <h4>Search by:</h4>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="title" type="checkbox" />
+                                    <label for="title">
+                                        Title
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="author" type="checkbox" />
+                                    <label for="author">
+                                        Author
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="language" type="checkbox" />
+                                    <label for="language">
+                                        Language
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="summary" type="checkbox" />
+                                    <label for="summary">
+                                        Summary
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="card col-md-3">
+                                    <a href="book.html">
+                                        <img width="100px" class="card-img-top" src=https://images.gr-assets.com/books/1437916050l/26506.jpg alt="Card image cap">
+                                    </a>
+                                    <div class="card-block">
+                                        <h5 class="card-title">
+                                            <a href="book.html">Sisters</a>
+                                        </h5>
+                                        <p class="card-text">by
+                                            <a href="author.html">Danielle Steel</a>
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-muted">Published on 2018.03.23</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card col-md-3">
+                                    <a href="book.html">
+                                        <img width="100px" class="card-img-top" src=https://panmacmillan.azureedge.net/pml/panmacmillancorporatesite/media/panmacmillan/cover-images/lucy-diamond/__thumbnails/9781509815661one%20night%20in%20italy_6_jpg_264_400.jpg
+                                            alt="Card image cap">
+                                    </a>
+                                    <div class="card-block">
+                                        <h5 class="card-title">
+                                            <a href="book.html">One night in Italy</a>
+                                        </h5>
+                                        <p class="card-text">by
+                                            <a href="author.html">Lucy Diamond</a>
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-muted">Published on 2018.03.23</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-5 pages total center">
+                                    Page 1 of 1
+                                    <div class="pagination-container center">
+                                        <ul class="pagination">
+                                            <li class="active">
+                                                <a>1</a>
+                                            </li>
+                                            <li>
+                                                <a>2</a>
+                                            </li>
+                                            <li>
+                                                <a>3</a>
+                                            </li>
+                                            <li>
+                                                <a>4</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel container d-none" id="search-results-events">
+                    <div class="row">
+                        <div class="col-md-3 filters">
+                            <div class="filter">
+                                <div class="row">
+                                    <h4>Filter by Genre:</h4>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="mystery-event" type="checkbox" />
+                                    <label for="mystery-event">
+                                        Mystery
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="romance-event" type="checkbox" />
+                                    <label for="romance-event">
+                                        Romance
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="thriller-event" type="checkbox" />
+                                    <label for="thriller-event">
+                                        Thriller
+                                    </label>
+                                </div>
+                                <div class="row checkbox checkbox-success">
+                                    <input id="dramma-event" type="checkbox" />
+                                    <label for="dramma-event">
+                                        Dramma
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>Found Events</h3>
+                            <div class="row">
+                                <div class="card col-md-4">
+                                    <a href="event.html">
+                                        <img height="100px" class="card-img-top img-thumbnail" src=http://booksofwonder.com/images/products/detail/20180325_slider_SQUARE.jpg
+                                            alt="Card image cap">
+                                    </a>
+                                    <div class="card-block">
+                                        <h4 class="card-title">
+                                            <a href="event.html">The NYC Teen Author Festival</a>
+                                        </h4>
+                                        <p class="card-text">
+                                            <i class="fas fa-calendar-alt"></i> 25.03.2018
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-muted">
+                                                <i class="fas fa-map-marker-alt"></i> 18 West 18th St Store, New York</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card col-md-4">
+                                    <a href="event.html">
+                                        <img height="100px" class="card-img-top img-thumbnail" src=http://www.taylorbrownfiction.com/wp-content/uploads/2018/01/GoHM-Trade-Reviews-1024x768.jpg
+                                            alt="Card image cap">
+                                    </a>
+                                    <div class="card-block">
+                                        <h4 class="card-title">
+                                            <a href="event.html">Taylor Brown: Gods of Howl Mountain</a>
+                                        </h4>
+                                        <p class="card-text">
+                                            <i class="fas fa-calendar-alt"></i> 23.04.2018
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-muted">
+                                                <i class="fas fa-map-marker-alt"></i> Avid Bookshop 493 Prince Avenue Athens, GA 30601</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-5 pages total center">
+                                    Page 1 of 1
+                                    <div class="pagination-container center">
+                                        <ul class="pagination">
+                                            <li class="active">
+                                                <a>1</a>
+                                            </li>
+                                            <li>
+                                                <a>2</a>
+                                            </li>
+                                            <li>
+                                                <a>3</a>
+                                            </li>
+                                            <li>
+                                                <a>4</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel container d-none" id="search-results-users">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Found users</h3>
+                            <div class="users">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user1</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user2</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user3</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user4</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user5</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user6</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user7</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user8</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user9</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user10</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-2 text-center">
+                                        <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" class="img-circle" alt="image" style="width: 70px;" />
+                                        <p>
+                                            <a href="profile.html">user11</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-offset-5 pages total center">
+                                        Page 1 of 1
+                                        <div class="pagination-container center">
+                                            <ul class="pagination">
+                                                <li class="active">
+                                                    <a>1</a>
+                                                </li>
+                                                <li>
+                                                    <a>2</a>
+                                                </li>
+                                                <li>
+                                                    <a>3</a>
+                                                </li>
+                                                <li>
+                                                    <a>4</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <section class="section background-dark">
+            <div class="line">
+                <div class="margin2x">
+                    <div class="row text-center">
+                        <ul class="footer-social-info center">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row center copyright">
+                        <br /> Copyright © 2018
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/responsee.js"></script>
+    <script type="text/javascript" src="js/template-scripts.js"></script>
+</body>
+
+</html>

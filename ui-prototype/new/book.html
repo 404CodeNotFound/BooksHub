@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BooksHub - Book Details</title>
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/responsee.css">
+  <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+  <link rel="stylesheet" href="css/lightcase.css">
+  <link rel="stylesheet" href="css/template-style.css">
+  <link rel="stylesheet" href="css/book.details.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+</head>
+
+<body class="size-1280">
+  <header role="banner" class="position-absolute">
+    <nav class="background-transparent background-primary-dott full-width sticky">
+      <div class="top-nav">
+        <!-- mobile version logo -->
+        <div class="logo hide-l hide-xl hide-xxl">
+          <a href="home.html" class="logo">
+            <!-- Logo White Version -->
+            <img class="logo-white" src="img/book-logo.png" alt="">
+            <!-- Logo Dark Version -->
+            <img class="logo-dark" src="img/book-logo.png" alt="">
+          </a>
+        </div>
+        <p class="nav-text"></p>
+
+        <!-- left menu items -->
+        <div class="top-nav left-menu">
+          <ul class="right top-ul chevron">
+            <li>
+              <a href="home.html">Home</a>
+            </li>
+            <li>
+              <a href="books.list.html">Books</a>
+            </li>
+            <li>
+              <a href="events.list.html">Events</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- logo -->
+        <ul class="logo-menu">
+          <a href="home.html" class="logo">
+            <!-- Logo White Version -->
+            <img class="logo-white" src="img/book-logo.png" alt="">
+            <!-- Logo Dark Version -->
+            <img class="logo-dark" src="img/book-logo.png" alt="">
+          </a>
+        </ul>
+
+        <!-- right menu items -->
+        <div class="top-nav right-menu">
+          <ul class="top-ul chevron">
+            <li>
+              <a href="search.html">Search</a>
+            </li>
+            <li>
+              <a href="login.html">Log in</a>
+            </li>
+            <li>
+              <a href="register.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main role="main">
+    <article>
+      <header class="section background-image text-center">
+        <h1 class="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+          Book Details
+        </h1>
+        <img class="arrow-object" src="img/arrow-object-white.svg" alt="">
+      </header>
+
+      <div class="container">
+        <section class="background-white section">
+          <div class="row col-md-12 book-info">
+            <div class="col-lg-4 col-md-7 col-sm-6 col-xs-12 animated  animation-done bounceInLeft book-cover">
+              <img alt="Book Cover" src="https://images-na.ssl-images-amazon.com/images/I/51KoFuN6y7L._SX327_BO1,204,203,200_.jpg" id="details-book-cover"
+                class="img-thumbnail img-responsive">
+              <div class="row" id="book-rating">
+                <div class="col-md-4">
+                  Rate this book:
+                </div>
+                <form action="/ratings" id="rating-form" method="post">
+                  <fieldset class="rating">
+                    <input type="radio" value="5" />
+                    <label title="Rocks!" rate-value='5'></label>
+
+                    <input type="radio" value="4" />
+                    <label title="Pretty good" rate-value='4'></label>
+
+                    <input type="radio" value="3" />
+                    <label title="Meh" rate-value='3'></label>
+
+                    <input type="radio" value="2" />
+                    <label title="Kinda bad" rate-value='2'></label>
+
+                    <input type="radio" value="1" />
+                    <label title="Sucks big time" rate-value='1'></label>
+                  </fieldset>
+                </form>
+              </div>
+              <div class="row" id="write-review-link">
+                <button class="btn-main-sm">
+                  <i class="fa fa-pencil"></i> Write review
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-5 col-sm-6 col-xs-12 animated animation-done  bounceInRight">
+              <h2 class="title">The Rooster Bar</h2>
+              <h4 class="title">
+                by
+                <b>
+                  <a href="author.html">John Grisham</a>
+                </b>
+              </h4>
+              <hr />
+              <div>Mark, Todd, and Zola came to law school to change the world, to make it a better place. But now, as third-year
+                students, these close friends realize they have been duped.</div>
+              <dl class="dl-horizontal">
+                <dt>
+                  Published
+                </dt>
+
+                <dd>
+                  2018.03.23
+                </dd>
+
+                <dt>
+                  ISBN
+                </dt>
+
+                <dd>
+                  0385541171
+                </dd>
+
+                <dt>
+                  Rating
+                </dt>
+
+                <dd>
+                  0
+                  <i class="fa fa-star star" aria-hidden="true"></i>
+                </dd>
+
+                <dt>
+                  Language
+                </dt>
+
+                <dd>
+                  English
+                </dd>
+                <dt>
+                  Publisher
+                </dt>
+
+                <dd>
+                  Paradise press
+                </dd>
+              </dl>
+              <hr />
+              <div>
+                <b> Genres: </b>
+                <span>Mystery</span>
+                <span>Thriller</span>
+              </div>
+              <hr />
+
+              <div class="row buttons">
+                <form action="#" class="col-md-3 col-sm-12" id="status-form" method="post">
+                  <select class="btn-main-sm" name="CurrentStatus">
+                    <option value="0">CurrentlyReading</option>
+                    <option value="1">Read</option>
+                    <option selected="selected" value="2">WantToRead</option>
+                  </select>
+                </form>
+                <div id="stat-message"></div>
+                <button class="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link">
+                  <i class="fa fa-comments"></i> See reviews</button>
+                <button class="btn-main-sm col-md-3 col-sm-12">
+                  <i class="fa fa-user"></i> Recommend</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <section class="section background-grey" id="review-form">
+        <div class="line text-center">
+          <i class="icon-sli-pencil text-primary text-size-40"></i>
+          <h2 class="text-size-50 text-m-size-40">
+            Leave a Review</h2>
+          <hr class="break background-primary break-small break-center margin-bottom-50">
+        </div>
+        <div class="container">
+          <form action="#" method="post">
+            <textarea class="form-control col-md-6" cols="8" id="Content" name="Content" placeholder="Write your review here..." rows="5"
+              style="min-width: 100%">
+            </textarea>
+            <input type="submit" value="Leave review" id="post-review-btn" class="btn-main-sm btn-block col-md-4 offset-md-4" />
+          </form>
+        </div>
+      </section>
+      <section class="section background-white" id="reviews">
+        <div class="line text-center">
+          <i class="icon-sli-speech text-primary text-size-40"></i>
+          <h2 class="text-size-50 text-m-size-40">
+            Reviews</h2>
+          <hr class="break background-primary break-small break-center margin-bottom-50">
+        </div>
+        <div class="review row">
+          <div class="col-md-2 col-xs-2">
+            <a href="img/profile-picture">
+                <img class="img-responsive" src="img/profile-picture.png"/>
+            </a>
+          </div>
+          <div class="col-md-10 col-xs-10">
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec velit odio. Proin tincidunt turpis quam, id ullamcorper nisi consequat eu. Vivamus a tellus eu dui sagittis elementum vitae in justo. Praesent vel nulla non nisi viverra posuere. Integer sed rhoncus nibh, non tempus sem.
+              <cite>
+                <span><a href="profile.html">simona</a></span>
+                <span>for</span>
+                <span><a href="book.html">The Right Time</a></span>
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+        <hr />
+        <div class="review row">
+          <div class="col-md-2 col-xs-2">
+            <a href="img/profile-picture">
+                <img class="img-responsive" src="img/profile-picture.png"/>
+            </a>
+          </div>
+          <div class="col-md-10 col-xs-10">
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec velit odio. Proin tincidunt turpis quam, id ullamcorper nisi consequat eu. Vivamus a tellus eu dui sagittis elementum vitae in justo. Praesent vel nulla non nisi viverra posuere. Integer sed rhoncus nibh, non tempus sem.
+              <cite>
+                <span><a href="profile.html">simona</a></span>
+                <span>for</span>
+                <span><a href="book.html">The Right Time</a></span>
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+        <hr />
+        <div class="review row">
+          <div class="col-md-2 col-xs-2">
+            <a href="img/profile-picture">
+                <img class="img-responsive" src="img/profile-picture.png"/>
+            </a>
+          </div>
+          <div class="col-md-10 col-xs-10">
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec velit odio. Proin tincidunt turpis quam, id ullamcorper nisi consequat eu. Vivamus a tellus eu dui sagittis elementum vitae in justo. Praesent vel nulla non nisi viverra posuere. Integer sed rhoncus nibh, non tempus sem.
+              <cite>
+                <span><a href="profile.html">simona</a></span>
+                <span>for</span>
+                <span><a href="book.html">The Right Time</a></span>
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+        <hr />
+        <div class="review row">
+          <div class="col-md-2 col-xs-2">
+            <a href="img/profile-picture">
+                <img class="img-responsive" src="img/profile-picture.png"/>
+            </a>
+          </div>
+          <div class="col-md-10 col-xs-10">
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec velit odio. Proin tincidunt turpis quam, id ullamcorper nisi consequat eu. Vivamus a tellus eu dui sagittis elementum vitae in justo. Praesent vel nulla non nisi viverra posuere. Integer sed rhoncus nibh, non tempus sem.
+              <cite>
+                <span><a href="profile.html">simona</a></span>
+                <span>for</span>
+                <span><a href="book.html">The Right Time</a></span>
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  <footer>
+    <section class="section background-dark">
+      <div class="line">
+        <div class="margin2x">
+          <div class="row text-center">
+            <ul class="footer-social-info center">
+              <li>
+                <a href="#">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-pinterest"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="row center copyright">
+            <br /> Copyright © 2018
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+  <script>
+    $("#all-reviews-link").click(function () {
+      $('html, body').animate({
+        scrollTop: $("#reviews").offset().top
+      }, 1000);
+    });
+
+    $("#write-review-link").click(function () {
+      $('html, body').animate({
+        scrollTop: $("#review-form").offset().top
+      }, 1000);
+    });
+  </script>
+  <script type="text/javascript" src="js/responsee.js"></script>
+  <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+  <script type="text/javascript" src="js/template-scripts.js"></script>
+</body>
+
+</html>
