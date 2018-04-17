@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import * as usersActions from '../../actions/users.actions';
 import { withSwalInstance } from 'sweetalert2-react';
 import swal from 'sweetalert2';
+import '../../style/login.css';
+import background from '../../style/banner-blurred.jpg';
 
 const SweetAlert = withSwalInstance(swal);
+const style = {
+    backgroundImage: `url(${background})`
+};
 class LoginPage extends Component {
     constructor(props) {
         super(props);
@@ -14,41 +19,51 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <div id="login">
-                <h2 className="title">Log in.</h2>
-                <h5 className="title">Use a local account to log in.</h5>
+            <div>
+                <header className="section-top-padding text-center" style={style}>
+                    <div className="container col-md-6 col-md-offset-2">
+                        <div id="login">
+                            <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 ">
+                                Log in.
+                            </h1>
+                            <h4 className="title">Use a local account to log in.</h4>
 
-                <div className="form-horizontal" id="login-form">
-                    <div className="form-group">
-                        <label className="col-md-2 control-label" htmlFor="UserName">Username</label>
-                        <div className="col-md-10">
-                            <input className="form-control" name="UserName" type="text" ref="username" />
+                            <div className="form-horizontal" id="login-form">
+                                <div className="form-group row">
+                                    <label className="col-md-2 control-label" htmlFor="UserName">Username</label>
+                                    <div className="col-md-8">
+                                        <input className="form-control" name="UserName" type="text" value="" id="username" ref="username" />
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <label className="col-md-2 control-label" htmlFor="Password">Password</label>
+                                    <div className="col-md-8">
+                                        <input className="form-control" name="Password" type="password" ref="password" />
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <div className="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Log in" className="btn-login" id="login-submit" onClick={this.submit} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label className="col-md-2 control-label" htmlFor="Password">Password</label>
-                        <div className="col-md-10">
-                            <input className="form-control" name="Password" type="password" ref="password" />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" className="btn btn-default" onClick={this.submit} />
-                        </div>
-                    </div>
-                </div>
+                    <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
+                </header>
                 {this.props.token &&
                     <Redirect to="/" />
                 }
-                    <SweetAlert
-                        show={this.props.error.message ? true : false}
-                        title="Error"
-                        type="error"
-                        text={this.props.error.message}
-                        confirmButtonColor="#ec6c62"
-                        onConfirm={this.props.removeError}
-                    />
+                <SweetAlert
+                    show={this.props.error.message ? true : false}
+                    title="Error"
+                    type="error"
+                    text={this.props.error.message}
+                    confirmButtonColor="#ec6c62"
+                    onConfirm={this.props.removeError}
+                />
             </div>
+         
         );
     }
 
