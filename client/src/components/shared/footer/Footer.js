@@ -1,31 +1,45 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="container">
-                <div className="row">
-                    <div className="footer-containertent">
-                        <ul className="footer-social-info">
-                            <li>
-                                <a href="https://www.facebook.com"><i className="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.twitter.com"><i className="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.pinterest.com/"><i className="fa fa-pinterest"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://plus.google.com"><i className="fa fa-google-plus"></i></a>
-                            </li>
-                        </ul>
-                        <br /><br />
-                        <p>Copyright © 2018 | Fullstack with Node.js and React application</p>
+        <section className="section-small-padding background-dark text-center">
+            <div className="line">
+                <div className="m-10 l-6 xl-4 center">
+                    <div className="margin">
+                        <div className="footer-containertent">
+                            <div className="row text-center">
+                                <ul className="footer-social-info center">
+                                    <li>
+                                        <Link to="/">
+                                            <i className="fa fa-facebook"></i>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/">
+                                            <i className="fa fa-twitter"></i>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/">
+                                            <i className="fa fa-pinterest"></i>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/">
+                                            <i className="fa fa-google-plus"></i>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="row center">
+                            <br /> Copyright © 2018
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </section>
     );
 };
 

@@ -1,0 +1,151 @@
+#book-rating {
+    margin-top: 10%;
+    margin-bottom: 6%;
+    padding-left: 2%;
+}
+
+.rating {
+    float: left;
+}
+
+.rating:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    width: 1em;
+    padding: 0.1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    line-height: 1.2;
+    color: #ddd;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+
+.btn-main-sm {
+    padding: 10px 10px;
+    background-color: #4eb980;
+    border: 1px solid #4eb980;
+    color: white;
+    border-radius: 5px;
+}
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+#post-review-btn {
+    margin-top: 2%;
+}
+
+.buttons .btn-main-sm {
+    margin-right: 5%;
+}
+
+#status-form {
+    margin-right: 10%;
+}
+
+dt {
+    float: left;
+}
+
+dd {
+    margin-left: 15% !important;
+}
+
+.background-image {
+    background-image: url(../img/banner-blurred.jpg);
+}
+
+.icon-sli-pencil.text-primary, 
+.icon-sli-speech.text-primary {
+    color: #4eb980 !important;
+}
+
+#write-review-link {
+    margin-left: 2%;
+}
+
+/*Reviews*/
+#reviews {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#reviews .review img {
+    border-radius: 50%;
+    max-width: 60%;
+}
+
+blockquote {
+    margin: 0 0 0px 0;
+    padding: 20px 70px 10px;
+    position: relative;
+    font-size: 1.2rem;
+    border: 0;
+}
+
+blockquote a {
+    text-decoration: none;
+    color: #4eb980;
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 120px;
+    position: absolute;
+    left: 10px;
+    top: -30px;
+    color: #4eb980;
+    font-family: inherit;
+}
+
+blockquote cite {
+    color: #111;
+    font-size: 1.2rem;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-family: 'Playball', cursive;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
+}
+
+@media only screen and (max-width: 600px) {
+    #reviews {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #reviews .review img {
+        max-width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -4,27 +4,22 @@ import Header from './shared/header/Header';
 import Footer from './shared/footer/Footer';
 import HomePage from './home/HomePage';
 import LoginPage from './login/LoginPage';
-import '../styles/bootstrap.css';
-import '../styles/main.css';
-import '../styles/font-awesome.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div>
-        <Router>
-          <div>
-            <Header />
-            <div className="container body-content">
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={LoginPage} />
-            </div>
-            <Footer />
-          </div>
-        </Router>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Header />
+                    <main role="main">
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/login" component={LoginPage} />
+                        <Footer />
+                    </main>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
