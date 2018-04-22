@@ -22,9 +22,22 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String
+    },
     nationality: String,
     age: Number,
+    gender: {
+        type: String
+    },
+    birth_date: Date,
     favourite_quote: String,
+    favourite_genres: [{
+        type: String
+    }],
+    languages:[{
+        type: String
+    }],
     photo: {
         type: String,
         default: "https://www.haikudeck.com/static/img/hd-avatar.png"

@@ -13,7 +13,7 @@ module.exports = (data) => {
                 .then(user => {
                     if (!user) {
                         res.status(401)
-                            .json({ message: "User was not found!" });
+                            .json({ message: "Incorrect username or password!" });
                     } else {
                         const payload = { id: user._id };
                         const token = jwt.encode(payload, secret);

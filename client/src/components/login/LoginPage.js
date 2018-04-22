@@ -84,10 +84,8 @@ class LoginPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     return {
         error: state.users.error,
-        token: state.users.token,
         shouldRedirect: state.users.shouldRedirect
     };
 }

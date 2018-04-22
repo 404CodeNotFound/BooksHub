@@ -45,18 +45,18 @@ class Header extends Component {
                                     <Link to="/search">Search</Link>
                                 </li>
                                 <li>
-                                    {this.props.currentUser === null ?
+                                    {!this.props.currentUser ?
                                         <Link to="/login">Log in</Link> :
-                                        (this.props.token.role === 'admin' ?
+                                        (this.props.currentUser.role === 'admin' ?
                                             <Link to="/administration">Admin Panel</Link> :
-                                            <Link to="/profile">My Profile</Link>
+                                            <Link to={"/users/" + this.props.currentUser}>My Profile</Link>
                                         )
                                     }
                                 </li>
                                 <li>
-                                    {this.props.currentUser === null ?
+                                    {!this.props.currentUser ?
                                         <Link to="/register">Register</Link> :
-                                        <button type="button" id="logout-btn" onClick={this.logout}>Logout</button>
+                                        <button type="button" id="logout-btn" onClick={this.props.logout}>Logout</button>
                                     }
                                 </li>
                             </ul>
@@ -66,16 +66,13 @@ class Header extends Component {
             </header>
         );
     }
-
-    logout = (event) => {
-
-    } 
 }
 
 function mapStateToProps(state, ownProps) {
+    const currentUser = localStorage.getItem('username');
     return {
-        token: state.users.token,
-        currentUser: state.users.currentUser
+        currentUser: currentUser,
+        isLoggedIn: state.users.isLoggedIn
     };
 }
 
@@ -94,4 +91,4 @@ $(window).scroll(function () {
     }
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

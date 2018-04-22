@@ -697,6 +697,17 @@ nav.fixed .left-menu, nav.fixed .right-menu {
     background: none;
 }
 
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+}
+
 @media screen and (max-width:768px) {
     header.position-absolute {
         background: #fff none repeat scroll 0 0;

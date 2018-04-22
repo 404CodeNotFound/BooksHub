@@ -1,39 +1,39 @@
 .user-dashboard-menu li {
     margin-bottom: 5px;
     cursor: pointer;
-  }
-  
-  .user-dashboard-menu li.active{
+}
+
+.user-dashboard-menu li.active {
     background: #4eb980;
     color: #fff;
-  }
-  
-  .user-dashboard-menu li.active:hover {
+}
+
+.user-dashboard-menu li.active:hover {
     color: #fff;
-  }
-  
-  .user-dashboard-menu li {
+}
+
+.user-dashboard-menu li {
     padding: 10px;
     font-size: 15px;
     display: block;
     font-weight: 600;
     color: #555;
-  }
-  
-  .user-dashboard-menu li:hover {
+}
+
+.user-dashboard-menu li:hover {
     color: #4eb980;
-  }
-  
-  .user-dashboard-menu li:hover span {
+}
+
+.user-dashboard-menu li:hover span {
     background: #4eb980;
     color: #fff;
-  }
-  
-  .user-dashboard-menu li i {
+}
+
+.user-dashboard-menu li i {
     margin-right: 5px;
-  }
-  
-  .user-dashboard-menu li a span {
+}
+
+.user-dashboard-menu li a span {
     float: right;
     background: #F4F7F9;
     float: right;
@@ -41,70 +41,71 @@
     border-radius: 8px;
     padding: 3px 8px;
     color: #84919B;
-  }
+}
 
-  .widget {
+.widget {
     background: #fff;
     box-shadow: 0px 1px 56px 0px rgba(0, 0, 0, 0.1);
     padding: 25px 30px 30px;
     margin-bottom: 30px;
     border-radius: 2px;
-  }
+}
 
-  .widget.user .image img {
+.widget.user .image img {
     width: 157px;
     height: 157px;
     border-radius: 100%;
     border: 7px solid #dedede;
-  }
+}
 
-  .user-dashboard-profile {
+.user-dashboard-profile {
     text-align: center;
-  }
-  
-  .user-dashboard-profile .profile-thumb img {
+}
+
+.user-dashboard-profile .profile-thumb img {
     width: 130px;
     height: auto;
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto;
     border: 5px solid #F4F7F9;
-  }
-  
-  .user-dashboard-profile h4 {
+}
+
+.user-dashboard-profile h4 {
     margin-top: 10px;
     font-size: 18px;
     font-weight: 600;
-  }
-  
-  .user-dashboard-profile .member-time {
+}
+
+.user-dashboard-profile .member-time {
     color: #888;
     font-size: 12px;
     margin-bottom: 3px;
-  }
+}
 
-  ul {
+ul {
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-  
-  .btn-main-sm {
+}
+
+.btn-main-sm {
     background: #4eb980;
     color: #fff !important;
     border: none;
     padding: 5px 15px 5px 15px;
-  }
-  
+}
+
 .btn-main-sm:hover {
-    background: #4eb980;;
+    background: #4eb980;
+    ;
     color: #fff;
-  }
+}
 
-  .title {
+.title {
     margin-bottom: 3%;
-  }
+}
 
-  .pagination li {
+.pagination li {
     border: 1px solid;
     border-radius: 4px;
     border-color: #565656;
@@ -112,138 +113,143 @@
     margin-right: 2px;
     cursor: pointer;
 }
+
 .pagination li.active {
-    background-color: #4eb980;   
-    border-color: #4eb980; 
+    background-color: #4eb980;
+    border-color: #4eb980;
     color: white;
 }
 
 .mbr-testimonial {
-  border-radius: 0;
-  border: 0;
-  margin-bottom: 0;
-  text-align: center;
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 0;
+    text-align: center;
 }
 
-.mbr-testimonial + * {
-  padding-top: 40px;
+.mbr-testimonial+* {
+    padding-top: 40px;
 }
 
 .mbr-testimonial.card {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 .mbr-testimonial .card-block {
-  background: #f4f4f4;
-  color: #565656;
-  font-family: "Lora";
-  font-size: 2rem;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 2;
-  padding: 1.875rem;
-  position: relative;
+    background: #f4f4f4;
+    color: #565656;
+    font-family: "Lora";
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 2;
+    padding: 1.875rem;
+    position: relative;
 }
 
 .mbr-testimonial .card-block:after {
-  background-color: inherit;
-  bottom: -7px;
-  content: "";
-  display: block;
-  height: 14px;
-  left: 50%;
-  margin-left: -7px;
-  position: absolute;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  width: 14px;
+    background-color: inherit;
+    bottom: -7px;
+    content: "";
+    display: block;
+    height: 14px;
+    left: 50%;
+    margin-left: -7px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 14px;
 }
 
 .mbr-testimonial-lg .card-block {
-  padding-bottom: 90px;
+    padding-bottom: 90px;
 }
 
 .mbr-testimonial .card-footer {
-  background: none;
-  border: 0;
-  padding: 0;
-  position: relative;
-  z-index: 2;
+    background: none;
+    border: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .mbr-testimonial .card-footer:last-child {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 .delete-review {
-  float: right;
+    float: right;
 }
 
 .for-book {
-  margin-top: 2%;
+    margin-top: 2%;
 }
 
 .for-book a {
-  color: #4eb980 !important;
+    color: #4eb980 !important;
 }
 
 .fa-trash-o {
-  color: darkred !important;
-  font-size: 16pt;
+    color: darkred !important;
+    font-size: 16pt;
 }
 
 .review {
-  margin-bottom: 5%;
+    margin-bottom: 5%;
 }
 
 .background-image {
-  background-color: #4eb980;
+    background-color: #4eb980;
 }
 
 .img-circle {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .img-circle:hover {
-  transform: scale(1.4);
-  margin-bottom: 15px;
+    transform: scale(1.4);
+    margin-bottom: 15px;
 }
 
 /*Invitations list*/
 
 #invitations {
-  margin: 0 4%;
+    margin: 0 4%;
 }
 
 .people-nearby .nearby-user {
-  padding: 20px 0;
-  border-top: 1px solid #f1f2f2;
-  border-bottom: 1px solid #f1f2f2;
-  margin-bottom: 20px;
+    padding: 20px 0;
+    border-top: 1px solid #f1f2f2;
+    border-bottom: 1px solid #f1f2f2;
+    margin-bottom: 20px;
 }
 
 img.profile-photo-lg {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
 }
 
 #create-event-btn {
-  margin-bottom: 3%;
+    margin-bottom: 3%;
 }
 
 .user {
-  text-align: center;
+    text-align: center;
+}
+
+.user-info {
+    padding-left: 10%;
+    padding-top: 5%;
 }
 
 @media only screen and (max-width: 768px) {
-  #currently-reading-books, #read-books, #want-to-read-books, #my-events, #joined-events, #reviews, #comments, #invitations {
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-
-  #friends {
-    padding-left: 20%;
-    padding-right: 10%;
-  }
+    #currently-reading-books, #read-books, #want-to-read-books, #my-events, #joined-events, #reviews, #comments, #invitations {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    #friends {
+        padding-left: 20%;
+        padding-right: 10%;
+    }
 }

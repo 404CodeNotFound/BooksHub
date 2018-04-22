@@ -4,13 +4,27 @@ export function loginSuccess(result) {
     return { type: 'LOGIN_SUCCESS', result };
 }
 
+export function logoutSuccess(result) {
+    return { type: 'LOGOUT_SUCCESS', result };
+}
 export function loginFailure(error) {
     return { type: 'LOGIN_FAILURE', error };
 }
 
+export function getProfileSuccess(user) {
+    return { type: 'GET_PROFILE_SUCCESS', user };
+}
 
 export function logout() {
-    return { type: 'LOGOUT_SUCCESS' };
+    return function (dispatch) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('id');
+        const result = {
+            isLoggedIn: false
+        };
+        dispatch(logoutSuccess(result));
+    }
 }
 
 export function removeError() {
@@ -22,9 +36,11 @@ export function login(username, password) {
         return requester.login(username, password)
             .done(response => {
                 const result = {
-                    token: response.token,
-                    user: response.user
+                    isLoggedIn: true
                 };
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('username', response.user.username);
+                localStorage.setItem('id', response.user._id);
 
                 dispatch(loginSuccess(result));
             })
@@ -32,4 +48,14 @@ export function login(username, password) {
                 dispatch(loginFailure(error.responseJSON));
             });
     }
+}
+
+export function getProfile(username) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+        return requester.getProfile(username, token)
+            .done(response => {
+                dispatch(getProfileSuccess(response.user));
+            });
+    };
 }
