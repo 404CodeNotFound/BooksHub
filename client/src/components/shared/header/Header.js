@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import $ from 'jquery'; 
 
 class Header extends Component {
     render() {
@@ -10,8 +11,8 @@ class Header extends Component {
                     <div className="top-nav">
                         <div className="logo hide-l hide-xl hide-xxl">
                             <Link to="/" className="logo">
-                                <img className="logo-white" src="img/book-logo.png" alt="" />
-                                <img className="logo-dark" src="img/book-logo.png" alt="" />
+                                <img className="logo-white" src="img/book-logo-white.png" alt="book-logo" />
+                                <img className="logo-dark" src="img/book-logo.png" alt="book-logo" />
                             </Link>
                         </div>
                         <p className="nav-text"></p>
@@ -32,7 +33,7 @@ class Header extends Component {
 
                         <ul className="logo-menu">
                             <Link to="/" className="logo">
-                                <img className="logo-white" src="img/book-logo.png" alt="" />
+                                <img className="logo-white" src="img/book-logo-white.png" alt="" />
                                 <img className="logo-dark" src="img/book-logo.png" alt="" />
                             </Link>
                         </ul>
@@ -69,5 +70,14 @@ function mapStateToProps(state, ownProps) {
         currentUser: state.currentUser
     };
 }
+
+$(window).scroll(function () {
+    if ($(this).scrollTop() > 20) {
+        $('.sticky').addClass("fixed");
+    }
+    else {
+        $('.sticky').removeClass("fixed");
+    }
+});
 
 export default connect(mapStateToProps)(Header);

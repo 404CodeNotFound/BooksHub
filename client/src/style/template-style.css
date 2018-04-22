@@ -133,7 +133,7 @@ td {
     height: 800px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image:url(../img/banner.jpg);
+    background-image: url(../img/banner.jpg);
 }
 
 /* Breaks */
@@ -197,18 +197,6 @@ nav {
     margin: 0 auto;
     max-width: 300px;
     width: 100%;
-}
-
-/* Aside Nav */
-
-/* Font colors */
-
-.background-white, .background-white p, .background-white a, .background-white a:link, .background-white a:visited, .background-white a:hover, .background-white a:active {
-    /* color: #777; */
-}
-
-.background-dark, .background-dark a, .background-dark a:link, .background-dark a:visited, .background-dark a:hover, .background-dark a:active {
-    /* color: #999; */
 }
 
 .background-white h1, .background-white h2, .background-white h3, .background-white h4, .background-white h5 {
@@ -606,6 +594,7 @@ nav {
 li.active-item::before {
     background: #4eb980 none repeat scroll 0 0;
 }
+
 .top-nav>ul>li>a::before, .top-nav>ul>.active-item>a::before {
     width: 6px;
     height: 6px;
@@ -637,12 +626,6 @@ li.active-item::before {
     background: #4eb980 none repeat scroll 0 0;
 }
 
-/* Menu font color */
-
-/* Custom form */
-
-/* Aside Navigation */
-
 section, header {
     position: relative;
 }
@@ -654,13 +637,45 @@ section, header {
     left: 0;
 }
 
-/* Portfolio Tabs */
+.fixed {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
 
-/* Carousel Navigation*/
+nav.fixed, .fixed nav {
+    padding: 1rem 0;
+}
 
-/* Buttons */
+nav.fixed, .fixed nav {
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+    padding: 0 2em;
+}
 
-/* Tabs */
+nav.fixed .top-nav li a, .fixed nav .top-nav li a {
+    color: #444;
+}
+
+nav.fixed .logo-white, .fixed nav .logo-white {
+    display: none;
+}
+
+nav.fixed .logo-dark, .fixed nav .logo-dark {
+    display: block;
+    width: 60px;
+}
+
+nav.fixed .left-menu, nav.fixed .right-menu {
+    padding: 0;
+}
+
+.background-transparent {
+    background: none;
+}
 
 @media screen and (max-width:768px) {
     header.position-absolute {
