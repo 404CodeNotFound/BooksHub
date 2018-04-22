@@ -15,7 +15,7 @@ const style = {
 class LoginPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: '', password: '' };
+        this.state = { username: '', password: ''};
     }
 
     render() {
@@ -28,7 +28,7 @@ class LoginPage extends Component {
                             </h1>
                         <h4 className="title">Use a local account to log in.</h4>
 
-                        <form className="form-horizontal" id="login-form">
+                        <form className="form-horizontal" id="login-form" onSubmit  ={this.submit} >
                             <div className="form-group row">
                                 <label className="col-md-2 control-label" htmlFor="username">Username</label>
                                 <div className="col-md-8">
@@ -43,14 +43,14 @@ class LoginPage extends Component {
                             </div>
                             <div className="form-group">
                                 <div className="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Log in" className="btn-login" id="login-submit" onClick={this.submit} />
+                                    <input type="submit" value="Log in" className="btn-login" id="login-submit" />
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
-                {this.props.token &&
+                {this.props.shouldRedirect &&
                     <Redirect to="/" />
                 }
                 <SweetAlert
@@ -65,15 +65,16 @@ class LoginPage extends Component {
         );
     }
 
-    handleUsernameChange = (e) => {
-        this.setState({ username: e.target.value });
+    handleUsernameChange = (event) => {
+        this.setState({ username: event.target.value });
     };
 
-    handlePasswordChange = (e) => {
-        this.setState({ password: e.target.value });
+    handlePasswordChange = (event) => {
+        this.setState({ password: event.target.value });
     };
 
-    submit = () => {
+    submit = (event) => {
+        event.preventDefault();
         const username = this.state.username;
         const password = this.state.password;
 
@@ -83,9 +84,11 @@ class LoginPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     return {
         error: state.users.error,
-        token: state.users.token
+        token: state.users.token,
+        shouldRedirect: state.users.shouldRedirect
     };
 }
 

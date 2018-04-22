@@ -8,7 +8,7 @@ module.exports = (data) => {
             const username = req.body.username;
             const password = req.body.password;
             //const passHash = crypto.SHA1(username + password).toString();
-            
+
             data.users.getUserByUsernameAndPassword(username, password)
                 .then(user => {
                     if (!user) {
@@ -18,7 +18,7 @@ module.exports = (data) => {
                         const payload = { id: user._id };
                         const token = jwt.encode(payload, secret);
                         res.status(200)
-                            .json({ message: "ok", token: token });
+                            .json({ message: "ok", user: { username: user.username, id: user._id }, token: token });
                     }
 
                     return res;

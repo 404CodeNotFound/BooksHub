@@ -18,6 +18,26 @@ a:hover {
     color: #4eb980 !important;
 }
 
+#logout-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 400;
+    padding: 1.5rem;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+nav.fixed .top-nav li #logout-btn, .fixed nav .top-nav li #logout-btn {
+    color: #444;
+}
+
+#logout-btn:hover {
+    color: #4eb980;
+}
+
 .card>a:hover {
     width: 110%;
 }
@@ -595,7 +615,7 @@ li.active-item::before {
     background: #4eb980 none repeat scroll 0 0;
 }
 
-.top-nav>ul>li>a::before, .top-nav>ul>.active-item>a::before {
+.top-nav>ul>li>a::before, .top-nav>ul>.active-item>a::before, #logout-btn::before {
     width: 6px;
     height: 6px;
     display: block;
@@ -615,14 +635,14 @@ li.active-item::before {
     -webkit-transition: all 0.20s linear 0s;
 }
 
-.top-nav>ul>li>a:hover::before, .top-nav>ul>.active-item>a::before {
+.top-nav>ul>li>a:hover::before, .top-nav>ul>.active-item>a::before, #logout-btn:hover::before {
     bottom: 10px;
     opacity: 1;
 }
 
 /* Menu dott color */
 
-.background-primary-dott .top-nav>ul>li>a::before {
+.background-primary-dott .top-nav>ul>li>a::before, #logout-btn::before {
     background: #4eb980 none repeat scroll 0 0;
 }
 

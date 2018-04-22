@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import $ from 'jquery'; 
+import $ from 'jquery';
+import * as usersActions from '../../../actions/users.actions';
 
 class Header extends Component {
     render() {
@@ -44,16 +45,18 @@ class Header extends Component {
                                     <Link to="/search">Search</Link>
                                 </li>
                                 <li>
-                                    {this.props.currentUser === undefined ?
+                                    {this.props.currentUser === null ?
                                         <Link to="/login">Log in</Link> :
-                                        <Link to="/profile">My Profile</Link>
+                                        (this.props.token.role === 'admin' ?
+                                            <Link to="/administration">Admin Panel</Link> :
+                                            <Link to="/profile">My Profile</Link>
+                                        )
                                     }
                                 </li>
                                 <li>
-                                    {this.props.currentUser === undefined ?
+                                    {this.props.currentUser === null ?
                                         <Link to="/register">Register</Link> :
-                                        (this.props.currentUser.role === 'admin' &&
-                                            <Link to="/admin">Admin</Link>)
+                                        <button type="button" id="logout-btn" onClick={this.logout}>Logout</button>
                                     }
                                 </li>
                             </ul>
@@ -63,11 +66,22 @@ class Header extends Component {
             </header>
         );
     }
+
+    logout = (event) => {
+
+    } 
 }
 
 function mapStateToProps(state, ownProps) {
     return {
-        currentUser: state.currentUser
+        token: state.users.token,
+        currentUser: state.users.currentUser
+    };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        logout: () => dispatch(usersActions.logout())
     };
 }
 
