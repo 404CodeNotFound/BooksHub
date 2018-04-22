@@ -4,6 +4,8 @@ import Header from './shared/header/Header';
 import Footer from './shared/footer/Footer';
 import HomePage from './home/HomePage';
 import LoginPage from './login/LoginPage';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 
 class App extends Component {
     render() {

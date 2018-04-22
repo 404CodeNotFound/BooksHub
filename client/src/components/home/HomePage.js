@@ -15,7 +15,7 @@ class HomePage extends Component {
                 <section className="background-white statistics">
                     <div className="line text-center">
                         <i className="icon-sli-star text-primary text-size-40"></i>
-                        <h2 className="text-dark text-size-50 text-m-size-40"><b>Join our huge community of readers</b></h2>
+                        <h2 className="text-dark text-size-50 text-m-size-40">Join our huge community of readers</h2>
                         <hr className="break background-primary break-small break-center margin-bottom-50" />
                     </div>
                     <div className="line">

@@ -8,18 +8,18 @@ module.exports = (data) => {
             const username = req.body.username;
             const password = req.body.password;
             //const passHash = crypto.SHA1(username + password).toString();
-
+            
             data.users.getUserByUsernameAndPassword(username, password)
                 .then(user => {
                     if (!user) {
                         res.status(401)
                             .json({ message: "User was not found!" });
+                    } else {
+                        const payload = { id: user._id };
+                        const token = jwt.encode(payload, secret);
+                        res.status(200)
+                            .json({ message: "ok", token: token });
                     }
-
-                    const payload = { id: user._id };
-                    const token = jwt.encode(payload, secret);
-                    res.status(200)
-                        .json({ message: "ok", token: token });
 
                     return res;
                 });

@@ -11,46 +11,45 @@ const SweetAlert = withSwalInstance(swal);
 const style = {
     backgroundImage: `url(${background})`
 };
+
 class LoginPage extends Component {
     constructor(props) {
         super(props);
-        this.submit = this.submit.bind(this);
+        this.state = { username: '', password: '' };
     }
 
     render() {
         return (
-            <div>
-                <header className="section-top-padding text-center" style={style}>
-                    <div className="container col-md-6 col-md-offset-2">
-                        <div id="login">
-                            <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 ">
-                                Log in.
+            <header className="section-top-padding text-center" style={style}>
+                <div className="container col-md-6 col-md-offset-2">
+                    <div id="login">
+                        <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 ">
+                            Log in.
                             </h1>
-                            <h4 className="title">Use a local account to log in.</h4>
+                        <h4 className="title">Use a local account to log in.</h4>
 
-                            <div className="form-horizontal" id="login-form">
-                                <div className="form-group row">
-                                    <label className="col-md-2 control-label" htmlFor="UserName">Username</label>
-                                    <div className="col-md-8">
-                                        <input className="form-control" name="UserName" type="text" value="" id="username" ref="username" />
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <label className="col-md-2 control-label" htmlFor="Password">Password</label>
-                                    <div className="col-md-8">
-                                        <input className="form-control" name="Password" type="password" ref="password" />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <div className="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Log in" className="btn-login" id="login-submit" onClick={this.submit} />
-                                    </div>
+                        <form className="form-horizontal" id="login-form">
+                            <div className="form-group row">
+                                <label className="col-md-2 control-label" htmlFor="username">Username</label>
+                                <div className="col-md-8">
+                                    <input className="form-control" name="UserName" type="text" id="username" onChange={this.handleUsernameChange} />
                                 </div>
                             </div>
-                        </div>
+                            <div className="form-group row">
+                                <label className="col-md-2 control-label" htmlFor="password">Password</label>
+                                <div className="col-md-8">
+                                    <input className="form-control" name="Password" type="password" onChange={this.handlePasswordChange} />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Log in" className="btn-login" id="login-submit" onClick={this.submit} />
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
-                </header>
+                </div>
+                <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
                 {this.props.token &&
                     <Redirect to="/" />
                 }
@@ -62,16 +61,24 @@ class LoginPage extends Component {
                     confirmButtonColor="#ec6c62"
                     onConfirm={this.props.removeError}
                 />
-            </div>
-         
+            </header>
         );
     }
 
-    submit() {
-        const username = this.refs["username"].value;
-        const password = this.refs["password"].value;
+    handleUsernameChange = (e) => {
+        this.setState({ username: e.target.value });
+    };
+
+    handlePasswordChange = (e) => {
+        this.setState({ password: e.target.value });
+    };
+
+    submit = () => {
+        const username = this.state.username;
+        const password = this.state.password;
 
         this.props.login(username, password);
+        this.setState({ author: '', text: '' });
     }
 }
 

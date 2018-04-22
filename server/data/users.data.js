@@ -4,6 +4,7 @@ module.exports = class UserData {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username, 'passHash': passHash },
                 (err, user) => {
+                    console.log(user);
                     if (err) {
                         return reject(err);
                     } else {

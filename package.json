@@ -34,8 +34,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./server/server.js",
-    "client": "webpack --mode development"
+    "server": "nodemon ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -47,5 +46,7 @@
     "url": "https://github.com/404CodeNotFound/BooksHub/issues"
   },
   "homepage": "https://github.com/404CodeNotFound/BooksHub#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-cli": "^2.0.15"
+  }
 }
