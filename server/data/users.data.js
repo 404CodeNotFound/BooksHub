@@ -86,4 +86,18 @@ module.exports = class UserData {
                 });
         });
     }
+
+    getUserFriends(id) {
+        return new Promise((resolve, reject) => {
+            User.findById(id)
+                .populate('friends')
+                .exec((err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(user.friends);
+                    }
+                });
+        });
+    }
 }

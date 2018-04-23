@@ -16,6 +16,10 @@ export function getProfileSuccess(user) {
     return { type: 'GET_PROFILE_SUCCESS', user };
 }
 
+export function getFriendsSuccess(friends) {
+    return { type: 'GET_FRIENDS_SUCCESS', friends };
+}
+
 export function logout() {
     return function (dispatch) {
         localStorage.removeItem('token');
@@ -56,6 +60,15 @@ export function getProfile(username) {
         return requester.get(`${api.USERS}/${username}`)
             .done(response => {
                 dispatch(getProfileSuccess(response.user));
+            });
+    };
+}
+
+export function getFriends(id) {
+    return function (dispatch) {
+        return requester.get(`${api.USERS}/${id}/friends`)
+            .done(response => {
+                dispatch(getFriendsSuccess(response.friends));
             });
     };
 }

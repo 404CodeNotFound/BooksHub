@@ -38,13 +38,12 @@ module.exports = (data) => {
                     if (!user) {
                         res.status(404)
                             .json({ message: "User was not found." });
+                        return res;
                     } else {
                         res.status(200)
                             .json({ user: user });
+                        return res;
                     }
-                    console.log(user);
-
-                    return res;
                 });
         },
         getReadingBooks(req, res) {
@@ -70,7 +69,7 @@ module.exports = (data) => {
             }
 
             data.users.getWishlist(id)
-                .then(books => {    
+                .then(books => {
                     res.status(200)
                         .json({ books: books });
                 });
@@ -91,6 +90,24 @@ module.exports = (data) => {
                 });
 
             return res;
+        },
+        getUserFriends(req, res) {
+            const id = req.params.id;
+            if (!id) {
+                res.status(400)
+                    .json({ message: "You should provide user id." });
+
+                return res;
+            }
+
+            data.users.getUserFriends(id)
+                .then(friends => {
+                    console.log(friends);
+                    res.status(200)
+                        .json({ friends: friends });
+                    return res;
+                });
         }
+
     }
 }

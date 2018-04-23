@@ -107,7 +107,7 @@ class ProfilePage extends Component {
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[8] === 'active' &&
-                                <FriendsList users={this.props.user.friends} title="Friends Collection" />
+                                <FriendsList users={this.props.friends} title="Friends Collection" />
                             }
                             {this.state.links[9] === 'active' &&
                                 <InvitationsList invitations={this.props.user.requests} title="Pending Invitations Collection" />
@@ -148,6 +148,7 @@ class ProfilePage extends Component {
                 break;
             case 'friends-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', 'active', ''] });
+                this.props.getFriends(this.props.user._id);                                
                 break;
             case 'invitations-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', '', 'active'] });
@@ -166,7 +167,8 @@ function mapStateToProps(state, ownProps) {
         currentUser: username,
         currentlyReading: state.users.currentlyReading,
         read: state.users.read,
-        wantToRead: state.users.wantToRead
+        wantToRead: state.users.wantToRead,
+        friends: state.users.friends
     };
 }
 
@@ -175,7 +177,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         getProfile: dispatch(usersActions.getProfile(ownProps.match.params.username)),
         getCurrentlyReadingBooks: (id) => dispatch(booksActions.getCurrentlyReadingBooks(id)),
         getWantToReadBooks: (id) => dispatch(booksActions.getWantToReadBooks(id)),
-        getReadBooks: (id) => dispatch(booksActions.getReadBooks(id))
+        getReadBooks: (id) => dispatch(booksActions.getReadBooks(id)),
+        getFriends: (id) => dispatch(usersActions.getFriends(id))
     };
 }
 
