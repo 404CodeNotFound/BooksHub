@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as usersActions from '../../actions/users.actions';
 import * as booksActions from '../../actions/books.actions';
+import * as invitationsActions from '../../actions/invitations.actions';
 import Information from './profile-partials/Information';
 import BooksList from './profile-partials/BooksList';
 import EventsList from './profile-partials/EventsList';
@@ -110,7 +111,7 @@ class ProfilePage extends Component {
                                 <FriendsList users={this.props.friends} title="Friends Collection" />
                             }
                             {this.state.links[9] === 'active' &&
-                                <InvitationsList invitations={this.props.user.requests} title="Pending Invitations Collection" />
+                                <InvitationsList invitations={this.props.invitations} title="Pending Invitations Collection" />
                             }
                         </div>
                     </div>
@@ -152,6 +153,7 @@ class ProfilePage extends Component {
                 break;
             case 'invitations-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', '', 'active'] });
+                this.props.getInvitations(this.props.user._id);                                
                 break;
             default:
                 this.setState({ links: ['active', '', '', '', '', '', '', '', '', ''] });
@@ -168,7 +170,8 @@ function mapStateToProps(state, ownProps) {
         currentlyReading: state.users.currentlyReading,
         read: state.users.read,
         wantToRead: state.users.wantToRead,
-        friends: state.users.friends
+        friends: state.users.friends,
+        invitations: state.users.invitations
     };
 }
 
@@ -178,7 +181,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         getCurrentlyReadingBooks: (id) => dispatch(booksActions.getCurrentlyReadingBooks(id)),
         getWantToReadBooks: (id) => dispatch(booksActions.getWantToReadBooks(id)),
         getReadBooks: (id) => dispatch(booksActions.getReadBooks(id)),
-        getFriends: (id) => dispatch(usersActions.getFriends(id))
+        getFriends: (id) => dispatch(usersActions.getFriends(id)),
+        getInvitations: (id) => dispatch(invitationsActions.getInvitations(id))
     };
 }
 

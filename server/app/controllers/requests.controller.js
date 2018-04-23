@@ -21,15 +21,8 @@ module.exports = (data) => {
 
             data.requests.getPendingRequests(userId)
                 .then(requests => {
-                    const mapped = requests.map(request => {
-                        return {
-                            sender: request.sender.username,
-                            date: request.sent_date
-                        };
-                    });
-
                     res.status(200)
-                        .json({ requests: mapped });
+                        .json({ requests: requests });
 
                     return res;
                 });
