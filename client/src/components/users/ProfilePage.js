@@ -21,7 +21,7 @@ class ProfilePage extends Component {
                             <span>{this.props.user.first_name} {this.props.user.last_name}</span>
                         }
                     </h1>
-                    <img className="arrow-object" src="img/arrow-object-white.svg" alt="arrow" />
+                    <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
                 </header>,
                 <section key="profile-section" className="background-white dashboard section">
                     <div className="row">
@@ -33,8 +33,9 @@ class ProfilePage extends Component {
                                     </div>
                                     <h5 className="text-center">{this.props.user.first_name} {this.props.user.last_name}</h5>
                                     <p>{this.props.user.username}</p>
-                                    {this.props.currentUser === this.props.user.username &&
-                                        <button type="button" className="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button>
+                                    {this.props.currentUser === this.props.user.username ?
+                                        <button type="button" className="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button>:
+                                        <button type="button" className="btn btn-main-green" data-toggle="modal">Send Invitation</button>
                                     }
                                 </div>
                                 <div className="widget user-dashboard-menu">

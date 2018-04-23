@@ -20,7 +20,7 @@ module.exports = (data) => {
                         res.status(200)
                             .json({ message: "ok", user: { username: user.username, id: user._id }, token: token });
                     }
-
+                    
                     return res;
                 });
         },
@@ -37,11 +37,11 @@ module.exports = (data) => {
                     if (!user) {
                         res.status(404)
                             .json({ message: "User was not found." });
-                    }
-
-                    res.status(200)
+                    } else {
+                        res.status(200)
                         .json({ user: user });
-
+                    }
+                        console.log(user);
                     return res;
                 });
         }

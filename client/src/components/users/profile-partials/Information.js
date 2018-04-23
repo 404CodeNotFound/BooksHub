@@ -33,15 +33,12 @@ class Information extends Component {
                 <dd>
                     {this.props.user.birth_date}
                 </dd>
-
-
-
                 <dt>
                     Age
                     </dt>
 
                 <dd>
-                    {this.props.age}
+                    {this.props.user.age}
                 </dd>
                 <dt>
                     Languages

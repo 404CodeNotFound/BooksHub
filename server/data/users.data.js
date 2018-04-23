@@ -1,10 +1,10 @@
-const { User } = require('../models/user')
+const { User } = require('../models');
+
 module.exports = class UserData {
     getUserByUsernameAndPassword(username, passHash) {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username, 'passHash': passHash },
                 (err, user) => {
-                    console.log(user);
                     if (err) {
                         return reject(err);
                     } else {
@@ -28,8 +28,19 @@ module.exports = class UserData {
 
     getUserProfile(username) {
         return new Promise((resolve, reject) => {
-            User.findOne({ 'username': username },
-                (err, user) => {
+            User.findOne({ 'username': username })
+                .populate({
+                    path: 'statuses',
+                    populate: { path: 'book' }
+                })
+                .populate('friends')
+                .populate({
+                    path: 'reviews',
+                    populate: {
+                        path: 'book'
+                    }
+                })
+                .exec((err, user) => {
                     if (err) {
                         return reject(err);
                     } else {
