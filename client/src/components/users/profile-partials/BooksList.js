@@ -10,16 +10,16 @@ class BooksList extends Component {
                 </div>,
                 <div key="books-list" className="margin2x">
                     <div className="row">
-                        {this.props.books.map(status =>
-                            <div className="col-md-4 margin-bottom-60">
+                        {this.props.books.map(book =>
+                            <div key={book._id} className="col-md-4 margin-bottom-60">
                                 <div className="float-left">
-                                    <img src={status.book.photo} width="200px" alt="book-logo"/>
+                                    <img src={book.photo} width="200px" alt="book-logo"/>
                                     <p>
-                                        <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{status.book.title}</h3>
+                                        <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{book.title}</h3>
                                     </p>
                                     <p>
-                                        {status.book.summary.substr(0, 50)}...
-                                        <Link className="text-more-info text-primary" to={"/books/" + status.book.title}>Read more</Link>
+                                        {book.summary.substr(0, 50)}...
+                                        <Link className="text-more-info text-primary" to={"/books/" + book.title}>Read more</Link>
                                     </p>
                                 </div>
                             </div>

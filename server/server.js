@@ -1,5 +1,4 @@
 const config = require('./config');
-const open = require('open');
 
 require('./db').init(config.connectionString)
     .then((db) => {
@@ -11,6 +10,5 @@ require('./db').init(config.connectionString)
     .then((app) => {
             app.listen(config.port, () => {
             console.log(`Server listening at: ${config.port}`);
-            // open(`http://localhost:${config.port}`);
         });
 });

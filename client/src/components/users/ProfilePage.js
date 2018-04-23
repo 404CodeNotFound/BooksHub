@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as usersActions from '../../actions/users.actions';
-import '../../style/profile.css';
+import * as booksActions from '../../actions/books.actions';
 import Information from './profile-partials/Information';
 import BooksList from './profile-partials/BooksList';
 import EventsList from './profile-partials/EventsList';
 import CommentsList from './profile-partials/CommentsList';
 import FriendsList from './profile-partials/FriendsList';
 import InvitationsList from './profile-partials/InvitationsList';
+import '../../style/profile.css';
 
 class ProfilePage extends Component {
     state = { links: ['active', '', '', '', '', '', '', '', '', ''] };
@@ -81,16 +82,13 @@ class ProfilePage extends Component {
                                 <Information user={this.props.user} />
                             }
                             {this.state.links[1] === 'active' &&
-                                <BooksList books={this.props.user.statuses.filter(status => status.name === 'CurrentlyReading')} 
-                                    title="Currently Reading Collection" />
+                                <BooksList books={this.props.currentlyReading} title="Currently Reading Collection" />
                             }
                             {this.state.links[2] === 'active' &&
-                                <BooksList books={this.props.user.statuses.filter(status => status.name === 'WantToRead')} 
-                                    title="Want to Read Collection" />
+                                <BooksList books={this.props.wantToRead} title="Want to Read Collection" />
                             }
                             {this.state.links[3] === 'active' &&
-                                <BooksList books={this.props.user.statuses.filter(status => status.name === 'Read')} 
-                                    title="Read Books Collection" />
+                                <BooksList books={this.props.read} title="Read Books Collection" />
                             }
                             {this.state.links[4] === 'active' &&
                                 <EventsList events={this.props.user.events} title="Events Collection" 
@@ -126,12 +124,15 @@ class ProfilePage extends Component {
         switch (event.target.id) {
             case 'currently-reading-link':
                 this.setState({ links: ['', 'active', '', '', '', '', '', '', '', ''] });
+                this.props.getCurrentlyReadingBooks(this.props.user._id);
                 break;
             case 'want-to-read-link':
                 this.setState({ links: ['', '', 'active', '', '', '', '', '', '', ''] });
+                this.props.getWantToReadBooks(this.props.user._id);                
                 break;
             case 'read-link':
                 this.setState({ links: ['', '', '', 'active', '', '', '', '', '', ''] });
+                this.props.getReadBooks(this.props.user._id);                
                 break;
             case 'my-events-link':
                 this.setState({ links: ['', '', '', '', 'active', '', '', '', '', ''] });
@@ -162,13 +163,19 @@ function mapStateToProps(state, ownProps) {
     const username = localStorage.getItem('username');
     return {
         user: state.users.profile,
-        currentUser: username
+        currentUser: username,
+        currentlyReading: state.users.currentlyReading,
+        read: state.users.read,
+        wantToRead: state.users.wantToRead
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getProfile: dispatch(usersActions.getProfile(ownProps.match.params.username))
+        getProfile: dispatch(usersActions.getProfile(ownProps.match.params.username)),
+        getCurrentlyReadingBooks: (id) => dispatch(booksActions.getCurrentlyReadingBooks(id)),
+        getWantToReadBooks: (id) => dispatch(booksActions.getWantToReadBooks(id)),
+        getReadBooks: (id) => dispatch(booksActions.getReadBooks(id))
     };
 }
 

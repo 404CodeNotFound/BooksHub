@@ -1,4 +1,5 @@
-import requester from '../requesters/users.requester';
+import requester from '../requesters/requester';
+import api from '../requesters/api';
 
 export function loginSuccess(result) {
     return { type: 'LOGIN_SUCCESS', result };
@@ -33,7 +34,7 @@ export function removeError() {
 
 export function login(username, password) {
     return function (dispatch) {
-        return requester.login(username, password)
+        return requester.post(api.LOGIN, { username: username, password: password })
             .done(response => {
                 const result = {
                     isLoggedIn: true
@@ -52,8 +53,7 @@ export function login(username, password) {
 
 export function getProfile(username) {
     return function (dispatch) {
-        const token = localStorage.getItem('token');
-        return requester.getProfile(username, token)
+        return requester.get(`${api.USERS}/${username}`)
             .done(response => {
                 dispatch(getProfileSuccess(response.user));
             });

@@ -34,6 +34,9 @@ const init = (data) => {
 
     app.post('/login', usersController.login);
     app.get('/users/:username', usersController.getUserProfile);
+    app.get('/users/:id/reading', usersController.getReadingBooks);
+    app.get('/users/:id/wishlist', usersController.getWishlist);
+    app.get('/users/:id/read', usersController.getReadBooks);    
     app.get('/users/:id/requests', auth.authenticate(passport), requestsController.getPendingUserRequests);
     app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);            
     

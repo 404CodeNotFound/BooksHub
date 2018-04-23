@@ -1,4 +1,5 @@
-export default function users(state = { error: {}, profile: null, isLoggedIn: false }, action) {
+export default function users(state = { error: {}, profile: null, isLoggedIn: false, 
+    currentlyReading: [], wantToRead:[], read: [] }, action) {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
             return {
@@ -26,6 +27,21 @@ export default function users(state = { error: {}, profile: null, isLoggedIn: fa
             return {
                 ...state,
                 profile: action.user
+            };
+        case 'GET_CURRENTLY_READING_BOOKS_SUCCESS':
+            return {
+                ...state,
+                currentlyReading: action.currentlyReading
+            };
+        case 'GET_WANT_TO_READ_BOOKS_SUCCESS':
+            return {
+                ...state,
+                wantToRead: action.wantToRead
+            };
+        case 'GET_READ_BOOKS_SUCCESS':
+            return {
+                ...state,
+                read: action.read
             };
         default:
             return state;
