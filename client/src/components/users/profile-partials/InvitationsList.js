@@ -5,10 +5,10 @@ class InvitationsList extends Component {
     render() {
         return (
             [
-                <div key="reuests-title" className="row title">
+                <div key="requests-title" className="row title">
                     <h3>{this.props.title}</h3>
                 </div>,
-                <div className="row">
+                <div key="requests-list" className="row">
                     <div className="people-nearby">
                         {this.props.invitations.map(invitation =>
                             <div className="nearby-user">

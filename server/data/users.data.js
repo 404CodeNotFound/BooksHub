@@ -35,6 +35,12 @@ module.exports = class UserData {
                 })
                 .populate('friends')
                 .populate({
+                    path: 'requests',
+                    populate: {
+                        path: 'sender'
+                    }
+                })                
+                .populate({
                     path: 'reviews',
                     populate: {
                         path: 'book'
