@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import * as usersActions from '../../actions/users.actions';
 import '../../style/profile.css';
+import Information from './profile-partials/Information';
+import BooksList from './profile-partials/BooksList';
+import EventsList from './profile-partials/EventsList';
+import CommentsList from './profile-partials/CommentsList';
+import FriendsList from './profile-partials/FriendsList';
+import InvitationsList from './profile-partials/InvitationsList';
 
 class ProfilePage extends Component {
+    state = { links: ['active', '', '', '', '', '', '', '', '', ''] };
     render() {
         return (
             this.props.user !== null ?
@@ -33,35 +39,35 @@ class ProfilePage extends Component {
                                 </div>
                                 <div className="widget user-dashboard-menu">
                                     <ul>
-                                        <li className="active" id="profile-info">
+                                        <li className={this.state.links[0]} id="profile-info" onClick={this.changeContent}>
                                             <i className="fa fa-user"></i> Information
                                         </li>
-                                        <li id="currently-reading-link" onClick={this.changeContent}>
+                                        <li className={this.state.links[1]} id="currently-reading-link" onClick={this.changeContent}>
                                             <i className="fa fa-book"></i> Currently reading
                                         </li>
-                                        <li id="want-to-read-link">
+                                        <li className={this.state.links[2]} id="want-to-read-link" onClick={this.changeContent}>
                                             <i className="fa fa-bookmark-o"></i> Want to read
                                         </li>
-                                        <li id="read-link">
+                                        <li className={this.state.links[3]} id="read-link" onClick={this.changeContent}>
                                             <i className="fa fa-file-archive-o"></i> Read
                                         </li>
-                                        <li id="my-events-link">
+                                        <li className={this.state.links[4]} id="my-events-link" onClick={this.changeContent}>
                                             <i className="fa fa-calendar"></i> {this.props.currentUser === this.props.user.username && <span>My</span>} Events
                                         </li>
-                                        <li id="joined-events-link">
+                                        <li className={this.state.links[5]} id="joined-events-link" onClick={this.changeContent}>
                                             <i className="fa fa-bookmark-o"></i> Joined Events
                                         </li>
-                                        <li id="reviews-link">
+                                        <li className={this.state.links[6]} id="reviews-link" onClick={this.changeContent}>
                                             <i className="fa fa-comments"></i>{this.props.currentUser === this.props.user.username && <span>My</span>} Reviews
                                         </li>
-                                        <li id="comments-link">
+                                        <li className={this.state.links[7]} id="comments-link" onClick={this.changeContent}>
                                             <i className="fa fa-comments"></i>{this.props.currentUser === this.props.user.username && <span>My</span>} Comments
                                         </li>
-                                        <li id="friends-link">
+                                        <li className={this.state.links[8]} id="friends-link" onClick={this.changeContent}>
                                             <i className="fa fa-users"></i>{this.props.currentUser === this.props.user.username && <span>My</span>} Friends
                                         </li>
                                         {this.props.currentUser === this.props.user.username &&
-                                            <li id="invitations-link">
+                                            <li className={this.state.links[9]} id="invitations-link" onClick={this.changeContent}>
                                                 <i className="fa fa-user"></i>Pending invitations
                                         </li>
                                         }
@@ -70,72 +76,43 @@ class ProfilePage extends Component {
                             </div>
                         </div>
                         <div className="col-md-8">
-                            <dl className="user-info dl-horizontal">
-                                <dt>
-                                    E-mail
-                                    </dt>
-
-                                <dd>
-                                    {this.props.user.email}
-                                </dd>
-
-                                <dt>
-                                    Nationality
-                                </dt>
-                                <dd>
-                                    {this.props.user.nationality}
-                                </dd>
-                                <dt>
-                                    Gender
-                                    </dt>
-
-                                <dd>
-                                    {this.props.user.gender}
-                                </dd>
-
-                                <dt>
-                                    Birthdate
-                                </dt>
-
-                                <dd>
-                                    {this.props.user.birth_date}
-                                </dd>
-
-
-
-                                <dt>
-                                    Age
-                                    </dt>
-
-                                <dd>
-                                    {this.props.age}
-                                </dd>
-                                <dt>
-                                    Languages
-                                    </dt>
-
-                                <dd>
-                                    {this.props.user.languages.map(language => 
-                                        <p key={language}>{language}</p>
-                                    )}
-                                </dd>
-                                <dt>
-                                    Favourite Quote
-                                    </dt>
-
-                                <dd>
-                                    {this.props.user.favourite_quote}
-                                </dd>
-                                <dt>
-                                    Favourite Genres
-                                    </dt>
-
-                                <dd>
-                                    {this.props.user.favourite_genres.map( genre => 
-                                        <p key={genre}>{genre}</p>
-                                    )}
-                                </dd>
-                            </dl>
+                            {this.state.links[0] === 'active' &&
+                                <Information user={this.props.user} />
+                            }
+                            {this.state.links[1] === 'active' &&
+                                <BooksList books={this.props.user.statuses.filter(status => status.name === 'CurrentlyReading')} 
+                                    title="Currently Reading Collection" />
+                            }
+                            {this.state.links[2] === 'active' &&
+                                <BooksList books={this.props.user.statuses.filter(status => status.name === 'WantToRead')} 
+                                    title="Want to Read Collection" />
+                            }
+                            {this.state.links[3] === 'active' &&
+                                <BooksList books={this.props.user.statuses.filter(status => status.name === 'Read')} 
+                                    title="Read Books Collection" />
+                            }
+                            {this.state.links[4] === 'active' &&
+                                <EventsList events={this.props.user.events} title="Events Collection" 
+                                    isMyProfile={this.props.user.username === this.props.currentUser}/>
+                            }
+                            {this.state.links[5] === 'active' &&
+                                <EventsList events={this.props.user.joined_events} title="Joined Events Collection" 
+                                    isMyProfile={false} />
+                            }
+                            {this.state.links[6] === 'active' &&
+                                <CommentsList comments={this.props.user.reviews} title="Reviews Collection" 
+                                    isMyProfile={this.props.user.username === this.props.currentUser} />
+                            }
+                            {this.state.links[7] === 'active' &&
+                                <CommentsList comments={this.props.user.comments} title="Comments Collection" 
+                                    isMyProfile={this.props.user.username === this.props.currentUser} />
+                            }
+                            {this.state.links[8] === 'active' &&
+                                <FriendsList users={this.props.user.friends} title="Friends Collection" />
+                            }
+                            {this.state.links[9] === 'active' &&
+                                <InvitationsList invitations={this.props.user.requests} title="Pending Invitations Collection" />
+                            }
                         </div>
                     </div>
                 </section>
@@ -145,7 +122,38 @@ class ProfilePage extends Component {
     }
 
     changeContent = (event) => {
-        console.log(event);
+        switch (event.target.id) {
+            case 'currently-reading-link':
+                this.setState({ links: ['', 'active', '', '', '', '', '', '', '', ''] });
+                break;
+            case 'want-to-read-link':
+                this.setState({ links: ['', '', 'active', '', '', '', '', '', '', ''] });
+                break;
+            case 'read-link':
+                this.setState({ links: ['', '', '', 'active', '', '', '', '', '', ''] });
+                break;
+            case 'my-events-link':
+                this.setState({ links: ['', '', '', '', 'active', '', '', '', '', ''] });
+                break;
+            case 'joined-events-link':
+                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });
+                break;
+            case 'reviews-link':
+                this.setState({ links: ['', '', '', '', '', '', 'active', '', '', ''] });
+                break;
+            case 'comments-link':
+                this.setState({ links: ['', '', '', '', '', '', '', 'active', '', ''] });
+                break;
+            case 'friends-link':
+                this.setState({ links: ['', '', '', '', '', '', '', '', 'active', ''] });
+                break;
+            case 'invitations-link':
+                this.setState({ links: ['', '', '', '', '', '', '', '', '', 'active'] });
+                break;
+            default:
+                this.setState({ links: ['active', '', '', '', '', '', '', '', '', ''] });
+                break;
+        }
     };
 }
 

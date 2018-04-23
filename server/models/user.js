@@ -65,6 +65,10 @@ const UserSchema = new Schema({
     joined_events: [{
         type: Schema.ObjectId,
         ref: 'Event'
+    }],
+    events: [{
+        type: Schema.ObjectId,
+        ref: 'Event'
     }]
   });
   
