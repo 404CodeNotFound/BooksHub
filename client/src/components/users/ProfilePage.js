@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as usersActions from '../../actions/users.actions';
 import * as booksActions from '../../actions/books.actions';
 import * as invitationsActions from '../../actions/invitations.actions';
+import * as commentsActions from '../../actions/comments.actions';
 import Information from './profile-partials/Information';
 import BooksList from './profile-partials/BooksList';
 import EventsList from './profile-partials/EventsList';
@@ -104,7 +105,7 @@ class ProfilePage extends Component {
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[7] === 'active' &&
-                                <CommentsList comments={this.props.user.comments} title="Comments Collection" 
+                                <CommentsList comments={this.props.comments} title="Comments Collection" 
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[8] === 'active' &&
@@ -146,6 +147,7 @@ class ProfilePage extends Component {
                 break;
             case 'comments-link':
                 this.setState({ links: ['', '', '', '', '', '', '', 'active', '', ''] });
+                this.props.getComments(this.props.user._id);                                                
                 break;
             case 'friends-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', 'active', ''] });
@@ -163,6 +165,7 @@ class ProfilePage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    console.log(state);
     const username = localStorage.getItem('username');
     return {
         user: state.users.profile,
@@ -171,7 +174,8 @@ function mapStateToProps(state, ownProps) {
         read: state.users.read,
         wantToRead: state.users.wantToRead,
         friends: state.users.friends,
-        invitations: state.users.invitations
+        invitations: state.users.invitations,
+        comments: state.users.comments
     };
 }
 
@@ -182,7 +186,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         getWantToReadBooks: (id) => dispatch(booksActions.getWantToReadBooks(id)),
         getReadBooks: (id) => dispatch(booksActions.getReadBooks(id)),
         getFriends: (id) => dispatch(usersActions.getFriends(id)),
-        getInvitations: (id) => dispatch(invitationsActions.getInvitations(id))
+        getInvitations: (id) => dispatch(invitationsActions.getInvitations(id)),
+        getComments: (id) => dispatch(commentsActions.getUserComments(id))
     };
 }
 

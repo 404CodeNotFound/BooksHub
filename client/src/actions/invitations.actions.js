@@ -10,7 +10,6 @@ export function getInvitations(id) {
     return function (dispatch) {
         return requester.getAuthorized(token, `${api.USERS}/${id}/requests`)
             .done(response => {
-                console.log(response)
                 dispatch(getInvitationsSuccess(response.requests));
             });
     };

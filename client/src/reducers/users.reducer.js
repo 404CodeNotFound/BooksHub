@@ -1,7 +1,7 @@
 export default function users(state = {
     error: {}, profile: null, isLoggedIn: false,
     currentlyReading: [], wantToRead: [], read: [],
-    friends: [], invitations: []
+    friends: [], invitations: [], comments: []
 }, action) {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
@@ -55,6 +55,11 @@ export default function users(state = {
             return {
                 ...state,
                 invitations: action.invitations
+            };
+        case 'GET_COMMENTS_SUCCESS': 
+            return {
+                ...state,
+                comments: action.comments
             };
         default:
             return state;

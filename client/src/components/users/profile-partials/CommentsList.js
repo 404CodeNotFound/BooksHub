@@ -14,7 +14,7 @@ class CommentsList extends Component {
                 </div>,
                 <div key="list" className="margin2x">
                     {this.props.comments.map(comment =>
-                        <div className="row review">
+                        <div key={comment._id} className="row review">
                             <div className="col-xs-12 col-md-12">
                                 <div className="mbr-testimonial card">
                                     <div className="card-block">

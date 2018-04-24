@@ -106,6 +106,22 @@ module.exports = (data) => {
                         .json({ friends: friends });
                     return res;
                 });
+        },
+        getUserComments(req, res) {
+            const id = req.params.id;
+            if (!id) {
+                res.status(400)
+                    .json({ message: "You should provide user id." });
+
+                return res;
+            }
+
+            data.comments.getComments(id)
+                .then(comments => {
+                    res.status(200)
+                        .json({ comments: comments });
+                    return res;
+                });
         }
 
     }

@@ -1,6 +1,6 @@
 const { Request } = require('../models');
 
-module.exports = class RequestData {
+module.exports = class RequestsData {
     getPendingRequests(userId) {
         return new Promise((resolve, reject) => {
             Request.find({ 'receiver': userId })
