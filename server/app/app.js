@@ -33,13 +33,16 @@ const init = (data) => {
     });
 
     app.post('/login', usersController.login);
+    // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);
     app.get('/users/:id/reading', usersController.getReadingBooks);
     app.get('/users/:id/wishlist', usersController.getWishlist);
     app.get('/users/:id/read', usersController.getReadBooks);  
     app.get('/users/:id/friends', usersController.getUserFriends);
     app.get('/users/:id/comments', usersController.getUserComments);  
-    app.get('/users/:id/reviews', usersController.getUserReviews);                                                  
+    app.get('/users/:id/reviews', usersController.getUserReviews);
+    app.get('/users/:id/events', usersController.getUserEvents);                                                  
+    app.get('/users/:id/joinedevents', usersController.getJoinedEvents);                                                                                                        
     app.get('/users/:id/requests', auth.authenticate(passport), requestsController.getPendingUserRequests);
     app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);            
     

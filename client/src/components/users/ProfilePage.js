@@ -5,6 +5,7 @@ import * as booksActions from '../../actions/books.actions';
 import * as invitationsActions from '../../actions/invitations.actions';
 import * as commentsActions from '../../actions/comments.actions';
 import * as reviewsActions from '../../actions/reviews.actions';
+import * as eventsActions from '../../actions/events.actions';
 import Information from './profile-partials/Information';
 import BooksList from './profile-partials/BooksList';
 import EventsList from './profile-partials/EventsList';
@@ -94,11 +95,11 @@ class ProfilePage extends Component {
                                 <BooksList books={this.props.read} title="Read Books Collection" />
                             }
                             {this.state.links[4] === 'active' &&
-                                <EventsList events={this.props.user.events} title="Events Collection" 
+                                <EventsList events={this.props.events} title="Events Collection" 
                                     isMyProfile={this.props.user.username === this.props.currentUser}/>
                             }
                             {this.state.links[5] === 'active' &&
-                                <EventsList events={this.props.user.joined_events} title="Joined Events Collection" 
+                                <EventsList events={this.props.joinedEvents} title="Joined Events Collection" 
                                     isMyProfile={false} />
                             }
                             {this.state.links[6] === 'active' &&
@@ -139,9 +140,11 @@ class ProfilePage extends Component {
                 break;
             case 'my-events-link':
                 this.setState({ links: ['', '', '', '', 'active', '', '', '', '', ''] });
+                this.props.getUserEvents(this.props.user._id);                                                                                                
                 break;
             case 'joined-events-link':
-                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });                                                              
+                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });    
+                this.props.getJoinedEvents(this.props.user._id);                                                                                                                                                          
                 break;
             case 'reviews-link':
                 this.setState({ links: ['', '', '', '', '', '', 'active', '', '', ''] });
@@ -177,7 +180,9 @@ function mapStateToProps(state, ownProps) {
         friends: state.users.friends,
         invitations: state.users.invitations,
         comments: state.users.comments,
-        reviews: state.users.reviews
+        reviews: state.users.reviews,
+        events: state.users.events,
+        joinedEvents: state.users.joinedEvents
     };
 }
 
@@ -190,7 +195,9 @@ function mapDispatchToProps(dispatch, ownProps) {
         getFriends: (id) => dispatch(usersActions.getFriends(id)),
         getInvitations: (id) => dispatch(invitationsActions.getInvitations(id)),
         getComments: (id) => dispatch(commentsActions.getUserComments(id)),
-        getReviews: (id) => dispatch(reviewsActions.getUserReviews(id))
+        getReviews: (id) => dispatch(reviewsActions.getUserReviews(id)),
+        getUserEvents: (id) => dispatch(eventsActions.getUserEvents(id)),
+        getJoinedEvents: (id) => dispatch(eventsActions.getJoinedEvents(id))
     };
 }
 

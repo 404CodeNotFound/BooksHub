@@ -138,6 +138,38 @@ module.exports = (data) => {
                         .json({ reviews: reviews });
                     return res;
                 });
+        },
+        getUserEvents(req, res) {
+            const id = req.params.id;
+            if (!id) {
+                res.status(400)
+                    .json({ message: "You should provide user id." });
+
+                return res;
+            }
+
+            data.events.getUserEvents(id)
+                .then(events => {
+                    res.status(200)
+                        .json({ events: events });
+                    return res;
+                });
+        },
+        getJoinedEvents(req, res) {
+            const id = req.params.id;
+            if (!id) {
+                res.status(400)
+                    .json({ message: "You should provide user id." });
+
+                return res;
+            }
+
+            data.users.getJoinedEvents(id)
+                .then(events => {
+                    res.status(200)
+                        .json({ events: events });
+                    return res;
+                });
         }
 
     }

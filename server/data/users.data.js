@@ -64,8 +64,6 @@ module.exports = class UserData {
                         return reject(err);
                     } else {
                         const books = statuses.map(status => status.book);
-        console.log(books)
-                        
                         return resolve(books);
                     }
                 });
@@ -96,6 +94,24 @@ module.exports = class UserData {
                         return reject(err);
                     } else {
                         return resolve(user.friends);
+                    }
+                });
+        });
+    }
+
+    getJoinedEvents(id) {
+        return new Promise((resolve, reject) => {
+            User.findById(id)
+                .populate({
+                    path: 'joined_events',
+                    populate: { path: 'creator' }
+                })
+                .exec((err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        const events = user.joined_events;
+                        return resolve(events);
                     }
                 });
         });

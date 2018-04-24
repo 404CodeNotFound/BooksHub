@@ -15,19 +15,19 @@ class EventsList extends Component {
                 <div key="events-list" className="margin2x">
                     <div className="row">
                         {this.props.events.map(event =>
-                            <div className="col-md-4 margin-bottom-60">
+                            <div key={event._id}className="col-md-4 margin-bottom-60">
                                 <div className="float-left">
                                     <img src={event.photo} height="200px" alt="event"/>
-                                    <p>
+                                    <div>
                                         <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{event.title}</h3>
                                         <h5>
                                             <small>by
-                                                <Link href="profile.html" to={"/users/" + event.user.username}>{event.user.username}</Link>
+                                                <Link href="profile.html" to={"/users/" + event.creator.username}> {event.creator.username}</Link>
                                             </small>
                                         </h5>
-                                    </p>
+                                    </div>
                                     <p>
-                                        {event.description.substr(0, 50)}...
+                                        {event.details.substr(0, 50)}...
                                         <Link className="text-more-info text-primary" to={"/events/" + event.title}>Read more</Link>
                                     </p>
                                 </div>

@@ -14,9 +14,9 @@ class BooksList extends Component {
                             <div key={book._id} className="col-md-4 margin-bottom-60">
                                 <div className="float-left">
                                     <img src={book.photo} width="200px" alt="book-logo"/>
-                                    <p>
+                                    <div>
                                         <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{book.title}</h3>
-                                    </p>
+                                    </div>
                                     <p>
                                         {book.summary.substr(0, 50)}...
                                         <Link className="text-more-info text-primary" to={"/books/" + book.title}>Read more</Link>
