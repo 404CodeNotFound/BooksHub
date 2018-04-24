@@ -26,10 +26,10 @@ module.exports = (data) => {
         },
         getUserProfile(req, res) {
             const username = req.params.username;
-            console.log(username);
             if (!username) {
                 res.status(400)
                     .json({ message: "You should provide username." });
+                return res;
             }
 
             data.users.getUserProfile(username)
@@ -66,15 +66,15 @@ module.exports = (data) => {
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
+                return res;
             }
 
             data.users.getWishlist(id)
                 .then(books => {
                     res.status(200)
                         .json({ books: books });
+                    return res;
                 });
-
-            return res;
         },
         getReadBooks(req, res) {
             const id = req.params.id;
@@ -102,7 +102,6 @@ module.exports = (data) => {
 
             data.users.getUserFriends(id)
                 .then(friends => {
-                    console.log(friends);
                     res.status(200)
                         .json({ friends: friends });
                     return res;

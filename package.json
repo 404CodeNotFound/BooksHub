@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "@types/cors": "^2.8.3",
-    "@types/jsonwebtoken": "^7.2.6",
     "@types/jwt-simple": "^0.5.33",
     "@types/moment-timezone": "^0.5.4",
     "@types/passport-jwt": "^3.0.1",
@@ -14,7 +13,6 @@
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "crypto": "^1.0.1",
     "crypto-js": "^3.1.9-1",
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
@@ -22,19 +20,19 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
     "express-validator": "^5.0.3",
-    "jsonwebtoken": "^8.2.0",
     "jwt-simple": "^0.5.1",
     "moment-timezone": "^0.5.14",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",
-    "open": "0.0.5",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./server/server.js"
+    "server": "nodemon ./server/server.js",
+    "client": "cd client && npm start",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -45,8 +43,5 @@
   "bugs": {
     "url": "https://github.com/404CodeNotFound/BooksHub/issues"
   },
-  "homepage": "https://github.com/404CodeNotFound/BooksHub#readme",
-  "devDependencies": {
-    "webpack-cli": "^2.0.15"
-  }
+  "homepage": "https://github.com/404CodeNotFound/BooksHub#readme"
 }
