@@ -122,6 +122,22 @@ module.exports = (data) => {
                         .json({ comments: comments });
                     return res;
                 });
+        },
+        getUserReviews(req, res) {
+            const id = req.params.id;
+            if (!id) {
+                res.status(400)
+                    .json({ message: "You should provide user id." });
+
+                return res;
+            }
+
+            data.reviews.getReviews(id)
+                .then(reviews => {
+                    res.status(200)
+                        .json({ reviews: reviews });
+                    return res;
+                });
         }
 
     }

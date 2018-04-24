@@ -4,6 +4,7 @@ import * as usersActions from '../../actions/users.actions';
 import * as booksActions from '../../actions/books.actions';
 import * as invitationsActions from '../../actions/invitations.actions';
 import * as commentsActions from '../../actions/comments.actions';
+import * as reviewsActions from '../../actions/reviews.actions';
 import Information from './profile-partials/Information';
 import BooksList from './profile-partials/BooksList';
 import EventsList from './profile-partials/EventsList';
@@ -101,7 +102,7 @@ class ProfilePage extends Component {
                                     isMyProfile={false} />
                             }
                             {this.state.links[6] === 'active' &&
-                                <CommentsList comments={this.props.user.reviews} title="Reviews Collection" 
+                                <CommentsList comments={this.props.reviews} title="Reviews Collection" 
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[7] === 'active' &&
@@ -140,10 +141,11 @@ class ProfilePage extends Component {
                 this.setState({ links: ['', '', '', '', 'active', '', '', '', '', ''] });
                 break;
             case 'joined-events-link':
-                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });
+                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });                                                              
                 break;
             case 'reviews-link':
                 this.setState({ links: ['', '', '', '', '', '', 'active', '', '', ''] });
+                this.props.getReviews(this.props.user._id);                                                                                
                 break;
             case 'comments-link':
                 this.setState({ links: ['', '', '', '', '', '', '', 'active', '', ''] });
@@ -165,7 +167,6 @@ class ProfilePage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log(state);
     const username = localStorage.getItem('username');
     return {
         user: state.users.profile,
@@ -175,7 +176,8 @@ function mapStateToProps(state, ownProps) {
         wantToRead: state.users.wantToRead,
         friends: state.users.friends,
         invitations: state.users.invitations,
-        comments: state.users.comments
+        comments: state.users.comments,
+        reviews: state.users.reviews
     };
 }
 
@@ -187,7 +189,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         getReadBooks: (id) => dispatch(booksActions.getReadBooks(id)),
         getFriends: (id) => dispatch(usersActions.getFriends(id)),
         getInvitations: (id) => dispatch(invitationsActions.getInvitations(id)),
-        getComments: (id) => dispatch(commentsActions.getUserComments(id))
+        getComments: (id) => dispatch(commentsActions.getUserComments(id)),
+        getReviews: (id) => dispatch(reviewsActions.getUserReviews(id))
     };
 }
 
