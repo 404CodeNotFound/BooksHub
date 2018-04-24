@@ -40,8 +40,10 @@ class ProfilePage extends Component {
                                     <p>{this.props.user.username}</p>
                                     {this.props.currentUser === this.props.user.username ?
                                         <button type="button" className="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button> :
-                                        (!this.props.hideInviteButton &&
-                                            <button type="button" className="btn btn-main-green" onClick={this.sendInvitation}>Send Invitation</button>
+                                        (this.showInviteButton() &&
+                                        (!this.props.hideInviteButton && 
+                                            <button type="button" className="btn btn-main-green" onClick={this.sendInvitation}>Send Invitation</button> 
+                                        )
                                         )
                                     }
                                 </div>
@@ -175,6 +177,18 @@ class ProfilePage extends Component {
         const receiverId = this.props.user._id;
 
         this.props.sendInvitation(senderId, receiverId);
+    }
+
+    showInviteButton = () => {
+        const friendIndex = this.props.user.friends.findIndex(friend => friend === this.props.currentUser.id);
+        const requestIndex = this.props.user.requests.findIndex(request => request.sender === this.props.currentUser.id);
+        console.log(friendIndex);
+        console.log(requestIndex)
+        if(friendIndex >= 0 || requestIndex >= 0) {
+            return false;
+        }
+
+        return true;
     }
 }
 

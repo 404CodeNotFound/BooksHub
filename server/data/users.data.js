@@ -29,6 +29,7 @@ module.exports = class UserData {
     getUserProfile(username) {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username })
+                .populate('requests')
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
