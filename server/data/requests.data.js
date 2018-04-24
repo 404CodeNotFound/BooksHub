@@ -1,4 +1,4 @@
-const { Request } = require('../models');
+const { Request, User } = require('../models');
 
 module.exports = class RequestsData {
     getPendingRequests(userId) {

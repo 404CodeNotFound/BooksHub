@@ -8,7 +8,7 @@ module.exports = (data) => {
             const username = req.body.username;
             const password = req.body.password;
             //const passHash = crypto.SHA1(username + password).toString();
-
+            
             data.users.getUserByUsernameAndPassword(username, password)
                 .then(user => {
                     if (!user) {

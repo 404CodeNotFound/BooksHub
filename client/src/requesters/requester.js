@@ -18,7 +18,7 @@ const requester = {
         return $.ajax({
             url: url,
             type: "POST",
-            body: body,
+            data: body,
             headers: { "authorization": `Bearer ${token}` }
         });
     },
@@ -26,7 +26,7 @@ const requester = {
         return $.ajax({
             url: url,
             type: "POST",
-            body: body
+            data: body
         });
     }
 }

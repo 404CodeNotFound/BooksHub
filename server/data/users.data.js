@@ -116,4 +116,18 @@ module.exports = class UserData {
                 });
         });
     }
+
+    addRequest(receiverId, requestId) {
+        return new Promise((resolve, reject) => {
+            User.findById(receiverId, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    user.requests.push(requestId);
+                    user.save();
+                    resolve(user);
+                }
+            })
+        });
+    }
 }

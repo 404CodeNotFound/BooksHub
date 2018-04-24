@@ -39,8 +39,10 @@ class ProfilePage extends Component {
                                     <h5 className="text-center">{this.props.user.first_name} {this.props.user.last_name}</h5>
                                     <p>{this.props.user.username}</p>
                                     {this.props.currentUser === this.props.user.username ?
-                                        <button type="button" className="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button>:
-                                        <button type="button" className="btn btn-main-green" data-toggle="modal">Send Invitation</button>
+                                        <button type="button" className="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button> :
+                                        (!this.props.hideInviteButton &&
+                                            <button type="button" className="btn btn-main-green" onClick={this.sendInvitation}>Send Invitation</button>
+                                        )
                                     }
                                 </div>
                                 <div className="widget user-dashboard-menu">
@@ -95,19 +97,19 @@ class ProfilePage extends Component {
                                 <BooksList books={this.props.read} title="Read Books Collection" />
                             }
                             {this.state.links[4] === 'active' &&
-                                <EventsList events={this.props.events} title="Events Collection" 
-                                    isMyProfile={this.props.user.username === this.props.currentUser}/>
+                                <EventsList events={this.props.events} title="Events Collection"
+                                    isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[5] === 'active' &&
-                                <EventsList events={this.props.joinedEvents} title="Joined Events Collection" 
+                                <EventsList events={this.props.joinedEvents} title="Joined Events Collection"
                                     isMyProfile={false} />
                             }
                             {this.state.links[6] === 'active' &&
-                                <CommentsList comments={this.props.reviews} title="Reviews Collection" 
+                                <CommentsList comments={this.props.reviews} title="Reviews Collection"
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[7] === 'active' &&
-                                <CommentsList comments={this.props.comments} title="Comments Collection" 
+                                <CommentsList comments={this.props.comments} title="Comments Collection"
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[8] === 'active' &&
@@ -132,48 +134,56 @@ class ProfilePage extends Component {
                 break;
             case 'want-to-read-link':
                 this.setState({ links: ['', '', 'active', '', '', '', '', '', '', ''] });
-                this.props.getWantToReadBooks(this.props.user._id);                
+                this.props.getWantToReadBooks(this.props.user._id);
                 break;
             case 'read-link':
                 this.setState({ links: ['', '', '', 'active', '', '', '', '', '', ''] });
-                this.props.getReadBooks(this.props.user._id);                
+                this.props.getReadBooks(this.props.user._id);
                 break;
             case 'my-events-link':
                 this.setState({ links: ['', '', '', '', 'active', '', '', '', '', ''] });
-                this.props.getUserEvents(this.props.user._id);                                                                                                
+                this.props.getUserEvents(this.props.user._id);
                 break;
             case 'joined-events-link':
-                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });    
-                this.props.getJoinedEvents(this.props.user._id);                                                                                                                                                          
+                this.setState({ links: ['', '', '', '', '', 'active', '', '', '', ''] });
+                this.props.getJoinedEvents(this.props.user._id);
                 break;
             case 'reviews-link':
                 this.setState({ links: ['', '', '', '', '', '', 'active', '', '', ''] });
-                this.props.getReviews(this.props.user._id);                                                                                
+                this.props.getReviews(this.props.user._id);
                 break;
             case 'comments-link':
                 this.setState({ links: ['', '', '', '', '', '', '', 'active', '', ''] });
-                this.props.getComments(this.props.user._id);                                                
+                this.props.getComments(this.props.user._id);
                 break;
             case 'friends-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', 'active', ''] });
-                this.props.getFriends(this.props.user._id);                                
+                this.props.getFriends(this.props.user._id);
                 break;
             case 'invitations-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', '', 'active'] });
-                this.props.getInvitations(this.props.user._id);                                
+                this.props.getInvitations(this.props.user._id);
                 break;
             default:
                 this.setState({ links: ['active', '', '', '', '', '', '', '', '', ''] });
                 break;
         }
     };
+
+    sendInvitation = () => {
+        const senderId = localStorage.getItem('id');
+        const receiverId = this.props.user._id;
+
+        this.props.sendInvitation(senderId, receiverId);
+    }
 }
 
 function mapStateToProps(state, ownProps) {
     const username = localStorage.getItem('username');
+    const userId = localStorage.getItem('id');
     return {
         user: state.users.profile,
-        currentUser: username,
+        currentUser: {username: username, id: userId},
         currentlyReading: state.users.currentlyReading,
         read: state.users.read,
         wantToRead: state.users.wantToRead,
@@ -182,7 +192,8 @@ function mapStateToProps(state, ownProps) {
         comments: state.users.comments,
         reviews: state.users.reviews,
         events: state.users.events,
-        joinedEvents: state.users.joinedEvents
+        joinedEvents: state.users.joinedEvents,
+        hideInviteButton: state.invitations.hideInviteButton
     };
 }
 
@@ -197,7 +208,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         getComments: (id) => dispatch(commentsActions.getUserComments(id)),
         getReviews: (id) => dispatch(reviewsActions.getUserReviews(id)),
         getUserEvents: (id) => dispatch(eventsActions.getUserEvents(id)),
-        getJoinedEvents: (id) => dispatch(eventsActions.getJoinedEvents(id))
+        getJoinedEvents: (id) => dispatch(eventsActions.getJoinedEvents(id)),
+        sendInvitation: (senderId, receiverId) => dispatch(invitationsActions.sendInvitation(senderId, receiverId))
     };
 }
 

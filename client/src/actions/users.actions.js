@@ -45,7 +45,7 @@ export function login(username, password) {
                 };
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('username', response.user.username);
-                localStorage.setItem('id', response.user._id);
+                localStorage.setItem('id', response.user.id);
 
                 dispatch(loginSuccess(result));
             })

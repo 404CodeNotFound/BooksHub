@@ -62,11 +62,14 @@ module.exports = (data) => {
 
             data.requests.postRequest(receiverId, senderId)
                 .then(request => {
-                    res.status(201)
-                        .json({ request: request });
+                    data.users.addRequest(receiverId, request._id)
+                        .then(user => {
+                            res.status(201)
+                                .json({ request: request });
 
-                    return res;
-                })
+                            return res;
+                        })
+                });
         }
     }
 }
