@@ -41,6 +41,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     return {
         errors: state.errors
     };

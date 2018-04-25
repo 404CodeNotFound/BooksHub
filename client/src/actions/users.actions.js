@@ -45,7 +45,7 @@ export function login(username, password) {
                 dispatch(loginSuccess(result));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message.message));
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     }
 }
@@ -57,7 +57,7 @@ export function getProfile(username) {
                 dispatch(getProfileSuccess(response.user));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
             });
     };
 }
@@ -69,7 +69,7 @@ export function getFriends(id) {
                 dispatch(getFriendsSuccess(response.friends));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
             });
     };
 }

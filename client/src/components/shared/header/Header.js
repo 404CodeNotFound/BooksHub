@@ -56,7 +56,7 @@ class Header extends Component {
                                 <li>
                                     {!this.props.currentUser ?
                                         <Link to="/register">Register</Link> :
-                                        <button type="button" id="logout-btn" onClick={this.props.logout}>Logout</button>
+                                        <Link to="/" onClick={this.props.logout}>Logout</Link>
                                     }
                                 </li>
                             </ul>
@@ -66,13 +66,13 @@ class Header extends Component {
             </header>
         );
     }
+
 }
 
 function mapStateToProps(state, ownProps) {
     const currentUser = localStorage.getItem('username');
     return {
-        currentUser: currentUser,
-        isLoggedIn: state.users.isLoggedIn
+        currentUser: currentUser
     };
 }
 
