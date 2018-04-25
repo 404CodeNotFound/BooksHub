@@ -48,7 +48,6 @@ module.exports = class UserData {
                     if (err) {
                         return reject(err);
                     } else {
-                        console.log(statuses);
                         const books = statuses.map(status => status.book);
                         return resolve(books);
                     }
@@ -127,6 +126,45 @@ module.exports = class UserData {
                     user.requests.push(requestId);
                     user.save();
                     resolve(user);
+                }
+            })
+        });
+    }
+
+    deleteRequest(userId, requestId) {
+        return new Promise((resolve, reject) => {
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const index = user.requests.indexOf(requestId);
+                    user.requests.splice(index, 1);
+                    user.save();
+                    resolve();
+                }
+            })
+        });
+    }
+
+    connectUsers(receiverId, senderId) {
+        return new Promise((resolve, reject) => {
+            console.log('connect')
+            return this.addFriend(receiverId, senderId)
+                .then(() => this.addFriend(senderId, receiverId))
+                .then(() => resolve())
+                .catch(err => reject(err));
+        });
+    }
+
+    addFriend(userId, newFriendId) {
+        return new Promise((resolve, reject) => {
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    user.friends.push(newFriendId);
+                    user.save();
+                    resolve();
                 }
             })
         });

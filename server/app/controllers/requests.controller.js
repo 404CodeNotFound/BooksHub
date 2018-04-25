@@ -70,6 +70,45 @@ module.exports = (data) => {
                             return res;
                         })
                 });
+        },
+        acceptRequest: (req, res) => {
+            const requestId = req.params.id;
+            if (!requestId) {
+                res.status(400)
+                    .json({ message: "You should provide id of request." });
+            } else {
+                data.requests.getAndDeleteRequest(requestId)
+                    .then(request => {
+                        console.log('2')
+                        const receiverId = request.receiver;
+                        const senderId = request.sender;
+
+                        return data.users.connectUsers(receiverId, senderId);
+                    })
+                    .then(() => res.status(200))
+                    .catch((err) => res.status(400).json({ message: err }));
+            }
+
+            return res;
+        },
+        declineRequest: (req, res) => {
+            const requestId = req.params.id;
+            if (!requestId) {
+                res.status(400)
+                    .json({ message: "You should provide id of request." });
+            } else {
+                data.requests.getAndDeleteRequest(requestId)
+                    .then(request => {
+                        const userId = request.receiver;
+                        return data.users.deleteRequest(userId, requestId);
+                    })
+                    .then(() => {
+                        res.status(204);
+                    })
+                    .catch((err) => res.status(400).json({ message: err }));
+            }
+
+            return res;
         }
     }
 }

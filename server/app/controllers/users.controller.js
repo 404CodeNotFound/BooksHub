@@ -170,7 +170,6 @@ module.exports = (data) => {
                         .json({ events: events });
                     return res;
                 });
-        }
-
+        },
     }
 }

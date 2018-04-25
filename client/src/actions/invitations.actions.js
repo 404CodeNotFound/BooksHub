@@ -9,6 +9,10 @@ export function getInvitationsSuccess(invitations) {
     return { type: 'GET_INVITATIONS_SUCCESS', invitations };
 }
 
+export function hideInvitationSuccess(id) {
+    return { type: 'HIDE_INVITATION_SUCCESS', id };
+}
+
 export function getInvitations(id) {
     const token = localStorage.getItem('token');
     return function (dispatch) {
@@ -25,6 +29,26 @@ export function sendInvitation(senderId, receiverId) {
         return requester.postAuthorized(token, `${api.USERS}/${receiverId}/requests`, { id: senderId })
             .done(response => {
                 dispatch(sendInvitationSuccess());
+            });
+    };
+}
+
+export function acceptInvitation(id) {
+    const token = localStorage.getItem('token');
+    return function (dispatch) {
+        return requester.putAuthorized(token, `${api.REQUESTS}/${id}`)
+            .done(response => {
+                dispatch(hideInvitationSuccess(id));
+            });
+    };
+}
+
+export function declineInvitation(id) {
+    const token = localStorage.getItem('token');
+    return function (dispatch) {
+        return requester.deleteAuthorized(token, `${api.REQUESTS}/${id}`, {})
+            .done(response => {
+                dispatch(hideInvitationSuccess(id));
             });
     };
 }

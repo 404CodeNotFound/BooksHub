@@ -28,7 +28,23 @@ const requester = {
             type: "POST",
             data: body
         });
-    }
+    },
+    putAuthorized: (token, url, body) => {
+        return $.ajax({
+            url: url,
+            type: "PUT",
+            data: body,
+            headers: { "authorization": `Bearer ${token}` }
+        });
+    },
+    deleteAuthorized: (token, url, body) => {
+        return $.ajax({
+            url: url,
+            type: "DELETE",
+            data: body,
+            headers: { "authorization": `Bearer ${token}` }
+        });
+    },
 }
 
 export default requester;

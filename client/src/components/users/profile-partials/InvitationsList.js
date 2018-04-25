@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as invitationsActions from '../../../actions/invitations.actions';
 
 class InvitationsList extends Component {
     render() {
@@ -11,7 +13,7 @@ class InvitationsList extends Component {
                 <div key="requests-list" className="row">
                     <div className="people-nearby">
                         {this.props.invitations.map(invitation =>
-                            <div className="nearby-user">
+                            <div key={invitation._id} className="nearby-user">
                                 <div className="row">
                                     <Link to={"/users/" + invitation.sender.username}>
                                         <div className="col-md-2 col-sm-2">
@@ -23,34 +25,34 @@ class InvitationsList extends Component {
                                         </div>
                                     </Link>
                                     <div className="col-md-2 col-sm-2">
-                                        <button className="btn btn-main-green pull-right">Accept</button>
+                                        <button className="btn btn-main-green pull-right" onClick={this.props.acceptInvitation(invitation._id)}>Accept</button>
                                     </div>
                                     <div className="col-md-2 col-sm-2">
-                                        <button className="btn pull-right">Decline</button>
+                                        <button className="btn pull-right" onClick={this.props.declineInvitation(invitation._id)}>Decline</button>
                                     </div>
                                 </div>
                             </div>
                         )}
-                    </div>,
-                    <div key="pages" className="row">
-                        <div className="col-md-offset-5 pages total center">
-                            Page 1 of 1
+                    </div>
+                </div>,
+                <div key="pages" className="row">
+                    <div className="col-md-offset-5 pages total center">
+                        Page 1 of 1
                                 <div className="pagination-container center">
-                                <ul className="pagination">
-                                    <li className="active">
-                                        <a>1</a>
-                                    </li>
-                                    <li>
-                                        <a>2</a>
-                                    </li>
-                                    <li>
-                                        <a>3</a>
-                                    </li>
-                                    <li>
-                                        <a>4</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul className="pagination">
+                                <li className="active">
+                                    <a>1</a>
+                                </li>
+                                <li>
+                                    <a>2</a>
+                                </li>
+                                <li>
+                                    <a>3</a>
+                                </li>
+                                <li>
+                                    <a>4</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -59,4 +61,17 @@ class InvitationsList extends Component {
     }
 }
 
-export default InvitationsList;
+function mapStateToProps(state, ownProps) {
+    return {
+        invitations: ownProps.invitations
+    }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        acceptInvitation: (id) => dispatch(invitationsActions.acceptInvitation(id)),
+        declineInvitation: (id) => dispatch(invitationsActions.declineInvitation(id))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InvitationsList);

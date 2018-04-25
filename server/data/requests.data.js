@@ -31,4 +31,31 @@ module.exports = class RequestsData {
             });
         });
     }
+
+    getAndDeleteRequest(id) {
+        return new Promise((resolve, reject) => {
+            Request.findById(id, (err, request) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return this.deleteRequest(id)
+                        .then(() => resolve(request))
+                        .catch((err) => reject(err));
+                }
+            });
+        });
+    }
+
+    deleteRequest(id) {
+        return new Promise((resolve, reject) => {
+            console.log('1')
+            Request.remove({'_id': id }, (err) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
+        });
+    }
 }

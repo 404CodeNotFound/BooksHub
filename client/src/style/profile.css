@@ -217,11 +217,20 @@ ul {
     margin: 0 4%;
 }
 
+.people-nearby {
+    padding-left: 10%;
+    width: 100%;
+}
+
 .people-nearby .nearby-user {
     padding: 20px 0;
     border-top: 1px solid #f1f2f2;
     border-bottom: 1px solid #f1f2f2;
     margin-bottom: 20px;
+}
+
+.people-nearby>.nearby-user>.row {
+    padding-left: 8%;
 }
 
 img.profile-photo-lg {

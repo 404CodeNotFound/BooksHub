@@ -44,7 +44,12 @@ const init = (data) => {
     app.get('/users/:id/events', usersController.getUserEvents);                                                  
     app.get('/users/:id/joinedevents', usersController.getJoinedEvents);                                                                                                        
     app.get('/users/:id/requests', auth.authenticate(passport), requestsController.getPendingUserRequests);
-    app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);            
+    app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);
+
+    // Accept and Decline Request
+    app.put('/requests/:id', auth.authenticate(passport), requestsController.acceptRequest);            
+    app.delete('/requests/:id', auth.authenticate(passport), requestsController.declineRequest);            
+                
     
     return Promise.resolve(server);
 };
