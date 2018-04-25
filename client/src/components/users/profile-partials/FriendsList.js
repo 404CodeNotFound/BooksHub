@@ -11,7 +11,7 @@ class FriendsList extends Component {
                 <div key="friends-list">
                     <div className="row">
                     {this.props.users.map(user => 
-                        <div className="col-md-1 margin-bottom-60">
+                        <div key={user._id} className="col-md-1 margin-bottom-60">
                         <div className="float-left user">
                             <Link to={"/users/" + user.username}>
                                 <img src={user.photo} width="200px" className="img-circle" alt="avatar"/>

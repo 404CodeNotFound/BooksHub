@@ -1,5 +1,6 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
+import * as errorActions from './error.actions';
 
 export function sendInvitationSuccess() {
     return { type: 'SEND_INVITATION_SUCCESS', hideInviteButton: true };
@@ -19,6 +20,9 @@ export function getInvitations(id) {
         return requester.getAuthorized(token, `${api.USERS}/${id}/requests`)
             .done(response => {
                 dispatch(getInvitationsSuccess(response.requests));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
             });
     };
 }
@@ -29,6 +33,9 @@ export function sendInvitation(senderId, receiverId) {
         return requester.postAuthorized(token, `${api.USERS}/${receiverId}/requests`, { id: senderId })
             .done(response => {
                 dispatch(sendInvitationSuccess());
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
             });
     };
 }
@@ -39,6 +46,9 @@ export function acceptInvitation(id) {
         return requester.putAuthorized(token, `${api.REQUESTS}/${id}`)
             .done(response => {
                 dispatch(hideInvitationSuccess(id));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
             });
     };
 }
@@ -49,6 +59,9 @@ export function declineInvitation(id) {
         return requester.deleteAuthorized(token, `${api.REQUESTS}/${id}`, {})
             .done(response => {
                 dispatch(hideInvitationSuccess(id));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
             });
     };
 }

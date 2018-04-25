@@ -25,10 +25,10 @@ class InvitationsList extends Component {
                                         </div>
                                     </Link>
                                     <div className="col-md-2 col-sm-2">
-                                        <button className="btn btn-main-green pull-right" onClick={this.props.acceptInvitation(invitation._id)}>Accept</button>
+                                        <button className="btn btn-main-green pull-right" onClick={(event) => this.props.acceptInvitation(invitation._id)}>Accept</button>
                                     </div>
                                     <div className="col-md-2 col-sm-2">
-                                        <button className="btn pull-right" onClick={this.props.declineInvitation(invitation._id)}>Decline</button>
+                                        <button className="btn pull-right" onClick={(event) => this.props.declineInvitation(invitation._id)}>Decline</button>
                                     </div>
                                 </div>
                             </div>

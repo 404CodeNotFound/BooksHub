@@ -1,5 +1,6 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
+import * as errorActions from './error.actions';
 
 export function loginSuccess(result) {
     return { type: 'LOGIN_SUCCESS', result };
@@ -7,9 +8,6 @@ export function loginSuccess(result) {
 
 export function logoutSuccess(result) {
     return { type: 'LOGOUT_SUCCESS', result };
-}
-export function loginFailure(error) {
-    return { type: 'LOGIN_FAILURE', error };
 }
 
 export function getProfileSuccess(user) {
@@ -28,12 +26,9 @@ export function logout() {
         const result = {
             isLoggedIn: false
         };
+        
         dispatch(logoutSuccess(result));
     }
-}
-
-export function removeError() {
-    return { type: 'REMOVE_ERROR' };
 }
 
 export function login(username, password) {
@@ -49,8 +44,8 @@ export function login(username, password) {
 
                 dispatch(loginSuccess(result));
             })
-            .fail(function (error) {
-                dispatch(loginFailure(error.responseJSON));
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message.message));
             });
     }
 }
@@ -60,6 +55,9 @@ export function getProfile(username) {
         return requester.get(`${api.USERS}/${username}`)
             .done(response => {
                 dispatch(getProfileSuccess(response.user));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message.message));                
             });
     };
 }
@@ -69,6 +67,9 @@ export function getFriends(id) {
         return requester.get(`${api.USERS}/${id}/friends`)
             .done(response => {
                 dispatch(getFriendsSuccess(response.friends));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message.message));                
             });
     };
 }

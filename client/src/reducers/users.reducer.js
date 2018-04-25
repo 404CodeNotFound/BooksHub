@@ -11,17 +11,6 @@ export default function users(state = {
                 shouldRedirect: true,
                 isLoggedIn: action.result.isLoggedIn
             };
-        case 'LOGIN_FAILURE':
-            return {
-                ...state,
-                error: action.error,
-                shouldRedirect: false
-            };
-        case 'REMOVE_ERROR':
-            return {
-                ...state,
-                error: {}
-            };
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,

@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as usersActions from '../../actions/users.actions';
-import { withSwalInstance } from 'sweetalert2-react';
-import swal from 'sweetalert2';
 import '../../style/login.css';
 import background from '../../style/banner-blurred.jpg';
 
-const SweetAlert = withSwalInstance(swal);
 const style = {
     backgroundImage: `url(${background})`
 };
@@ -53,14 +50,6 @@ class LoginPage extends Component {
                 {this.props.shouldRedirect &&
                     <Redirect to="/" />
                 }
-                <SweetAlert
-                    show={this.props.error.message ? true : false}
-                    title="Error"
-                    type="error"
-                    text={this.props.error.message}
-                    confirmButtonColor="#ec6c62"
-                    onConfirm={this.props.removeError}
-                />
             </header>
         );
     }
@@ -85,15 +74,13 @@ class LoginPage extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        error: state.users.error,
         shouldRedirect: state.users.shouldRedirect
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        login: (username, password) => dispatch(usersActions.login(username, password)),
-        removeError: () => dispatch(usersActions.removeError())
+        login: (username, password) => dispatch(usersActions.login(username, password))
     };
 }
 
