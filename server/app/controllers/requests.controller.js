@@ -5,27 +5,34 @@ module.exports = (data) => {
             if (!userId) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
+            } else {
+                data.users.getUserById(userId)
+                    .then(user => {
+                        if (!user) {
+                            res.status(404)
+                                .json({ message: "User was not found." })
 
-                return res;
+                            return res;
+                        }
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                        return res;
+                    });
+
+                data.requests.getPendingRequests(userId)
+                    .then(requests => {
+                        res.status(200)
+                            .json({ requests: requests });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                    });
             }
 
-            data.users.getUserById(userId)
-                .then(user => {
-                    if (!user) {
-                        res.status(404)
-                            .json({ message: "User was not found." })
-
-                        return res;
-                    }
-                });
-
-            data.requests.getPendingRequests(userId)
-                .then(requests => {
-                    res.status(200)
-                        .json({ requests: requests });
-
-                    return res;
-                });
+            return res;
         },
         sendRequests: (req, res) => {
             const receiverId = req.params.id;
@@ -34,42 +41,56 @@ module.exports = (data) => {
             if (!receiverId) {
                 res.status(400)
                     .json({ message: "You should provide id of receiver." });
-            }
-
-            if (!senderId) {
+            } else if (!senderId) {
                 res.status(400)
                     .json({ message: "You should provide id of sender." });
-            }
-
-            data.users.getUserById(receiverId)
-                .then(user => {
-                    if (!user) {
-                        res.status(404)
-                            .json({ message: "Receiver was not found." });
-                        return res;
-                    }
-                });
-
-            data.users.getUserById(senderId)
-                .then(user => {
-                    if (!user) {
-                        res.status(404)
-                            .json({ message: "Sender was not found." });
-
-                        return res;
-                    }
-                });
-
-            data.requests.postRequest(receiverId, senderId)
-                .then(request => {
-                    data.users.addRequest(receiverId, request._id)
-                        .then(user => {
-                            res.status(201)
-                                .json({ request: request });
+            } else {
+                data.users.getUserById(receiverId)
+                    .then(user => {
+                        if (!user) {
+                            res.status(404)
+                                .json({ message: "Receiver was not found." });
 
                             return res;
-                        })
-                });
+                        }
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+
+                        return res;
+                    });
+
+                data.users.getUserById(senderId)
+                    .then(user => {
+                        if (!user) {
+                            res.status(404)
+                                .json({ message: "Sender was not found." });
+
+                            return res;
+                        }
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+
+                        return res;
+                    });
+
+                data.requests.postRequest(receiverId, senderId)
+                    .then(request => {
+                        return data.users.addRequest(receiverId, request._id);
+                    })
+                    .then(user => {
+                        res.status(201).json("Created");
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
+            }
+
+            return res;
         },
         acceptRequest: (req, res) => {
             const requestId = req.params.id;
@@ -79,14 +100,16 @@ module.exports = (data) => {
             } else {
                 data.requests.getAndDeleteRequest(requestId)
                     .then(request => {
-                        console.log('2')
                         const receiverId = request.receiver;
                         const senderId = request.sender;
 
                         return data.users.connectUsers(receiverId, senderId);
                     })
-                    .then(() => res.status(200))
-                    .catch((err) => res.status(400).json({ message: err }));
+                    .then(() => res.status(201).json("Accepted"))
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
             return res;
@@ -103,9 +126,12 @@ module.exports = (data) => {
                         return data.users.deleteRequest(userId, requestId);
                     })
                     .then(() => {
-                        res.status(204);
+                        res.status(200).json("Removed");
                     })
-                    .catch((err) => res.status(400).json({ message: err }));
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
             return res;

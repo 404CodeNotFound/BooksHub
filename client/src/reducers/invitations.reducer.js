@@ -1,6 +1,4 @@
-export default function invitations(state = {
-    error: {}, hideInviteButton: false
-}, action) {
+export default function invitations(state = { hideInviteButton: false}, action) {
     switch (action.type) {
         case 'SEND_INVITATION_SUCCESS':
             return {

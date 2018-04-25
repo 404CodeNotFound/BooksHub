@@ -31,7 +31,7 @@ export function sendInvitation(senderId, receiverId) {
     const token = localStorage.getItem('token');
     return function (dispatch) {
         return requester.postAuthorized(token, `${api.USERS}/${receiverId}/requests`, { id: senderId })
-            .done(response => {
+            .done(() => {
                 dispatch(sendInvitationSuccess());
             })
             .fail(error => {
@@ -57,7 +57,7 @@ export function declineInvitation(id) {
     const token = localStorage.getItem('token');
     return function (dispatch) {
         return requester.deleteAuthorized(token, `${api.REQUESTS}/${id}`, {})
-            .done(response => {
+            .done(() => {
                 dispatch(hideInvitationSuccess(id));
             })
             .fail(error => {

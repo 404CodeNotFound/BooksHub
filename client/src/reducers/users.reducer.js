@@ -66,7 +66,23 @@ export default function users(state = {
                 ...state,
                 events: action.events
             };
+        case 'HIDE_INVITATION_SUCCESS':
+            return {
+                ...state,
+                invitations: removeInvitation(state.invitations, action.id)
+            };
         default:
             return state;
     }
+}
+
+function removeInvitation(invitations, id) {
+    const length = invitations.length;
+    const index = invitations.findIndex(invitation => invitation._id === id);
+    const newInvitationsList = [
+        ...invitations.slice(0, index),
+        ...invitations.slice(index + 1, length)
+    ];
+
+    return newInvitationsList;
 }

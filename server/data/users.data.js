@@ -148,7 +148,6 @@ module.exports = class UserData {
 
     connectUsers(receiverId, senderId) {
         return new Promise((resolve, reject) => {
-            console.log('connect')
             return this.addFriend(receiverId, senderId)
                 .then(() => this.addFriend(senderId, receiverId))
                 .then(() => resolve())

@@ -7,8 +7,13 @@ module.exports = (data) => {
         login: (req, res) => {
             const username = req.body.username;
             const password = req.body.password;
+
+            if (!username || !password) {
+                res.status(400)
+                    .json({ message: "You should provide username and password." });
+            }
             //const passHash = crypto.SHA1(username + password).toString();
-            
+
             data.users.getUserByUsernameAndPassword(username, password)
                 .then(user => {
                     if (!user) {
@@ -18,76 +23,99 @@ module.exports = (data) => {
                         const payload = { id: user._id };
                         const token = jwt.encode(payload, secret);
                         res.status(200)
-                            .json({ message: "ok", user: { username: user.username, id: user._id }, token: token });
+                            .json({
+                                user: {
+                                    username: user.username,
+                                    id: user._id
+                                },
+                                token: token
+                            });
                     }
-
-                    return res;
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: 'Something went wrong!' })
                 });
+
+                return res;
         },
         getUserProfile(req, res) {
             const username = req.params.username;
             if (!username) {
                 res.status(400)
                     .json({ message: "You should provide username." });
-                return res;
+            } else {
+                data.users.getUserProfile(username)
+                    .then(user => {
+                        if (!user) {
+                            res.status(404)
+                                .json({ message: "User was not found." });
+                        } else {
+                            res.status(200)
+                                .json({ user: user });
+                        }
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
-
-            data.users.getUserProfile(username)
-                .then(user => {
-
-                    if (!user) {
-                        res.status(404)
-                            .json({ message: "User was not found." });
-                        return res;
-                    } else {
-                        res.status(200)
-                            .json({ user: user });
-                        return res;
-                    }
-                });
+            return res;
         },
         getReadingBooks(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-                return res;
+            } else {
+                data.users.getReadingBooks(id)
+                    .then(books => {
+                        res.status(200)
+                            .json({ books: books });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.users.getReadingBooks(id)
-                .then(books => {
-                    res.status(200)
-                        .json({ books: books });
-                    return res;
-                });
+            return res;
         },
         getWishlist(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-                return res;
+            } else {
+                data.users.getWishlist(id)
+                    .then(books => {
+                        res.status(200)
+                            .json({ books: books });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.users.getWishlist(id)
-                .then(books => {
-                    res.status(200)
-                        .json({ books: books });
-                    return res;
-                });
+            return res;
         },
         getReadBooks(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
+            } else {
+                data.users.getReadBooks(id)
+                    .then(books => {
+                        res.status(200)
+                            .json({ books: books });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
-
-            data.users.getReadBooks(id)
-                .then(books => {
-                    res.status(200)
-                        .json({ books: books });
-                });
 
             return res;
         },
@@ -96,80 +124,95 @@ module.exports = (data) => {
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-
-                return res;
+            } else {
+                data.users.getUserFriends(id)
+                    .then(friends => {
+                        res.status(200)
+                            .json({ friends: friends });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.users.getUserFriends(id)
-                .then(friends => {
-                    res.status(200)
-                        .json({ friends: friends });
-                    return res;
-                });
+            return res;
         },
         getUserComments(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-
-                return res;
+            } else {
+                data.comments.getComments(id)
+                    .then(comments => {
+                        res.status(200)
+                            .json({ comments: comments });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.comments.getComments(id)
-                .then(comments => {
-                    res.status(200)
-                        .json({ comments: comments });
-                    return res;
-                });
+            return res;
         },
         getUserReviews(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-
-                return res;
+            } else {
+                data.reviews.getReviews(id)
+                    .then(reviews => {
+                        res.status(200)
+                            .json({ reviews: reviews });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.reviews.getReviews(id)
-                .then(reviews => {
-                    res.status(200)
-                        .json({ reviews: reviews });
-                    return res;
-                });
+            return res;
         },
         getUserEvents(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-
-                return res;
+            } else {
+                data.events.getUserEvents(id)
+                    .then(events => {
+                        res.status(200)
+                            .json({ events: events });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.events.getUserEvents(id)
-                .then(events => {
-                    res.status(200)
-                        .json({ events: events });
-                    return res;
-                });
+            return res;
         },
         getJoinedEvents(req, res) {
             const id = req.params.id;
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
-
-                return res;
+            } else {
+                data.users.getJoinedEvents(id)
+                    .then(events => {
+                        res.status(200)
+                            .json({ events: events });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
             }
 
-            data.users.getJoinedEvents(id)
-                .then(events => {
-                    res.status(200)
-                        .json({ events: events });
-                    return res;
-                });
+            return res;
         },
     }
 }

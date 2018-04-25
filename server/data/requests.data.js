@@ -38,7 +38,7 @@ module.exports = class RequestsData {
                 if (err) {
                     return reject(err);
                 } else {
-                    return this.deleteRequest(id)
+                    this.deleteRequest(id)
                         .then(() => resolve(request))
                         .catch((err) => reject(err));
                 }
@@ -48,8 +48,7 @@ module.exports = class RequestsData {
 
     deleteRequest(id) {
         return new Promise((resolve, reject) => {
-            console.log('1')
-            Request.remove({'_id': id }, (err) => {
+            Request.remove({ '_id': id }, (err) => {
                 if (err) {
                     return reject(err);
                 } else {
