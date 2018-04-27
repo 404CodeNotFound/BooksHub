@@ -65,7 +65,7 @@ module.exports = (data) => {
         getReadingBooks(req, res) {
             const id = req.params.id;
             const page = req.query.page;
-            
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
@@ -86,7 +86,7 @@ module.exports = (data) => {
         getWishlist(req, res) {
             const id = req.params.id;
             const page = req.query.page;
-            
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
@@ -107,7 +107,7 @@ module.exports = (data) => {
         getReadBooks(req, res) {
             const id = req.params.id;
             const page = req.query.page;
-            
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
@@ -191,7 +191,7 @@ module.exports = (data) => {
         getUserEvents(req, res) {
             const id = req.params.id;
             const page = req.query.page;
-            
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
@@ -230,5 +230,55 @@ module.exports = (data) => {
 
             return res;
         },
+        deleteReview(req, res) {
+            const userId = req.params.userId;
+            const reviewId = req.params.reviewId;
+
+            if (!userId) {
+                res.status(400)
+                    .json({ message: "You should provide id of user." });
+            } else if (!reviewId) {
+                res.status(400)
+                    .json({ message: "You should provide id of review." });
+            } else {
+                data.users.deleteReview(userId, reviewId)
+                    .then(() => data.reviews.deleteReview(reviewId))
+                    .then(() => {
+                        res.status(200)
+                            .json("Removed");
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
+            }
+
+            return res;
+        },
+        deleteComment(req, res) {
+            const userId = req.params.userId;
+            const commentId = req.params.commentId;
+            
+            if (!userId) {
+                res.status(400)
+                    .json({ message: "You should provide id of user." });
+            } else if (!commentId) {
+                res.status(400)
+                    .json({ message: "You should provide id of comment." });
+            } else {
+                data.users.deleteComment(userId, commentId)
+                    .then(() => data.comments.deleteComment(commentId))
+                    .then(() => {
+                        res.status(200)
+                            .json("Removed");
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
+            }
+
+            return res;
+        }
     }
 }

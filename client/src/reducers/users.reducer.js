@@ -58,20 +58,30 @@ export default function users(state = {
         case 'HIDE_INVITATION_SUCCESS':
             return {
                 ...state,
-                invitations: removeInvitation(state.invitations, action.id)
+                invitations: removeFromCollection(state.invitations, action.id)
+            };
+        case 'DELETE_REVIEW_SUCCESS':
+            return {
+                ...state,
+                reviews: removeFromCollection(state.reviews, action.id)
+            };
+        case 'DELETE_COMMENT_SUCCESS':
+            return {
+                ...state,
+                comments: removeFromCollection(state.comments, action.id)
             };
         default:
             return state;
     }
 }
 
-function removeInvitation(invitations, id) {
-    const length = invitations.length;
-    const index = invitations.findIndex(invitation => invitation._id === id);
-    const newInvitationsList = [
-        ...invitations.slice(0, index),
-        ...invitations.slice(index + 1, length)
+function removeFromCollection(collection, id) {
+    const length = collection.length;
+    const index = collection.findIndex(item => item._id === id);
+    const newCollection = [
+        ...collection.slice(0, index),
+        ...collection.slice(index + 1, length)
     ];
 
-    return newInvitationsList;
+    return newCollection;
 }

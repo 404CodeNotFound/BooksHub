@@ -23,4 +23,16 @@ module.exports = class CommentsData {
                 });
         });
     }
+
+    deleteComment(id) {
+        return new Promise((resolve, reject) => {
+            Comment.remove({ '_id': id }, (err) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
+        });
+    }
 }

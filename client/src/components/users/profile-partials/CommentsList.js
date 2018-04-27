@@ -28,7 +28,7 @@ class CommentsList extends Component {
                                 <div className="mbr-testimonial card">
                                     <div className="card-block">
                                         {this.props.isMyProfile &&
-                                            <button className="btn-xs delete-review">
+                                            <button className="btn-xs delete-review" onClick={(event) => this.props.deleteComment(this.props.userId, comment._id)}>
                                                 <i className="fa fa-trash-o"></i>
                                             </button>
                                         }
@@ -77,7 +77,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getComments: (id, page) => dispatch(commentsActions.getUserComments(id, page))
+        getComments: (id, page) => dispatch(commentsActions.getUserComments(id, page)),
+        deleteComment: (userId, commentId) => dispatch(commentsActions.deleteComment(userId, commentId))
     };
 }
 

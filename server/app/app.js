@@ -33,20 +33,33 @@ const init = (data) => {
     });
 
     app.post('/login', usersController.login);
+    
     // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);
+
+    // Book collections of User
     app.get('/users/:id/reading', usersController.getReadingBooks);
     app.get('/users/:id/wishlist', usersController.getWishlist);
     app.get('/users/:id/read', usersController.getReadBooks);  
+
+    // Friends of User
     app.get('/users/:id/friends', usersController.getUserFriends);
-    app.get('/users/:id/comments', usersController.getUserComments);  
+
+    // Comments of User
+    app.get('/users/:id/comments', usersController.getUserComments); 
+    app.delete('/users/:userId/comments/:commentId', auth.authenticate(passport), usersController.deleteComment);  
+    
+    // Reviews of User
     app.get('/users/:id/reviews', usersController.getUserReviews);
+    app.delete('/users/:userId/reviews/:reviewId', auth.authenticate(passport), usersController.deleteReview);
+
+    // Events of User
     app.get('/users/:id/events', usersController.getUserEvents);                                                  
-    app.get('/users/:id/joinedevents', usersController.getJoinedEvents);                                                                                                        
+    app.get('/users/:id/joinedevents', usersController.getJoinedEvents);                  
+    
+    // Requests of User
     app.get('/users/:id/requests', auth.authenticate(passport), requestsController.getPendingUserRequests);
     app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);
-
-    // Accept and Decline Request
     app.put('/requests/:id', auth.authenticate(passport), requestsController.acceptRequest);            
     app.delete('/requests/:id', auth.authenticate(passport), requestsController.declineRequest);            
                 

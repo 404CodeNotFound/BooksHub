@@ -204,4 +204,34 @@ module.exports = class UserData {
             })
         });
     }
+
+    deleteReview(userId, reviewId) {
+        return new Promise((resolve, reject) => {
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const index = user.reviews.indexOf(reviewId);
+                    user.reviews.splice(index, 1);
+                    user.save();
+                    resolve();
+                }
+            })
+        });
+    }
+
+    deleteComment(userId, commentId) {
+        return new Promise((resolve, reject) => {
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const index = user.comments.indexOf(commentId);
+                    user.comments.splice(index, 1);
+                    user.save();
+                    resolve();
+                }
+            })
+        });
+    }
 }

@@ -23,4 +23,16 @@ module.exports = class ReviewsData {
                 });
         });
     }
+
+    deleteReview(id) {
+        return new Promise((resolve, reject) => {
+            Review.remove({ '_id': id }, (err) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
+        });
+    }
 }

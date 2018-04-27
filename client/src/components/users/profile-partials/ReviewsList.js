@@ -28,7 +28,7 @@ class ReviewsList extends Component {
                                 <div className="mbr-testimonial card">
                                     <div className="card-block">
                                         {this.props.isMyProfile &&
-                                            <button className="btn-xs delete-review">
+                                            <button className="btn-xs delete-review" onClick={(event) => this.props.deleteReview(this.props.userId, review._id)}>
                                                 <i className="fa fa-trash-o"></i>
                                             </button>
                                         }
@@ -77,7 +77,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getReviews: (id, page) => dispatch(reviewsActions.getUserReviews(id, page))
+        getReviews: (id, page) => dispatch(reviewsActions.getUserReviews(id, page)),
+        deleteReview: (userId, reviewId) => dispatch(reviewsActions.deleteReview(userId, reviewId))
     };
 }
 
