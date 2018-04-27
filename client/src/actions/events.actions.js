@@ -2,31 +2,30 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 
-export function getJoinedEventsSuccess(events) {
-    return { type: 'GET_JOINED_EVENTS_SUCCESS', events };
+export function getUserEventsSuccess(result) {
+    return { type: 'GET_USER_EVENTS_SUCCESS', events: result.events, eventsCount: result.eventsCount };
 }
 
-export function getUserEventsSuccess(events) {
-    return { type: 'GET_USER_EVENTS_SUCCESS', events };
-}
-
-export function getJoinedEvents(id) {
+export function getJoinedEvents(id, page) {
     return function (dispatch) {
-        return requester.get(`${api.USERS}/${id}/joinedevents`)
+        debugger;
+        return requester.get(`${api.USERS}/${id}/joinedevents?page=${page}`)
             .done(response => {
-                dispatch(getJoinedEventsSuccess(response.events));
+                debugger;
+                dispatch(getUserEventsSuccess(response));
             })
             .fail(error => {
+                debugger;
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     }
 }
 
-export function getUserEvents(id) {
+export function getUserEvents(id, page) {
     return function (dispatch) {
-        return requester.get(`${api.USERS}/${id}/events`)
+        return requester.get(`${api.USERS}/${id}/events?page=${page}`)
             .done(response => {
-                dispatch(getUserEventsSuccess(response.events));
+                dispatch(getUserEventsSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

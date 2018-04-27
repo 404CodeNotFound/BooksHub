@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Pagination from "react-js-pagination";
+import * as eventsActions from '../../../actions/events.actions';
 
 class EventsList extends Component {
+    state = { activePage: 1 };
+
+    componentDidMount() {
+        if (this.props.title === 'Events Collection') {
+            this.props.getUserEvents(this.props.userId, 1);
+        } else {
+            this.props.getJoinedEvents(this.props.userId, 1);
+        }
+    }
+
     render() {
         return (
             [
@@ -15,9 +28,9 @@ class EventsList extends Component {
                 <div key="events-list" className="margin2x">
                     <div className="row">
                         {this.props.events.map(event =>
-                            <div key={event._id}className="col-md-4 margin-bottom-60">
+                            <div key={event._id} className="col-md-4 margin-bottom-60">
                                 <div className="float-left">
-                                    <img src={event.photo} height="200px" alt="event"/>
+                                    <img src={event.photo} height="200px" alt="event" />
                                     <div>
                                         <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{event.title}</h3>
                                         <h5>
@@ -35,31 +48,44 @@ class EventsList extends Component {
                         )}
 
                     </div>,
-                    <div key="pages" className="row">
-                        <div className="col-md-offset-5 pages total center">
-                            Page 1 of 1
-                                <div className="pagination-container center">
-                                <ul className="pagination">
-                                    <li className="active">
-                                        <a>1</a>
-                                    </li>
-                                    <li>
-                                        <a>2</a>
-                                    </li>
-                                    <li>
-                                        <a>3</a>
-                                    </li>
-                                    <li>
-                                        <a>4</a>
-                                    </li>
-                                </ul>
-                            </div>
+                    {this.props.events.length > 0 &&
+                        <div key="pages" className="row">
+                            <Pagination
+                                activePage={this.state.activePage}
+                                itemsCountPerPage={1}
+                                totalItemsCount={this.props.eventsCount}
+                                pageRangeDisplayed={5}
+                                onChange={this.selectPage}
+                            />
                         </div>
-                    </div>
+                    }
                 </div>
             ]
         );
     }
+
+    selectPage = (pageNumber) => {
+        this.setState({ activePage: pageNumber });
+        if (this.props.title === 'Events Collection') {
+            this.props.getUserEvents(this.props.userId, pageNumber);
+        } else {
+            this.props.getJoinedEvents(this.props.userId, pageNumber);
+        }
+    }
 }
 
-export default EventsList;
+function mapStateToProps(state, ownProps) {
+    return {
+        events: state.users.events,
+        eventsCount: state.users.eventsCount
+    };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        getUserEvents: (id, page) => dispatch(eventsActions.getUserEvents(id, page)),
+        getJoinedEvents: (id, page) => dispatch(eventsActions.getJoinedEvents(id, page))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsList);

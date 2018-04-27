@@ -1,7 +1,9 @@
 const { Review } = require('../models');
+const getPageOfCollection = require('../utils/pagination');
+const itemsPerPage = 1;
 
 module.exports = class ReviewsData {
-    getReviews(id) {
+    getReviews(id, page) {
         return new Promise((resolve, reject) => {
             Review.find({ 'user': id })
                 .populate('book')
@@ -9,7 +11,14 @@ module.exports = class ReviewsData {
                     if (err) {
                         return reject(err);
                     } else {
-                        return resolve(reviews);
+                        const reviewsOnPage = getPageOfCollection(reviews, page, itemsPerPage);
+
+                        let result = {
+                            reviews: reviewsOnPage,
+                            reviewsCount: reviews.length
+                        };
+                        
+                        return resolve(result);
                     }
                 });
         });

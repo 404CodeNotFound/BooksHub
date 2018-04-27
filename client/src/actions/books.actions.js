@@ -2,23 +2,15 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 
-export function getCurrentlyReadingBooksSuccess(books) {
-    return { type: 'GET_CURRENTLY_READING_BOOKS_SUCCESS', currentlyReading: books };
+export function getUserBooksSuccess(result) {
+    return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
 }
 
-export function getWantToReadBooksSuccess(books) {
-    return { type: 'GET_WANT_TO_READ_BOOKS_SUCCESS', wantToRead: books };
-}
-
-export function getReadBooksSuccess(books) {
-    return { type: 'GET_READ_BOOKS_SUCCESS', read: books };
-}
-
-export function getCurrentlyReadingBooks(id) {
+export function getCurrentlyReadingBooks(id, page) {
     return function (dispatch) {
-        return requester.get(`${api.USERS}/${id}/reading`)
+        return requester.get(`${api.USERS}/${id}/reading?page=${page}`)
             .done(response => {
-                dispatch(getCurrentlyReadingBooksSuccess(response.books));
+                dispatch(getUserBooksSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -26,11 +18,11 @@ export function getCurrentlyReadingBooks(id) {
     };
 }
 
-export function getWantToReadBooks(id) {
+export function getWantToReadBooks(id, page) {
     return function (dispatch) {
-        return requester.get(`${api.USERS}/${id}/wishlist`)
+        return requester.get(`${api.USERS}/${id}/wishlist?page=${page}`)
             .done(response => {
-                dispatch(getWantToReadBooksSuccess(response.books));
+                dispatch(getUserBooksSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));                
@@ -38,11 +30,11 @@ export function getWantToReadBooks(id) {
     };
 }
 
-export function getReadBooks(id) {
+export function getReadBooks(id, page) {
     return function (dispatch) {
-        return requester.get(`${api.USERS}/${id}/read`)
+        return requester.get(`${api.USERS}/${id}/read?page=${page}`)
             .done(response => {
-                dispatch(getReadBooksSuccess(response.books));
+                dispatch(getUserBooksSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));                

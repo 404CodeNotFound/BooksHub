@@ -1,7 +1,9 @@
 const { Comment } = require('../models');
+const getPageOfCollection = require('../utils/pagination');
+const itemsPerPage = 1;
 
 module.exports = class CommentsData {
-    getComments(id) {
+    getComments(id, page) {
         return new Promise((resolve, reject) => {
             Comment.find({ 'user': id })
                 .populate('event')
@@ -9,7 +11,14 @@ module.exports = class CommentsData {
                     if (err) {
                         return reject(err);
                     } else {
-                        return resolve(comments);
+                        const commentsOnPage = getPageOfCollection(comments, page, itemsPerPage);
+
+                        let result = {
+                            comments: commentsOnPage,
+                            commentsCount: comments.length
+                        };
+                        
+                        return resolve(result);
                     }
                 });
         });

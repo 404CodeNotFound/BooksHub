@@ -42,7 +42,7 @@ module.exports = class UserData {
         });
     }
 
-    getReadingBooks(id) {
+    getReadingBooks(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'CurentlyReading' })
                 .populate('book')
@@ -51,13 +51,20 @@ module.exports = class UserData {
                         return reject(err);
                     } else {
                         const books = statuses.map(status => status.book);
-                        return resolve(books);
+                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+
+                        let result = {
+                            books: booksOnPage,
+                            booksCount: books.length
+                        };
+
+                        return resolve(result);
                     }
                 });
         });
     }
 
-    getWishlist(id) {
+    getWishlist(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'WantToRead' })
                 .populate('book')
@@ -66,13 +73,20 @@ module.exports = class UserData {
                         return reject(err);
                     } else {
                         const books = statuses.map(status => status.book);
-                        return resolve(books);
+                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+
+                        let result = {
+                            books: booksOnPage,
+                            booksCount: books.length
+                        };
+
+                        return resolve(result);
                     }
                 });
         });
     }
 
-    getReadBooks(id) {
+    getReadBooks(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'Read' })
                 .populate('book')
@@ -81,7 +95,14 @@ module.exports = class UserData {
                         return reject(err);
                     } else {
                         const books = statuses.map(status => status.book);
-                        return resolve(books);
+                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+
+                        let result = {
+                            books: booksOnPage,
+                            booksCount: books.length
+                        };
+
+                        return resolve(result);
                     }
                 });
         });
@@ -108,7 +129,7 @@ module.exports = class UserData {
         });
     }
 
-    getJoinedEvents(id) {
+    getJoinedEvents(id, page) {
         return new Promise((resolve, reject) => {
             User.findById(id)
                 .populate({
@@ -119,8 +140,14 @@ module.exports = class UserData {
                     if (err) {
                         return reject(err);
                     } else {
-                        const events = user.joined_events;
-                        return resolve(events);
+                        const eventsOnPage = getPageOfCollection(user.joined_events, page, itemsPerPage);
+
+                        let result = {
+                            events: eventsOnPage,
+                            eventsCount: user.joined_events.length
+                        };
+
+                        return resolve(result);
                     }
                 });
         });

@@ -6,6 +6,11 @@ import * as invitationsActions from '../../../actions/invitations.actions';
 
 class InvitationsList extends Component {
     state = { activePage: 1 };
+
+    componentDidMount() {
+        this.props.getInvitations(this.props.userId, 1);
+    }
+
     render() {
         return (
             [
@@ -36,23 +41,25 @@ class InvitationsList extends Component {
                             </div>
                         )}
                     </div>
-                </div>,
-                <div key="pages" className="row">
-                    <Pagination
-                        activePage={this.state.activePage}
-                        itemsCountPerPage={1}
-                        totalItemsCount={this.props.invitationsCount}
-                        pageRangeDisplayed={5}
-                        onChange={this.selectPage}
-                    />
+                    {this.props.invitations.length > 0 &&
+                        <div key="pages" className="row">
+                            <Pagination
+                                activePage={this.state.activePage}
+                                itemsCountPerPage={1}
+                                totalItemsCount={this.props.invitationsCount}
+                                pageRangeDisplayed={5}
+                                onChange={this.selectPage}
+                            />
+                        </div>
+                    }
                 </div>
             ]
         );
     }
 
     selectPage = (pageNumber) => {
-        this.setState({activePage: pageNumber});
-        this.props.getNextPage(this.props.userId, pageNumber);
+        this.setState({ activePage: pageNumber });
+        this.props.getInvitations(this.props.userId, pageNumber);
     }
 }
 
@@ -66,7 +73,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getNextPage: (userId, page) => dispatch(invitationsActions.getInvitations(userId, page)),
+        getInvitations: (id, page) => dispatch(invitationsActions.getInvitations(id, page)),
         acceptInvitation: (id) => dispatch(invitationsActions.acceptInvitation(id)),
         declineInvitation: (id) => dispatch(invitationsActions.declineInvitation(id))
     };

@@ -37,7 +37,7 @@ module.exports = (data) => {
                         .json({ message: 'Something went wrong!' })
                 });
 
-                return res;
+            return res;
         },
         getUserProfile(req, res) {
             const username = req.params.username;
@@ -64,14 +64,16 @@ module.exports = (data) => {
         },
         getReadingBooks(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+            
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.users.getReadingBooks(id)
+                data.users.getReadingBooks(id, page)
                     .then(books => {
                         res.status(200)
-                            .json({ books: books });
+                            .json(books);
                     })
                     .catch(error => {
                         res.status(500)
@@ -83,14 +85,16 @@ module.exports = (data) => {
         },
         getWishlist(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+            
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.users.getWishlist(id)
+                data.users.getWishlist(id, page)
                     .then(books => {
                         res.status(200)
-                            .json({ books: books });
+                            .json(books);
                     })
                     .catch(error => {
                         res.status(500)
@@ -102,14 +106,16 @@ module.exports = (data) => {
         },
         getReadBooks(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+            
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.users.getReadBooks(id)
+                data.users.getReadBooks(id, page)
                     .then(books => {
                         res.status(200)
-                            .json({ books: books });
+                            .json(books);
                     })
                     .catch(error => {
                         res.status(500)
@@ -142,14 +148,16 @@ module.exports = (data) => {
         },
         getUserComments(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.comments.getComments(id)
+                data.comments.getComments(id, page)
                     .then(comments => {
                         res.status(200)
-                            .json({ comments: comments });
+                            .json(comments);
                     })
                     .catch(error => {
                         res.status(500)
@@ -161,14 +169,16 @@ module.exports = (data) => {
         },
         getUserReviews(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.reviews.getReviews(id)
+                data.reviews.getReviews(id, page)
                     .then(reviews => {
                         res.status(200)
-                            .json({ reviews: reviews });
+                            .json(reviews);
                     })
                     .catch(error => {
                         res.status(500)
@@ -180,14 +190,16 @@ module.exports = (data) => {
         },
         getUserEvents(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+            
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.events.getUserEvents(id)
+                data.events.getUserEvents(id, page)
                     .then(events => {
                         res.status(200)
-                            .json({ events: events });
+                            .json(events);
                     })
                     .catch(error => {
                         res.status(500)
@@ -199,14 +211,16 @@ module.exports = (data) => {
         },
         getJoinedEvents(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.users.getJoinedEvents(id)
+                data.users.getJoinedEvents(id, page)
                     .then(events => {
                         res.status(200)
-                            .json({ events: events });
+                            .json(events);
                     })
                     .catch(error => {
                         res.status(500)

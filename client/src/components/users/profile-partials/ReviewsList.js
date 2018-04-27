@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
-import * as commentsActions from '../../../actions/comments.actions';
+import * as reviewsActions from '../../../actions/reviews.actions';
 
 const postedOnStyle = {
     fontSize: "1rem"
 };
 
-class CommentsList extends Component {
+class ReviewsList extends Component {
     state = { activePage: 1 };
 
     componentDidMount() {
-        this.props.getComments(this.props.userId, 1);
+        this.props.getReviews(this.props.userId, 1);
     }
 
     render() {
@@ -22,8 +22,8 @@ class CommentsList extends Component {
                     <h3>{this.props.title}</h3>
                 </div>,
                 <div key="list" className="margin2x">
-                    {this.props.comments.map(comment =>
-                        <div key={comment._id} className="row review">
+                    {this.props.reviews.map(review =>
+                        <div key={review._id} className="row review">
                             <div className="col-xs-12 col-md-12">
                                 <div className="mbr-testimonial card">
                                     <div className="card-block">
@@ -32,23 +32,23 @@ class CommentsList extends Component {
                                                 <i className="fa fa-trash-o"></i>
                                             </button>
                                         }
-                                        <p>{comment.content}</p>
-                                        <p style={postedOnStyle}>Posted on {comment.posted_on}</p>
+                                        <p>{review.content}</p>
+                                        <p style={postedOnStyle}>Posted on {review.posted_on}</p>
                                     </div>
                                     <div className="for-book">
                                         for
-                                            <Link to={"/events/" + comment.event.title}> {comment.event.title}</Link>
+                                            <Link to={"/books/" + review.book.title}> {review.book.title}</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
-                    {this.props.comments.length > 0 &&
+                    {this.props.reviews.length > 0 &&
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}
                                 itemsCountPerPage={1}
-                                totalItemsCount={this.props.commentsCount}
+                                totalItemsCount={this.props.reviewsCount}
                                 pageRangeDisplayed={5}
                                 onChange={this.selectPage}
                             />
@@ -61,15 +61,15 @@ class CommentsList extends Component {
 
     selectPage = (pageNumber) => {
         this.setState({ activePage: pageNumber });
-        this.props.getComments(this.props.userId, pageNumber);
+        this.props.getReviews(this.props.userId, pageNumber);
     }
 }
 
 function mapStateToProps(state, ownProps) {
     debugger;
     return {
-        comments: state.users.comments,
-        commentsCount: state.users.commentsCount,
+        reviews: state.users.reviews,
+        reviewsCount: state.users.reviewsCount,
         userId: ownProps.userId,
         isMyProfile: ownProps.isMyProfile
     }
@@ -77,8 +77,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getComments: (id, page) => dispatch(commentsActions.getUserComments(id, page))
+        getReviews: (id, page) => dispatch(reviewsActions.getUserReviews(id, page))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentsList);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsList);

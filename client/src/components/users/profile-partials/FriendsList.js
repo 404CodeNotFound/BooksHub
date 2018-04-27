@@ -6,7 +6,11 @@ import * as usersActions from '../../../actions/users.actions';
 
 class FriendsList extends Component {
     state = { activePage: 1 };
-    
+
+    componentDidMount() {
+        this.props.getFriends(this.props.userId, 1);
+    }
+
     render() {
         return (
             [
@@ -26,23 +30,25 @@ class FriendsList extends Component {
                             </div>
                         )}
                     </div>,
-                    <div key="pages" className="row">
-                        <Pagination
-                            activePage={this.state.activePage}
-                            itemsCountPerPage={18}
-                            totalItemsCount={this.props.friendsCount}
-                            pageRangeDisplayed={5}
-                            onChange={this.selectPage}
-                        />
-                    </div>
+                    {this.props.users.length > 0 &&
+                        <div key="pages" className="row">
+                            <Pagination
+                                activePage={this.state.activePage}
+                                itemsCountPerPage={18}
+                                totalItemsCount={this.props.friendsCount}
+                                pageRangeDisplayed={5}
+                                onChange={this.selectPage}
+                            />
+                        </div>
+                    }
                 </div>
             ]
         );
     }
 
     selectPage = (pageNumber) => {
-        this.setState({activePage: pageNumber});
-        this.props.getNextPage(this.props.userId, pageNumber);
+        this.setState({ activePage: pageNumber });
+        this.props.getFriends(this.props.userId, pageNumber);
     }
 }
 
@@ -56,7 +62,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getNextPage: (userId, page) => dispatch(usersActions.getFriends(userId, page)),
+        getFriends: (userId, page) => dispatch(usersActions.getFriends(userId, page)),
     };
 }
 

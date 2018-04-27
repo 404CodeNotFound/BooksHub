@@ -49,7 +49,7 @@ class Header extends Component {
                                         <Link to="/login">Log in</Link> :
                                         (this.props.currentUser.role === 'admin' ?
                                             <Link to="/administration">Admin Panel</Link> :
-                                            <Link to={"/users/" + this.props.currentUser}>My Profile</Link>
+                                            <Link to={"/users/" + this.props.currentUser + "/profile"}>My Profile</Link>
                                         )
                                     }
                                 </li>
