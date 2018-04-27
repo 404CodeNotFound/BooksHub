@@ -2,6 +2,8 @@ module.exports = (data) => {
     return {
         getPendingUserRequests: (req, res) => {
             const userId = req.params.id;
+            const page = req.query.page;
+
             if (!userId) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
@@ -21,10 +23,10 @@ module.exports = (data) => {
                         return res;
                     });
 
-                data.requests.getPendingRequests(userId)
+                data.requests.getPendingRequests(userId, page)
                     .then(requests => {
                         res.status(200)
-                            .json({ requests: requests });
+                            .json(requests);
                     })
                     .catch(error => {
                         res.status(500)

@@ -2,7 +2,7 @@ export default function users(state = {
     error: {}, profile: null, isLoggedIn: false,
     currentlyReading: [], wantToRead: [], read: [],
     friends: [], invitations: [], comments: [], reviews: [],
-    events:[], joinedEvents: []
+    events: [], joinedEvents: [], friendsCount: 0, invitationsCount: 0
 }, action) {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
@@ -39,12 +39,14 @@ export default function users(state = {
         case 'GET_FRIENDS_SUCCESS':
             return {
                 ...state,
-                friends: action.friends
+                friends: action.friends,
+                friendsCount: action.friendsCount
             };
         case 'GET_INVITATIONS_SUCCESS':
             return {
                 ...state,
-                invitations: action.invitations
+                invitations: action.invitations,
+                invitationsCount: action.invitationsCount
             };
         case 'GET_COMMENTS_SUCCESS':
             return {

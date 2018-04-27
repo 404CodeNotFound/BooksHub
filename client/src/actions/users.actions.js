@@ -14,8 +14,8 @@ export function getProfileSuccess(user) {
     return { type: 'GET_PROFILE_SUCCESS', user };
 }
 
-export function getFriendsSuccess(friends) {
-    return { type: 'GET_FRIENDS_SUCCESS', friends };
+export function getFriendsSuccess(result) {
+    return { type: 'GET_FRIENDS_SUCCESS', friends: result.friends, friendsCount: result.friendsCount };
 }
 
 export function logout() {
@@ -62,11 +62,11 @@ export function getProfile(username) {
     };
 }
 
-export function getFriends(id) {
+export function getFriends(id, page) {
     return function (dispatch) {
-        return requester.get(`${api.USERS}/${id}/friends`)
+        return requester.get(`${api.USERS}/${id}/friends?page=${page}`)
             .done(response => {
-                dispatch(getFriendsSuccess(response.friends));
+                dispatch(getFriendsSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));                

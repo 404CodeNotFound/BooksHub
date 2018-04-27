@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Pagination from "react-js-pagination";
 import * as invitationsActions from '../../../actions/invitations.actions';
 
 class InvitationsList extends Component {
+    state = { activePage: 1 };
     render() {
         return (
             [
@@ -36,39 +38,35 @@ class InvitationsList extends Component {
                     </div>
                 </div>,
                 <div key="pages" className="row">
-                    <div className="col-md-offset-5 pages total center">
-                        Page 1 of 1
-                                <div className="pagination-container center">
-                            <ul className="pagination">
-                                <li className="active">
-                                    <a>1</a>
-                                </li>
-                                <li>
-                                    <a>2</a>
-                                </li>
-                                <li>
-                                    <a>3</a>
-                                </li>
-                                <li>
-                                    <a>4</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <Pagination
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={1}
+                        totalItemsCount={this.props.invitationsCount}
+                        pageRangeDisplayed={5}
+                        onChange={this.selectPage}
+                    />
                 </div>
             ]
         );
+    }
+
+    selectPage = (pageNumber) => {
+        this.setState({activePage: pageNumber});
+        this.props.getNextPage(this.props.userId, pageNumber);
     }
 }
 
 function mapStateToProps(state, ownProps) {
     return {
-        invitations: ownProps.invitations
+        invitations: state.users.invitations,
+        invitationsCount: state.users.invitationsCount,
+        userId: ownProps.userId
     }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
+        getNextPage: (userId, page) => dispatch(invitationsActions.getInvitations(userId, page)),
         acceptInvitation: (id) => dispatch(invitationsActions.acceptInvitation(id)),
         declineInvitation: (id) => dispatch(invitationsActions.declineInvitation(id))
     };

@@ -1,7 +1,9 @@
 const { Request, User } = require('../models');
+const getPageOfCollection = require('../utils/pagination');
+const itemsPerPage = 1;
 
 module.exports = class RequestsData {
-    getPendingRequests(userId) {
+    getPendingRequests(userId, page) {
         return new Promise((resolve, reject) => {
             Request.find({ 'receiver': userId })
                 .populate('sender')
@@ -9,7 +11,14 @@ module.exports = class RequestsData {
                     if (err) {
                         return reject(err);
                     } else {
-                        return resolve(requests);
+                        const requestsOnPage = getPageOfCollection(requests, page, itemsPerPage);
+
+                        let result = {
+                            requests: requestsOnPage,
+                            requestsCount: requests.length
+                        };
+
+                        return resolve(result);
                     }
                 });
         });

@@ -115,10 +115,10 @@ class ProfilePage extends Component {
                                     isMyProfile={this.props.user.username === this.props.currentUser} />
                             }
                             {this.state.links[8] === 'active' &&
-                                <FriendsList users={this.props.friends} title="Friends Collection" />
+                                <FriendsList userId={this.props.user._id} title="Friends Collection" />
                             }
                             {this.state.links[9] === 'active' &&
-                                <InvitationsList invitations={this.props.invitations} title="Pending Invitations Collection" />
+                                <InvitationsList userId={this.props.user._id} title="Pending Invitations Collection" />
                             }
                         </div>
                     </div>
@@ -160,11 +160,11 @@ class ProfilePage extends Component {
                 break;
             case 'friends-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', 'active', ''] });
-                this.props.getFriends(this.props.user._id);
+                this.props.getFriends(this.props.user._id, 1);
                 break;
             case 'invitations-link':
                 this.setState({ links: ['', '', '', '', '', '', '', '', '', 'active'] });
-                this.props.getInvitations(this.props.user._id);
+                this.props.getInvitations(this.props.user._id, 1);
                 break;
             default:
                 this.setState({ links: ['active', '', '', '', '', '', '', '', '', ''] });
@@ -199,8 +199,6 @@ function mapStateToProps(state, ownProps) {
         currentlyReading: state.users.currentlyReading,
         read: state.users.read,
         wantToRead: state.users.wantToRead,
-        friends: state.users.friends,
-        invitations: state.users.invitations,
         comments: state.users.comments,
         reviews: state.users.reviews,
         events: state.users.events,
@@ -215,8 +213,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         getCurrentlyReadingBooks: (id) => dispatch(booksActions.getCurrentlyReadingBooks(id)),
         getWantToReadBooks: (id) => dispatch(booksActions.getWantToReadBooks(id)),
         getReadBooks: (id) => dispatch(booksActions.getReadBooks(id)),
-        getFriends: (id) => dispatch(usersActions.getFriends(id)),
-        getInvitations: (id) => dispatch(invitationsActions.getInvitations(id)),
+        getFriends: (id, page) => dispatch(usersActions.getFriends(id, page)),
+        getInvitations: (id, page) => dispatch(invitationsActions.getInvitations(id, page)),
         getComments: (id) => dispatch(commentsActions.getUserComments(id)),
         getReviews: (id) => dispatch(reviewsActions.getUserReviews(id)),
         getUserEvents: (id) => dispatch(eventsActions.getUserEvents(id)),

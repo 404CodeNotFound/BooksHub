@@ -1,4 +1,6 @@
 const { User, Status } = require('../models');
+const getPageOfCollection = require('../utils/pagination');
+const itemsPerPage = 18;
 
 module.exports = class UserData {
     getUserByUsernameAndPassword(username, passHash) {
@@ -85,7 +87,7 @@ module.exports = class UserData {
         });
     }
 
-    getUserFriends(id) {
+    getUserFriends(id, page) {
         return new Promise((resolve, reject) => {
             User.findById(id)
                 .populate('friends')
@@ -93,7 +95,14 @@ module.exports = class UserData {
                     if (err) {
                         return reject(err);
                     } else {
-                        return resolve(user.friends);
+                        const friendsOnPage = getPageOfCollection(user.friends, page, itemsPerPage);
+
+                        let result = {
+                            friends: friendsOnPage,
+                            friendsCount: user.friends.length
+                        };
+
+                        return resolve(result);
                     }
                 });
         });

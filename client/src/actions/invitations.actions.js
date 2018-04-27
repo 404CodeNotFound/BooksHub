@@ -6,20 +6,20 @@ export function sendInvitationSuccess() {
     return { type: 'SEND_INVITATION_SUCCESS', hideInviteButton: true };
 }
 
-export function getInvitationsSuccess(invitations) {
-    return { type: 'GET_INVITATIONS_SUCCESS', invitations };
+export function getInvitationsSuccess(result) {
+    return { type: 'GET_INVITATIONS_SUCCESS', invitations: result.requests, invitationsCount: result.requestsCount};
 }
 
 export function hideInvitationSuccess(id) {
     return { type: 'HIDE_INVITATION_SUCCESS', id };
 }
 
-export function getInvitations(id) {
+export function getInvitations(id, page) {
     const token = localStorage.getItem('token');
     return function (dispatch) {
-        return requester.getAuthorized(token, `${api.USERS}/${id}/requests`)
+        return requester.getAuthorized(token, `${api.USERS}/${id}/requests?page=${page}`)
             .done(response => {
-                dispatch(getInvitationsSuccess(response.requests));
+                dispatch(getInvitationsSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));                

@@ -121,14 +121,16 @@ module.exports = (data) => {
         },
         getUserFriends(req, res) {
             const id = req.params.id;
+            const page = req.query.page;
+
             if (!id) {
                 res.status(400)
                     .json({ message: "You should provide user id." });
             } else {
-                data.users.getUserFriends(id)
+                data.users.getUserFriends(id, page)
                     .then(friends => {
                         res.status(200)
-                            .json({ friends: friends });
+                            .json(friends);
                     })
                     .catch(error => {
                         res.status(500)
