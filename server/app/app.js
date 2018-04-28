@@ -12,6 +12,7 @@ const init = (data) => {
     const server = require('http').Server(app);
     const usersController = require('./controllers/users.controller')(data);
     const requestsController = require('./controllers/requests.controller')(data);
+    const booksController = require('./controllers/books.controller')(data);    
     
     app.use('/libs', express.static('node_modules'));
     app.use(bodyParser.json());
@@ -63,6 +64,8 @@ const init = (data) => {
     app.put('/requests/:id', auth.authenticate(passport), requestsController.acceptRequest);            
     app.delete('/requests/:id', auth.authenticate(passport), requestsController.declineRequest);            
                 
+    // Books
+    app.get('/books/:title', booksController.getBook);                                                  
     
     return Promise.resolve(server);
 };

@@ -1,0 +1,168 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as booksActions from '../../actions/books.actions';
+import '../../style/book.details.css';
+
+class BookDetailsPage extends Component {
+    componentDidMount() {
+        this.props.getBookDetails();
+    }
+
+    render() {
+        return (
+            this.props.book !== null ?
+                [<article>
+                    <header className="section background-image text-center">
+                        <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                            Book Details
+                      </h1>
+                        <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
+                    </header>
+
+                    <div className="container">
+                        <section className="background-white section">
+                            <div className="row col-md-12 book-info">
+                                <div className="col-lg-4 col-md-7 col-sm-6 col-xs-12 animated  animation-done bounceInLeft book-cover">
+                                    <img alt="Book Cover" src={this.props.book.photo} id="details-book-cover"
+                                        className="img-thumbnail img-responsive" />
+                                    {this.props.currentUser.username &&
+                                        [<div className="row" id="book-rating">
+                                            <div className="col-md-4">
+                                                Rate this book:
+                              </div>
+                                            <form action="/ratings" id="rating-form" method="post">
+                                                <fieldset className="rating">
+                                                    <input type="radio" value="5" />
+                                                    <label title="Rocks!" rate-value='5'></label>
+
+                                                    <input type="radio" value="4" />
+                                                    <label title="Pretty good" rate-value='4'></label>
+
+                                                    <input type="radio" value="3" />
+                                                    <label title="Meh" rate-value='3'></label>
+
+                                                    <input type="radio" value="2" />
+                                                    <label title="Kinda bad" rate-value='2'></label>
+
+                                                    <input type="radio" value="1" />
+                                                    <label title="Sucks big time" rate-value='1'></label>
+                                                </fieldset>
+                                            </form>
+                                        </div>,
+                                        <div className="row" id="write-review-link">
+                                            <button className="btn-main-sm">
+                                                <i className="fa fa-pencil"></i> Write review
+                              </button>
+                                        </div>
+                                        ]}
+                                </div>
+
+                                <div className="col-lg-7 col-md-5 col-sm-6 col-xs-12 animated animation-done  bounceInRight">
+                                    <h2 className="title">{this.props.book.title}</h2>
+                                    <h4 className="title">
+                                        by
+                              <b>
+                                            <Link to={"/authors/" + this.props.book.author.first_name + " " + this.props.book.author.last_name}> {this.props.book.author.first_name} {this.props.book.author.last_name}</Link>
+                                        </b>
+                                    </h4>
+                                    <hr />
+                                    <div>
+                                        {this.props.book.summary}
+                                    </div>
+                                    <dl className="dl-horizontal">
+                                        <dt>
+                                            Published
+                              </dt>
+
+                                        <dd>
+                                            {this.props.book.date_published}
+                                        </dd>
+
+                                        <dt>
+                                            ISBN
+                              </dt>
+
+                                        <dd>
+                                            {this.props.book.isbn}
+                                        </dd>
+
+                                        <dt>
+                                            Rating
+                              </dt>
+
+                                        <dd>
+                                            {this.props.book.rating} <i className="fa fa-star star" aria-hidden="true"></i>
+                                        </dd>
+
+                                        <dt>
+                                            Language
+                              </dt>
+
+                                        <dd>
+                                            {this.props.book.language}
+                                        </dd>
+                                        <dt>
+                                            Publisher
+                              </dt>
+
+                                        <dd>
+                                            {this.props.book.publisher}
+                                        </dd>
+                                    </dl>
+                                    <hr />
+                                    <div>
+                                        <b> Genres: </b>
+                                        {this.props.book.genres.map(genre =>
+                                            <span>{genre.name} </span>
+                                        )}
+                                    </div>
+                                    <hr />
+
+                                    <div className="row buttons">
+                                        {this.props.currentUser.username &&
+                                            <form action="#" className="col-md-3 col-sm-12" id="status-form" method="post">
+                                                <select className="btn-main-sm" name="CurrentStatus">
+                                                    <option value="0">CurrentlyReading</option>
+                                                    <option value="1">Read</option>
+                                                    <option selected="selected" value="2">WantToRead</option>
+                                                </select>
+                                            </form>
+                                        }
+                                        <div id="stat-message"></div>
+                                        <button className="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link">
+                                            <i className="fa fa-comments"></i> See reviews</button>
+                                        {this.props.currentUser.username &&
+                                            <button className="btn-main-sm col-md-3 col-sm-12">
+                                                <i className="fa fa-user"></i> Recommend</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </article>
+                ] :
+                <div className="loader"></div>
+        )
+    }
+}
+
+function mapStateToProps(state, ownProps) {
+    const username = localStorage.getItem('username');
+    const userId = localStorage.getItem('id');
+
+    return {
+        book: state.books.book,
+        currentUser: { username: username, id: userId }
+    };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.title))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookDetailsPage);
