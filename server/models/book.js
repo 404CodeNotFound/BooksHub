@@ -41,7 +41,7 @@ module.exports = function init(mongoose) {
         }],
         reviews: [{
             type: Schema.ObjectId,
-            ref: 'Comment'
+            ref: 'Review'
         }]
     });
 

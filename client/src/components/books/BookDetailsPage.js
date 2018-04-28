@@ -12,7 +12,7 @@ class BookDetailsPage extends Component {
     render() {
         return (
             this.props.book !== null ?
-                [<article>
+                <article>
                     <header className="section background-image text-center">
                         <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                             Book Details
@@ -27,7 +27,7 @@ class BookDetailsPage extends Component {
                                     <img alt="Book Cover" src={this.props.book.photo} id="details-book-cover"
                                         className="img-thumbnail img-responsive" />
                                     {this.props.currentUser.username &&
-                                        [<div className="row" id="book-rating">
+                                        [<div key="rate" className="row" id="book-rating">
                                             <div className="col-md-4">
                                                 Rate this book:
                               </div>
@@ -50,7 +50,7 @@ class BookDetailsPage extends Component {
                                                 </fieldset>
                                             </form>
                                         </div>,
-                                        <div className="row" id="write-review-link">
+                                        <div key="mark" className="row" id="write-review-link">
                                             <button className="btn-main-sm">
                                                 <i className="fa fa-pencil"></i> Write review
                               </button>
@@ -114,7 +114,7 @@ class BookDetailsPage extends Component {
                                     <div>
                                         <b> Genres: </b>
                                         {this.props.book.genres.map(genre =>
-                                            <span>{genre.name} </span>
+                                            <span key={genre._id}>{genre.name} </span>
                                         )}
                                     </div>
                                     <hr />
@@ -122,10 +122,10 @@ class BookDetailsPage extends Component {
                                     <div className="row buttons">
                                         {this.props.currentUser.username &&
                                             <form action="#" className="col-md-3 col-sm-12" id="status-form" method="post">
-                                                <select className="btn-main-sm" name="CurrentStatus">
+                                                <select defaultValue="2" className="btn-main-sm" name="CurrentStatus">
                                                     <option value="0">CurrentlyReading</option>
                                                     <option value="1">Read</option>
-                                                    <option selected="selected" value="2">WantToRead</option>
+                                                    <option value="2">WantToRead</option>
                                                 </select>
                                             </form>
                                         }
@@ -140,10 +140,40 @@ class BookDetailsPage extends Component {
                                 </div>
                             </div>
                         </section>
+                        <section className="section background-white" id="reviews">
+                            <div className="line text-center">
+                                <i className="icon-sli-speech text-primary text-size-40"></i>
+                                <h2 className="text-size-50 text-m-size-40">
+                                    Reviews</h2>
+                                <hr className="break background-primary break-small break-center margin-bottom-50" />
+                            </div>
+                            {this.props.book.reviews.map(review =>
+                                <span key={review._id}>
+                                    <div key={review._id} className="review row">
+                                        <div className="col-md-2 col-xs-2">
+                                            <Link to={"/users/" + review.user.username + "/information"}>
+                                                <img className="img-responsive" src={review.user.photo} alt={"user-photo-" + review.user.username }/>
+                                            </Link>
+                                        </div>
+                                        <div className="col-md-10 col-xs-10">
+                                            <blockquote>
+                                                {review.content}
+                                                <cite>
+                                                    <span><Link to={"/users/" + review.user.username + "/information"}>{review.user.username} </Link></span>
+                                                    <span>for </span>
+                                                    <span><Link to={"/books/" + this.props.book.title}> {this.props.book.title}</Link></span>
+                                                </cite>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                    <hr key={"line " + review._id} />
+                                </span>
+                            )}
 
+                        </section>
                     </div>
                 </article>
-                ] :
+                :
                 <div className="loader"></div>
         )
     }
