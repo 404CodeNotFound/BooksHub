@@ -6,8 +6,8 @@ export function getUserBooksSuccess(result) {
     return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
 }
 
-export function getBookDetailsSuccess(book) {
-    return { type: 'GET_BOOK_DETAILS_SUCCESS', book };
+export function getBookDetailsSuccess(book, canWriteReview) {
+    return { type: 'GET_BOOK_DETAILS_SUCCESS', result: { book, canWriteReview } };
 }
 
 export function getCurrentlyReadingBooks(id, page) {
@@ -29,7 +29,7 @@ export function getWantToReadBooks(id, page) {
                 dispatch(getUserBooksSuccess(response));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }
@@ -41,19 +41,21 @@ export function getReadBooks(id, page) {
                 dispatch(getUserBooksSuccess(response));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }
 
-export function getBookDetails(title) {
+export function getBookDetails(title, userId) {
     return function (dispatch) {
         return requester.get(`${api.BOOKS}/${title}`)
             .done(response => {
-                dispatch(getBookDetailsSuccess(response.book));
+                const userCanWriteReview = response.book.reviews.findIndex(review => review.user._id === userId) < 0;
+
+                dispatch(getBookDetailsSuccess(response.book, userCanWriteReview));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }

@@ -234,4 +234,18 @@ module.exports = class UserData {
             })
         });
     }
+
+    addReviewToUser(userId, review) {
+        return new Promise((resolve, reject) => {
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    user.reviews.push(review._id);
+                    user.save();
+                    return resolve(review);
+                }
+            })
+        });
+    }
 }

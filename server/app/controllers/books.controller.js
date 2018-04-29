@@ -24,6 +24,33 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        addReview: (req, res) => {
+            const review = req.body;
+            if(!review.user) {
+                res.status(400)
+                    .json({ message: "You should provide id of user." });
+            } else if(!review.book) {
+                res.status(400)
+                    .json({ message: "You should provide id of book." });
+            } else if(!review.content) {
+                res.status(400)
+                    .json({ message: "You should provide content of review." });
+            } else {
+                data.reviews.createReview(review)
+                .then(createdReview => data.books.addReviewToBook(createdReview.book, createdReview))
+                .then(createdReview => data.users.addReviewToUser(review.user, createdReview))
+                .then(createdReview => {
+                    res.status(201)
+                        .json({ review: createdReview });
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: 'Something went wrong!' })
+                });
+            }
+
+            return res;
         }
     }
 }

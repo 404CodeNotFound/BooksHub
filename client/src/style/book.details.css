@@ -137,6 +137,11 @@ blockquote cite:before {
     content: "\2014 \2009";
 }
 
+#review-content {
+    width: 100%;
+    margin: auto;
+}
+
 @media only screen and (max-width: 600px) {
     #reviews {
         margin-left: 0;

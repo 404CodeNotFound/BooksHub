@@ -17,8 +17,21 @@ module.exports = class ReviewsData {
                             reviews: reviewsOnPage,
                             reviewsCount: reviews.length
                         };
-                        
+
                         return resolve(result);
+                    }
+                });
+        });
+    }
+
+    getAllReviewsOfUser(userId) {
+        return new Promise((resolve, reject) => {
+            Review.find({ 'user': userId })
+                .exec((err, reviews) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(reviews);
                     }
                 });
         });
@@ -33,6 +46,36 @@ module.exports = class ReviewsData {
                     return resolve();
                 }
             });
+        });
+    }
+
+    createReview(receivedReview) {
+        return new Promise((resolve, reject) => {
+            const review = new Review(receivedReview);
+            review.save((err, createdReview) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return this.getReviewById(createdReview._id)
+                        .then((populatedReview) => resolve(populatedReview))
+                        .catch(err => reject(err));
+                }
+            });
+        });
+    }
+
+    getReviewById(id) {
+        return new Promise((resolve, reject) => {
+            Review.findById(id)
+                .populate({ path: 'user', select: 'username photo' })
+                .populate({ path: 'book', select: 'title' })
+                .exec((err, review) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(review);
+                    }
+                });
         });
     }
 }

@@ -16,4 +16,18 @@ module.exports = class BooksData {
                 });
         });
     }
+
+    addReviewToBook(bookId, review) {
+        return new Promise((resolve, reject) => {
+            Book.findById(bookId, (err, book) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    book.reviews.push(review._id);
+                    book.save();
+                    return resolve(review);
+                }
+            })
+        });
+    }
 }

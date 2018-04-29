@@ -10,6 +10,10 @@ export function deleteReviewSuccess(reviewId) {
     return { type: 'DELETE_REVIEW_SUCCESS', id: reviewId };
 }
 
+export function writeReviewSuccess(result) {
+    return { type: 'WRITE_REVIEW_SUCCES', result };
+}
+
 export function getUserReviews(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/reviews?page=${page}`)
@@ -18,7 +22,7 @@ export function getUserReviews(id, page) {
                 dispatch(getUserReviewsSuccess(response));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     }
 }
@@ -31,7 +35,26 @@ export function deleteReview(userId, reviewId) {
                 dispatch(deleteReviewSuccess(reviewId));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function sendReview(content, userId, bookId) {
+    const token = localStorage.getItem('token');
+    return function (dispatch) {
+        const review = {
+            content: content,
+            user: userId,
+            book: bookId,
+            posted_on: new Date()
+        };
+        return requester.postAuthorized(token, `${api.BOOKS}/${bookId}/reviews`, review)
+            .done((response) => {
+                dispatch(writeReviewSuccess({review: response.review, canWriteReview: false}));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }

@@ -65,7 +65,8 @@ const init = (data) => {
     app.delete('/requests/:id', auth.authenticate(passport), requestsController.declineRequest);            
                 
     // Books
-    app.get('/books/:title', booksController.getBook);                                                  
+    app.get('/books/:title', booksController.getBook);
+    app.post('/books/:title/reviews', auth.authenticate(passport), booksController.addReview);                                                                                                        
     
     return Promise.resolve(server);
 };
