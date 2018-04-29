@@ -4,6 +4,10 @@
   "description": "https://docs.google.com/document/d/11zBbvFGzgrspcyJ4e_uxhbiwercsvRKsHJ1VZ6mLIbI/edit https://drive.google.com/open?id=1HH_C5362OHLyVBsoxZgxEJcJRCOmoS4d_dTwGYWPEe0",
   "main": "index.js",
   "dependencies": {
+    "@types/babel-core": "^6.25.3",
+    "@types/bootstrap": "^4.1.0",
+    "@types/open": "0.0.29",
+    "@types/passport-local": "^1.0.33",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
