@@ -68,6 +68,10 @@ module.exports = function init(mongoose) {
         events: [{
             type: Schema.ObjectId,
             ref: 'Event'
+        }],
+        ratings: [{
+            type: Schema.ObjectId,
+            ref: 'Rating'
         }]
       });
       

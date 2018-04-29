@@ -34,6 +34,10 @@
     color: #f70;
 }
 
+.marked-star {
+    color: gold !important;    
+}
+
 .rating:not(:checked) > label:hover,
 .rating:not(:checked) > label:hover ~ label {
     color: gold;

@@ -66,7 +66,8 @@ const init = (data) => {
                 
     // Books
     app.get('/books/:title', booksController.getBook);
-    app.post('/books/:title/reviews', auth.authenticate(passport), booksController.addReview);                                                                                                        
+    app.post('/books/:title/reviews', auth.authenticate(passport), booksController.addReview);
+    app.put('/books/:title/rating', auth.authenticate(passport), booksController.rateBook);                                                                                                                                                                                                                    
     
     return Promise.resolve(server);
 };

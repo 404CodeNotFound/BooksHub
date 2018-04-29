@@ -248,4 +248,18 @@ module.exports = class UserData {
             })
         });
     }
+
+    rateBook(rating) {
+        return new Promise((resolve, reject) => {
+            User.findById(rating.user, (err, user) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    user.ratings.push(rating._id);
+                    user.save();
+                    return resolve(rating);
+                }
+            })
+        });
+    }
 }

@@ -34,28 +34,28 @@ class BookDetailsPage extends Component {
                                             <div className="col-md-4">
                                                 Rate this book:
                               </div>
-                                            <form action="/ratings" id="rating-form" method="post">
+                                            <form id="rating-form" method="post">
                                                 <fieldset className="rating">
-                                                    <input type="radio" value="5" />
-                                                    <label title="Rocks!" rate-value='5'></label>
+                                                    <input type="radio" value="5"/>
+                                                    <label class={this.shouldBeMarked(5) ? 'marked-star' : ''} title="Rocks!" value='5' onClick={() => this.handleRateBook(5)}></label>
 
                                                     <input type="radio" value="4" />
-                                                    <label title="Pretty good" rate-value='4'></label>
+                                                    <label class={this.shouldBeMarked(4) ? 'marked-star' : ''} title="Pretty good" onClick={() => this.handleRateBook(4)}></label>
 
                                                     <input type="radio" value="3" />
-                                                    <label title="Meh" rate-value='3'></label>
+                                                    <label class={this.shouldBeMarked(3) ? 'marked-star' : ''} title="Meh" onClick={() => this.handleRateBook(3)}></label>
 
                                                     <input type="radio" value="2" />
-                                                    <label title="Kinda bad" rate-value='2'></label>
+                                                    <label class={this.shouldBeMarked(2) ? 'marked-star' : ''} title="Kinda bad" onClick={() => this.handleRateBook(2)}></label>
 
                                                     <input type="radio" value="1" />
-                                                    <label title="Sucks big time" rate-value='1'></label>
+                                                    <label class={this.shouldBeMarked(1) ? 'marked-star' : ''} title="Sucks big time" onClick={() => this.handleRateBook(1)}></label>
                                                 </fieldset>
                                             </form>
                                         </div>,
                                         this.props.canWriteReview &&
                                         <div key="mark" className="row" id="write-review-link">
-                                            <button className="btn-main-sm">
+                                            <button className="btn-main-sm" onClick={event => this.handleScrollToElement(event, "review-form")}>
                                                 <i className="fa fa-pencil"></i> Write review
                               </button>
                                         </div>
@@ -134,7 +134,7 @@ class BookDetailsPage extends Component {
                                             </form>
                                         }
                                         <div id="stat-message"></div>
-                                        <button className="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link">
+                                        <button className="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link" onClick={event => this.handleScrollToElement(event, "reviews")}>
                                             <i className="fa fa-comments"></i> See reviews</button>
                                         {this.props.currentUser.username &&
                                             <button className="btn-main-sm col-md-3 col-sm-12">
@@ -211,16 +211,31 @@ class BookDetailsPage extends Component {
         this.props.sendReview(reviewContent, this.props.currentUser.id, this.props.book._id);
         this.setState({ author: '', text: '' });
     }
+
+    handleScrollToElement = (event, elementId) => {
+        const node = document.getElementById(elementId);
+        window.scrollTo(0, node.offsetTop);
+    }
+
+    handleRateBook = (rating) => {
+        this.props.rateBook(this.props.book._id, this.props.currentUser.id, rating);
+    }
+
+    shouldBeMarked = (rating) => {
+        return rating <= this.props.currentUserRating;
+    }
 }
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('id');
 
     return {
         book: state.books.book,
         currentUser: { username: username, id: userId },
-        canWriteReview: state.books.canWriteReview
+        canWriteReview: state.books.canWriteReview,
+        currentUserRating: state.books.currentUserRating
     };
 }
 
@@ -228,7 +243,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     const userId = localStorage.getItem('id');
     return {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.title, userId)),
-        sendReview: (content, userId, bookId) => dispatch(reviewsActions.sendReview(content, userId, bookId))
+        sendReview: (content, userId, bookId) => dispatch(reviewsActions.sendReview(content, userId, bookId)),
+        rateBook: (bookId, userId, rating) => dispatch(booksActions.rateBook(userId, bookId, rating))
     };
 }
 

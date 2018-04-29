@@ -27,27 +27,62 @@ module.exports = (data) => {
         },
         addReview: (req, res) => {
             const review = req.body;
-            if(!review.user) {
+            if (!review.user) {
                 res.status(400)
                     .json({ message: "You should provide id of user." });
-            } else if(!review.book) {
+            } else if (!review.book) {
                 res.status(400)
                     .json({ message: "You should provide id of book." });
-            } else if(!review.content) {
+            } else if (!review.content) {
                 res.status(400)
                     .json({ message: "You should provide content of review." });
             } else {
                 data.reviews.createReview(review)
-                .then(createdReview => data.books.addReviewToBook(createdReview.book, createdReview))
-                .then(createdReview => data.users.addReviewToUser(review.user, createdReview))
-                .then(createdReview => {
-                    res.status(201)
-                        .json({ review: createdReview });
-                })
-                .catch(error => {
-                    res.status(500)
-                        .json({ message: 'Something went wrong!' })
-                });
+                    .then(createdReview => data.books.addReviewToBook(createdReview.book, createdReview))
+                    .then(createdReview => data.users.addReviewToUser(review.user, createdReview))
+                    .then(createdReview => {
+                        res.status(201)
+                            .json({ review: createdReview });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                    });
+            }
+
+            return res;
+        },
+        rateBook: (req, res) => {
+            const receivedRating = req.body;
+            if (!receivedRating.user) {
+                res.status(400)
+                    .json({ message: "You should provide id of user." });
+            } else if (!receivedRating.book) {
+                res.status(400)
+                    .json({ message: "You should provide id of book." });
+            } else if (!receivedRating.stars) {
+                res.status(400)
+                    .json({ message: "You should provide rating." });
+            } else {
+                data.ratings.postOrUpdateRating(receivedRating)
+                    .then(result => {
+                        if (!result.isUpdated) {
+                            return data.users.rateBook(result.rating)
+                                .then(rating => data.books.addRatingToBook(rating))
+                        } else {
+                            return data.books.updateTotalRatingOfBook(receivedRating.book);
+                        }
+                    })
+                    .then(result => {
+                        console.log(result);
+                        res.status(201)
+                            .json(result);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                    })
             }
 
             return res;
