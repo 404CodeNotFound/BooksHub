@@ -7,18 +7,22 @@ export default function books(state = {
                 ...state,
                 book: action.result.book,
                 canWriteReview: action.result.canWriteReview,
-                currentUserRating: action.result.currentUserRating
+                currentUserRating: action.result.currentUserRating,
+                bookStatus: action.result.bookStatus
             };
         case 'WRITE_REVIEW_SUCCES':
             return {
                 ...state,
                 book: {
                     ...state.book,
-                    reviews: addReview(state.book.reviews, action.result.review)
+                    reviews: [
+                        action.result.review,
+                        ...state.book.reviews
+                    ]
                 },
                 canWriteReview: action.result.canWriteReview
             };
-        case 'RATE_BOOK_SUCCESS': 
+        case 'RATE_BOOK_SUCCESS':
             return {
                 ...state,
                 book: {
@@ -27,14 +31,12 @@ export default function books(state = {
                 },
                 currentUserRating: action.result.userRating
             }
+        case 'MARK_BOOK_SUCCESS':
+            return {
+                ...state,
+                bookStatus: action.result.bookStatus
+            }
         default:
             return state;
     }
-}
-
-function addReview(reviews, review) {
-    return [
-        review,
-        ...reviews,
-    ];
 }

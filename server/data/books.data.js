@@ -7,7 +7,8 @@ module.exports = class BooksData {
                 .populate({ path: 'genres', select: 'name' })
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'reviews', populate: { path: 'user', select: 'username photo' } })
-                .populate({ path: 'ratings' })                
+                .populate({ path: 'ratings', select: 'user stars' })
+                .populate({ path: 'statuses', select: 'user name' })
                 .exec((err, book) => {
                     if (err) {
                         return reject(err);
@@ -35,16 +36,35 @@ module.exports = class BooksData {
     addRatingToBook(rating) {
         return new Promise((resolve, reject) => {
             Book.findById(rating.book)
-                .populate({path: 'ratings', select: 'stars'})
+                .populate({ path: 'ratings', select: 'stars' })
                 .exec((err, book) => {
                     if (err) {
                         return reject(err);
                     } else {
-                        console.log(book.ratings);
                         book.ratings.push(rating);
                         book.rating = calculateRating(book.ratings);
                         book.save();
                         return resolve({ bookRating: book.rating });
+                    }
+                })
+        });
+    }
+
+    markBook(status) {
+        return new Promise((resolve, reject) => {
+            Book.findById(status.book)
+                .exec((err, book) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        book.statuses.push(status);
+                        book.save((saveError, savedBook) => {
+                            if (saveError) {
+                                return reject(saveError);
+                            } else {
+                                return resolve({ bookStatus: status.name });
+                            }
+                        });
                     }
                 })
         });
@@ -59,7 +79,7 @@ module.exports = class BooksData {
                         return reject(err);
                     } else {
                         let bookRating = 0;
-                        if(book.ratings.length > 0) {
+                        if (book.ratings.length > 0) {
                             bookRating = calculateRating(book.ratings);
                         }
 
@@ -74,7 +94,7 @@ module.exports = class BooksData {
 
 function calculateRating(ratings) {
     let sum = 0;
-    for(let i = 0; i < ratings.length; i++) {
+    for (let i = 0; i < ratings.length; i++) {
         sum += ratings[i].stars;
     }
     const ratingsCount = ratings.length;
@@ -84,10 +104,10 @@ function calculateRating(ratings) {
 
 function calculateNewRating(ratings, newRating) {
     let sum = 0;
-    for(let i = 0; i < ratings.length; i++) {
+    for (let i = 0; i < ratings.length; i++) {
         sum += ratings[i].stars;
     }
-    
+
     sum += newRating.stars;
     const ratingsCount = ratings.length + 1;
 

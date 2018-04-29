@@ -37,19 +37,19 @@ class BookDetailsPage extends Component {
                                             <form id="rating-form" method="post">
                                                 <fieldset className="rating">
                                                     <input type="radio" value="5"/>
-                                                    <label class={this.shouldBeMarked(5) ? 'marked-star' : ''} title="Rocks!" value='5' onClick={() => this.handleRateBook(5)}></label>
+                                                    <label className={this.shouldBeMarked(5) ? 'marked-star' : ''} title="Rocks!" value='5' onClick={() => this.handleRateBook(5)}></label>
 
                                                     <input type="radio" value="4" />
-                                                    <label class={this.shouldBeMarked(4) ? 'marked-star' : ''} title="Pretty good" onClick={() => this.handleRateBook(4)}></label>
+                                                    <label className={this.shouldBeMarked(4) ? 'marked-star' : ''} title="Pretty good" onClick={() => this.handleRateBook(4)}></label>
 
                                                     <input type="radio" value="3" />
-                                                    <label class={this.shouldBeMarked(3) ? 'marked-star' : ''} title="Meh" onClick={() => this.handleRateBook(3)}></label>
+                                                    <label className={this.shouldBeMarked(3) ? 'marked-star' : ''} title="Meh" onClick={() => this.handleRateBook(3)}></label>
 
                                                     <input type="radio" value="2" />
-                                                    <label class={this.shouldBeMarked(2) ? 'marked-star' : ''} title="Kinda bad" onClick={() => this.handleRateBook(2)}></label>
+                                                    <label className={this.shouldBeMarked(2) ? 'marked-star' : ''} title="Kinda bad" onClick={() => this.handleRateBook(2)}></label>
 
                                                     <input type="radio" value="1" />
-                                                    <label class={this.shouldBeMarked(1) ? 'marked-star' : ''} title="Sucks big time" onClick={() => this.handleRateBook(1)}></label>
+                                                    <label className={this.shouldBeMarked(1) ? 'marked-star' : ''} title="Sucks big time" onClick={() => this.handleRateBook(1)}></label>
                                                 </fieldset>
                                             </form>
                                         </div>,
@@ -125,11 +125,11 @@ class BookDetailsPage extends Component {
 
                                     <div className="row buttons">
                                         {this.props.currentUser.username &&
-                                            <form action="#" className="col-md-3 col-sm-12" id="status-form" method="post">
-                                                <select defaultValue="2" className="btn-main-sm" name="CurrentStatus">
-                                                    <option value="0">CurrentlyReading</option>
-                                                    <option value="1">Read</option>
-                                                    <option value="2">WantToRead</option>
+                                            <form className="col-md-3 col-sm-12" id="status-form">
+                                                <select defaultValue={this.props.bookStatus} className="btn-main-sm" name="CurrentStatus" id="mark-book" onChange={(event) => this.markBook(event)}>
+                                                    <option value="CurrentlyReading">Currently Reading</option>
+                                                    <option value="Read">Read</option>
+                                                    <option value="WantToRead">Want To Read</option>
                                                 </select>
                                             </form>
                                         }
@@ -224,10 +224,14 @@ class BookDetailsPage extends Component {
     shouldBeMarked = (rating) => {
         return rating <= this.props.currentUserRating;
     }
+
+    markBook = (event) => {
+        const markedAs = event.target.value;
+        this.props.markBook(this.props.book._id, this.props.currentUser.id, markedAs);
+    }
 }
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('id');
 
@@ -235,7 +239,8 @@ function mapStateToProps(state, ownProps) {
         book: state.books.book,
         currentUser: { username: username, id: userId },
         canWriteReview: state.books.canWriteReview,
-        currentUserRating: state.books.currentUserRating
+        currentUserRating: state.books.currentUserRating,
+        bookStatus: state.books.bookStatus
     };
 }
 
@@ -244,7 +249,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.title, userId)),
         sendReview: (content, userId, bookId) => dispatch(reviewsActions.sendReview(content, userId, bookId)),
-        rateBook: (bookId, userId, rating) => dispatch(booksActions.rateBook(userId, bookId, rating))
+        rateBook: (bookId, userId, rating) => dispatch(booksActions.rateBook(userId, bookId, rating)),
+        markBook: (bookId, userId, status) => dispatch(booksActions.markBook(bookId, userId, status))
     };
 }
 

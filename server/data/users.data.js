@@ -256,8 +256,32 @@ module.exports = class UserData {
                     return reject(err);
                 } else {
                     user.ratings.push(rating._id);
-                    user.save();
-                    return resolve(rating);
+                    user.save((error, savedUser) => {
+                        if (error) {
+                            return reject(error);
+                        } else {
+                            return resolve(rating);
+                        }
+                    });
+                }
+            })
+        });
+    }
+
+    markBook(status) {
+        return new Promise((resolve, reject) => {
+            User.findById(status.user, (err, user) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    user.statuses.push(status._id);
+                    user.save((error, savedUser) => {
+                        if (error) {
+                            return reject(error);
+                        } else {
+                            return resolve(status);
+                        }
+                    });
                 }
             })
         });

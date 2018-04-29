@@ -6,12 +6,16 @@ export function getUserBooksSuccess(result) {
     return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
 }
 
-export function getBookDetailsSuccess(book, canWriteReview, currentUserRating) {
-    return { type: 'GET_BOOK_DETAILS_SUCCESS', result: { book, canWriteReview, currentUserRating } };
+export function getBookDetailsSuccess(book, canWriteReview, currentUserRating, bookStatus) {
+    return { type: 'GET_BOOK_DETAILS_SUCCESS', result: { book, canWriteReview, currentUserRating, bookStatus } };
 }
 
 export function rateBookSuccess(result) {
     return { type: 'RATE_BOOK_SUCCESS', result };
+}
+
+export function markBookSuccess(result) {
+    return { type: 'MARK_BOOK_SUCCESS', result };
 }
 
 export function getCurrentlyReadingBooks(id, page) {
@@ -55,9 +59,17 @@ export function getBookDetails(title, userId) {
         return requester.get(`${api.BOOKS}/${title}`)
             .done(response => {
                 const userCanWriteReview = response.book.reviews.findIndex(review => review.user._id === userId) < 0;
-                const currentUserRating = response.book.ratings.find(rating => rating.user === userId);
+                let currentUserRating = response.book.ratings.find(rating => rating.user === userId);
+                if (!currentUserRating) {
+                    currentUserRating = { stars: 0 };
+                }
 
-                dispatch(getBookDetailsSuccess(response.book, userCanWriteReview, currentUserRating.stars));
+                let bookStatus = response.book.statuses.find(status => status.user === userId);
+                if (!bookStatus) {
+                    bookStatus = { name: 'WantToRead' };
+                }
+
+                dispatch(getBookDetailsSuccess(response.book, userCanWriteReview, currentUserRating.stars, bookStatus.name));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -78,6 +90,25 @@ export function rateBook(userId, bookId, rating) {
         return requester.putAuthorized(token, `${api.BOOKS}/${bookId}/rating`, body)
             .done(response => {
                 dispatch(rateBookSuccess({ userRating: body.stars, bookRating: response.bookRating }));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function markBook(bookId, userId, status) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+        const body = {
+            user: userId,
+            book: bookId,
+            name: status
+        };
+
+        return requester.putAuthorized(token, `${api.BOOKS}/${bookId}/statuses`, body)
+            .done(response => {
+                dispatch(markBookSuccess({ bookStatus: response.bookStatus }));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
