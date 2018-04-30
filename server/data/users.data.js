@@ -286,4 +286,17 @@ module.exports = class UserData {
             })
         });
     }
+
+    getFavouriteGenres(userId) {
+        return new Promise((resolve, reject) => {
+            User.findById(userId,
+                (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(user.favourite_genres);
+                    }
+                });
+        });
+    }
 }

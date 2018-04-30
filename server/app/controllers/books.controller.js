@@ -117,6 +117,41 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        getRecommendedBooks: (req, res) => {
+            const userId = req.user._id;
+
+            data.users.getFavouriteGenres(userId)
+                .then(genres => {
+                    if (genres.length > 0) {
+                        return data.genres.getBooksByGenres(genres);
+                    }
+
+                    return data.books.getLatestBooks();
+                })
+                .then(books => {
+                    res.status(200)
+                        .json({ books: books });
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: 'Something went wrong!' })
+                });
+
+            return res;
+        },
+        getLatestBooks: (req, res) => {
+            data.books.getLatestBooks()
+                .then(books => {
+                    res.status(200)
+                        .json({ books: books });
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: 'Something went wrong!' })
+                });
+
+            return res;
         }
     }
 }

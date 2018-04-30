@@ -6,6 +6,14 @@ export function getUserBooksSuccess(result) {
     return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
 }
 
+export function getRecommendedBooksSuccess(books) {
+    return { type: 'GET_RECOMMENDED_BOOKS_SUCCESS', books };    
+}
+
+export function getLatestBooksSuccess(books) {
+    return { type: 'GET_LATEST_BOOKS_SUCCESS', books };    
+}
+
 export function getBookDetailsSuccess(book, canWriteReview, currentUserRating, bookStatus) {
     return { type: 'GET_BOOK_DETAILS_SUCCESS', result: { book, canWriteReview, currentUserRating, bookStatus } };
 }
@@ -109,6 +117,31 @@ export function markBook(bookId, userId, status) {
         return requester.putAuthorized(token, `${api.BOOKS}/${bookId}/statuses`, body)
             .done(response => {
                 dispatch(markBookSuccess({ bookStatus: response.bookStatus }));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function getRecommendedBooks() {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+        return requester.getAuthorized(token, `${api.RECOMMENDED_BOOKS}`)
+            .done(response => {
+                dispatch(getRecommendedBooksSuccess(response.books));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function getLatestBooks() {
+    return function (dispatch) {
+        return requester.get(`${api.LATEST_BOOKS}`)
+            .done(response => {
+                dispatch(getLatestBooksSuccess(response.books));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

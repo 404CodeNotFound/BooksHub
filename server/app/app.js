@@ -1,7 +1,7 @@
 /* globals __dirname */
 const express = require('express');
 const passport = require('passport');
-var cors = require('cors')
+var cors = require('cors');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const path = require('path');
@@ -68,7 +68,9 @@ const init = (data) => {
     app.get('/books/:title', booksController.getBook);
     app.post('/books/:title/reviews', auth.authenticate(passport), booksController.addReview);
     app.put('/books/:id/rating', auth.authenticate(passport), booksController.rateBook);
-    app.put('/books/:id/statuses', auth.authenticate(passport), booksController.markBook);                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    app.put('/books/:id/statuses', auth.authenticate(passport), booksController.markBook);
+    app.get('/recommendedbooks', auth.authenticate(passport), booksController.getRecommendedBooks);
+    app.get('/latestbooks', booksController.getLatestBooks);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     
     return Promise.resolve(server);
 };

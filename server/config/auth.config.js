@@ -27,12 +27,8 @@ const configAuth = {
                     const userProfile = {
                         _id: user._id,
                         username: user.username,
-                        firstName: user.first_Name,
-                        lastName: user.last_Name,
-                        nationality: user.nationality,
-                        age: user.age,
-                        favouriteQuote: user.favourite_quote,
-                        photo: user.photo,
+                        firstName: user.first_name,
+                        lastName: user.last_name
                     };
                     return done(null, userProfile);
                 } else {

@@ -6,6 +6,7 @@ const ReviewsData = require('./reviews.data');
 const EventsData = require('./events.data');
 const RatingsData = require('./ratings.data');
 const StatusesData = require('./statuses.data');
+const GenresData = require('./genres.data');
 
 const init = () => {
     return Promise.resolve({
@@ -16,7 +17,8 @@ const init = () => {
         reviews: new ReviewsData(),
         events: new EventsData(),
         ratings: new RatingsData(),
-        statuses: new StatusesData()
+        statuses: new StatusesData(),
+        genres: new GenresData()
     });
 };
 

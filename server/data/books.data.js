@@ -90,6 +90,22 @@ module.exports = class BooksData {
                 })
         });
     }
+
+    getLatestBooks() {
+        return new Promise((resolve, reject) => {
+            Book.find({})
+                .populate({path: 'author', select: 'first_name last_name'})
+                .sort({'date_published': '-1'})
+                .limit(4)
+                .exec((err, books) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(books);
+                    }
+                })
+        });
+    }
 }
 
 function calculateRating(ratings) {

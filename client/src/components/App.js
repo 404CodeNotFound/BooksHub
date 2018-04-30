@@ -6,6 +6,7 @@ import Footer from './shared/footer/Footer';
 import HomePage from './home/HomePage';
 import LoginPage from './login/LoginPage';
 import ProfilePage from './users/ProfilePage';
+import BooksListPage from './books/BooksListPage';
 import BookDetailsPage from './books/BookDetailsPage';
 import swal from 'sweetalert2';
 import { withSwalInstance } from 'sweetalert2-react';
@@ -22,10 +23,11 @@ class App extends Component {
                 <div>
                     <Header />
                     <main role="main">
-                        <Route exact path="/" component={HomePage} />
-                        <Route path="/login" component={LoginPage} />
-                        <Route path="/users/:username" component={ProfilePage} />
-                        <Route path="/books/:title" component={BookDetailsPage} />                        
+                            <Route exact path="/" component={HomePage} />
+                            <Route path="/login" component={LoginPage} />
+                            <Route path="/users/:username" component={ProfilePage} />
+                            <Route exact path="/books" component={BooksListPage} />
+                            <Route path="/books/:title" component={BookDetailsPage} />
                         <Footer />
                     </main>
                     <SweetAlert
