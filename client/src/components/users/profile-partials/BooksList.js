@@ -70,7 +70,6 @@ class BooksList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log(state)
     return {
         books: state.users.books,
         booksCount: state.users.booksCount,

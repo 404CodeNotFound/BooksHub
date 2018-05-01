@@ -1,4 +1,7 @@
 const { Book } = require('../models')
+const getPageOfCollection = require('../utils/pagination');
+const calculateCurrentRating = require('../utils/rating');
+const itemsPerPage = 20;
 
 module.exports = class BooksData {
     getBookByTitle(title) {
@@ -42,7 +45,7 @@ module.exports = class BooksData {
                         return reject(err);
                     } else {
                         book.ratings.push(rating);
-                        book.rating = calculateRating(book.ratings);
+                        book.rating = calculateCurrentRating(book.ratings);
                         book.save();
                         return resolve({ bookRating: book.rating });
                     }
@@ -80,7 +83,7 @@ module.exports = class BooksData {
                     } else {
                         let bookRating = 0;
                         if (book.ratings.length > 0) {
-                            bookRating = calculateRating(book.ratings);
+                            bookRating = calculateCurrentRating(book.ratings);
                         }
 
                         book.rating = bookRating;
@@ -106,26 +109,26 @@ module.exports = class BooksData {
                 })
         });
     }
-}
 
-function calculateRating(ratings) {
-    let sum = 0;
-    for (let i = 0; i < ratings.length; i++) {
-        sum += ratings[i].stars;
+    getAllBooks(page) {
+        return new Promise((resolve, reject) => {
+            Book.find({})
+                .populate({path: 'author', select: 'first_name last_name'})
+                .sort({'date_published': '-1'})
+                .exec((err, books) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+
+                        let result = {
+                            books: booksOnPage,
+                            booksCount: books.length
+                        };
+
+                        return resolve(result);
+                    }
+                })
+        });
     }
-    const ratingsCount = ratings.length;
-
-    return sum / ratingsCount;
-}
-
-function calculateNewRating(ratings, newRating) {
-    let sum = 0;
-    for (let i = 0; i < ratings.length; i++) {
-        sum += ratings[i].stars;
-    }
-
-    sum += newRating.stars;
-    const ratingsCount = ratings.length + 1;
-
-    return sum / ratingsCount;
 }

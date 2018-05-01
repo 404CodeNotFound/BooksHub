@@ -7,11 +7,11 @@ export function getUserBooksSuccess(result) {
 }
 
 export function getRecommendedBooksSuccess(books) {
-    return { type: 'GET_RECOMMENDED_BOOKS_SUCCESS', books };    
+    return { type: 'GET_RECOMMENDED_BOOKS_SUCCESS', books };
 }
 
 export function getLatestBooksSuccess(books) {
-    return { type: 'GET_LATEST_BOOKS_SUCCESS', books };    
+    return { type: 'GET_LATEST_BOOKS_SUCCESS', books };
 }
 
 export function getBookDetailsSuccess(book, canWriteReview, currentUserRating, bookStatus) {
@@ -24,6 +24,10 @@ export function rateBookSuccess(result) {
 
 export function markBookSuccess(result) {
     return { type: 'MARK_BOOK_SUCCESS', result };
+}
+
+export function getAllBooksSuccess(result) {
+    return { type: 'GET_ALL_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
 }
 
 export function getCurrentlyReadingBooks(id, page) {
@@ -142,6 +146,19 @@ export function getLatestBooks() {
         return requester.get(`${api.LATEST_BOOKS}`)
             .done(response => {
                 dispatch(getLatestBooksSuccess(response.books));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function getAllBooks(page) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+        return requester.getAuthorized(token, `${api.BOOKS}?page=${page}`)
+            .done(response => {
+                dispatch(getAllBooksSuccess(response));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

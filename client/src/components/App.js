@@ -13,6 +13,7 @@ import { withSwalInstance } from 'sweetalert2-react';
 import * as errorActions from '../actions/error.actions';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import AdminPanelPage from './administration/AdminPanelPage';
 
 const SweetAlert = withSwalInstance(swal);
 
@@ -28,6 +29,7 @@ class App extends Component {
                             <Route path="/users/:username" component={ProfilePage} />
                             <Route exact path="/books" component={BooksListPage} />
                             <Route path="/books/:title" component={BookDetailsPage} />
+                            <Route path="/administration" component={AdminPanelPage} />                            
                         <Footer />
                     </main>
                     <SweetAlert
