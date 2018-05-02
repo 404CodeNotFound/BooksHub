@@ -28,6 +28,19 @@ module.exports = class UserData {
         });
     }
 
+    getUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            User.findOne({ 'username': username })
+                .exec((err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(user);
+                    }
+                });
+        });
+    }
+
     getUserProfile(username) {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username })
@@ -232,6 +245,21 @@ module.exports = class UserData {
                     resolve();
                 }
             })
+        });
+    }
+
+    createUser(newUser) {
+        return new Promise((resolve, reject) => {
+            const user = new User(newUser);
+            user.save((err, createdUser) => {
+                if(err) {
+                    return reject(err);
+                } else {
+                    return this.getUserById(createdUser._id)
+                        .then(foundUser => resolve(foundUser))
+                        .catch(err => reject(err));
+                }
+            });
         });
     }
 }

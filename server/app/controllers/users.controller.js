@@ -39,6 +39,39 @@ module.exports = (data) => {
 
             return res;
         },
+        register: (req, res) => {
+            // TODO - redirect to profile if user is already signed in
+
+            const user = req.body;
+            
+            if(!user.username || !user.passHash || !user.email) {
+                res.status(400)
+                    .json({ message: "Username, email and password are required."});
+            }
+
+            data.users.getUserByUsername(user.username)
+                .then((existingUser) => {
+                    if(existingUser) {
+                        res.status(404)
+                            .json({ message: "User with that username already exists." });
+                    } else {
+                        user.photo = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+
+                        // TODO what date to set as a user birthdate
+                        user.birth_date = new Date(2018, 01, 01);
+                        
+                        data.users.createUser(user)
+                            .then(createdUser => {
+                                res.status(201)
+                                    .json({ user: createdUser });
+                            });
+                    }
+                })
+                .catch((error) => {
+                    res.status(500)
+                        .json({ message: "Something went wrong!" });
+                });
+        },
         getUserProfile(req, res) {
             const username = req.params.username;
             if (!username) {

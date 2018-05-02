@@ -33,7 +33,8 @@ const init = (data) => {
     });
 
     app.post('/login', usersController.login);
-    
+    app.post('/register', usersController.register);
+
     // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);
 
