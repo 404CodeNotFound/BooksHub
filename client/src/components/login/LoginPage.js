@@ -25,7 +25,7 @@ class LoginPage extends Component {
                             </h1>
                         <h4 className="title">Use a local account to log in.</h4>
 
-                        <form className="form-horizontal" id="login-form" onSubmit  ={this.submit} >
+                        <form className="form-horizontal" id="login-form" onSubmit={this.submit} >
                             <div className="form-group row">
                                 <label className="col-md-2 control-label" htmlFor="username">Username</label>
                                 <div className="col-md-8">
@@ -68,7 +68,7 @@ class LoginPage extends Component {
         const password = this.state.password;
 
         this.props.login(username, password);
-        this.setState({ author: '', text: '' });
+        this.setState({ username: '', password: '' });
     }
 }
 

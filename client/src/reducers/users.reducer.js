@@ -9,6 +9,11 @@ export default function users(state = {
                 shouldRedirect: true,
                 isLoggedIn: action.result.isLoggedIn
             };
+        case 'REGISTER_SUCCESS':
+            return {
+                ...state,
+                shouldRedirect: true
+            };
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,

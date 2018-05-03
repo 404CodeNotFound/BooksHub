@@ -12,9 +12,9 @@ module.exports = (data) => {
                 res.status(400)
                     .json({ message: "You should provide username and password." });
             }
-            //const passHash = crypto.SHA1(username + password).toString();
+            const passHash = crypto.SHA1(password).toString();
 
-            data.users.getUserByUsernameAndPassword(username, password)
+            data.users.getUserByUsernameAndPassword(username, passHash)
                 .then(user => {
                     if (!user) {
                         res.status(401)
@@ -44,10 +44,13 @@ module.exports = (data) => {
 
             const user = req.body;
             
-            if(!user.username || !user.passHash || !user.email) {
+            if(!user.username || !user.password || !user.email) {
                 res.status(400)
                     .json({ message: "Username, email and password are required."});
             }
+            
+            user.passHash = crypto.SHA1(user.password).toString();
+            user.password = "";
 
             data.users.getUserByUsername(user.username)
                 .then((existingUser) => {
