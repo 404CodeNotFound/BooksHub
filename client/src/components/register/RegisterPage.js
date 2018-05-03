@@ -72,10 +72,7 @@ class RegisterPage extends Component {
                         </form>
                     </div>
                 </div>
-                <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
-                { this.props.shouldRedirectToLogin &&
-                    <Redirect to="/login" />
-                }     
+                <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />   
             </header>
         );
     }
@@ -116,12 +113,8 @@ class RegisterPage extends Component {
             firstname: '',
             lastname: ''
         });
-    };
-}
 
-function mapStateToProps(state, ownProps) {
-    return {
-        shouldRedirectToLogin: state.users.shouldRedirectToLogin
+        this.props.history.push("/login");
     };
 }
 
@@ -132,4 +125,4 @@ function mapDispatchToProps(dispatch, ownProps) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
+export default connect(null, mapDispatchToProps)(RegisterPage);

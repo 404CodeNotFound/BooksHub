@@ -6,16 +6,12 @@ export function loginSuccess() {
     return { type: 'LOGIN_SUCCESS' };
 }
 
-export function stopRedirect() {
-    return { type: 'STOP_REDIRECT' };
-}
-
 export function registerSuccess() {
     return { type: 'REGISTER_SUCCESS' };
 }
 
-export function logoutSuccess(result) {
-    return { type: 'LOGOUT_SUCCESS', result };
+export function logoutSuccess() {
+    return { type: 'LOGOUT_SUCCESS' };
 }
 
 export function getProfileSuccess(user) {
@@ -31,11 +27,8 @@ export function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('id');
-        const result = {
-            shouldRedirect: false
-        };
         
-        dispatch(logoutSuccess(result));
+        dispatch(logoutSuccess());
     }
 }
 
@@ -60,7 +53,6 @@ export function register(username, password, email, firstname, lastname) {
         return requester.post(api.REGISTER, { username: username, password: password, email: email, first_name: firstname, last_name: lastname })
             .done(response => {
                 dispatch(registerSuccess());
-                dispatch(stopRedirect());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

@@ -5,23 +5,15 @@ export default function users(state = {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
             return {
-                ...state,
-                shouldRedirect: true,
+                ...state
             };
         case 'REGISTER_SUCCESS':
             return {
-                ...state,
-                shouldRedirectToLogin: true
-            };
-        case 'STOP_REDIRECT':
-            return {
-                ...state,
-                shouldRedirectToLogin: false
+                ...state
             };
         case 'LOGOUT_SUCCESS':
             return {
-                ...state,
-                shouldRedirect: action.result.shouldRedirect
+                ...state
             };
         case 'GET_PROFILE_SUCCESS':
             return {

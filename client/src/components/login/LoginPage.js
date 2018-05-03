@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import * as usersActions from '../../actions/users.actions';
 import '../../style/login.css';
 import background from '../../style/banner-blurred.jpg';
@@ -47,9 +46,6 @@ class LoginPage extends Component {
                     </div>
                 </div>
                 <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
-                {this.props.shouldRedirect &&
-                    <Redirect to="/" />
-                }
             </header>
         );
     }
@@ -69,13 +65,9 @@ class LoginPage extends Component {
 
         this.props.login(username, password);
         this.setState({ username: '', password: '' });
+        
+        this.props.history.push("/");
     }
-}
-
-function mapStateToProps(state, ownProps) {
-    return {
-        shouldRedirect: state.users.shouldRedirect
-    };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
@@ -84,4 +76,4 @@ function mapDispatchToProps(dispatch, ownProps) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(LoginPage);
