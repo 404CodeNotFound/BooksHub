@@ -315,6 +315,25 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        updateUserProfile: (req, res) => {
+            if(req.user.username !== req.params.username) {
+                res.status(403)
+                    .json({ message: "Users can only edit their profiles." });
+            }
+
+            const userData = req.body;
+            userData.username = req.user.username;
+
+            data.users.updateUser(userData)
+                .then((updatedUser) => {
+                    res.status(201)
+                        .json({ user: updatedUser });
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: error.toString() });
+                });      
         }
     }
 }

@@ -262,4 +262,29 @@ module.exports = class UserData {
             });
         });
     }
+
+    updateUser(user) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ username: user.username }, {  
+                $set: {
+                    first_name: user.firstname,
+                    last_name: user.lastname,
+                    email: user.email,
+                    nationality: user.nationality,
+                    age: user.age,
+                    gender: user.gender,
+                    // birth_date: new Date(user.birthdate),
+                    // languages: languages
+                }
+            }, 
+            { new: true }, 
+            (error, updatedUser) => {
+                if(error) {
+                    return reject(error);
+                }
+
+                return resolve(updatedUser);
+            });
+        });
+    }
 }

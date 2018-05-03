@@ -37,6 +37,7 @@ const init = (data) => {
 
     // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);
+    app.put('/users/:username', auth.authenticate(passport), usersController.updateUserProfile);
 
     // Book collections of User
     app.get('/users/:id/reading', usersController.getReadingBooks);
@@ -63,8 +64,7 @@ const init = (data) => {
     app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);
     app.put('/requests/:id', auth.authenticate(passport), requestsController.acceptRequest);            
     app.delete('/requests/:id', auth.authenticate(passport), requestsController.declineRequest);            
-                
-    
+           
     return Promise.resolve(server);
 };
 
