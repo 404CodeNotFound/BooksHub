@@ -73,9 +73,9 @@ class RegisterPage extends Component {
                     </div>
                 </div>
                 <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
-                 {this.props.shouldRedirect &&
+                { this.props.shouldRedirectToLogin &&
                     <Redirect to="/login" />
-                }  
+                }     
             </header>
         );
     }
@@ -121,7 +121,7 @@ class RegisterPage extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        shouldRedirect: state.users.shouldRedirect
+        shouldRedirectToLogin: state.users.shouldRedirectToLogin
     };
 }
 

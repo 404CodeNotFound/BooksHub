@@ -7,17 +7,21 @@ export default function users(state = {
             return {
                 ...state,
                 shouldRedirect: true,
-                isLoggedIn: action.result.isLoggedIn
             };
         case 'REGISTER_SUCCESS':
             return {
                 ...state,
-                shouldRedirect: true
+                shouldRedirectToLogin: true
+            };
+        case 'STOP_REDIRECT':
+            return {
+                ...state,
+                shouldRedirectToLogin: false
             };
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,
-                isLoggedIn: action.result.isLoggedIn
+                shouldRedirect: action.result.shouldRedirect
             };
         case 'GET_PROFILE_SUCCESS':
             return {
