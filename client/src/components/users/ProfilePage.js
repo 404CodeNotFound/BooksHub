@@ -137,7 +137,7 @@ class ProfilePage extends Component {
                                     title="Pending Invitations Collection" />} />
                         </div>
                     </div>
-                    <EditUserModal isVisible={this.state.isOpen} toggleModal={this.toggleModal} />                
+                    <EditUserModal isVisible={this.state.isOpen} toggleModal={this.toggleModal} user={this.props.user} />                
                 </section >
                 ] :
                 <div className="loader"></div>

@@ -6,15 +6,14 @@ class Information extends Component {
             <dl className="user-info dl-horizontal">
                 <dt>
                     E-mail
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.email}
                 </dd>
 
                 <dt>
                     Nationality
-                    </dt>
+                </dt>
                 <dd>
                     {this.props.user.nationality}
                 </dd>
@@ -35,10 +34,16 @@ class Information extends Component {
                 </dd>
                 <dt>
                     Age
-                    </dt>
+                </dt>
 
                 <dd>
                     {this.props.user.age}
+                </dd>
+                <dt>
+                    Gender
+                </dt>
+                <dd>
+                    {this.props.user.gender}
                 </dd>
                 <dt>
                     Languages

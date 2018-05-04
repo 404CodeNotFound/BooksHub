@@ -275,7 +275,7 @@ module.exports = class UserData {
                     gender: user.gender,
                     // birth_date: new Date(user.birthdate),
                     // languages: languages,
-                    favourite_quote: user.quote
+                    favourite_quote: user.favouriteQuote
                 }
             }, 
             { new: true }, 

@@ -252,7 +252,7 @@ img.profile-photo-lg {
     padding-top: 5%;
 }
 
-label {
+.modal-body label {
     margin-right: 4%;
     color: #555;
 } 

@@ -71,6 +71,10 @@ export default function users(state = {
                 ...state,
                 comments: removeFromCollection(state.comments, action.id)
             };
+        case 'UPDATE_PROFILE_SUCCESS':
+            return Object.assign({}, state, {
+                profile: action.user
+            });
         default:
             return state;
     }

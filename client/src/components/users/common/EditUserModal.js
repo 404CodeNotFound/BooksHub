@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap4-modal';
-// import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
 
@@ -8,6 +7,14 @@ class EditUserModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            username: this.props.user.username,
+            email: this.props.user.email,
+            firstname: this.props.user.first_name,
+            lastname: this.props.user.last_name,
+            nationality: this.props.user.nationality,
+            age: this.props.user.age,
+            gender: this.props.user.gender,
+            favourite_quote: this.props.user.favourite_quote
         };
     }
 
@@ -24,61 +31,52 @@ class EditUserModal extends Component {
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="email">Email</label>
                             <div className="col-md-8">
-                                <input className="form-control" id="email" name="email" type="text" value={this.state.email} onChange={this.handleEmailChange} />
+                                <input className="form-control" id="email" name="email" type="text" value={this.state.email || ''} onChange={this.handleEmailChange} />
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="firstname">First Name</label>
                             <div className="col-md-8">
-                                <input className="form-control" id="firstname" name="firstname" type="text" value={this.state.firstname} onChange={this.handleFirstnameChange} />
+                                <input className="form-control" id="firstname" name="firstname" type="text" value={this.state.firstname || ''} onChange={this.handleFirstnameChange} />
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="lastname">Last Name</label>
                             <div className="col-md-8">
-                                <input className="form-control" id="lastname" name="lastname" type="text" value={this.state.lastname} onChange={this.handleLastnameChange} />
+                                <input className="form-control" id="lastname" name="lastname" type="text" value={this.state.lastname || ''} onChange={this.handleLastnameChange} />
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="nationality">Nationality</label>
                             <div className="col-md-8">
-                                <input className="form-control" id="nationality" name="nationality" type="text" value={this.state.nationality} onChange={this.handleNationalityChange} />
+                                <input className="form-control" id="nationality" name="nationality" type="text" value={this.state.nationality || ''} onChange={this.handleNationalityChange} />
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="age">Age</label>
                             <div className="col-md-8">
-                                <input className="form-control" id="age" name="age" type="text" value={this.state.age} onChange={this.handleAgeChange} />
-                            </div>
-                        </div>
-
-                        <div className="form-group row">
-                            <label className="col-md-2 control-label" htmlFor="age">Gender</label>
-                            <div className="col-md-8">
-                                <input className="form-control" id="age" name="age" type="text" value={this.state.age} onChange={this.handleAgeChange} />
+                                <input className="form-control" id="age" name="age" type="text" value={this.state.age || ''} onChange={this.handleAgeChange} />
                             </div>
                         </div>
                         
-                        {/* <div className="form-group row">
+                        <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="gender">Gender</label>
                             <div className="col-md-8">
-                                <ButtonToolbar>
-                                    <DropdownButton title="Choose" id="dropdown-size-medium">
-                                        <MenuItem eventKey="male">Male</MenuItem>
-                                        <MenuItem eventKey="female">Female</MenuItem>
-                                    </DropdownButton>
-                                </ButtonToolbar>
+                                <select name="gender" value={this.state.gender} onChange={this.handleGenderChange}>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
-                        </div> */}
+                        </div>
                         
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="favouriteQuote">Favourite quote</label>
                             <div className="col-md-8">
-                                <input className="form-control" id="favouriteQuote" name="favouriteQuote" type="text" value={this.state.favouriteQuote} onChange={this.handleQuoteChange} />
+                                <input className="form-control" id="favouriteQuote" name="favouriteQuote" type="text" value={this.state.favourite_quote || ''} onChange={this.handleQuoteChange} />
                             </div>
                         </div>
                     </div>
@@ -112,16 +110,37 @@ class EditUserModal extends Component {
         this.setState({ age: event.target.value });
     }
 
+    handleGenderChange = (event) => {
+        this.setState({ gender: event.target.value });
+    }
+
     handleQuoteChange = (event) => {
-        this.setState({ favouriteQuote: event.target.value });
+        this.setState({ favourite_quote: event.target.value });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // handle data
+        var user = {
+            username: this.state.username,
+            email: this.state.email,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            nationality: this.state.nationality,
+            age: this.state.age,
+            gender: this.state.gender,
+            favouriteQuote: this.state.favourite_quote
+        };
 
+        this.props.updateProfile(user);
+        
         this.props.toggleModal();
     }
 }
 
-export default EditUserModal;
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        updateProfile: (user) => dispatch(usersActions.updateProfile(user))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(EditUserModal);
