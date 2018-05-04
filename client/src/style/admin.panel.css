@@ -82,3 +82,7 @@
 .background-image {
   background-image: url(../img/banner-blurred.jpg);
 }
+
+.modal {
+  display: block !important;
+}

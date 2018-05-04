@@ -24,7 +24,8 @@ export function logout() {
         localStorage.removeItem('username');
         localStorage.removeItem('id');
         const result = {
-            isLoggedIn: false
+            isLoggedIn: false,
+            shouldRedirect: false
         };
         
         dispatch(logoutSuccess(result));

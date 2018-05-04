@@ -12,7 +12,8 @@ export default function users(state = {
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,
-                isLoggedIn: action.result.isLoggedIn
+                isLoggedIn: action.result.isLoggedIn,
+                shouldRedirect: action.result.shouldRedirect
             };
         case 'GET_PROFILE_SUCCESS':
             return {
