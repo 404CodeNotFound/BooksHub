@@ -2,12 +2,16 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 
-export function loginSuccess(result) {
-    return { type: 'LOGIN_SUCCESS', result };
+export function loginSuccess() {
+    return { type: 'LOGIN_SUCCESS' };
 }
 
-export function logoutSuccess(result) {
-    return { type: 'LOGOUT_SUCCESS', result };
+export function registerSuccess() {
+    return { type: 'REGISTER_SUCCESS' };
+}
+
+export function logoutSuccess() {
+    return { type: 'LOGOUT_SUCCESS' };
 }
 
 export function getProfileSuccess(user) {
@@ -23,12 +27,8 @@ export function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('id');
-        const result = {
-            isLoggedIn: false,
-            shouldRedirect: false
-        };
         
-        dispatch(logoutSuccess(result));
+        dispatch(logoutSuccess());
     }
 }
 
@@ -36,14 +36,23 @@ export function login(username, password) {
     return function (dispatch) {
         return requester.post(api.LOGIN, { username: username, password: password })
             .done(response => {
-                const result = {
-                    isLoggedIn: true
-                };
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('username', response.user.username);
                 localStorage.setItem('id', response.user.id);
 
-                dispatch(loginSuccess(result));
+                dispatch(loginSuccess());
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    }
+}
+
+export function register(username, password, email, firstname, lastname) {
+    return function (dispatch) {
+        return requester.post(api.REGISTER, { username: username, password: password, email: email, first_name: firstname, last_name: lastname })
+            .done(response => {
+                dispatch(registerSuccess());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

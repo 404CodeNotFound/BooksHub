@@ -28,6 +28,19 @@ module.exports = class UserData {
         });
     }
 
+    getUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            User.findOne({ 'username': username })
+                .exec((err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(user);
+                    }
+                });
+        });
+    }
+
     getUserProfile(username) {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username })
@@ -297,6 +310,46 @@ module.exports = class UserData {
                         return resolve(user.favourite_genres);
                     }
                 });
+        });
+    }
+
+    createUser(newUser) {
+        return new Promise((resolve, reject) => {
+            const user = new User(newUser);
+            user.save((err, createdUser) => {
+                if(err) {
+                    return reject(err);
+                } else {
+                    return this.getUserById(createdUser._id)
+                        .then(foundUser => resolve(foundUser))
+                        .catch(err => reject(err));
+                }
+            });
+        });
+    }
+
+    updateUser(user) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ username: user.username }, {  
+                $set: {
+                    first_name: user.firstname,
+                    last_name: user.lastname,
+                    email: user.email,
+                    nationality: user.nationality,
+                    age: user.age,
+                    gender: user.gender,
+                    // birth_date: new Date(user.birthdate),
+                    // languages: languages
+                }
+            }, 
+            { new: true }, 
+            (error, updatedUser) => {
+                if(error) {
+                    return reject(error);
+                }
+
+                return resolve(updatedUser);
+            });
         });
     }
 }

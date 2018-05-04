@@ -5,6 +5,7 @@ import Header from './shared/header/Header';
 import Footer from './shared/footer/Footer';
 import HomePage from './home/HomePage';
 import LoginPage from './login/LoginPage';
+import RegisterPage from './register/RegisterPage';
 import ProfilePage from './users/ProfilePage';
 import BooksListPage from './books/BooksListPage';
 import BookDetailsPage from './books/BookDetailsPage';
@@ -26,6 +27,7 @@ class App extends Component {
                     <main role="main">
                             <Route exact path="/" component={HomePage} />
                             <Route path="/login" component={LoginPage} />
+                        <Route path="/register" component={RegisterPage} />
                             <Route path="/users/:username" component={ProfilePage} />
                             <Route exact path="/books" component={BooksListPage} />
                             <Route path="/books/:title" component={BookDetailsPage} />

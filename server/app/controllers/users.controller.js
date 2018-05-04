@@ -12,9 +12,9 @@ module.exports = (data) => {
                 res.status(400)
                     .json({ message: "You should provide username and password." });
             }
-            //const passHash = crypto.SHA1(username + password).toString();
+            const passHash = crypto.SHA1(password).toString();
 
-            data.users.getUserByUsernameAndPassword(username, password)
+            data.users.getUserByUsernameAndPassword(username, passHash)
                 .then(user => {
                     if (!user) {
                         res.status(401)
@@ -38,6 +38,42 @@ module.exports = (data) => {
                 });
 
             return res;
+        },
+        register: (req, res) => {
+            // TODO - redirect to profile if user is already signed in
+
+            const user = req.body;
+            
+            if(!user.username || !user.password || !user.email) {
+                res.status(400)
+                    .json({ message: "Username, email and password are required."});
+            }
+            
+            user.passHash = crypto.SHA1(user.password).toString();
+            user.password = "";
+
+            data.users.getUserByUsername(user.username)
+                .then((existingUser) => {
+                    if(existingUser) {
+                        res.status(404)
+                            .json({ message: "User with that username already exists." });
+                    } else {
+                        user.photo = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+
+                        // TODO what date to set as a user birthdate
+                        user.birth_date = new Date(2018, 01, 01);
+                        
+                        data.users.createUser(user)
+                            .then(createdUser => {
+                                res.status(201)
+                                    .json({ user: createdUser });
+                            });
+                    }
+                })
+                .catch((error) => {
+                    res.status(500)
+                        .json({ message: "Something went wrong!" });
+                });
         },
         getUserProfile(req, res) {
             const username = req.params.username;
@@ -279,6 +315,25 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        updateUserProfile: (req, res) => {
+            if(req.user.username !== req.params.username) {
+                res.status(403)
+                    .json({ message: "Users can only edit their profiles." });
+            }
+
+            const userData = req.body;
+            userData.username = req.user.username;
+
+            data.users.updateUser(userData)
+                .then((updatedUser) => {
+                    res.status(201)
+                        .json({ user: updatedUser });
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: error.toString() });
+                });      
         }
     }
 }
