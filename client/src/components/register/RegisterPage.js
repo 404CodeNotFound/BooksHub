@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import * as usersActions from '../../actions/users.actions';
 import '../../style/register.css';
 import background from '../../style/banner-blurred.jpg';
