@@ -6,7 +6,6 @@ import './style/responsee.css';
 import './style/font-poppins.css';
 import './style/icons.css';
 import './style/template-style.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 
 const initialState = {};

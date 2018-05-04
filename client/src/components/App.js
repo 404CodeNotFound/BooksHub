@@ -12,6 +12,7 @@ import AdminPanelPage from './administration/AdminPanelPage';
 import swal from 'sweetalert2';
 import { withSwalInstance } from 'sweetalert2-react';
 import * as errorActions from '../actions/error.actions';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const SweetAlert = withSwalInstance(swal);
 

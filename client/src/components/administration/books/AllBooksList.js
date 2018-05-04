@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as booksActions from '../../../actions/books.actions';
-import * as modalsActions from '../../../actions/modals.actions';
+// import * as modalsActions from '../../../actions/modals.actions';
 import BookRow from './BookRow';
 import Pagination from "react-js-pagination";
 import AddBookModal from './AddBookModal';
-import {Portal} from 'react-portal';
 
 class AllBooksList extends Component {
     state = { activePage: 1 };
@@ -20,7 +19,7 @@ class AllBooksList extends Component {
                 [<div id="page-content-wrapper administration-box" key="books-list">
                     <div id="books">
                         <h2>Books</h2>
-                        <button type="button" className="btn btn-main-green" onClick={this.props.openModal}>+ Add</button>
+                        <button type="button" className="btn btn-main-green" onClick={this.props.showAddBookModal1}>+ Add</button>
                         <table className="table">
                             <tbody>
                                 <tr>
@@ -62,9 +61,9 @@ class AllBooksList extends Component {
                             </div>
                         }
                     </div>
-                    <Portal>
+                    {this.props.showAddBookModal &&
                         <AddBookModal />
-                        </Portal>
+                    }
                 </div>
                 ] :
                 <div className="loader"></div>
@@ -85,13 +84,14 @@ function mapStateToProps(state, ownProps) {
         books: state.administration.books,
         booksCount: state.administration.booksCount,
         currentAdmin: { username: username, id: userId },
+        showAddBookModal: state.modals.showAddBookModal
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllBooks: (pageNumber) => dispatch(booksActions.getAllBooks(pageNumber)),
-        openModal: () => dispatch(modalsActions.openModal())
+        // showAddBookModal1: () => dispatch(modalsActions.openAddBookModal())
     };
 }
 

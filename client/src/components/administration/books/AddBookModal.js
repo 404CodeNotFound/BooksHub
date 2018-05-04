@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import * as booksActions from '../../../actions/books.actions';
 import Modal from 'react-bootstrap4-modal';
@@ -7,12 +6,11 @@ import Modal from 'react-bootstrap4-modal';
 class AddBookModal extends Component {
     render() {
         return (
-            <Modal
-                visible={this.props.show}>
-                <Modal.Header closeButton>
-                    <Modal.Title id='ModalHeader'>Add new event</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <Modal visible={true} onClickBackdrop={this.modalBackdropClicked} dialogClassName="modal-lg">
+                <div className="modal-header">
+                    <h5 className="modal-title">Add new book</h5>
+                </div>
+                <div className="modal-body">
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-title">Title</label>
                         <div className="col-md-8">
@@ -38,13 +36,15 @@ class AddBookModal extends Component {
                             <input className="form-control" id="book-description" name="Description" type="text" value="" />
                         </div>
                     </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
-                    <button className='btn btn-primary'>
-                        Save
-        </button>
-                </Modal.Footer>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" onClick={this.onPanic}>
+                        Add
+          </button>
+                    <button type="button" className="btn btn-primary" onClick={this.onFirePhasers}>
+                        Cancel
+          </button>
+                </div>
             </Modal>
         )
     }
@@ -55,8 +55,7 @@ function mapStateToProps(state, ownProps) {
     const userId = localStorage.getItem('id');
 
     return {
-        currentAdmin: { username: username, id: userId },
-        show: state.modals.show
+        currentAdmin: { username: username, id: userId }
     };
 }
 
