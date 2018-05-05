@@ -317,14 +317,14 @@ module.exports = (data) => {
         },
         updateUserProfile: (req, res) => {
             if(req.user.username !== req.params.username) {
-                console.log(req.user);
-                console.log(req.params);
                 res.status(403)
                     .json({ message: "Users can only edit their profiles." });
             }
 
             const userData = req.body;
             userData.username = req.user.username;
+            console.log("controller");
+            console.log(userData);
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {

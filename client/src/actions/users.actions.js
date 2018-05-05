@@ -90,11 +90,12 @@ export function getFriends(id, page) {
 
 export function updateProfile(user) {
     const token = localStorage.getItem('token');
+    console.log("actions");
+    console.log(user);
     
     return function (dispatch) {
         return requester.putAuthorized(token, `${api.USERS}/${user.username}`, user)
             .done(response => {
-                console.log(response);
                 dispatch(updateProfileSuccess(response.user));
             })
             .fail(error => {

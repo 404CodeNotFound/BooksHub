@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap4-modal';
+import Select from 'react-select';
+import '../../../../node_modules/react-select/dist/react-select.css';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
+
+const LANGUAGES = [
+	{ label: 'Bulgarian', value: 'bulgarian' },
+	{ label: 'English', value: 'english' },
+	{ label: 'French', value: 'french' },
+	{ label: 'Spanish', value: 'spanish' },
+	{ label: 'German', value: 'german' },
+	{ label: 'Italian', value: 'italian' },
+];
 
 class EditUserModal extends Component {
     constructor(props) {
@@ -14,7 +25,9 @@ class EditUserModal extends Component {
             nationality: this.props.user.nationality,
             age: this.props.user.age,
             gender: this.props.user.gender,
-            favourite_quote: this.props.user.favourite_quote
+            favourite_quote: this.props.user.favourite_quote,
+            stayOpen: false,
+            languages: this.props.user.languages,
         };
     }
 
@@ -54,6 +67,21 @@ class EditUserModal extends Component {
                             <div className="col-md-8">
                                 <input className="form-control" id="nationality" name="nationality" type="text" value={this.state.nationality || ''} onChange={this.handleNationalityChange} />
                             </div>
+                        </div>
+
+                        <div className="form-group row">
+                            <label className="col-md-2 control-label" htmlFor="languages">Languages</label>
+                            <div className="col-md-8">
+                                <Select
+                                    closeOnSelect={!this.state.stayOpen}
+                                    multi
+                                    onChange={this.handleSelectChange}
+                                    options={LANGUAGES}
+                                    placeholder="Select languages"
+                                    joinValues
+                                    value={this.state.languages}
+                                />
+                            </div>                            
                         </div>
 
                         <div className="form-group row">
@@ -106,6 +134,10 @@ class EditUserModal extends Component {
         this.setState({ nationality: event.target.value });
     }
 
+    handleSelectChange = (value) => {
+        this.setState({ languages: value });
+    }
+
     handleAgeChange = (event) => {
         this.setState({ age: event.target.value });
     }
@@ -126,6 +158,7 @@ class EditUserModal extends Component {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             nationality: this.state.nationality,
+            languages: this.state.languages,
             age: this.state.age,
             gender: this.state.gender,
             favouriteQuote: this.state.favourite_quote
