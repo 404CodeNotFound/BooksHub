@@ -339,7 +339,8 @@ module.exports = class UserData {
                     age: user.age,
                     gender: user.gender,
                     // birth_date: new Date(user.birthdate),
-                    // languages: languages
+                    // languages: user.languages,
+                    favourite_quote: user.favouriteQuote
                 }
             }, 
             { new: true }, 

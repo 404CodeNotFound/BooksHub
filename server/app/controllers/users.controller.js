@@ -59,10 +59,9 @@ module.exports = (data) => {
                         res.status(404)
                             .json({ message: "User with that username already exists." });
                     } else {
-                        user.photo = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-
-                        // TODO what date to set as a user birthdate
+                        user.photo = "http://www.verspers.nl/workspace/assets/images/empty_profile.png";
                         user.birth_date = new Date(2018, 01, 01);
+                        user.gender = "Male";
                         
                         data.users.createUser(user)
                             .then(createdUser => {
@@ -325,6 +324,8 @@ module.exports = (data) => {
 
             const userData = req.body;
             userData.username = req.user.username;
+            console.log("controller");
+            console.log(userData);
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {

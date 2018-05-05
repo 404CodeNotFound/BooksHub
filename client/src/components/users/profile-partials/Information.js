@@ -6,60 +6,66 @@ class Information extends Component {
             <dl className="user-info dl-horizontal">
                 <dt>
                     E-mail
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.email}
                 </dd>
 
                 <dt>
                     Nationality
-                    </dt>
+                </dt>
                 <dd>
                     {this.props.user.nationality}
                 </dd>
+
                 <dt>
                     Gender
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.gender}
                 </dd>
 
                 <dt>
                     Birthdate
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.birth_date}
                 </dd>
+
                 <dt>
                     Age
-                    </dt>
+                </dt>
 
                 <dd>
                     {this.props.user.age}
                 </dd>
+
+                <dt>
+                    Gender
+                </dt>
+                <dd>
+                    {this.props.user.gender}
+                </dd>
+
                 <dt>
                     Languages
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.languages.map(language =>
-                        <p key={language}>{language}</p>
+                        <p key={language.label}>{language.label}</p>
                     )}
                 </dd>
+
                 <dt>
                     Favourite Quote
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.favourite_quote}
                 </dd>
+
                 <dt>
                     Favourite Genres
-                    </dt>
-
+                </dt>
                 <dd>
                     {this.props.user.favourite_genres.map(genre =>
                         <p key={genre}>{genre}</p>

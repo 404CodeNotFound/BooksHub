@@ -10,10 +10,18 @@ import CommentsList from './profile-partials/CommentsList';
 import FriendsList from './profile-partials/FriendsList';
 import InvitationsList from './profile-partials/InvitationsList';
 import ReviewsList from './profile-partials/ReviewsList';
+import EditUserModal from './common/EditUserModal';
 import '../../style/profile.css';
 
 class ProfilePage extends Component {
-    state = { links: ['active', '', '', '', '', '', '', '', '', ''] };
+    state = { links: ['active', '', '', '', '', '', '', '', '', ''], isOpen: false };
+
+    toggleModal = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
     render() {
         return (
             this.props.user !== null ?
@@ -37,7 +45,7 @@ class ProfilePage extends Component {
                                     <h5 className="text-center">{this.props.user.first_name} {this.props.user.last_name}</h5>
                                     <p>{this.props.user.username}</p>
                                     {this.props.currentUser.username === this.props.user.username ?
-                                        <button type="button" className="btn btn-main-green" data-toggle="modal" data-target="#edit-modal">Edit Profile</button> :
+                                        <button type="button" className="btn btn-main-green" onClick={this.toggleModal}>Edit Profile</button> :
                                         (this.showInviteButton() &&
                                             (!this.props.hideInviteButton &&
                                                 <button type="button" className="btn btn-main-green" onClick={this.sendInvitation}>Send Invitation</button>
@@ -129,6 +137,7 @@ class ProfilePage extends Component {
                                     title="Pending Invitations Collection" />} />
                         </div>
                     </div>
+                    <EditUserModal isVisible={this.state.isOpen} toggleModal={this.toggleModal} user={this.props.user} />                
                 </section >
                 ] :
                 <div className="loader"></div>
