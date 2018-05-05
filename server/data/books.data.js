@@ -114,6 +114,7 @@ module.exports = class BooksData {
         return new Promise((resolve, reject) => {
             Book.find({ 'isDeleted': false })
                 .populate({ path: 'author', select: 'first_name last_name' })
+                .populate({ path: 'genres', select: 'name' })                
                 .sort({ 'date_published': '-1' })
                 .exec((err, books) => {
                     if (err) {
@@ -154,7 +155,7 @@ module.exports = class BooksData {
         });
     }
 
-    updateBook(bookId, title, isbn, publisher, photo, language, summary) {
+    updateBook(bookId, title, isbn, publisher, photo, language, summary, genres) {
         return new Promise((resolve, reject) => {
             Book.findOneAndUpdate({ _id: bookId }, {
                 $set: {
@@ -163,7 +164,8 @@ module.exports = class BooksData {
                     publisher: publisher,
                     photo: photo,
                     language: language,
-                    summary: summary
+                    summary: summary,
+                    genres: genres
                 }
             },
                 { new: true }, (err, savedBook) => {

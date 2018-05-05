@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap4-modal';
+import Select from 'react-select';
 import * as booksActions from '../../../actions/books.actions';
+import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 
 class EditBookModal extends Component {
@@ -12,9 +14,12 @@ class EditBookModal extends Component {
         photo: this.props.book.photo,
         language: this.props.book.language,
         publisher: this.props.book.publisher,
-        genres: []
+        genres: this.props.book.genres
     };
-    
+
+    componentDidMount() {
+        this.props.getAllGenres();
+    }
 
     render() {
         return (
@@ -56,7 +61,21 @@ class EditBookModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-summary">Summary</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-summary" value={this.state.summary || ''} type="text" onChange={(event) => this.handleSummaryChange(event)} />
+                            <textarea class="form-control" rows="5" id="book-summary" value={this.state.summary || ''} onChange={(event) => this.handleSummaryChange(event)}></textarea>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label className="col-md-2 control-label">Genres</label>
+                        <div className="col-md-8">
+                            <Select
+                                closeOnSelect={!this.state.stayOpen}
+                                multi
+                                onChange={this.handleGenresChange}
+                                options={this.props.genresSelectValues}
+                                placeholder="Select genres"
+                                joinValues
+                                value={this.state.genres}
+                            />
                         </div>
                     </div>
                 </div>
@@ -96,11 +115,15 @@ class EditBookModal extends Component {
         this.setState({ language: event.target.value });
     }
 
-    handleGenresChange = (event) => {
-
+    handleGenresChange = (value) => {
+        debugger;
+        this.setState({ genres: value });
     }
 
-    submitBook = () => {
+    submitBook = (event) => {
+        const g = this.state.genres;
+        const genres = g.map((selectedItem) => selectedItem.id);
+        debugger;
         const book = {
             id: this.props.book._id,
             title: this.state.title,
@@ -108,7 +131,8 @@ class EditBookModal extends Component {
             publisher: this.state.publisher,
             summary: this.state.summary,
             photo: this.state.photo,
-            language: this.state.language
+            language: this.state.language,
+            genres: genres.join(', ')
         };
 
         this.props.saveBook(book);
@@ -118,14 +142,16 @@ class EditBookModal extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         isVisibleEditBook: state.modals.showEditBookModal,
-        book: state.modals.bookToEdit
+        book: state.modals.bookToEdit,
+        genresSelectValues: state.administration.genresSelectValues
     }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         saveBook: (book) => dispatch(booksActions.editBook(book)),
-        closeEditBookModal: () => dispatch(modalsActions.closeEditBookModal())
+        closeEditBookModal: () => dispatch(modalsActions.closeEditBookModal()),
+        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues())
     };
 }
 

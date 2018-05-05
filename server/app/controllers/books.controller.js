@@ -199,8 +199,9 @@ module.exports = (data) => {
                     .json({ message: "Only Administrator can edit book." });
             } else {
                 const book = req.body;
+                const genres = book.genres.split(', ');                
                 data.books.updateBook(book.id, book.title, book.isbn, book.publisher,
-                    book.photo, book.language, book.summary)
+                    book.photo, book.language, book.summary, genres)
                     .then(updatedBook => {
                         res.status(201)
                             .json({ book: updatedBook });

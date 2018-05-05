@@ -72,7 +72,9 @@ class AddBookModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-summary">Summary</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-summary" name="Summary" type="text" onChange={(event) => this.handleSummaryChange(event)} />
+                            <div className="col-md-8">
+                                <textarea class="form-control" rows="5" id="book-summary" onChange={(event) => this.handleSummaryChange(event)}></textarea>
+                            </div>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -162,6 +164,7 @@ function mapStateToProps(state, ownProps) {
         genresSelectValues: state.administration.genresSelectValues
     };
 }
+
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         saveBook: (book) => dispatch(booksActions.addBook(book)),
