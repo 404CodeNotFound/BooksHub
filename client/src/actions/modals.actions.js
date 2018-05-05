@@ -17,3 +17,11 @@ export function closeAddBookModal() {
         dispatch(closeAddBookModalSuccess());
     };
 }
+
+export function openEditBookModal() {
+    return { type: 'OPEN_EDIT_BOOK_MODAL' };
+}
+
+export function closeEditBookModal() {
+    return { type: 'CLOSE_EDIT_BOOK_MODAL' };
+}

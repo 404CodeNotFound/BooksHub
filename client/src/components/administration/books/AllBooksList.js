@@ -19,7 +19,7 @@ class AllBooksList extends Component {
                 [<div id="page-content-wrapper administration-box" key="books-list">
                     <div id="books">
                         <h2>Books</h2>
-                        <button type="button" className="btn btn-main-green" onClick={this.props.showAddBookModal1}>+ Add</button>
+                        <button type="button" className="btn btn-main-green" onClick={this.props.openAddBookModal}>+ Add</button>
                         <table className="table">
                             <tbody>
                                 <tr>
@@ -61,9 +61,10 @@ class AllBooksList extends Component {
                             </div>
                         }
                     </div>
-                    {this.props.showAddBookModal &&
-                        <AddBookModal />
+                    {this.props.isVisibleAddBookModal && 
+                    <AddBookModal />
                     }
+                        
                 </div>
                 ] :
                 <div className="loader"></div>
@@ -77,21 +78,17 @@ class AllBooksList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    const username = localStorage.getItem('username');
-    const userId = localStorage.getItem('id');
-
     return {
         books: state.administration.books,
         booksCount: state.administration.booksCount,
-        currentAdmin: { username: username, id: userId },
-        showAddBookModal: state.modals.showAddBookModal
+        isVisibleAddBookModal: state.modals.showAddBookModal
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllBooks: (pageNumber) => dispatch(booksActions.getAllBooks(pageNumber)),
-        showAddBookModal1: () => dispatch(modalsActions.openAddBookModal())
+        openAddBookModal: () => dispatch(modalsActions.openAddBookModal())
     };
 }
 

@@ -47,8 +47,8 @@ class Header extends Component {
                                 <li>
                                     {!this.props.currentUser ?
                                         <Link to="/login">Log in</Link> :
-                                        (this.props.currentUser.role === 'admin' ?
-                                            <Link to="/administration">Admin Panel</Link> :
+                                        (this.props.currentUserRole === 'Admin' ?
+                                            <Link to="/administration/books">Admin Panel</Link> :
                                             <Link to={"/users/" + this.props.currentUser + "/profile"}>My Profile</Link>
                                         )
                                     }
@@ -71,8 +71,10 @@ class Header extends Component {
 
 function mapStateToProps(state, ownProps) {
     const currentUser = localStorage.getItem('username');
+    const currentUserRole = localStorage.getItem('role');    
     return {
-        currentUser: currentUser
+        currentUser: currentUser,
+        currentUserRole: currentUserRole
     };
 }
 

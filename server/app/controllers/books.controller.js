@@ -190,6 +190,26 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        editBook: (req, res) => {
+            if (req.user.role !== 'Admin') {
+                res.status(403)
+                    .json({ message: "Only Administrator can edit book." });
+            } else {
+                const book = req.body;
+                data.books.updateBook(book.id, book.title, book.isbn, book.publisher,
+                    book.photo, book.language, book.summary)
+                    .then(updatedBook => {
+                        res.status(201)
+                            .json({ book: updatedBook });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                    });
+            }
+
+            return res;
         }
     }
 }

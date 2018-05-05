@@ -27,6 +27,7 @@ export function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('id');
+        localStorage.removeItem('role');        
         
         dispatch(logoutSuccess());
     }
@@ -39,6 +40,7 @@ export function login(username, password) {
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('username', response.user.username);
                 localStorage.setItem('id', response.user.id);
+                localStorage.setItem('role', response.user.role);
 
                 dispatch(loginSuccess());
             })

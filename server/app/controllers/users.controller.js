@@ -13,7 +13,7 @@ module.exports = (data) => {
                     .json({ message: "You should provide username and password." });
             }
             const passHash = crypto.SHA1(password).toString();
-
+            
             data.users.getUserByUsernameAndPassword(username, passHash)
                 .then(user => {
                     if (!user) {
@@ -26,7 +26,8 @@ module.exports = (data) => {
                             .json({
                                 user: {
                                     username: user.username,
-                                    id: user._id
+                                    id: user._id,
+                                    role: user.role
                                 },
                                 token: token
                             });

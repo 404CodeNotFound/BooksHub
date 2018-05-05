@@ -97,8 +97,8 @@ module.exports = class BooksData {
     getLatestBooks() {
         return new Promise((resolve, reject) => {
             Book.find({})
-                .populate({path: 'author', select: 'first_name last_name'})
-                .sort({'date_published': '-1'})
+                .populate({ path: 'author', select: 'first_name last_name' })
+                .sort({ 'date_published': '-1' })
                 .limit(4)
                 .exec((err, books) => {
                     if (err) {
@@ -113,8 +113,8 @@ module.exports = class BooksData {
     getAllBooks(page) {
         return new Promise((resolve, reject) => {
             Book.find({})
-                .populate({path: 'author', select: 'first_name last_name'})
-                .sort({'date_published': '-1'})
+                .populate({ path: 'author', select: 'first_name last_name' })
+                .sort({ 'date_published': '-1' })
                 .exec((err, books) => {
                     if (err) {
                         return reject(err);
@@ -144,10 +144,34 @@ module.exports = class BooksData {
             book.language = language;
             book.summary = summary;
             book.save((err, createdBook) => {
-                if(err) {
+                if (err) {
                     return reject(err);
                 } else {
                     return resolve(createdBook);
+                }
+            })
+        });
+    }
+
+    updateBook(bookId, title, isbn, publisher, photo, language, summary) {
+        return new Promise((resolve, reject) => {
+            Book.findById(bookId, (err, book) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    book.title = title;
+                    book.isbn = isbn;
+                    book.publisher = publisher,
+                        book.photo = photo,
+                        book.language = language;
+                    book.summary = summary;
+                    book.save((saveError, savedBook) => {
+                        if (saveError) {
+                            return reject(saveError);
+                        } else {
+                            return resolve(savedBook);
+                        }
+                    })
                 }
             })
         });

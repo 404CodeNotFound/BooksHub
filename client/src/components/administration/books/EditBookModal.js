@@ -4,77 +4,66 @@ import Modal from 'react-bootstrap4-modal';
 import * as booksActions from '../../../actions/books.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 
-class AddBookModal extends Component {
-        state = {
-            title: '',
-            authorFirstName: '',
-            authorLastName: '',
-            isbn: '',
-            summary: '',
-            photo: '',
-            language: '',
-            publisher: '',
-            genres: []
-        };
+class EditBookModal extends Component {
+    state = {
+        title: this.props.book.title,
+        isbn: this.props.book.isbn,
+        summary: this.props.book.summary,
+        photo: this.props.book.photo,
+        language: this.props.book.language,
+        publisher: this.props.book.publisher,
+        genres: []
+    };
 
     render() {
         return (
             <Modal visible={true} dialogClassName="modal-lg">
                 <div className="modal-header">
-                    <h5 className="modal-title">Add new book</h5>
+                    <h5 className="modal-title">Edit book</h5>
                 </div>
                 <div className="modal-body">
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-title">Title</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-title" name="Title" type="text" onChange={(event) => this.handleTitleChange(event)} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-md-2 control-label">Author</label>
-                        <div className="col-md-4">
-                            <input className="form-control" id="book-author-firstName" placeholder="First Name" type="text" onChange={(event) => this.handleAuthorFirstNameChange(event)} />
-                        </div>
-                        <div className="col-md-4">
-                            <input className="form-control" id="book-author-lastName" placeholder="Last Name" type="text" onChange={(event) => this.handleAuthorLastNameChange(event)} />
+                            <input className="form-control" id="book-title" value={this.state.title || ''} type="text" onChange={(event) => this.handleTitleChange(event)} />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-photo">Photo</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-photo" name="Photo" type="text" onChange={(event) => this.handlePhotoChange(event)} />
+                            <input className="form-control" id="book-photo" value={this.state.photo || ''} type="text" onChange={(event) => this.handlePhotoChange(event)} />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-isbn">ISBN</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-isbn" name="ISBN" type="text" onChange={(event) => this.handleIsbnChange(event)} />
+                            <input className="form-control" id="book-isbn" value={this.state.isbn || ''} type="text" onChange={(event) => this.handleIsbnChange(event)} />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-publisher">Publisher</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-publisher" name="Publisher" type="text" onChange={(event) => this.handlePublisherChange(event)} />
+                            <input className="form-control" id="book-publisher" value={this.state.publisher || ''} type="text" onChange={(event) => this.handlePublisherChange(event)} />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-language">Language</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-language" name="Language" type="text" onChange={(event) => this.handleLanguageChange(event)} />
+                            <input className="form-control" id="book-language" value={this.state.language || ''} type="text" onChange={(event) => this.handleLanguageChange(event)} />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-summary">Summary</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-summary" name="Summary" type="text" onChange={(event) => this.handleSummaryChange(event)} />
+                            <input className="form-control" id="book-summary" value={this.state.summary || ''} type="text" onChange={(event) => this.handleSummaryChange(event)} />
                         </div>
                     </div>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" onClick={this.submitBook}>
-                        Add
+                        Edit
           </button>
-                    <button type="button" className="btn btn-primary" onClick={this.props.closeAddBookModal}>
+                    <button type="button" className="btn btn-primary" onClick={this.props.closeEditBookModal}>
                         Cancel
           </button>
                 </div>
@@ -84,14 +73,6 @@ class AddBookModal extends Component {
 
     handleTitleChange = (event) => {
         this.setState({ title: event.target.value });
-    }
-
-    handleAuthorFirstNameChange = (event) => {
-        this.setState({ authorFirstName: event.target.value });
-    }
-
-    handleAuthorLastNameChange = (event) => {
-        this.setState({ authorLastName: event.target.value });
     }
 
     handleIsbnChange = (event) => {
@@ -121,8 +102,6 @@ class AddBookModal extends Component {
     submitBook = () => {
         const book = {
             title: this.state.title,
-            authorFirstName: this.state.authorFirstName,
-            authorLastName: this.state.authorLastName,
             isbn: this.state.isbn,
             publisher: this.state.publisher,
             summary: this.state.summary,
@@ -134,11 +113,16 @@ class AddBookModal extends Component {
     }
 }
 
+function mapStateToProps(state, ownProps) {
+    return {
+        isVisibleEditBook: state.modals.showEditBookModal
+    }
+}
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        saveBook: (book) => dispatch(booksActions.addBook(book)),
-        closeAddBookModal: () => dispatch(modalsActions.closeAddBookModal())
+        saveBook: (book) => dispatch(booksActions.editBook(book)),
+        closeEditBookModal: () => dispatch(modalsActions.closeEditBookModal())
     };
 }
 
-export default connect(null, mapDispatchToProps)(AddBookModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditBookModal);

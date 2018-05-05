@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as modalsActions from '../../../actions/modals.actions';
+import EditBookModal from './EditBookModal';
 
 class BookRow extends Component {
     render() {
@@ -27,7 +30,10 @@ class BookRow extends Component {
                     <Link to={"/books/" + this.props.book.title}>Details |</Link>
                 </td>
                 <td>
-                    <button>Edit |</button>
+                    <button onClick={this.props.openEditBookModal}>Edit |</button>
+                    {this.props.isVisibleEditBook &&
+                        <EditBookModal book={this.props.book} />
+                    }
                 </td>
                 <td>
                     <button>Delete |</button>
@@ -37,4 +43,16 @@ class BookRow extends Component {
     }
 };
 
-export default BookRow;
+function mapStateToProps(state, ownProps) {
+    return {
+        isVisibleEditBook: state.modals.showEditBookModal
+    }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        openEditBookModal: () => dispatch(modalsActions.openEditBookModal())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookRow);
