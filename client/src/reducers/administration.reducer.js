@@ -22,10 +22,15 @@ export default function books(state = {
                 ...state,
                 books: updateItemInCollection(state.books, action.book)
             };
-        case 'DELETE_BOOK_SUCCESS': 
+        case 'DELETE_BOOK_SUCCESS':
             return {
                 ...state,
                 books: removeFromCollection(state.books, action.bookId)
+            };
+        case 'GET_GENRES_AS_SELECT_VALUES':
+            return {
+                ...state,
+                genresSelectValues: action.genresSelectValues
             };
         default:
             return state;

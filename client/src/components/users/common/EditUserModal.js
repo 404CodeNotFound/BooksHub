@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap4-modal';
 import Select from 'react-select';
-import '../../../../node_modules/react-select/dist/react-select.css';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
 

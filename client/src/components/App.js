@@ -14,6 +14,7 @@ import swal from 'sweetalert2';
 import { withSwalInstance } from 'sweetalert2-react';
 import * as errorActions from '../actions/error.actions';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-select/dist/react-select.css';
 
 const SweetAlert = withSwalInstance(swal);
 

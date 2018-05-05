@@ -12,7 +12,8 @@ const init = (data) => {
     const server = require('http').Server(app);
     const usersController = require('./controllers/users.controller')(data);
     const requestsController = require('./controllers/requests.controller')(data);
-    const booksController = require('./controllers/books.controller')(data);    
+    const booksController = require('./controllers/books.controller')(data); 
+    const genresController = require('./controllers/genres.controller')(data);   
     
     app.use('/libs', express.static('node_modules'));
     app.use(bodyParser.json());
@@ -77,8 +78,10 @@ const init = (data) => {
     app.put('/books/:id/statuses', auth.authenticate(passport), booksController.markBook);
     
     app.get('/recommendedbooks', auth.authenticate(passport), booksController.getRecommendedBooks);
-    app.get('/latestbooks', booksController.getLatestBooks);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    app.get('/latestbooks', booksController.getLatestBooks);      
     
+    // Genres
+    app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);    
     return Promise.resolve(server);
 };
 

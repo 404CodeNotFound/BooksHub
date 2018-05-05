@@ -174,10 +174,12 @@ module.exports = (data) => {
                     .json({ message: "Only Administrator can add new book." });
             } else {
                 const book = req.body;
+
                 data.authors.getOrAddAuthorByName(book.authorFirstName, book.authorLastName)
                     .then(author => {
+                        const genres = book.genres.split(', ');
                         return data.books.createBook(book.title, author._id, book.isbn, book.publisher,
-                            book.photo, book.language, book.summary);
+                            book.photo, book.language, book.summary, genres);
                     })
                     .then(createdBook => {
                         res.status(201)

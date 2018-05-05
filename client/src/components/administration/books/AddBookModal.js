@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap4-modal';
+import Select from 'react-select';
 import * as booksActions from '../../../actions/books.actions';
+import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 
 class AddBookModal extends Component {
-        state = {
-            title: '',
-            authorFirstName: '',
-            authorLastName: '',
-            isbn: '',
-            summary: '',
-            photo: '',
-            language: '',
-            publisher: '',
-            genres: []
-        };
+    state = {
+        title: '',
+        authorFirstName: '',
+        authorLastName: '',
+        isbn: '',
+        summary: '',
+        photo: '',
+        language: '',
+        publisher: '',
+        genres: []
+    };
+
+    componentDidMount() {
+        this.props.getAllGenres();
+    }
 
     render() {
         return (
@@ -69,6 +75,20 @@ class AddBookModal extends Component {
                             <input className="form-control" id="book-summary" name="Summary" type="text" onChange={(event) => this.handleSummaryChange(event)} />
                         </div>
                     </div>
+                    <div className="form-group row">
+                        <label className="col-md-2 control-label">Genres</label>
+                        <div className="col-md-8">
+                            <Select
+                                closeOnSelect={!this.state.stayOpen}
+                                multi
+                                onChange={this.handleGenresChange}
+                                options={this.props.genresSelectValues}
+                                placeholder="Select genres"
+                                joinValues
+                                value={this.state.genres}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" onClick={this.submitBook}>
@@ -114,11 +134,13 @@ class AddBookModal extends Component {
         this.setState({ language: event.target.value });
     }
 
-    handleGenresChange = (event) => {
-
+    handleGenresChange = (value) => {
+        this.setState({ genres: value });
     }
 
     submitBook = () => {
+        const genres = this.state.genres.map(selectedItem => selectedItem.id);
+
         const book = {
             title: this.state.title,
             authorFirstName: this.state.authorFirstName,
@@ -127,18 +149,25 @@ class AddBookModal extends Component {
             publisher: this.state.publisher,
             summary: this.state.summary,
             photo: this.state.photo,
-            language: this.state.language
+            language: this.state.language,
+            genres: genres.join(', ')
         };
 
         this.props.saveBook(book);
     }
 }
 
+function mapStateToProps(state, ownProps) {
+    return {
+        genresSelectValues: state.administration.genresSelectValues
+    };
+}
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         saveBook: (book) => dispatch(booksActions.addBook(book)),
-        closeAddBookModal: () => dispatch(modalsActions.closeAddBookModal())
+        closeAddBookModal: () => dispatch(modalsActions.closeAddBookModal()),
+        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues())
     };
 }
 
-export default connect(null, mapDispatchToProps)(AddBookModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddBookModal);

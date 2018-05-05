@@ -132,7 +132,7 @@ module.exports = class BooksData {
         });
     }
 
-    createBook(title, authorId, isbn, publisher, photo, language, summary) {
+    createBook(title, authorId, isbn, publisher, photo, language, summary, genres) {
         return new Promise((resolve, reject) => {
             let book = new Book();
             book.title = title;
@@ -143,6 +143,7 @@ module.exports = class BooksData {
             book.photo = photo;
             book.language = language;
             book.summary = summary;
+            book.genres = genres;
             book.save((err, createdBook) => {
                 if (err) {
                     return reject(err);

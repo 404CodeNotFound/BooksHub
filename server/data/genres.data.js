@@ -32,11 +32,23 @@ module.exports = class GenresData {
             }
         });
     }
+
+    getAllGenres() {
+        return new Promise((resolve, reject) => {
+            Genre.find({}, (err, genres) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(genres);
+                }
+            });
+        });
+    }
 }
 
 function getRandomRecommendedBooks(books) {
     const count = 4;
-    const shuffled = books.sort(() => .5 - Math.random());// shuffle  
+    const shuffled = books.sort(() => .5 - Math.random());
     let selected = shuffled.slice(0, count);
 
     return selected;
