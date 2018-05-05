@@ -35,6 +35,14 @@ export function addBookSuccess(book) {
     return { type: 'ADD_BOOK_SUCCESS', book };
 }
 
+export function editBookSuccess(book) {
+    return { type: 'EDIT_BOOK_SUCCESS', book };
+}
+
+export function deleteBookSuccess(bookId) {
+    return { type: 'DELETE_BOOK_SUCCESS', bookId: bookId };
+}
+
 export function getCurrentlyReadingBooks(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/reading?page=${page}`)
@@ -184,8 +192,33 @@ export function addBook(book) {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
-} 
+}
 
 export function editBook(book) {
-    
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.putAuthorized(token, `${api.BOOKS}/${book._id}`, book)
+            .done(response => {
+                dispatch(editBookSuccess(response.book));
+                dispatch(modalsActions.closeEditBookModal());
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function deleteBook(bookId) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.deleteAuthorized(token, `${api.BOOKS}/${bookId}`)
+            .done(response => {
+                dispatch(deleteBookSuccess(bookId));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
 }

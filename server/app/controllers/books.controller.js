@@ -210,6 +210,25 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        deleteBook(req, res) {
+            if (req.user.role !== 'Admin') {
+                res.status(403)
+                    .json({ message: "Only Administrator can delete book." });
+            } else {
+                const bookId = req.params.id;
+                data.books.deleteBook(bookId)
+                    .then(() => {
+                        res.status(200)
+                            .json("Removed");
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                    });
+            }
+
+            return res;
         }
     }
 }

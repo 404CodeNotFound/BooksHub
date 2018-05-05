@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as modalsActions from '../../../actions/modals.actions';
-import EditBookModal from './EditBookModal';
+import * as booksActions from '../../../actions/books.actions';
 
-class BookRow extends Component {
+class BookRow extends Component {    
     render() {
         return (
             <tr>
@@ -30,29 +30,21 @@ class BookRow extends Component {
                     <Link to={"/books/" + this.props.book.title}>Details |</Link>
                 </td>
                 <td>
-                    <button onClick={this.props.openEditBookModal}>Edit |</button>
-                    {this.props.isVisibleEditBook &&
-                        <EditBookModal book={this.props.book} />
-                    }
+                    <button onClick={() => this.props.openEditBookModal(this.props.book)}>Edit |</button>
                 </td>
                 <td>
-                    <button>Delete |</button>
+                    <button onClick={() => this.props.deleteBook(this.props.book._id)}>Delete |</button>
                 </td>
             </tr>
         );
     }
 };
 
-function mapStateToProps(state, ownProps) {
-    return {
-        isVisibleEditBook: state.modals.showEditBookModal
-    }
-}
-
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        openEditBookModal: () => dispatch(modalsActions.openEditBookModal())
+        openEditBookModal: (book) => dispatch(modalsActions.openEditBookModal(book)),
+        deleteBook: (bookId) => dispatch(booksActions.deleteBook(bookId))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookRow);
+export default connect(null, mapDispatchToProps)(BookRow);

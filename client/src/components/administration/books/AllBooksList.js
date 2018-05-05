@@ -5,9 +5,10 @@ import * as modalsActions from '../../../actions/modals.actions';
 import BookRow from './BookRow';
 import Pagination from "react-js-pagination";
 import AddBookModal from './AddBookModal';
+import EditBookModal from './EditBookModal';
 
 class AllBooksList extends Component {
-    state = { activePage: 1 };
+    state = { activePage: 1, isOpen: false };
 
     componentDidMount() {
         this.props.getAllBooks(this.state.activePage);
@@ -64,7 +65,9 @@ class AllBooksList extends Component {
                     {this.props.isVisibleAddBookModal && 
                     <AddBookModal />
                     }
-                        
+                    {this.props.isVisibleEditBookModal && 
+                        <EditBookModal toggleModal={this.toggleModal} />        
+                    }                
                 </div>
                 ] :
                 <div className="loader"></div>
@@ -81,7 +84,8 @@ function mapStateToProps(state, ownProps) {
     return {
         books: state.administration.books,
         booksCount: state.administration.booksCount,
-        isVisibleAddBookModal: state.modals.showAddBookModal
+        isVisibleAddBookModal: state.modals.showAddBookModal,
+        isVisibleEditBookModal: state.modals.showEditBookModal
     };
 }
 

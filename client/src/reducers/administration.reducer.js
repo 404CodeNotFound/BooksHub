@@ -16,8 +16,42 @@ export default function books(state = {
                     ...state.books
                 ],
                 booksCount: state.booksCount + 1
-            }
+            };
+        case 'EDIT_BOOK_SUCCESS':
+            return {
+                ...state,
+                books: updateItemInCollection(state.books, action.book)
+            };
+        case 'DELETE_BOOK_SUCCESS': 
+            return {
+                ...state,
+                books: removeFromCollection(state.books, action.bookId)
+            };
         default:
             return state;
     }
+}
+
+function updateItemInCollection(collection, updatedItem) {
+    const length = collection.length;
+    const index = collection.findIndex(item => item._id === updatedItem._id);
+    updatedItem.author = collection[index].author;
+    const newCollection = [
+        ...collection.slice(0, index),
+        updatedItem,
+        ...collection.slice(index + 1, length)
+    ];
+
+    return newCollection;
+}
+
+function removeFromCollection(collection, id) {
+    const length = collection.length;
+    const index = collection.findIndex(item => item._id === id);
+    const newCollection = [
+        ...collection.slice(0, index),
+        ...collection.slice(index + 1, length)
+    ];
+
+    return newCollection;
 }

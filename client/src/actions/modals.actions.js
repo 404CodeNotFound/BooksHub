@@ -18,8 +18,8 @@ export function closeAddBookModal() {
     };
 }
 
-export function openEditBookModal() {
-    return { type: 'OPEN_EDIT_BOOK_MODAL' };
+export function openEditBookModal(book) {
+    return { type: 'OPEN_EDIT_BOOK_MODAL', book };
 }
 
 export function closeEditBookModal() {

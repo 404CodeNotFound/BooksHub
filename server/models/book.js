@@ -50,7 +50,11 @@ module.exports = function init(mongoose) {
         statuses: [{
             type: Schema.ObjectId,
             ref: 'Status'
-        }]
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
     });
 
     const Book = mongoose.model('Book', BookSchema);

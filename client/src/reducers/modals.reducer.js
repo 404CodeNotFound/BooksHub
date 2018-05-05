@@ -1,4 +1,5 @@
-export default function modals(state = { showAddBookModal: false, showEditBookModal: false }, action) {
+export default function modals(state = { showAddBookModal: false, 
+    showEditBookModal: false, bookToEdit: {} }, action) {
     switch (action.type) {
         case 'OPEN_ADD_BOOK_MODAL':
             return {
@@ -10,11 +11,13 @@ export default function modals(state = { showAddBookModal: false, showEditBookMo
             };
         case 'OPEN_EDIT_BOOK_MODAL':
             return {
-                showEditBookModal: true
+                showEditBookModal: true,
+                bookToEdit: action.book
             };
         case 'CLOSE_EDIT_BOOK_MODAL':
             return {
-                showEditBookModal: false
+                showEditBookModal: false,
+                bookToEdit: {}
             };
         default:
             return state;

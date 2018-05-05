@@ -6,7 +6,7 @@ const itemsPerPage = 20;
 module.exports = class BooksData {
     getBookByTitle(title) {
         return new Promise((resolve, reject) => {
-            return Book.findOne({ 'title': title })
+            return Book.findOne({ 'title': title, 'isDeleted': false })
                 .populate({ path: 'genres', select: 'name' })
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'reviews', populate: { path: 'user', select: 'username photo' } })
@@ -96,7 +96,7 @@ module.exports = class BooksData {
 
     getLatestBooks() {
         return new Promise((resolve, reject) => {
-            Book.find({})
+            Book.find({'isDeleted': false})
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .sort({ 'date_published': '-1' })
                 .limit(4)
@@ -112,7 +112,7 @@ module.exports = class BooksData {
 
     getAllBooks(page) {
         return new Promise((resolve, reject) => {
-            Book.find({})
+            Book.find({ 'isDeleted': false })
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .sort({ 'date_published': '-1' })
                 .exec((err, books) => {
@@ -155,25 +155,40 @@ module.exports = class BooksData {
 
     updateBook(bookId, title, isbn, publisher, photo, language, summary) {
         return new Promise((resolve, reject) => {
-            Book.findById(bookId, (err, book) => {
-                if (err) {
-                    return reject(err);
-                } else {
-                    book.title = title;
-                    book.isbn = isbn;
-                    book.publisher = publisher,
-                        book.photo = photo,
-                        book.language = language;
-                    book.summary = summary;
-                    book.save((saveError, savedBook) => {
-                        if (saveError) {
-                            return reject(saveError);
-                        } else {
-                            return resolve(savedBook);
-                        }
-                    })
+            Book.findOneAndUpdate({ _id: bookId }, {
+                $set: {
+                    title: title,
+                    isbn: isbn,
+                    publisher: publisher,
+                    photo: photo,
+                    language: language,
+                    summary: summary
                 }
-            })
+            },
+                { new: true }, (err, savedBook) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(savedBook);
+                    }
+                });
+        });
+    }
+
+    deleteBook(bookId) {
+        return new Promise((resolve, reject) => {
+            Book.findOneAndUpdate({ '_id': bookId }, {
+                $set: {
+                    isDeleted: true
+                }
+            },
+                { new: true }, (err, book) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve();
+                    }
+                });
         });
     }
 }

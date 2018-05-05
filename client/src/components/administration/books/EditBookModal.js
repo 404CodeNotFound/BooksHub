@@ -14,10 +14,11 @@ class EditBookModal extends Component {
         publisher: this.props.book.publisher,
         genres: []
     };
+    
 
     render() {
         return (
-            <Modal visible={true} dialogClassName="modal-lg">
+            <Modal visible={true} onClickBackdrop={this.props.closeEditBookModal} dialogClassName="modal-lg">
                 <div className="modal-header">
                     <h5 className="modal-title">Edit book</h5>
                 </div>
@@ -101,6 +102,7 @@ class EditBookModal extends Component {
 
     submitBook = () => {
         const book = {
+            id: this.props.book._id,
             title: this.state.title,
             isbn: this.state.isbn,
             publisher: this.state.publisher,
@@ -115,9 +117,11 @@ class EditBookModal extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        isVisibleEditBook: state.modals.showEditBookModal
+        isVisibleEditBook: state.modals.showEditBookModal,
+        book: state.modals.bookToEdit
     }
 }
+
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         saveBook: (book) => dispatch(booksActions.editBook(book)),
