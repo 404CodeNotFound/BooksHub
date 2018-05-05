@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as booksActions from '../../../actions/books.actions';
-// import * as modalsActions from '../../../actions/modals.actions';
+import * as modalsActions from '../../../actions/modals.actions';
 import BookRow from './BookRow';
 import Pagination from "react-js-pagination";
 import AddBookModal from './AddBookModal';
@@ -53,7 +53,7 @@ class AllBooksList extends Component {
                             <div key="pages" className="row">
                                 <Pagination
                                     activePage={this.state.activePage}
-                                    itemsCountPerPage={1}
+                                    itemsCountPerPage={10}
                                     totalItemsCount={this.props.booksCount}
                                     pageRangeDisplayed={5}
                                     onChange={this.selectPage}
@@ -91,7 +91,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllBooks: (pageNumber) => dispatch(booksActions.getAllBooks(pageNumber)),
-        // showAddBookModal1: () => dispatch(modalsActions.openAddBookModal())
+        showAddBookModal1: () => dispatch(modalsActions.openAddBookModal())
     };
 }
 

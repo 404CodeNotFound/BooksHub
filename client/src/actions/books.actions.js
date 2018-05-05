@@ -1,6 +1,7 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
+import * as modalsActions from './modals.actions';
 
 export function getUserBooksSuccess(result) {
     return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
@@ -28,6 +29,10 @@ export function markBookSuccess(result) {
 
 export function getAllBooksSuccess(result) {
     return { type: 'GET_ALL_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
+}
+
+export function addBookSuccess(book) {
+    return { type: 'ADD_BOOK_SUCCESS', book };
 }
 
 export function getCurrentlyReadingBooks(id, page) {
@@ -165,3 +170,18 @@ export function getAllBooks(page) {
             });
     };
 }
+
+export function addBook(book) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.postAuthorized(token, `${api.BOOKS}`, book)
+            .done(response => {
+                dispatch(addBookSuccess(response.book));
+                dispatch(modalsActions.closeAddBookModal());
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+} 

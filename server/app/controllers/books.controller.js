@@ -167,6 +167,29 @@ module.exports = (data) => {
                 });
 
             return res;
+        },
+        addBook: (req, res) => {
+            if (req.user.role !== 'Admin') {
+                res.status(403)
+                    .json({ message: "Only Administrator can add new book." });
+            } else {
+                const book = req.body;
+                data.authors.getOrAddAuthorByName(book.authorFirstName, book.authorLastName)
+                    .then(author => {
+                        return data.books.createBook(book.title, author._id, book.isbn, book.publisher,
+                            book.photo, book.language, book.summary);
+                    })
+                    .then(createdBook => {
+                        res.status(201)
+                            .json({ book: createdBook });
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' })
+                    });
+            }
+
+            return res;
         }
     }
 }

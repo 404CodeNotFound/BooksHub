@@ -8,6 +8,15 @@ export default function books(state = {
                 books: action.books,
                 booksCount: action.booksCount
             };
+        case 'ADD_BOOK_SUCCESS':
+            return {
+                ...state,
+                books: [
+                    action.book,
+                    ...state.books
+                ],
+                booksCount: state.booksCount + 1
+            }
         default:
             return state;
     }

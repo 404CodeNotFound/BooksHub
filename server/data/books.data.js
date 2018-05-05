@@ -131,4 +131,25 @@ module.exports = class BooksData {
                 })
         });
     }
+
+    createBook(title, authorId, isbn, publisher, photo, language, summary) {
+        return new Promise((resolve, reject) => {
+            let book = new Book();
+            book.title = title;
+            book.author = authorId;
+            book.date_published = new Date();
+            book.isbn = isbn;
+            book.publisher = publisher;
+            book.photo = photo;
+            book.language = language;
+            book.summary = summary;
+            book.save((err, createdBook) => {
+                if(err) {
+                    return reject(err);
+                } else {
+                    return resolve(createdBook);
+                }
+            })
+        });
+    }
 }

@@ -21,6 +21,12 @@ module.exports = function init(mongoose) {
             type: String,
             required: true
         },
+        role: {
+            type: String,
+            required: true,
+            enum: ['Admin', 'User'],
+            default: 'User'
+        },
         email: {
             type: String
         },
