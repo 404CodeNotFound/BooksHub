@@ -34,7 +34,7 @@ module.exports = function init(mongoose) {
         favourite_genres: [{
             type: String
         }],
-        languages:[{
+        languages: [{
             type: String
         }],
         photo: {
@@ -68,9 +68,13 @@ module.exports = function init(mongoose) {
         events: [{
             type: Schema.ObjectId,
             ref: 'Event'
+        }],
+        recommended_books: [{
+            type: Schema.ObjectId,
+            ref: 'Book'
         }]
-      });
-      
+    });
+
     const User = mongoose.model('User', UserSchema);
     return User;
 }

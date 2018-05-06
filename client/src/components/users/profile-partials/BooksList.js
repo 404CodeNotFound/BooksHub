@@ -12,8 +12,10 @@ class BooksList extends Component {
             this.props.getCurrentlyReadingBooks(this.props.userId, 1);
         } else if (this.props.title === 'Want to Read Collection') {
             this.props.getWantToReadBooks(this.props.userId, 1);
-        } else {
+        } else if (this.props.title === 'Read Books Collection') {
             this.props.getReadBooks(this.props.userId, 1);
+        } else {
+            this.props.getRecommendedBooks(this.props.userId, 1);
         }
     }
 
@@ -63,14 +65,15 @@ class BooksList extends Component {
             this.props.getCurrentlyReadingBooks(this.props.userId, pageNumber);
         } else if (this.props.title === 'Want to Read Collection') {
             this.props.getWantToReadBooks(this.props.userId, pageNumber);
-        } else {
+        } else if (this.props.title === 'Read Books Collection') {
             this.props.getReadBooks(this.props.userId, pageNumber);
+        } else {
+            this.props.getRecommendedBooks(this.props.userId, pageNumber);
         }
     }
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log(state)
     return {
         books: state.users.books,
         booksCount: state.users.booksCount,
@@ -83,6 +86,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         getCurrentlyReadingBooks: (id, page) => dispatch(booksActions.getCurrentlyReadingBooks(id, page)),
         getWantToReadBooks: (id, page) => dispatch(booksActions.getWantToReadBooks(id, page)),
         getReadBooks: (id, page) => dispatch(booksActions.getReadBooks(id, page)),
+        getRecommendedBooks: (id, page) => dispatch(booksActions.getRecommendedBooks(id, page))
     };
 }
 

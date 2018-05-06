@@ -42,7 +42,8 @@ const init = (data) => {
     // Book collections of User
     app.get('/users/:id/reading', usersController.getReadingBooks);
     app.get('/users/:id/wishlist', usersController.getWishlist);
-    app.get('/users/:id/read', usersController.getReadBooks);  
+    app.get('/users/:id/read', usersController.getReadBooks);
+    app.get('/users/:id/recommended', usersController.getRecommendedBooks);        
 
     // Friends of User
     app.get('/users/:id/friends', usersController.getUserFriends);

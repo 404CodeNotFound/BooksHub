@@ -121,6 +121,28 @@ module.exports = class UserData {
         });
     }
 
+    getRecommendedBooks(id, page) {
+        return new Promise((resolve, reject) => {
+            User.findById(id)
+                .populate({ path: 'recommended_books', select: 'title photo summary', populate: { path: 'author', select: 'first_name last_name' } })
+                .exec((err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        const books = user.recommended_books;
+                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+
+                        let result = {
+                            books: booksOnPage,
+                            booksCount: books.length
+                        };
+
+                        return resolve(result);
+                    }
+                });
+        });
+    }
+
     getUserFriends(id, page) {
         return new Promise((resolve, reject) => {
             User.findById(id)
@@ -252,7 +274,7 @@ module.exports = class UserData {
         return new Promise((resolve, reject) => {
             const user = new User(newUser);
             user.save((err, createdUser) => {
-                if(err) {
+                if (err) {
                     return reject(err);
                 } else {
                     return this.getUserById(createdUser._id)
@@ -265,7 +287,7 @@ module.exports = class UserData {
 
     updateUser(user) {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ username: user.username }, {  
+            User.findOneAndUpdate({ username: user.username }, {
                 $set: {
                     first_name: user.firstname,
                     last_name: user.lastname,
@@ -277,15 +299,15 @@ module.exports = class UserData {
                     languages: user.languages.split(', '),
                     favourite_quote: user.favouriteQuote
                 }
-            }, 
-            { new: true }, 
-            (error, updatedUser) => {
-                if(error) {
-                    return reject(error);
-                }
+            },
+                { new: true },
+                (error, updatedUser) => {
+                    if (error) {
+                        return reject(error);
+                    }
 
-                return resolve(updatedUser);
-            });
+                    return resolve(updatedUser);
+                });
         });
     }
 }
