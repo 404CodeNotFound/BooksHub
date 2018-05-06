@@ -1,3 +1,8 @@
+.dashboard {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .user-dashboard-menu li {
     margin-bottom: 5px;
     cursor: pointer;
@@ -105,24 +110,9 @@ ul {
     margin-bottom: 3%;
 }
 
-.pagination li {
-    border: 1px solid;
-    border-radius: 4px;
-    border-color: #565656;
-    padding: 5px 10px 5px;
-    margin-right: 2px;
-    cursor: pointer;
-}
-
-.pagination li.active {
-    background-color: #4eb980;
-    border-color: #4eb980;
-    color: white;
-}
-
 .mbr-testimonial {
-    border-radius: 0;
-    border: 0;
+    border-radius: 0 !important;
+    border: 0 !important;
     margin-bottom: 0;
     text-align: center;
 }
@@ -179,10 +169,14 @@ ul {
 
 .delete-review {
     float: right;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .for-book {
     margin-top: 2%;
+    padding-top: 10%;
 }
 
 .for-book a {
@@ -250,12 +244,29 @@ img.profile-photo-lg {
 .user-info {
     padding-left: 10%;
     padding-top: 5%;
+    font-size: 13pt;
 }
 
 .modal-body label {
     margin-right: 4%;
     color: #555;
-} 
+}
+
+dt {
+    float: left;
+}
+
+dd {
+    margin-left: 15% !important;
+}
+
+#profile-menu {
+    padding-left: 0px;
+}
+
+#profile-menu>li.active>a {
+    color: white;
+}
 
 @media only screen and (max-width: 768px) {
     #currently-reading-books, #read-books, #want-to-read-books, #my-events, #joined-events, #reviews, #comments, #invitations {

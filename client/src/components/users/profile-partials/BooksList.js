@@ -22,20 +22,22 @@ class BooksList extends Component {
     render() {
         return (
             [
-                <div key="title" className="row title">
-                    <h3>{this.props.title}</h3>
+                <div key="title" className="line text-center">
+                    <i className="icon-sli-book-open text-primary text-size-40"></i>
+                    <h2 className="text-dark text-size-40 text-m-size-30">{this.props.title}</h2>
+                    <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 <div key="books-list" className="margin2x">
                     <div className="row">
                         {this.props.books.map(book =>
-                            <div key={book._id} className="col-md-4 margin-bottom-60">
+                            <div key={book._id} className="col-md-3 margin-bottom-60">
                                 <div className="float-left">
-                                    <img src={book.photo} width="200px" alt="book-logo" />
+                                    <img src={book.photo} width="200px" alt="book-logo" className="margin-bottom-20" />
                                     <div>
                                         <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{book.title}</h3>
                                     </div>
                                     <p>
-                                        {book.summary.substr(0, 50)}...
+                                        {book.summary.substr(0, 70)}...
                                         <Link className="text-more-info text-primary" to={"/books/" + book.title}>Read more</Link>
                                     </p>
                                 </div>

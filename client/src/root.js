@@ -6,6 +6,7 @@ import './style/responsee.css';
 import './style/font-poppins.css';
 import './style/icons.css';
 import './style/template-style.css';
+import './style/pagination.css';
 
 const initialState = {};
 const store = configureStore(initialState);

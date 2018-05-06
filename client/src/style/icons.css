@@ -34,7 +34,13 @@
     font-style: normal;
 }
 
-.icon-sli-speech, .icon-sli-book-open, .icon-sli-pencil, .icon-sli-star {
+.icon-sli-speech, 
+.icon-sli-book-open, 
+.icon-sli-pencil, 
+.icon-sli-star, 
+.icon-sli-calendar, 
+.icon-user-following,
+.icon-user-follow {
     font-family: 'sli';
     font-style: normal;
     font-variant: normal;
@@ -61,3 +67,15 @@
 .icon-sli-star:before {
     content: "\e09b";
 }
+
+.icon-sli-calendar:before {
+    content: "\e075";    
+}
+
+.icon-user-following:before {
+    content: "\e003";
+}
+
+.icon-user-follow:before {
+    content: "\e002";
+  }

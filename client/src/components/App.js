@@ -26,6 +26,7 @@ class App extends Component {
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Route path="/users/:username" component={ProfilePage} />
+
                         <Footer />
                     </main>
                     <SweetAlert

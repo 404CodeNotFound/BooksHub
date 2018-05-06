@@ -11,6 +11,7 @@ import FriendsList from './profile-partials/FriendsList';
 import InvitationsList from './profile-partials/InvitationsList';
 import ReviewsList from './profile-partials/ReviewsList';
 import EditUserModal from './common/EditUserModal';
+import { BarLoader } from 'react-css-loaders';
 import '../../style/profile.css';
 
 class ProfilePage extends Component {
@@ -54,7 +55,7 @@ class ProfilePage extends Component {
                                     }
                                 </div>
                                 <div className="widget user-dashboard-menu">
-                                    <ul>
+                                    <ul id="profile-menu">
                                         <li className={this.state.links[0]} id="profile-info">
                                             <Link to={"/users/" + this.props.user.username + "/profile"} onClick={(event) => this.setActive(0)}>
                                                 <i className="fa fa-user"></i> Information
@@ -79,7 +80,7 @@ class ProfilePage extends Component {
                                             <li className={this.state.links[4]} id="read-link">
                                                 <Link to={"/users/" + this.props.user.username + "/recommended"} onClick={(event) => this.setActive(4)}>
                                                     <i className="fa fa-file-archive-o"></i> Recommended books <span class="badge badge-light">{this.props.user.recommended_books.length}</span>
-                                            </Link>
+                                                </Link>
                                             </li>
                                         }
                                         <li className={this.state.links[5]} id="my-events-link" >
@@ -118,7 +119,7 @@ class ProfilePage extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-7 offset-md-1">
                             <Route path={"/users/" + this.props.user.username + "/profile"} render={() => <Information user={this.props.user} />} />
                             <Route path={"/users/" + this.props.user.username + "/currently-reading"}
                                 render={() => <BooksList title="Currently Reading Collection" userId={this.props.user._id} />} />
@@ -149,7 +150,9 @@ class ProfilePage extends Component {
                     <EditUserModal isVisible={this.state.isOpen} toggleModal={this.toggleModal} user={this.props.user} />
                 </section >
                 ] :
-                <div className="loader"></div>
+                <div className="loader-page">
+                    <BarLoader color="#4eb980" size="11" />
+                </div>
         )
     }
 

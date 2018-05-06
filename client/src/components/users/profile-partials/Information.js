@@ -4,6 +4,18 @@ class Information extends Component {
     render() {
         return (
             <dl className="user-info dl-horizontal">
+            <dt>
+                    Full Name
+                </dt>
+                <dd>
+                    {this.props.user.first_name} {this.props.user.last_name}
+                </dd>
+                <dt>
+                    Username
+                </dt>
+                <dd>
+                    {this.props.user.username}
+                </dd>
                 <dt>
                     E-mail
                 </dt>
@@ -51,7 +63,7 @@ class Information extends Component {
                     Languages
                 </dt>
                 <dd>
-                    {this.props.user.languages.map(language =>
+                    {this.props.user.selectedLanguages.map(language =>
                         <p key={language.label}>{language.label}</p>
                     )}
                 </dd>
