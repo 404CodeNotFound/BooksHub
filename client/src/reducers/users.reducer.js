@@ -18,7 +18,10 @@ export default function users(state = {
         case 'GET_PROFILE_SUCCESS':
             return {
                 ...state,
-                profile: action.user
+                profile: {
+                    ...action.user,
+                    selectedLanguages: action.userLanguages
+                }
             };
         case 'GET_USER_BOOKS_SUCCESS':
             return {

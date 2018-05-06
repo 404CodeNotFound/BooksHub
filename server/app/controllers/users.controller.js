@@ -323,8 +323,6 @@ module.exports = (data) => {
 
             const userData = req.body;
             userData.username = req.user.username;
-            console.log("controller");
-            console.log(userData);
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {
