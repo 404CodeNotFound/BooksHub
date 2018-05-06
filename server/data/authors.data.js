@@ -8,7 +8,7 @@ module.exports = class AuthorsData {
                     if (err) {
                         return reject(err);
                     } else {
-                        if(!author) {
+                        if (!author) {
                             return this.createAuthor(firstName, lastName);
                         }
 
@@ -30,6 +30,20 @@ module.exports = class AuthorsData {
                     return resolve(createdAuthor);
                 }
             });
+        });
+    }
+
+    getAuthorById(id) {
+        return new Promise((resolve, reject) => {
+            return Author.findById(id)
+                .populate({ path: 'books', select: 'title summary photo' })
+                .exec((err, author) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(author);
+                    }
+                });
         });
     }
 }

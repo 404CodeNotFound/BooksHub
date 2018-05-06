@@ -15,6 +15,7 @@ import { withSwalInstance } from 'sweetalert2-react';
 import * as errorActions from '../actions/error.actions';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-select/dist/react-select.css';
+import AuthorBiographyPage from './authors/AuthorBiographyPage';
 
 const SweetAlert = withSwalInstance(swal);
 
@@ -32,6 +33,7 @@ class App extends Component {
                             <Route path="/users/:username" component={ProfilePage} />
                             <Route exact path="/books" component={BooksListPage} />
                             <Route path="/books/:title" component={BookDetailsPage} />
+                            <Route path="/authors/:id" component={AuthorBiographyPage} />                            
                             <Route path="/administration" component={AdminPanelPage} />                            
                         <Footer />
                     </main>                    

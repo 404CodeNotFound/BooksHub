@@ -94,3 +94,7 @@ dd {
 .icon-sli-book-open.text-primary {
     color: #4eb980 !important;
 }
+
+.fa-envelope {
+    width:50px;
+}

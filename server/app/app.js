@@ -10,10 +10,13 @@ const auth = require('../config/auth.config');
 const init = (data) => {
     const app = express();
     const server = require('http').Server(app);
+
+    // Controllers
     const usersController = require('./controllers/users.controller')(data);
     const requestsController = require('./controllers/requests.controller')(data);
     const booksController = require('./controllers/books.controller')(data); 
-    const genresController = require('./controllers/genres.controller')(data);   
+    const genresController = require('./controllers/genres.controller')(data);
+    const authorsController = require('./controllers/authors.controller')(data);   
     
     app.use('/libs', express.static('node_modules'));
     app.use(bodyParser.json());
@@ -82,6 +85,10 @@ const init = (data) => {
     
     // Genres
     app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);    
+
+    // Authors
+    app.get('/authors/:id', authorsController.getAuthor);
+
     return Promise.resolve(server);
 };
 

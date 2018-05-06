@@ -5,6 +5,7 @@ const api = {
     REQUESTS: 'http://localhost:3003/requests',
     BOOKS: 'http://localhost:3003/books',
     GENRES: 'http://localhost:3003/genres',
+    AUTHORS: 'http://localhost:3003/authors',    
     RECOMMENDED_BOOKS: 'http://localhost:3003/recommendedbooks',
     LATEST_BOOKS: 'http://localhost:3003/latestbooks'
 };
