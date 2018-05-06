@@ -27,7 +27,8 @@ module.exports = function init(mongoose) {
         summary: String,
         rating: {
             type: Number,
-            max: 5
+            max: 5,
+            default: 0
         },
         photo: {
             type: String,

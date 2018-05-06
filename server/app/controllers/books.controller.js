@@ -182,6 +182,10 @@ module.exports = (data) => {
                             book.photo, book.language, book.summary, genres);
                     })
                     .then(createdBook => {
+                        data.authors.addBookToAuthorCollection(createdBook._id, createdBook.author);
+                        return createdBook;
+                    })
+                    .then(createdBook => {
                         res.status(201)
                             .json({ book: createdBook });
                     })

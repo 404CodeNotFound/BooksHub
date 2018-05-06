@@ -46,4 +46,17 @@ module.exports = class AuthorsData {
                 });
         });
     }
+
+    addBookToAuthorCollection(bookId, authorId) {
+        return new Promise((resolve, reject) => {
+            Author.findOneAndUpdate({ _id: authorId }, { $push: { books: bookId } },
+                { new: true }, (err, savedBook) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(savedBook);
+                    }
+                });
+        });
+    }
 }
