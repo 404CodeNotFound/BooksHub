@@ -5,6 +5,10 @@ import $ from 'jquery';
 import * as usersActions from '../../../actions/users.actions';
 
 class Header extends Component {
+    state = {
+        links:['active-item', '', '', '', '', '']
+    };
+
     render() {
         return (
             <header role="banner" className="position-absolute">
@@ -20,14 +24,14 @@ class Header extends Component {
 
                         <div className="top-nav left-menu">
                             <ul className="right top-ul chevron">
-                                <li>
-                                    <Link to="/">Home</Link>
+                                <li className={this.state.links[0]}>
+                                    <Link to="/" onClick={() => this.changeActiveLink(0)}>Home</Link>
                                 </li>
-                                <li>
-                                    <Link to="/books">Books</Link>
+                                <li className={this.state.links[1]}>
+                                    <Link to="/books" onClick={() => this.changeActiveLink(1)}>Books</Link>
                                 </li>
-                                <li>
-                                    <Link to="/events">Events</Link>
+                                <li className={this.state.links[2]}>
+                                    <Link to="/events" onClick={() => this.changeActiveLink(2)}>Events</Link>
                                 </li>
                             </ul>
                         </div>
@@ -41,21 +45,21 @@ class Header extends Component {
 
                         <div className="top-nav right-menu">
                             <ul className="top-ul chevron">
-                                <li>
-                                    <Link to="/search">Search</Link>
+                                <li className={this.state.links[3]}>
+                                    <Link to="/search" onClick={() => this.changeActiveLink(3)}>Search</Link>
                                 </li>
-                                <li>
+                                <li className={this.state.links[4]}>
                                     {!this.props.currentUser ?
-                                        <Link to="/login">Log in</Link> :
+                                        <Link to="/login" onClick={() => this.changeActiveLink(4)}>Log in</Link> :
                                         (this.props.currentUser.role === 'admin' ?
-                                            <Link to="/administration">Admin Panel</Link> :
-                                            <Link to={"/users/" + this.props.currentUser + "/profile"}>My Profile</Link>
+                                            <Link to="/administration" onClick={() => this.changeActiveLink(4)}>Admin Panel</Link> :
+                                            <Link to={"/users/" + this.props.currentUser + "/profile"} onClick={() => this.changeActiveLink(4)}>My Profile</Link>
                                         )
                                     }
                                 </li>
-                                <li>
+                                <li className={this.state.links[5]}>
                                     {!this.props.currentUser ?
-                                        <Link to="/register">Register</Link> :
+                                        <Link to="/register" onClick={() => this.changeActiveLink(5)}>Register</Link> :
                                         <Link to="/" onClick={this.props.logout}>Logout</Link>
                                     }
                                 </li>
@@ -67,6 +71,18 @@ class Header extends Component {
         );
     }
 
+    changeActiveLink = (index) => {
+        let changedLinks = [];
+        for (let i = 0; i < 6; i++) {
+            if (i === index) {
+                changedLinks[i] = 'active-item';
+            } else {
+                changedLinks[i] = '';
+            }
+        }
+
+        this.setState({ links: changedLinks });
+    }
 }
 
 function mapStateToProps(state, ownProps) {

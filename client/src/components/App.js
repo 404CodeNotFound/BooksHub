@@ -7,6 +7,7 @@ import HomePage from './home/HomePage';
 import LoginPage from './login/LoginPage';
 import RegisterPage from './register/RegisterPage';
 import ProfilePage from './users/ProfilePage';
+import NotFoundPage from './shared/not-found/NotFoundPage';
 import swal from 'sweetalert2';
 import { withSwalInstance } from 'sweetalert2-react';
 import * as errorActions from '../actions/error.actions';
@@ -26,7 +27,7 @@ class App extends Component {
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Route path="/users/:username" component={ProfilePage} />
-
+                        <Route path="*" component={NotFoundPage}/>
                         <Footer />
                     </main>
                     <SweetAlert

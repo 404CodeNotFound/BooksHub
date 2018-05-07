@@ -3,7 +3,9 @@
     padding: 10% 0% 6% 15%;
 }
 #login {
-    margin-top: 8%;
+    margin-top: 6%;
+    padding-bottom: 8%;
+
 }
 
 #register h4, #register h2, #login h4, #login h2 {
