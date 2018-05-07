@@ -9,3 +9,11 @@ export function removeError() {
 export function validationFailed(validationErrors) {
     return { type: 'VALIDATION_FAILED', validationErrors };
 }
+
+export function removeValidationError(param) {
+    return { type: 'REMOVE_VALIDATION_ERROR', param: param };
+}
+
+export function removeAllValidationErrors() {
+    return { type: 'REMOVE_ALL_VALIDATION_ERRORS' };
+}

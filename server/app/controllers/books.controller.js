@@ -215,7 +215,6 @@ module.exports = (data) => {
             } else {
                 const book = req.body;
                 req.checkBody('title', 'Title is required.').notEmpty();
-                req.checkBody(['authorFirstName', 'authorLastName'], 'Author name is required.').notEmpty();
                 req.checkBody('photo', 'Photo is required.').notEmpty();
 
                 const errors = req.validationErrors();

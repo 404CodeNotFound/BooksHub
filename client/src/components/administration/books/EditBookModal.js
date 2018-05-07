@@ -32,12 +32,18 @@ class EditBookModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="book-title">Title</label>
                         <div className="col-md-8">
                             <input className="form-control" id="book-title" value={this.state.title || ''} type="text" onChange={(event) => this.handleTitleChange(event)} />
+                            {this.props.titleError &&
+                                <div className="error">{this.props.titleError.msg}</div>
+                            }
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-photo">Photo</label>
                         <div className="col-md-8">
                             <input className="form-control" id="book-photo" value={this.state.photo || ''} type="text" onChange={(event) => this.handlePhotoChange(event)} />
+                            {this.props.photoError &&
+                                <div className="error">{this.props.photoError.msg}</div>
+                            }
                         </div>
                     </div>
                     <div className="form-group row">
@@ -140,10 +146,16 @@ class EditBookModal extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    const titleError = state.errors.validationErrors.find(error => error.param === 'title');
+    const authorError = state.errors.validationErrors.find(error => error.param === 'authorFirstName.authorLastName');
+    const photoError = state.errors.validationErrors.find(error => error.param === 'photo');
+
     return {
-        isVisibleEditBook: state.modals.showEditBookModal,
         book: state.modals.bookToEdit,
-        genresSelectValues: state.administration.genresSelectValues
+        genresSelectValues: state.administration.genresSelectValues,
+        titleError: titleError,
+        authorError: authorError,
+        photoError: photoError
     }
 }
 

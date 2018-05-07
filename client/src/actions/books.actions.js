@@ -208,7 +208,11 @@ export function editBook(book) {
                 dispatch(modalsActions.closeEditBookModal());
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
             });
     };
 }

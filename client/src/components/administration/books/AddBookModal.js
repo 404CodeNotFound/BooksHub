@@ -5,6 +5,7 @@ import Select from 'react-select';
 import * as booksActions from '../../../actions/books.actions';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
+import * as errorsActions from '../../../actions/error.actions';
 
 class AddBookModal extends Component {
     state = {
@@ -113,14 +114,26 @@ class AddBookModal extends Component {
     }
 
     handleTitleChange = (event) => {
+        if(this.props.titleError) {
+            this.props.removeValidationError('title');
+        }
+
         this.setState({ title: event.target.value });
     }
 
     handleAuthorFirstNameChange = (event) => {
+        if(this.props.authorError) {
+            this.props.removeValidationError('authorFirstName.authorLastName');
+        }
+
         this.setState({ authorFirstName: event.target.value });
     }
 
     handleAuthorLastNameChange = (event) => {
+        if(this.props.authorError) {
+            this.props.removeValidationError('authorFirstName.authorLastName');
+        }
+
         this.setState({ authorLastName: event.target.value });
     }
 
@@ -137,6 +150,10 @@ class AddBookModal extends Component {
     }
 
     handlePhotoChange = (event) => {
+        if(this.props.photoError) {
+            this.props.removeValidationError('photo');
+        }
+
         this.setState({ photo: event.target.value });
     }
 
@@ -184,7 +201,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         saveBook: (book) => dispatch(booksActions.addBook(book)),
         closeAddBookModal: () => dispatch(modalsActions.closeAddBookModal()),
-        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues())
+        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues()),
+        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
     };
 }
 
