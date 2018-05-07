@@ -6,6 +6,7 @@ import './style/responsee.css';
 import './style/font-poppins.css';
 import './style/icons.css';
 import './style/template-style.css';
+import './style/pagination.css';
 import 'font-awesome/css/font-awesome.css';
 
 const initialState = {};

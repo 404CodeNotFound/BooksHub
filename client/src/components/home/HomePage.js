@@ -3,15 +3,14 @@ import React, { Component } from 'react';
 class HomePage extends Component {
     render() {
         return (
-            <div>
+            [
                 <header className="section-top-padding background-image-main text-center main-header">
                     <h1 className="text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-40 margin-top-110">
                         Today a reader, tomorrow a leader.
                     </h1>
                     <p className="text-white">- Margaret Fuller</p>
                     <img className="arrow-object" src="img/arrow-object-white.svg" alt="" />
-                </header>
-
+                </header>,
                 <section className="background-white statistics">
                     <div className="line text-center">
                         <i className="icon-sli-star text-primary text-size-40"></i>
@@ -53,7 +52,7 @@ class HomePage extends Component {
                         </div>
                     </div>
                 </section>
-            </div>
+            ]
         )
     }
 }

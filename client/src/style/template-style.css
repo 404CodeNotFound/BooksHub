@@ -1,6 +1,12 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     background: #fff;
     position: absolute;
+    height: 100%;
 }
 
 p {
@@ -706,6 +712,14 @@ nav.fixed .left-menu, nav.fixed .right-menu {
     -webkit-animation: spin 2s linear infinite;
     /* Safari */
     animation: spin 2s linear infinite;
+}
+
+.loader-page {
+    height: 100%;
+}
+
+.background-green {
+    background-color: #4eb980;
 }
 
 @media screen and (max-width:768px) {

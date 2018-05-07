@@ -79,6 +79,10 @@ module.exports = function init(mongoose) {
         ratings: [{
             type: Schema.ObjectId,
             ref: 'Rating'
+        }],
+        recommended_books: [{
+            type: Schema.ObjectId,
+            ref: 'Book'
         }]
     });
 

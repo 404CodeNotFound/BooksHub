@@ -222,3 +222,15 @@ export function deleteBook(bookId) {
             });
     };
 }
+
+export function getRecommendedBooks(id, page) {
+    return function (dispatch) {
+        return requester.get(`${api.USERS}/${id}/recommended?page=${page}`)
+            .done(response => {
+                dispatch(getUserBooksSuccess(response));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+            });
+    };
+}

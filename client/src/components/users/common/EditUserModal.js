@@ -26,7 +26,7 @@ class EditUserModal extends Component {
             gender: this.props.user.gender,
             favourite_quote: this.props.user.favourite_quote,
             stayOpen: false,
-            languages: this.props.user.languages,
+            languages: this.props.user.selectedLanguages,
         };
     }
 
@@ -151,13 +151,14 @@ class EditUserModal extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const languages = this.state.languages.map(language => language.label);
         var user = {
             username: this.state.username,
             email: this.state.email,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             nationality: this.state.nationality,
-            languages: this.state.languages,
+            languages: languages.join(', '),
             age: this.state.age,
             gender: this.state.gender,
             favouriteQuote: this.state.favourite_quote

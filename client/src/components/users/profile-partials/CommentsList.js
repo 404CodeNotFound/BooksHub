@@ -18,8 +18,10 @@ class CommentsList extends Component {
     render() {
         return (
             [
-                <div key="title" className="row title">
-                    <h3>{this.props.title}</h3>
+                <div key="title" className="line text-center">
+                    <i className="icon-sli-speech text-primary text-size-40"></i>
+                    <h2 className="text-dark text-size-40 text-m-size-30">{this.props.title}</h2>
+                    <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 <div key="list" className="margin2x">
                     {this.props.comments.map(comment =>
@@ -66,7 +68,6 @@ class CommentsList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     return {
         comments: state.users.comments,
         commentsCount: state.users.commentsCount,

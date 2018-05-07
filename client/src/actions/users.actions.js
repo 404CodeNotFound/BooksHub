@@ -14,8 +14,8 @@ export function logoutSuccess() {
     return { type: 'LOGOUT_SUCCESS' };
 }
 
-export function getProfileSuccess(user) {
-    return { type: 'GET_PROFILE_SUCCESS', user };
+export function getProfileSuccess(user, userLanguages) {
+    return { type: 'GET_PROFILE_SUCCESS', user, userLanguages };
 }
 
 export function getFriendsSuccess(result) {
@@ -70,10 +70,13 @@ export function getProfile(username) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${username}`)
             .done(response => {
-                dispatch(getProfileSuccess(response.user));
+                const languagesSelectList = response.user.languages.map(l => {
+                    return { label: l, value: l };
+                });
+                dispatch(getProfileSuccess(response.user, languagesSelectList));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }
@@ -85,24 +88,21 @@ export function getFriends(id, page) {
                 dispatch(getFriendsSuccess(response));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }
 
 export function updateProfile(user) {
     const token = localStorage.getItem('token');
-    console.log("actions");
-    console.log(user);
-    
+
     return function (dispatch) {
         return requester.putAuthorized(token, `${api.USERS}/${user.username}`, user)
             .done(response => {
                 dispatch(updateProfileSuccess(response.user));
             })
             .fail(error => {
-                console.log(error);
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     }
 }

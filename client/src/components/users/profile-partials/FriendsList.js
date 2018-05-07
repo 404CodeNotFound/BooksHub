@@ -14,8 +14,10 @@ class FriendsList extends Component {
     render() {
         return (
             [
-                <div key="friends-title" className="row title">
-                    <h3>{this.props.title}</h3>
+                <div key="title" className="line text-center">
+                    <i className="icon-user-following text-primary text-size-40"></i>
+                    <h2 className="text-dark text-size-40 text-m-size-30">{this.props.title}</h2>
+                    <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 <div key="friends-list">
                     <div className="row">

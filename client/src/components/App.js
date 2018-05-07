@@ -10,6 +10,7 @@ import ProfilePage from './users/ProfilePage';
 import BooksListPage from './books/BooksListPage';
 import BookDetailsPage from './books/BookDetailsPage';
 import AdminPanelPage from './administration/AdminPanelPage';
+import NotFoundPage from './shared/not-found/NotFoundPage';
 import swal from 'sweetalert2';
 import { withSwalInstance } from 'sweetalert2-react';
 import * as errorActions from '../actions/error.actions';
@@ -35,6 +36,7 @@ class App extends Component {
                             <Route path="/books/:title" component={BookDetailsPage} />
                             <Route path="/authors/:id" component={AuthorBiographyPage} />                            
                             <Route path="/administration" component={AdminPanelPage} />                            
+                        <Route path="*" component={NotFoundPage}/>
                         <Footer />
                     </main>                    
                     <SweetAlert

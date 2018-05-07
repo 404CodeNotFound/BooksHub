@@ -14,23 +14,27 @@ class InvitationsList extends Component {
     render() {
         return (
             [
-                <div key="requests-title" className="row title">
-                    <h3>{this.props.title}</h3>
+                <div key="title" className="line text-center">
+                    <i className="icon-user-follow text-primary text-size-40"></i>
+                    <h2 className="text-dark text-size-40 text-m-size-30">{this.props.title}</h2>
+                    <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 <div key="requests-list" className="row">
                     <div className="people-nearby">
                         {this.props.invitations.map(invitation =>
                             <div key={invitation._id} className="nearby-user">
                                 <div className="row">
-                                    <Link to={"/users/" + invitation.sender.username}>
-                                        <div className="col-md-2 col-sm-2">
+                                    <div className="col-md-2 col-sm-2">
+                                        <Link to={"/users/" + invitation.sender.username}>
                                             <img src={invitation.sender.photo} alt="user" className="profile-photo-lg" />
-                                        </div>
-                                        <div className="col-md-6 col-sm-6">
+                                        </Link>
+                                    </div>
+                                    <div className="col-md-6 col-sm-6">
+                                        <Link to={"/users/" + invitation.sender.username}>
                                             <h5 className="profile-link">{invitation.sender.first_name} {invitation.sender.last_name}</h5>
                                             <p>{invitation.sender.username}</p>
-                                        </div>
-                                    </Link>
+                                        </Link>
+                                    </div>
                                     <div className="col-md-2 col-sm-2">
                                         <button className="btn btn-main-green pull-right" onClick={(event) => this.props.acceptInvitation(invitation._id)}>Accept</button>
                                     </div>
@@ -41,17 +45,16 @@ class InvitationsList extends Component {
                             </div>
                         )}
                     </div>
-                    {this.props.invitations.length > 0 &&
-                        <div key="pages" className="row">
-                            <Pagination
-                                activePage={this.state.activePage}
-                                itemsCountPerPage={1}
-                                totalItemsCount={this.props.invitationsCount}
-                                pageRangeDisplayed={5}
-                                onChange={this.selectPage}
-                            />
-                        </div>
-                    }
+                </div>,
+                this.props.invitations.length > 0 &&
+                <div key="pages" className="row">
+                    <Pagination
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={10}
+                        totalItemsCount={this.props.invitationsCount}
+                        pageRangeDisplayed={5}
+                        onChange={this.selectPage}
+                    />
                 </div>
             ]
         );

@@ -161,6 +161,27 @@ module.exports = (data) => {
 
             return res;
         },
+        getRecommendedBooks(req, res) {
+            const id = req.params.id;
+            const page = req.query.page;
+
+            if (!id) {
+                res.status(400)
+                    .json({ message: "You should provide user id." });
+            } else {
+                data.users.getRecommendedBooks(id, page)
+                    .then(books => {
+                        res.status(200)
+                            .json(books);
+                    })
+                    .catch(error => {
+                        res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
+            }
+
+            return res;
+        },
         getUserFriends(req, res) {
             const id = req.params.id;
             const page = req.query.page;
@@ -324,8 +345,6 @@ module.exports = (data) => {
 
             const userData = req.body;
             userData.username = req.user.username;
-            console.log("controller");
-            console.log(userData);
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {
