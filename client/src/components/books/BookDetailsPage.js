@@ -66,7 +66,7 @@ class BookDetailsPage extends Component {
                                     <h4 className="title">
                                         by
                               <b>
-                                            <Link to={"/authors/" + this.props.book.author._id}> {this.props.book.author.first_name} {this.props.book.author.last_name}</Link>
+                                            <Link to={"/authors/" + this.props.book.author._id} className="green-link"> {this.props.book.author.first_name} {this.props.book.author.last_name}</Link>
                                         </b>
                                     </h4>
                                     <hr />

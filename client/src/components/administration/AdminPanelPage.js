@@ -17,35 +17,35 @@ class AdminPanelPage extends Component {
                         <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
                     </header>,
                         <section className="section background-white">
-                        <div className="container">
+                        <div className="container" id="admin-page-content">
                             <div className="row">
                                 <div className="col-md-3">
                                     <div className="sidebar">
                                         <div className="widget user-dashboard-menu">
-                                            <ul>
+                                            <ul id="admin-menu">
                                                 <li className={this.state.links[0]} id="profile-info">
                                                     <Link to="/administration/books" onClick={(event) => this.setActive(0)}>
-                                                        <i className="fa fa-user"></i> Books
+                                                    <i className="fa fa-book"></i> Books
                                                 </Link>
                                                 </li>
                                                 <li className={this.state.links[1]} id="currently-reading-link">
                                                     <Link to="/administration/events" onClick={(event) => this.setActive(1)}>
-                                                        <i className="fa fa-book"></i> Events
+                                                    <i className="fa fa-calendar"></i> Events
                                                 </Link>
                                                 </li>
                                                 <li className={this.state.links[2]} id="want-to-read-link">
                                                     <Link to="/administration/users" onClick={(event) => this.setActive(2)}>
-                                                        <i className="fa fa-bookmark-o"></i> Users
+                                                        <i className="fa fa-users"></i> Users
                                                 </Link>
                                                 </li>
                                                 <li className={this.state.links[3]} id="read-link">
                                                     <Link to="/administration/authors" onClick={(event) => this.setActive(3)}>
-                                                        <i className="fa fa-file-archive-o"></i> Authors
+                                                        <i className="fa fa-users"></i> Authors
                                                 </Link>
                                                 </li>
                                                 <li className={this.state.links[4]} id="my-events-link" >
                                                     <Link to="/administration/genres" onClick={(event) => this.setActive(4)}>
-                                                        <i className="fa fa-calendar"></i> Genres
+                                                    <i className="fa fa-bookmark"></i> Genres
                                                 </Link>
                                                 </li>
                                             </ul>

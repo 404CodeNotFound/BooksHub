@@ -722,6 +722,10 @@ nav.fixed .left-menu, nav.fixed .right-menu {
     background-color: #4eb980;
 }
 
+.green-link {
+    color: #4eb980 !important;
+}
+
 @media screen and (max-width:768px) {
     header.position-absolute {
         background: #fff none repeat scroll 0 0;

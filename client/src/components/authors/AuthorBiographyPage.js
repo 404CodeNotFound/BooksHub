@@ -37,7 +37,7 @@ class AuthorBiographyPage extends Component {
                                                 </div>
                                                 <p>
                                                     <i className="fa fa-envelope one"></i>
-                                                    <a href={this.props.author.website} target="blank">{this.props.author.website}</a>
+                                                    <a href={this.props.author.website} target="blank" className="green-link">{this.props.author.website}</a>
                                                 </p>
                                             </div>
                                             <hr />
@@ -96,7 +96,7 @@ class AuthorBiographyPage extends Component {
                                             </Link>
                                             <div className="card-block background-grey">
                                                 <h5 className="card-title">
-                                                    <Link to={"/books/" + book.title}>{book.title}</Link>
+                                                    <Link to={"/books/" + book.title} className="green-link">{book.title}</Link>
                                                 </h5>
                                                 <p className="card-text">
                                                     <small className="text-muted">{book.summary.substr(0, 60)}...</small>

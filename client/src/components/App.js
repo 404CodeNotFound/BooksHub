@@ -33,7 +33,7 @@ class App extends Component {
                             <Route path="/login" component={LoginPage} />
                             <Route path="/register" component={RegisterPage} />
                             <Route path="/users/:username" component={ProfilePage} />
-                            <Route path="/books" component={BooksListPage} />
+                            <Route exact path="/books" component={BooksListPage} />
                             <Route path="/books/:title" component={BookDetailsPage} />
                             <Route path="/authors/:id" component={AuthorBiographyPage} />
                             <Route path="/administration" component={AdminPanelPage} />

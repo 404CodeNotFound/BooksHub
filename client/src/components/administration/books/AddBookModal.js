@@ -82,9 +82,7 @@ class AddBookModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-summary">Summary</label>
                         <div className="col-md-8">
-                            <div className="col-md-8">
-                                <textarea class="form-control" rows="5" id="book-summary" onChange={(event) => this.handleSummaryChange(event)}></textarea>
-                            </div>
+                            <textarea class="form-control" rows="5" id="book-summary" onChange={(event) => this.handleSummaryChange(event)}></textarea>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -114,7 +112,7 @@ class AddBookModal extends Component {
     }
 
     handleTitleChange = (event) => {
-        if(this.props.titleError) {
+        if (this.props.titleError) {
             this.props.removeValidationError('title');
         }
 
@@ -122,7 +120,7 @@ class AddBookModal extends Component {
     }
 
     handleAuthorFirstNameChange = (event) => {
-        if(this.props.authorError) {
+        if (this.props.authorError) {
             this.props.removeValidationError('authorFirstName.authorLastName');
         }
 
@@ -130,7 +128,7 @@ class AddBookModal extends Component {
     }
 
     handleAuthorLastNameChange = (event) => {
-        if(this.props.authorError) {
+        if (this.props.authorError) {
             this.props.removeValidationError('authorFirstName.authorLastName');
         }
 
@@ -150,7 +148,7 @@ class AddBookModal extends Component {
     }
 
     handlePhotoChange = (event) => {
-        if(this.props.photoError) {
+        if (this.props.photoError) {
             this.props.removeValidationError('photo');
         }
 

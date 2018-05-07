@@ -52,7 +52,7 @@ class Header extends Component {
                                     {!this.props.currentUser ?
                                         <Link to="/login" onClick={() => this.changeActiveLink(4)}>Log in</Link> :
                                         (this.props.currentUserRole === 'Admin' ?
-                                            <Link to="/administration" onClick={() => this.changeActiveLink(4)}>Admin Panel</Link> :
+                                            <Link to="/administration/books" onClick={() => this.changeActiveLink(4)}>Admin Panel</Link> :
                                             <Link to={"/users/" + this.props.currentUser + "/profile"} onClick={() => this.changeActiveLink(4)}>My Profile</Link>
                                         )
                                     }

@@ -30,10 +30,10 @@ class BookRow extends Component {
                     <Link to={"/books/" + this.props.book.title}>Details |</Link>
                 </td>
                 <td>
-                    <button onClick={() => this.props.openEditBookModal(this.props.book)}>Edit |</button>
+                    <button className="action-btn" onClick={() => this.props.openEditBookModal(this.props.book)}>Edit |</button>
                 </td>
                 <td>
-                    <button onClick={() => this.props.deleteBook(this.props.book._id)}>Delete |</button>
+                    <button className="action-btn" onClick={() => this.props.deleteBook(this.props.book._id)}>Delete |</button>
                 </td>
             </tr>
         );

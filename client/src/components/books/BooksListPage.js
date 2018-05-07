@@ -20,25 +20,27 @@ class BooksListPage extends Component {
         return (
             (this.props.recommendedBooks.length > 0 || this.props.latestBooks.length > 0) ?
                 <article>
-                    <header class="section background-image text-center" style={this.backgroundImage}>
-                        <h1 class="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                    <header className="section background-image text-center" style={this.backgroundImage}>
+                        <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                             {this.props.currentUser.id ? "Recommended" : "Latest"} books
               </h1>
-                        <img class="arrow-object" src="img/arrow-object-white.svg" alt="arrow" />
+                        <img className="arrow-object" src="img/arrow-object-white.svg" alt="arrow" />
                     </header>
-                    <section class="section background-white">
-                        <div class="line row">
-                            {this.props.recommendedBooks.length > 0 &&
-                                this.props.recommendedBooks.map(book =>
-                                    <BookPartial book={book} />
-                                )
-                            }
+                    <section className="section background-white">
+                        <div className="container">
+                            <div className="line row">
+                                {this.props.recommendedBooks.length > 0 &&
+                                    this.props.recommendedBooks.map(book =>
+                                        <BookPartial book={book} />
+                                    )
+                                }
 
-                            {this.props.latestBooks.length > 0 &&
-                                this.props.latestBooks.map(book =>
-                                    <BookPartial book={book} />
-                                )
-                            }
+                                {this.props.latestBooks.length > 0 &&
+                                    this.props.latestBooks.map(book =>
+                                        <BookPartial book={book} />
+                                    )
+                                }
+                            </div>
                         </div>
                     </section>
                 </article>
