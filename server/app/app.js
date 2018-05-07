@@ -10,6 +10,7 @@ const auth = require('../config/auth.config');
 const init = (data) => {
     const app = express();
     const server = require('http').Server(app);
+    const validator = require('express-validator');
 
     // Controllers
     const usersController = require('./controllers/users.controller')(data);
@@ -23,7 +24,8 @@ const init = (data) => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(expressValidator());
     app.use(cors());
-
+    app.use(validator());
+    
     auth.init(app, data, passport);
 
     app.use((req, res, next) => {

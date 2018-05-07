@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './shared/header/Header';
 import Footer from './shared/footer/Footer';
@@ -28,17 +28,19 @@ class App extends Component {
                 <div>
                     <Header />
                     <main role="main">
+                        <Switch>
                             <Route exact path="/" component={HomePage} />
                             <Route path="/login" component={LoginPage} />
-                        <Route path="/register" component={RegisterPage} />
+                            <Route path="/register" component={RegisterPage} />
                             <Route path="/users/:username" component={ProfilePage} />
-                            <Route exact path="/books" component={BooksListPage} />
+                            <Route path="/books" component={BooksListPage} />
                             <Route path="/books/:title" component={BookDetailsPage} />
-                            <Route path="/authors/:id" component={AuthorBiographyPage} />                            
-                            <Route path="/administration" component={AdminPanelPage} />                            
-                        <Route path="*" component={NotFoundPage}/>
-                        <Footer />
-                    </main>                    
+                            <Route path="/authors/:id" component={AuthorBiographyPage} />
+                            <Route path="/administration" component={AdminPanelPage} />
+                            <Route path="*" component={NotFoundPage} />
+                        </Switch>
+                        <Footer />                        
+                    </main>
                     <SweetAlert
                         show={this.props.errors.error ? true : false}
                         title="Error"

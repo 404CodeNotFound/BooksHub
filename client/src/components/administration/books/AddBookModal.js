@@ -34,12 +34,18 @@ class AddBookModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="book-title">Title</label>
                         <div className="col-md-8">
                             <input className="form-control" id="book-title" name="Title" type="text" onChange={(event) => this.handleTitleChange(event)} />
+                            {this.props.titleError &&
+                                <div className="error">{this.props.titleError.msg}</div>
+                            }
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-2 control-label">Author</label>
                         <div className="col-md-4">
                             <input className="form-control" id="book-author-firstName" placeholder="First Name" type="text" onChange={(event) => this.handleAuthorFirstNameChange(event)} />
+                            {this.props.authorError &&
+                                <div className="error">{this.props.authorError.msg}</div>
+                            }
                         </div>
                         <div className="col-md-4">
                             <input className="form-control" id="book-author-lastName" placeholder="Last Name" type="text" onChange={(event) => this.handleAuthorLastNameChange(event)} />
@@ -49,6 +55,9 @@ class AddBookModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="book-photo">Photo</label>
                         <div className="col-md-8">
                             <input className="form-control" id="book-photo" name="Photo" type="text" onChange={(event) => this.handlePhotoChange(event)} />
+                            {this.props.photoError &&
+                                <div className="error">{this.props.photoError.msg}</div>
+                            }
                         </div>
                     </div>
                     <div className="form-group row">
@@ -81,7 +90,6 @@ class AddBookModal extends Component {
                         <label className="col-md-2 control-label">Genres</label>
                         <div className="col-md-8">
                             <Select
-                                closeOnSelect={!this.state.stayOpen}
                                 multi
                                 onChange={this.handleGenresChange}
                                 options={this.props.genresSelectValues}
@@ -160,8 +168,15 @@ class AddBookModal extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    const titleError = state.errors.validationErrors.find(error => error.param === 'title');
+    const authorError = state.errors.validationErrors.find(error => error.param === 'authorFirstName.authorLastName');
+    const photoError = state.errors.validationErrors.find(error => error.param === 'photo');
+
     return {
-        genresSelectValues: state.administration.genresSelectValues
+        genresSelectValues: state.administration.genresSelectValues,
+        titleError: titleError,
+        authorError: authorError,
+        photoError: photoError
     };
 }
 

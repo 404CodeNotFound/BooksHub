@@ -189,7 +189,11 @@ export function addBook(book) {
                 dispatch(modalsActions.closeAddBookModal());
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
             });
     };
 }
@@ -223,14 +227,14 @@ export function deleteBook(bookId) {
     };
 }
 
-export function getRecommendedBooks(id, page) {
+export function getRecommendedBooksByFriends(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/recommended?page=${page}`)
             .done(response => {
                 dispatch(getUserBooksSuccess(response));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));                
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }

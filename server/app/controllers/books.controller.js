@@ -175,24 +175,35 @@ module.exports = (data) => {
             } else {
                 const book = req.body;
 
-                data.authors.getOrAddAuthorByName(book.authorFirstName, book.authorLastName)
-                    .then(author => {
-                        const genres = book.genres.split(', ');
-                        return data.books.createBook(book.title, author._id, book.isbn, book.publisher,
-                            book.photo, book.language, book.summary, genres);
-                    })
-                    .then(createdBook => {
-                        data.authors.addBookToAuthorCollection(createdBook._id, createdBook.author);
-                        return createdBook;
-                    })
-                    .then(createdBook => {
-                        res.status(201)
-                            .json({ book: createdBook });
-                    })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
-                    });
+                req.checkBody('title', 'Title is required.').notEmpty();
+                req.checkBody(['authorFirstName', 'authorLastName'], 'Author name is required.').notEmpty();
+                req.checkBody('photo', 'Photo is required.').notEmpty();
+
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    res.status(400)
+                        .json(errors);
+                } else {
+                    data.authors.getOrAddAuthorByName(book.authorFirstName, book.authorLastName)
+                        .then(author => {
+                            const genres = book.genres.split(', ');
+                            return data.books.createBook(book.title, author._id, book.isbn, book.publisher,
+                                book.photo, book.language, book.summary, genres);
+                        })
+                        .then(createdBook => {
+                            data.authors.addBookToAuthorCollection(createdBook._id, createdBook.author);
+                            return createdBook;
+                        })
+                        .then(createdBook => {
+                            res.status(201)
+                                .json({ book: createdBook });
+                        })
+                        .catch(error => {
+                            res.status(500)
+                                .json({ message: 'Something went wrong!' })
+                        });
+                }
             }
 
             return res;
@@ -203,17 +214,28 @@ module.exports = (data) => {
                     .json({ message: "Only Administrator can edit book." });
             } else {
                 const book = req.body;
-                const genres = book.genres.split(', ');                
-                data.books.updateBook(book.id, book.title, book.isbn, book.publisher,
-                    book.photo, book.language, book.summary, genres)
-                    .then(updatedBook => {
-                        res.status(201)
-                            .json({ book: updatedBook });
-                    })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
-                    });
+                req.checkBody('title', 'Title is required.').notEmpty();
+                req.checkBody(['authorFirstName', 'authorLastName'], 'Author name is required.').notEmpty();
+                req.checkBody('photo', 'Photo is required.').notEmpty();
+
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    res.status(400)
+                        .json(errors);
+                } else {
+                    const genres = book.genres.split(', ');
+                    data.books.updateBook(book.id, book.title, book.isbn, book.publisher,
+                        book.photo, book.language, book.summary, genres)
+                        .then(updatedBook => {
+                            res.status(201)
+                                .json({ book: updatedBook });
+                        })
+                        .catch(error => {
+                            res.status(500)
+                                .json({ message: 'Something went wrong!' })
+                        });
+                }
             }
 
             return res;

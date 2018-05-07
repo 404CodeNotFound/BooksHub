@@ -5,3 +5,7 @@ export function actionFailed(error) {
 export function removeError() {
     return { type: 'REMOVE_ERROR' };
 }
+
+export function validationFailed(validationErrors) {
+    return { type: 'VALIDATION_FAILED', validationErrors };
+}
