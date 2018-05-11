@@ -75,9 +75,13 @@ export default function users(state = {
                 comments: removeFromCollection(state.comments, action.id)
             };
         case 'UPDATE_PROFILE_SUCCESS':
-            return Object.assign({}, state, {
-                profile: action.user
-            });
+            return {
+                ...state,
+                profile: {
+                    ...action.user,
+                    selectedLanguages: action.userLanguages
+                }
+            };
         default:
             return state;
     }

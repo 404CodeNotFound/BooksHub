@@ -22,8 +22,8 @@ export function getFriendsSuccess(result) {
     return { type: 'GET_FRIENDS_SUCCESS', friends: result.friends, friendsCount: result.friendsCount };
 }
 
-export function updateProfileSuccess(user) {
-    return { type: 'UPDATE_PROFILE_SUCCESS', user };
+export function updateProfileSuccess(user, userLanguages) {
+    return { type: 'UPDATE_PROFILE_SUCCESS', user, userLanguages };
 }
 
 export function logout() {
@@ -97,7 +97,13 @@ export function updateProfile(user) {
     return function (dispatch) {
         return requester.putAuthorized(token, `${api.USERS}/${user.username}`, user)
             .done(response => {
-                dispatch(updateProfileSuccess(response.user));
+                const userLanguages = response.user.languages.map(language => { 
+                    return { 
+                        label: language, value: language 
+                    }
+                });
+
+                dispatch(updateProfileSuccess(response.user, userLanguages));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

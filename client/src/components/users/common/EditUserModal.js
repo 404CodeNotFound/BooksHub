@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
 
 const LANGUAGES = [
-	{ label: 'Bulgarian', value: 'bulgarian' },
-	{ label: 'English', value: 'english' },
-	{ label: 'French', value: 'french' },
-	{ label: 'Spanish', value: 'spanish' },
-	{ label: 'German', value: 'german' },
-	{ label: 'Italian', value: 'italian' },
+	{ label: 'Bulgarian', value: 'Bulgarian' },
+	{ label: 'English', value: 'English' },
+	{ label: 'French', value: 'French' },
+	{ label: 'Spanish', value: 'Spanish' },
+	{ label: 'German', value: 'German' },
+	{ label: 'Italian', value: 'Italian' },
 ];
 
 class EditUserModal extends Component {
