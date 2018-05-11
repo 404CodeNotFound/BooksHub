@@ -79,7 +79,7 @@ class ProfilePage extends Component {
                                         {this.props.currentUser.username === this.props.user.username &&
                                             <li className={this.state.links[4]} id="read-link">
                                                 <Link to={"/users/" + this.props.user.username + "/recommended"} onClick={(event) => this.setActive(4)}>
-                                                    <i className="fa fa-file-archive-o"></i> Recommended books <span class="badge badge-light">{this.props.user.recommended_books.length}</span>
+                                                    <i className="fa fa-file-archive-o"></i> Recommended books <span className="badge badge-light">{this.props.user.recommended_books.length}</span>
                                                 </Link>
                                             </li>
                                         }
@@ -111,7 +111,7 @@ class ProfilePage extends Component {
                                         {this.props.currentUser.username === this.props.user.username &&
                                             <li className={this.state.links[10]} id="invitations-link">
                                                 <Link to={"/users/" + this.props.user.username + "/invitations"} onClick={(event) => this.setActive(10)}>
-                                                    <i className="fa fa-user"></i> Pending invitations <span class="badge badge-light">{this.props.user.requests.length}</span>
+                                                    <i className="fa fa-user"></i> Pending invitations <span className="badge badge-light">{this.props.user.requests.length}</span>
                                                 </Link>
                                             </li>
                                         }

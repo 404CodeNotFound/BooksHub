@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BooksHub - Admin Panel</title>
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/responsee.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="css/admin.panel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/template-style.css">
+    <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body class="size-1280">
+    <header role="banner" class="position-absolute">
+        <nav class="background-transparent background-primary-dott full-width sticky">
+            <div class="top-nav">
+                <!-- mobile version logo -->
+                <div class="logo hide-l hide-xl hide-xxl">
+                    <a href="home.html" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/book-logo.png" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/book-logo.png" alt="">
+                    </a>
+                </div>
+                <p class="nav-text"></p>
+
+                <!-- left menu items -->
+                <div class="top-nav left-menu">
+                    <ul class="right top-ul chevron">
+                        <li>
+                            <a href="home.admin.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="books.list.html">Books</a>
+                        </li>
+                        <li>
+                            <a href="events.list.html">Events</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- logo -->
+                <ul class="logo-menu">
+                    <a href="home.admin.html" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/book-logo.png" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/book-logo.png" alt="">
+                    </a>
+                </ul>
+
+                <!-- right menu items -->
+                <div class="top-nav right-menu">
+                    <ul class="top-ul chevron">
+                        <li>
+                            <a href="search.html">Search</a>
+                        </li>
+                        <li>
+                            <a href="profile.html">My Profile</a>
+                        </li>
+                        <li>
+                            <a href="admin.panel.html">Admin Panel</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        <article>
+            <header class="section background-image text-center">
+                <h1 class="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                    Admin Panel
+                </h1>
+                <img class="arrow-object" src="img/arrow-object-white.svg" alt="">
+            </header>
+
+            <section class="section background-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="sidebar">
+                                <div class="widget user-dashboard-menu">
+                                    <ul>
+                                        <li class="active" id="books-link">
+                                            <i class="fa fa-book"></i> Books
+                                        </li>
+                                        <li id="users-link">
+                                            <i class="fa fa-user"></i> Users
+                                        </li>
+                                        <li id="authors-link">
+                                            <i class="fa fa-file-archive-o"></i> Authors
+                                        </li>
+                                        <li id="events-link">
+                                            <i class="fa fa-calendar"></i> Events
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="line col-md-9">
+                            <div id="page-content-wrapper administration-box">
+                                <div id="books">
+                                    <h2>Books</h2>
+                                    <button type="button" class="btn btn-main-green" data-toggle="modal" data-target="#add-book-modal">+ Add</button>
+                                    <table class="table">
+                                        <tr>
+                                            <th>
+                                                PhotoUrl
+                                            </th>
+                                            <th>
+                                                Title
+                                            </th>
+                                            <th>
+                                                ISBN
+                                            </th>
+                                            <th>
+                                                Published
+                                            </th>
+                                            <th>
+                                                Author
+                                            </th>
+                                            <th>
+                                                Publisher
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://thecliparts.com/wp-content/uploads/2016/12/dark-blue-book-cover-clipart.png" width="20px" height="20px"
+                                                    alt="No image" />
+                                            </td>
+                                            <td>
+                                                The Rooster Bar
+                                            </td>
+                                            <td>
+                                                0385541171
+                                            </td>
+                                            <td>
+                                                2018.03.23
+                                            </td>
+                                            <td>
+                                                John Grisham
+                                            </td>
+                                            <td>
+                                                Paradise press
+                                            </td>
+                                            <td>
+                                                <a href="#">Details |</a>
+                                            </td>
+                                            <td>
+                                                <a data-ajax="true" href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://thecliparts.com/wp-content/uploads/2016/12/dark-blue-book-cover-clipart.png" width="20px" height="20px"
+                                                    alt="No image" />
+                                            </td>
+                                            <td>
+                                                Sisters
+                                            </td>
+                                            <td>
+                                                0385340222
+                                            </td>
+                                            <td>
+                                                2018.03.23
+                                            </td>
+                                            <td>
+                                                Danielle Steel
+                                            </td>
+                                            <td>
+                                                Paradise press
+                                            </td>
+                                            <td>
+                                                <a href="#">Details |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-offset-5 pages total center">
+                                            Page 1 of 1
+                                            <div class="pagination-container center">
+                                                <ul class="pagination">
+                                                    <li class="active">
+                                                        <a>1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>3</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>4</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="events" class="d-none">
+                                    <h2>Events</h2>
+                                    <button type="button" class="btn btn-main-green" data-toggle="modal" data-target="#add-event-modal">+ Add</button>
+                                    <table class="table">
+                                        <tr>
+                                            <th>
+                                                PhotoUrl
+                                            </th>
+                                            <th>
+                                                Title
+                                            </th>
+                                            <th>
+                                                Start at
+                                            </th>
+                                            <th>
+                                                End at
+                                            </th>
+                                            <th>
+                                                Place
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://www.eventbriz.com/wp-content/uploads/2017/09/NOWLIVE.jpg" width="40px" height="40px" alt="No image" />
+                                            </td>
+                                            <td>
+                                                The Rooster Bar
+                                            </td>
+                                            <td>
+                                                23.04.2018 10:00
+                                            </td>
+                                            <td>
+                                                23.04.2018 13:00
+                                            </td>
+                                            <td>
+                                                John Grisham
+                                            </td>
+                                            <td>
+                                                <a href="#">Details |</a>
+                                            </td>
+                                            <td>
+                                                <a data-ajax="true" href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2016/05/10105129/discount-codes-reach-more-people-eventbrite.png"
+                                                    width="40px" height="40px" alt="No image" />
+                                            </td>
+                                            <td>
+                                                Sisters
+                                            </td>
+                                            <td>
+                                                23.04.2018 10:00
+                                            </td>
+                                            <td>
+                                                23.04.2018 13:00
+                                            </td>
+                                            <td>
+                                                Danielle Steel
+                                            </td>
+                                            <td>
+                                                <a href="#">Details |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-offset-5 pages total center">
+                                            Page 1 of 1
+                                            <div class="pagination-container center">
+                                                <ul class="pagination">
+                                                    <li class="active">
+                                                        <a>1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>3</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>4</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="authors" class="d-none">
+                                    <h2>Authors</h2>
+                                    <button type="button" class="btn btn-main-green" data-toggle="modal" data-target="#add-author-modal">+ Add</button>
+                                    <table class="table">
+                                        <tr>
+                                            <th>
+                                                PhotoUrl
+                                            </th>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Nationality
+                                            </th>
+                                            <th>
+                                                Birth Date
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="http://melindaleigh.com/wp-content/uploads/2016/05/Melinda_Leigh_About_2.jpg" width="30px" alt="No image" />
+                                            </td>
+                                            <td>
+                                                Melinda Leigh
+                                            </td>
+                                            <td>
+                                                Bulgarian
+                                            </td>
+                                            <td>
+                                                23.04.1975
+                                            </td>
+                                            <td>
+                                                <a href="#">Details |</a>
+                                            </td>
+                                            <td>
+                                                <a data-ajax="true" href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://cdn1.thr.com/sites/default/files/2016/05/gettyimages-488083971.jpg" width="30px" alt="No image" />
+                                            </td>
+                                            <td>
+                                                Barbara Davis
+                                            </td>
+                                            <td>
+                                                Serbian
+                                            </td>
+                                            <td>
+                                                23.04.1920
+                                            </td>
+                                            <td>
+                                                <a href="#">Details |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-offset-5 pages total center">
+                                            Page 1 of 1
+                                            <div class="pagination-container center">
+                                                <ul class="pagination">
+                                                    <li class="active">
+                                                        <a>1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>3</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>4</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="users" class="d-none">
+                                    <h2>Users</h2>
+                                    <table class="table">
+                                        <tr>
+                                            <th>
+                                                PhotoUrl
+                                            </th>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Username
+                                            </th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="http://melindaleigh.com/wp-content/uploads/2016/05/Melinda_Leigh_About_2.jpg" width="30px" alt="No image" />
+                                            </td>
+                                            <td>
+                                                Melinda Leigh
+                                            </td>
+                                            <td>
+                                                <a href="profile.html">melinda123</a>
+                                            </td>
+                                            <td>
+                                                melinda@gmail.com
+                                            </td>
+                                            <td>
+                                                <a href="#">Make admin |</a>
+                                            </td>
+                                            <td>
+                                                <a data-ajax="true" href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://cdn1.thr.com/sites/default/files/2016/05/gettyimages-488083971.jpg" width="30px" alt="No image" />
+                                            </td>
+                                            <td>
+                                                Barbara Davis
+                                            </td>
+                                            <td>
+                                                <a href="profile.html">barbs</a>
+                                            </td>
+                                            <td>
+                                                bdavis@gmail.com
+                                            </td>
+                                            <td>
+                                                <a href="#">Make admin |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Delete |</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Edit |</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-offset-5 pages total center">
+                                            Page 1 of 1
+                                            <div class="pagination-container center">
+                                                <ul class="pagination">
+                                                    <li class="active">
+                                                        <a>1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>3</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>4</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <div class="modal fade" id="add-book-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add new event</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="book-title">Title</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="book-title" name="Title" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="book-author">Author</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="book-author" name="Author" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="book-isbn">ISBN</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="book-isbn" name="ISBN" type="text" value="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="book-description">Description</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="book-description" name="Description" type="text" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-main-green" data-dismiss="modal">Add</button>
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="add-event-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add new event</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="event-title">Title</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="event-title" name="Title" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="event-place">Place</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="event-place" name="Place" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="event-date">Date</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="event-date" name="Date" type="text" value="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="event-description">Description</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="event-description" name="Description" type="text" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-main-green" data-dismiss="modal">Add</button>
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <section class="section background-dark">
+            <div class="line">
+                <div class="margin2x">
+                    <div class="row text-center">
+                        <ul class="footer-social-info center">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row center copyright">
+                        <br /> Copyright © 2018
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <script type="text/javascript" src="js/admin.panel.js"></script>
+    <script type="text/javascript" src="js/responsee.js"></script>
+    <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="js/template-scripts.js"></script>
+</body>
+
+</html>

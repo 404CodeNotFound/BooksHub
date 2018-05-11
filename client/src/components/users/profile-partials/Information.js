@@ -63,9 +63,9 @@ class Information extends Component {
                     Languages
                 </dt>
                 <dd>
-                    {this.props.user.selectedLanguages.map(language =>
-                        <p key={language.label}>{language.label}</p>
-                    )}
+                     {this.props.user.selectedLanguages.map(language =>
+                        <span key={language.label}>{language.label} </span>
+                    )} 
                 </dd>
 
                 <dt>

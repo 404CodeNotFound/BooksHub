@@ -1,0 +1,450 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Playball');
+
+/*Sections*/
+.section-title {
+    font-size: 32px;
+    font-family: 'Playball', cursive;
+    color: #111;
+    text-align: center;
+    font-weight: 700;
+}
+
+.section-description {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title-divider {
+    width: 50px;
+    height: 3px;
+    background: #4eb980;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.hero {
+    display: table;
+    position: relative;
+    background-image: url("../assets/banner.jpg");
+    background-size: cover;
+    padding: 150px 0;
+    color: #fff;
+    width: 100%;
+    height: 75vh;
+}
+
+.hero:after {
+    content: '';
+    z-index: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.70);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.hero .container h1 {
+    font-size: 6rem;    
+}
+
+.hero .container .tagline {
+    font-size: 5.5rem;    
+}
+
+.hero-brand {
+    margin-bottom: 75px;
+    display: inline-block;
+}
+
+.hero-brand:hover {
+    opacity: .75;
+}
+
+.tagline {
+    font-family: "Playball", Verdana, cursive;
+    font-size: 26px;
+    margin: 45px 0 75px 0;
+    color: #fff;
+}
+
+#team {
+    background: #fff;
+    padding: 1% 15% 1% 15%;
+}
+
+#team .member {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#team .member .pic {
+    margin-bottom: 15px;
+    overflow: hidden;
+    /*height: 350px;*/
+}
+
+#team .member .pic img {
+    max-width: 90%;
+}
+
+#team .member h4 {
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+#team .member h4 a {
+    color: #333333;
+    text-decoration: none;
+}
+
+#team .member h4 a:hover {
+    color: #4eb980;
+}
+
+#team .member span {
+    font-style: italic;
+    display: block;
+    font-size: 13px;
+}
+
+/*Testimonials*/
+#testimonials {
+    background: #f6f6f6;
+    padding: 2% 15%;
+    margin-bottom: 1%;
+}
+
+#testimonials hr {
+    border: 1px solid #4eb980;
+    width: 200px;
+}
+
+#testimonials .review img {
+    border: 6px solid #fff;
+    overflow: hidden;
+    max-width: 10%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.img-center {
+    margin: 0 auto;
+}
+
+blockquote {
+    margin: 0 0 0px 0;
+    padding: 20px 70px 10px;
+    position: relative;
+    font-size: 2rem;
+    border: 0;
+}
+
+blockquote a {
+    text-decoration: none;
+    color: #4eb980;
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 120px;
+    position: absolute;
+    left: 10px;
+    top: -30px;
+    color: #4eb980;
+    font-family: inherit;
+}
+
+blockquote cite {
+    color: #111;
+    font-size: 2rem;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-family: 'Playball', cursive;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
+}
+
+/*Homepage (logged user)*/
+.box-item {
+    float: left;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 4%;
+}
+
+.box-item img {
+    width: 150%;
+}
+.box-item .box-post .label a, .box-item .box-post .post-title a {
+    color:#FFF;
+}
+
+.box-item .box-post .post-title a {
+    font-weight: bolder;
+    text-shadow: 1px 2px #4eb980;
+}
+
+.box-item .box-post span.meta {
+    font-family:  sans-serif;
+    font-size: 12px;
+    color: #fff;
+    margin-top: 15px;
+    display: block;
+}
+
+.box-item .box-post span.meta span {
+    margin-right: 15px;
+}
+
+.box-item .box-post {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.events-recommendations {
+    padding: 0 10% 2% 10%;
+}
+
+.background {
+    background: #f6f6f6!important;
+}
+
+.sidebar {
+    background-color: #f6f6f6;
+    /* background-color:  #edf8f2 */
+    margin-top: 1.2%;
+    margin-left: 4%;
+    padding: 2% 4%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-size: 0.8rem;
+}
+
+.sidebar .row {
+    margin-bottom: 25%;
+}
+
+.sidebar-title {
+    font-family: 'Playball', cursive;
+    color: #4eb980;
+}
+
+#team, .events-recommendations {
+    margin: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*Sidebar sections title*/
+
+h2 {
+    font: 33px sans-serif;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.no-background {
+    position: relative;
+    overflow: hidden;
+}
+ 
+.no-background span {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    position: relative;
+    padding: 0 20px;
+}
+
+.no-background span:before, .no-background span:after {
+    content: '';
+    display: block;
+    width: 1000px;
+    position: absolute;
+    top: 0.73em;
+    border-top: 1px solid #4eb980;
+}
+
+.no-background span:before { right: 100%; }
+.no-background span:after { left: 100%; }
+
+/*Sidebar section title end*/
+
+.bolder {
+    font-weight: bolder;
+}
+
+/*Invitations*/
+#invitations-block{
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+ul.users{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+ul.users li{
+  list-style: none;
+  position: relative;
+  margin: 3px auto !important;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+img.profile-photo{
+  height: 58px;
+  width: 58px;
+  border-radius: 50%;
+}
+/*Invitations end*/
+
+/*Upcoming events*/
+.mini-cal {
+    font-family: 'Playball', cursive;
+    float: right;
+    width:100%;
+    background:#fff;
+    border-color: #4eb980;
+    border-width:5px;  
+    border-style:double;
+}
+
+.mini-cal ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.calendar {
+    padding: 1em;
+}
+
+.cal1 .clndr .clndr-controls {
+  position: relative;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  padding: 20px 0 0 0;
+  text-align: center;
+  background: #ffffff;
+  min-height: 78px;
+}
+.cal1 .clndr .clndr-controls .month {
+	padding: 15px 0 0 0;
+	text-align: center;
+	color:#4eb980;
+    font-size: 24px;
+    font-weight: bolder;
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button { 
+  position:absolute;
+  right: 30px;
+  top: 29px;
+  width: 30px;
+  height: 43px;
+  text-indent: -4000px;
+  background: url(../assets/right-arrow.png) no-repeat -30px 0px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .inactive:hover {
+  cursor: default;
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button { 
+    position: absolute;
+    left: 30px;
+    top: 29px;
+    width: 30px;
+    height: 43px;
+    text-indent: -4000px; 
+    background: url(../assets/left-arrow.png) no-repeat -1px 0; 
+    cursor: pointer; 
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .inactive:hover {
+  cursor: default;
+}
+.cal1 .clndr .clndr-table {
+  table-layout: fixed;
+  width:100%;
+  height: 300px;
+  margin:0 auto;
+  background: #ffffff;
+}
+.cal1 .clndr .clndr-table .header-days {
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.cal1 .clndr .clndr-table .header-days .header-day {
+   vertical-align: middle;
+   text-align: center;
+	color:#C3C3E5;
+	font-size:16px;
+}
+.cal1 .clndr .clndr-table tr {
+    height:45px;
+}
+.cal1 .clndr .clndr-table tr td {
+  vertical-align: top;
+}
+.cal1 .clndr .clndr-table tr .day {
+  width: 100%;
+  height: inherit;
+  color:#3a3b36;
+  vertical-align:middle;
+}
+
+.cal1 .clndr .clndr-table tr .today {
+    color: #4eb980!important;
+    text-decoration: none;
+    border: 1px solid #4eb980;
+ }
+  
+.cal1 .clndr .clndr-table tr .day:hover {
+    background-color: #4eb980;
+}
+
+.cal1 .clndr .clndr-table tr .day .day-contents:hover {
+  	color:#fff;
+}
+
+.cal1 .clndr .clndr-table tr .event {
+     background: #ccffcc;
+	 padding:0;
+}
+.cal1 .clndr .clndr-table tr .day .day-contents {
+    box-sizing: border-box;
+	font-size: 15px;
+	text-align: center;
+	cursor: pointer;
+    padding: 10px;
+}
+
+/*Upcoming events end*/
