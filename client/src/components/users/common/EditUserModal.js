@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap4-modal';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
+import * as modalsActions from '../../../actions/modals.actions';
 
 const LANGUAGES = [
 	{ label: 'Bulgarian', value: 'Bulgarian' },
@@ -25,18 +26,17 @@ class EditUserModal extends Component {
             age: this.props.user.age,
             gender: this.props.user.gender,
             favourite_quote: this.props.user.favourite_quote,
-            stayOpen: false,
-            languages: this.props.user.selectedLanguages,
+            languages: this.props.user.languages,
         };
     }
 
     render() {
         return (
-            <Modal visible={this.props.isVisible} onClickBackdrop={this.props.toggleModal}>
+            <Modal visible={true} onClickBackdrop={this.props.closeEditUserModal}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-header">
                         <h4 className="modal-title">Edit your profile</h4>
-                        <button type="button" className="close" onClick={this.props.toggleModal}>&times;</button>
+                        <button type="button" className="close" onClick={this.props.closeEditUserModal}>&times;</button>
                     </div>
 
                     <div className="modal-body">
@@ -72,7 +72,7 @@ class EditUserModal extends Component {
                             <label className="col-md-2 control-label" htmlFor="languages">Languages</label>
                             <div className="col-md-8">
                                 <Select
-                                    closeOnSelect={!this.state.stayOpen}
+                                    closeOnSelect={true}
                                     multi
                                     onChange={this.handleSelectChange}
                                     options={LANGUAGES}
@@ -110,7 +110,7 @@ class EditUserModal extends Component {
 
                     <div className="modal-footer">
                         <input type="submit" value="Edit" className="btn btn-main-green" />
-                        <button type="button" className="btn" onClick={this.props.toggleModal}>Close</button>
+                        <button type="button" className="btn" onClick={this.props.closeEditUserModal}>Close</button>
                     </div>
                 </form>
             </Modal>
@@ -165,15 +165,21 @@ class EditUserModal extends Component {
         };
 
         this.props.updateProfile(user);
-        
-        this.props.toggleModal();
     }
+}
+
+function mapStateToProps(state, ownProps) {
+    
+    return {
+        user: state.modals.userToEdit,
+    };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        updateProfile: (user) => dispatch(usersActions.updateProfile(user))
+        updateProfile: (user) => dispatch(usersActions.updateProfile(user)),
+        closeEditUserModal: () => dispatch(modalsActions.closeEditUserModal())
     };
 }
 
-export default connect(null, mapDispatchToProps)(EditUserModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserModal);

@@ -1,6 +1,7 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
+import * as modalsActions from './modals.actions';
 
 export function loginSuccess() {
     return { type: 'LOGIN_SUCCESS' };
@@ -73,6 +74,7 @@ export function getProfile(username) {
                 const languagesSelectList = response.user.languages.map(l => {
                     return { label: l, value: l };
                 });
+
                 dispatch(getProfileSuccess(response.user, languagesSelectList));
             })
             .fail(error => {
@@ -102,10 +104,11 @@ export function updateProfile(user) {
                 const userLanguages = response.user.languages.map(language => { 
                     return { 
                         label: language, value: language 
-                    }
+                    };
                 });
 
                 dispatch(updateProfileSuccess(response.user, userLanguages));
+                dispatch(modalsActions.closeEditUserModal());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

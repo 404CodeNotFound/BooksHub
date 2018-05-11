@@ -65,7 +65,7 @@ class Information extends Component {
                 <dd>
                      {this.props.user.selectedLanguages.map(language =>
                         <span key={language.label}>{language.label} </span>
-                    )} 
+                    )}  
                 </dd>
 
                 <dt>
