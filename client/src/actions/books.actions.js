@@ -186,7 +186,7 @@ export function addBook(book) {
         return requester.postAuthorized(token, `${api.BOOKS}`, book)
             .done(response => {
                 dispatch(addBookSuccess(response.book));
-                dispatch(modalsActions.closeAddBookModal());
+                dispatch(modalsActions.closeAddBookModal());                                
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
