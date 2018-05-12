@@ -352,8 +352,6 @@ module.exports = class UserData {
     }
 
     updateUser(user) {
-        console.log(user);
-
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate({ username: user.username }, {
                 $set: {

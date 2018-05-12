@@ -16,41 +16,42 @@ class AllBooksList extends Component {
 
     render() {
         return (
-            this.props.books.length > 0 ?
-                [<div id="page-content-wrapper administration-box" key="books-list">
+            // this.props.books.length > 0 ?
+                <div id="page-content-wrapper administration-box" key="books-list">
                     <div id="books">
                         <h2>Books</h2>
                         <button type="button" className="btn btn-main-green" onClick={this.props.openAddBookModal}>+ Add</button>
-                        <table className="table">
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        PhotoUrl
-                        </th>
-                                    <th>
-                                        Title
-                        </th>
-                                    <th>
-                                        ISBN
-                        </th>
-                                    <th>
-                                        Published
-                        </th>
-                                    <th>
-                                        Author
-                        </th>
-                                    <th>
-                                        Publisher
-                        </th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                {this.props.books.map(book =>
-                                    <BookRow key={book._id} book={book} />
-                                )}
-                            </tbody>
-                        </table>
                         {this.props.books.length > 0 &&
+                            [<table className="table">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            PhotoUrl
+                                        </th>
+                                        <th>
+                                            Title
+                                        </th>
+                                        <th>
+                                            ISBN
+                                        </th>
+                                        <th>
+                                            Published
+                                        </th>
+                                        <th>
+                                            Author
+                                        </th>
+                                        <th>
+                                            Publisher
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    {this.props.books.map(book =>
+                                        <BookRow key={book._id} book={book} />
+                                    )}
+                                </tbody>
+                            </table>,
+                            
                             <div key="pages" className="row">
                                 <Pagination
                                     activePage={this.state.activePage}
@@ -59,8 +60,9 @@ class AllBooksList extends Component {
                                     pageRangeDisplayed={5}
                                     onChange={this.selectPage}
                                 />
-                            </div>
+                            </div>]
                         }
+
                     </div>
                     {this.props.isVisibleAddBookModal && 
                         <AddBookModal />
@@ -69,8 +71,8 @@ class AllBooksList extends Component {
                         <EditBookModal />        
                     }                
                 </div>
-                ] :
-                <div className="loader"></div>
+                // ] :
+                // <div className="loader"></div>
         )
     }
 
