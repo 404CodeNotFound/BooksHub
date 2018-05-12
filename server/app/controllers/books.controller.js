@@ -174,7 +174,7 @@ module.exports = (data) => {
                     .json({ message: "Only Administrator can add new book." });
             } else {
                 const book = req.body;
-
+                
                 req.checkBody('title', 'Title is required.').notEmpty();
                 req.checkBody('authorFirstName', 'Author name is required.').notEmpty();
                 req.checkBody('authorLastName', 'Author name is required.').notEmpty();
