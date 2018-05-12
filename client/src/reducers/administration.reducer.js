@@ -27,6 +27,12 @@ export default function books(state = {
                 ...state,
                 books: removeFromCollection(state.books, action.bookId)
             };
+        case 'GET_ALL_AUTHORS_SUCCESS':
+            return {
+                ...state,
+                authors: action.authors,
+                authorsCount: action.authorsCount
+            };
         default:
             return state;
     }

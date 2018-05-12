@@ -37,37 +37,36 @@ class AuthorBiographyPage extends Component {
                                                 </div>
                                                 <p>
                                                     <i className="fa fa-envelope one"></i>
-                                                    <a href={this.props.author.website} target="blank" className="green-link">{this.props.author.website}</a>
+                                                    <a href={this.props.author.website} target="blank" className="green-link">{this.props.author.website || '-'}</a>
                                                 </p>
                                             </div>
                                             <hr />
                                             <dl className="container details dl-horizontal">
                                                 <dt>
                                                     Nationality
-                                        </dt>
+                                                </dt>
 
                                                 <dd>
-                                                    {this.props.author.nationality} </dd>
+                                                    {this.props.author.nationality || '-'} </dd>
 
                                                 <dt>
                                                     Age
-                                        </dt>
+                                                </dt>
 
                                                 <dd>
-                                                    {this.props.author.age} </dd>
+                                                    {this.props.author.age || '-'} </dd>
 
                                                 <dt>
                                                     Birth date
-    </dt>
+                                                </dt>
                                                 <dd>
-                                                    {this.props.author.birth_date}
+                                                    {this.props.author.birth_date || '-'}
                                                 </dd>
                                                 <dt>
                                                     Biography
-                                        </dt>
-
+                                                </dt>
                                                 <dd>
-                                                    {this.props.author.biography}
+                                                    {this.props.author.biography || '-'}
                                                 </dd>
                                             </dl>
                                             <p>

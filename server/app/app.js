@@ -90,6 +90,7 @@ const init = (data) => {
     app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);    
 
     // Authors
+    app.get('/authors', auth.authenticate(passport), authorsController.getAllAuthors);
     app.get('/authors/:id', authorsController.getAuthor);
 
     return Promise.resolve(server);

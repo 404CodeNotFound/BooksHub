@@ -8,7 +8,7 @@ import AddBookModal from './AddBookModal';
 import EditBookModal from './EditBookModal';
 
 class AllBooksList extends Component {
-    state = { activePage: 1, isOpen: false };
+    state = { activePage: 1 };
 
     componentDidMount() {
         this.props.getAllBooks(this.state.activePage);
@@ -22,7 +22,7 @@ class AllBooksList extends Component {
                         <h2>Books</h2>
                         <button type="button" className="btn btn-main-green" onClick={this.props.openAddBookModal}>+ Add</button>
                         {this.props.books.length > 0 &&
-                            [<table className="table">
+                            [<table key="books-table" className="table">
                                 <tbody>
                                     <tr>
                                         <th>

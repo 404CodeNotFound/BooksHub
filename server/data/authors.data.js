@@ -1,4 +1,7 @@
 const { Author } = require('../models')
+const getPageOfCollection = require('../utils/pagination');
+
+const itemsPerPage = 10;
 
 module.exports = class AuthorsData {
     getOrAddAuthorByName(firstName, lastName) {
@@ -56,6 +59,26 @@ module.exports = class AuthorsData {
                     } else {
                         return resolve(savedBook);
                     }
+                });
+        });
+    }
+
+    getAllAuthors(page) {
+        return new Promise((resolve, reject) => {
+            Author.find({ 'isDeleted': false })
+                .exec((err, authors) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    const pageAuthors = getPageOfCollection(authors, page, itemsPerPage);
+
+                    const data = {
+                        authors: pageAuthors,
+                        authorsCount: authors.length
+                    };
+
+                    return resolve(data);
                 });
         });
     }
