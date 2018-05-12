@@ -1,6 +1,7 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
+import * as modalsActions from './modals.actions';
 
 export function loginSuccess() {
     return { type: 'LOGIN_SUCCESS' };
@@ -14,16 +15,16 @@ export function logoutSuccess() {
     return { type: 'LOGOUT_SUCCESS' };
 }
 
-export function getProfileSuccess(user, userLanguages) {
-    return { type: 'GET_PROFILE_SUCCESS', user, userLanguages };
+export function getProfileSuccess(user, userLanguages, userGenres) {
+    return { type: 'GET_PROFILE_SUCCESS', user, userLanguages, userGenres };
 }
 
 export function getFriendsSuccess(result) {
     return { type: 'GET_FRIENDS_SUCCESS', friends: result.friends, friendsCount: result.friendsCount };
 }
 
-export function updateProfileSuccess(user, userLanguages) {
-    return { type: 'UPDATE_PROFILE_SUCCESS', user, userLanguages };
+export function updateProfileSuccess(user, userLanguages, userGenres) {
+    return { type: 'UPDATE_PROFILE_SUCCESS', user, userLanguages, userGenres };
 }
 
 export function logout() {
@@ -73,7 +74,12 @@ export function getProfile(username) {
                 const languagesSelectList = response.user.languages.map(l => {
                     return { label: l, value: l };
                 });
-                dispatch(getProfileSuccess(response.user, languagesSelectList));
+
+                const genresList = response.user.favourite_genres.map(genre => {
+                    return { label: genre.name, value: genre.name };
+                });
+
+                dispatch(getProfileSuccess(response.user, languagesSelectList, genresList));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -95,17 +101,24 @@ export function getFriends(id, page) {
 
 export function updateProfile(user) {
     const token = localStorage.getItem('token');
-
+    
     return function (dispatch) {
         return requester.putAuthorized(token, `${api.USERS}/${user.username}`, user)
             .done(response => {
                 const userLanguages = response.user.languages.map(language => { 
                     return { 
                         label: language, value: language 
-                    }
+                    };
                 });
 
-                dispatch(updateProfileSuccess(response.user, userLanguages));
+                const userGenres = response.user.favourite_genres.map(genre => {
+                    return {
+                        label: genre.name, value: genre.name
+                    };
+                });
+
+                dispatch(updateProfileSuccess(response.user, userLanguages, userGenres));
+                dispatch(modalsActions.closeEditUserModal());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

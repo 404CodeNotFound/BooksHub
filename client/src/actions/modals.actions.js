@@ -12,6 +12,19 @@ export function openEditBookModalSuccess(mappedBook) {
     return { type: 'OPEN_EDIT_BOOK_MODAL', book: mappedBook };
 }
 
+
+export function closeEditBookModal() {
+    return { type: 'CLOSE_EDIT_BOOK_MODAL' };
+}
+
+export function openEditUserModalSuccess(mappedUser) {
+    return { type: 'OPEN_EDIT_USER_MODAL', user: mappedUser };
+}
+
+export function closeEditUserModal() {
+    return { type: 'CLOSE_EDIT_USER_MODAL' };
+}
+
 export function openAddBookModal() {
     return function (dispatch) {
         dispatch(errorsActions.removeAllValidationErrors());
@@ -40,6 +53,18 @@ export function openEditBookModal(book) {
     }
 }
 
-export function closeEditBookModal() {
-    return { type: 'CLOSE_EDIT_BOOK_MODAL' };
+export function openEditUserModal(user) {
+    return function (dispatch) {
+        const genresSelectList = user.favourite_genres.map(genre => {
+            return { label: genre.name, value: genre.name, id: genre._id };
+        });
+
+        const mappedUser = {
+            ...user,
+            languages: user.selectedLanguages,
+            genres: genresSelectList
+        };
+
+        dispatch(openEditUserModalSuccess(mappedUser));
+    }
 }

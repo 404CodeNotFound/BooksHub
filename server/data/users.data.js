@@ -45,6 +45,7 @@ module.exports = class UserData {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username })
                 .populate('requests')
+                .populate('favourite_genres')
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
@@ -351,6 +352,8 @@ module.exports = class UserData {
     }
 
     updateUser(user) {
+        console.log(user);
+
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate({ username: user.username }, {
                 $set: {
@@ -360,19 +363,20 @@ module.exports = class UserData {
                     nationality: user.nationality,
                     age: user.age,
                     gender: user.gender,
-                    // birth_date: new Date(user.birthdate),
+                    birth_date: user.birthdate,
                     languages: user.languages.split(', '),
-                    favourite_quote: user.favouriteQuote
+                    favourite_quote: user.favouriteQuote,
+                    favourite_genres: user.genres.split(', '),
                 }
-            },
-                { new: true },
-                (error, updatedUser) => {
-                    if (error) {
-                        return reject(error);
-                    }
+            }, { new: true })
+            .populate('favourite_genres')
+            .exec(function(error, updatedUser) {
+                if (error) {
+                    return reject(error);
+                }
 
-                    return resolve(updatedUser);
-                });
+                return resolve(updatedUser);
+            });
         });
     }
 }

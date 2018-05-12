@@ -20,7 +20,8 @@ export default function users(state = {
                 ...state,
                 profile: {
                     ...action.user,
-                    selectedLanguages: action.userLanguages
+                    selectedLanguages: action.userLanguages,
+                    selectedGenres: action.userGenres
                 }
             };
         case 'GET_USER_BOOKS_SUCCESS':
@@ -79,7 +80,8 @@ export default function users(state = {
                 ...state,
                 profile: {
                     ...action.user,
-                    selectedLanguages: action.userLanguages
+                    selectedLanguages: action.userLanguages,
+                    selectedGenres: action.userGenres
                 }
             };
         default:

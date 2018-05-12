@@ -74,7 +74,7 @@ class EditBookModal extends Component {
                         <label className="col-md-2 control-label">Genres</label>
                         <div className="col-md-8">
                             <Select
-                                closeOnSelect={!this.state.stayOpen}
+                                closeOnSelect={true}
                                 multi
                                 onChange={this.handleGenresChange}
                                 options={this.props.genresSelectValues}
@@ -152,7 +152,7 @@ function mapStateToProps(state, ownProps) {
 
     return {
         book: state.modals.bookToEdit,
-        genresSelectValues: state.administration.genresSelectValues,
+        genresSelectValues: state.genres.genresSelectValues,
         titleError: titleError,
         authorError: authorError,
         photoError: photoError

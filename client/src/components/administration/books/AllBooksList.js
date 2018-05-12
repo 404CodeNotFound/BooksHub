@@ -63,10 +63,10 @@ class AllBooksList extends Component {
                         }
                     </div>
                     {this.props.isVisibleAddBookModal && 
-                    <AddBookModal />
+                        <AddBookModal />
                     }
                     {this.props.isVisibleEditBookModal && 
-                        <EditBookModal toggleModal={this.toggleModal} />        
+                        <EditBookModal />        
                     }                
                 </div>
                 ] :
