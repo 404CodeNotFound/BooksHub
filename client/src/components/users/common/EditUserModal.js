@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap4-modal';
+import DatePicker from 'react-date-picker';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
 import * as modalsActions from '../../../actions/modals.actions';
+import * as genresActions from '../../../actions/genres.actions';
 
 const LANGUAGES = [
 	{ label: 'Bulgarian', value: 'Bulgarian' },
@@ -24,10 +26,16 @@ class EditUserModal extends Component {
             lastname: this.props.user.last_name,
             nationality: this.props.user.nationality,
             age: this.props.user.age,
+            birthdate: new Date(this.props.user.birth_date.split('T')[0]),
             gender: this.props.user.gender,
             favourite_quote: this.props.user.favourite_quote,
             languages: this.props.user.languages,
+            genres: this.props.user.genres
         };
+    }
+
+    componentDidMount() {
+        this.props.getAllGenres();
     }
 
     render() {
@@ -89,6 +97,13 @@ class EditUserModal extends Component {
                                 <input className="form-control" id="age" name="age" type="text" value={this.state.age || ''} onChange={this.handleAgeChange} />
                             </div>
                         </div>
+
+                        <div className="form-group row">
+                            <label className="col-md-2 control-label" htmlFor="birthdate">Birthdate</label>
+                            <div className="col-md-8">
+                                <DatePicker value={this.state.birthdate} onChange={this.handleBirthdateChange} />
+                            </div>
+                        </div>
                         
                         <div className="form-group row">
                             <label className="col-md-2 control-label" htmlFor="gender">Gender</label>
@@ -106,6 +121,22 @@ class EditUserModal extends Component {
                                 <input className="form-control" id="favouriteQuote" name="favouriteQuote" type="text" value={this.state.favourite_quote || ''} onChange={this.handleQuoteChange} />
                             </div>
                         </div>
+
+                        <div className="form-group row">
+                            <label className="col-md-2 control-label">Favourite genres</label>
+                            <div className="col-md-8">
+                                <Select
+                                    closeOnSelect={true}
+                                    multi
+                                    onChange={this.handleGenresChange}
+                                    options={this.props.genresSelectValues}
+                                    placeholder="Select genres"
+                                    joinValues
+                                    value={this.state.genres}
+                                />
+                            </div>                            
+                        </div>
+
                     </div>
 
                     <div className="modal-footer">
@@ -141,6 +172,10 @@ class EditUserModal extends Component {
         this.setState({ age: event.target.value });
     }
 
+    handleBirthdateChange = (value) => {
+        this.setState({ birthdate: value });
+    }
+
     handleGenderChange = (event) => {
         this.setState({ gender: event.target.value });
     }
@@ -149,9 +184,14 @@ class EditUserModal extends Component {
         this.setState({ favourite_quote: event.target.value });
     }
 
+    handleGenresChange = (value) => {
+        this.setState({ genres: value });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const languages = this.state.languages.map(language => language.label);
+        const genres = this.state.genres.map(genre => genre.id);
         var user = {
             username: this.state.username,
             email: this.state.email,
@@ -159,7 +199,9 @@ class EditUserModal extends Component {
             lastname: this.state.lastname,
             nationality: this.state.nationality,
             languages: languages.join(', '),
+            genres: genres.join(', '),
             age: this.state.age,
+            birthdate: this.state.birthdate,
             gender: this.state.gender,
             favouriteQuote: this.state.favourite_quote
         };
@@ -169,16 +211,17 @@ class EditUserModal extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    
     return {
         user: state.modals.userToEdit,
+        genresSelectValues: state.genres.genresSelectValues,
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         updateProfile: (user) => dispatch(usersActions.updateProfile(user)),
-        closeEditUserModal: () => dispatch(modalsActions.closeEditUserModal())
+        closeEditUserModal: () => dispatch(modalsActions.closeEditUserModal()),
+        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues())
     };
 }
 

@@ -55,9 +55,14 @@ export function openEditBookModal(book) {
 
 export function openEditUserModal(user) {
     return function (dispatch) {
+        const genresSelectList = user.favourite_genres.map(genre => {
+            return { label: genre.name, value: genre.name, id: genre._id };
+        });
+
         const mappedUser = {
             ...user,
-            languages: user.selectedLanguages
+            languages: user.selectedLanguages,
+            genres: genresSelectList
         };
 
         dispatch(openEditUserModalSuccess(mappedUser));

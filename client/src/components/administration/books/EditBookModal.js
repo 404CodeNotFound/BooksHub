@@ -152,7 +152,7 @@ function mapStateToProps(state, ownProps) {
 
     return {
         book: state.modals.bookToEdit,
-        genresSelectValues: state.administration.genresSelectValues,
+        genresSelectValues: state.genres.genresSelectValues,
         titleError: titleError,
         authorError: authorError,
         photoError: photoError

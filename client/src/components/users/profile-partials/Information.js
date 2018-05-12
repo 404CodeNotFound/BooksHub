@@ -41,7 +41,7 @@ class Information extends Component {
                     Birthdate
                 </dt>
                 <dd>
-                    {this.props.user.birth_date}
+                    {this.props.user.birth_date.split('T')[0]}
                 </dd>
 
                 <dt>
@@ -79,8 +79,8 @@ class Information extends Component {
                     Favourite Genres
                 </dt>
                 <dd>
-                    {this.props.user.favourite_genres.map(genre =>
-                        <p key={genre}>{genre}</p>
+                    {this.props.user.selectedGenres.map(genre =>
+                        <span key={genre.label}>{genre.label} </span>
                     )}
                 </dd>
             </dl>
