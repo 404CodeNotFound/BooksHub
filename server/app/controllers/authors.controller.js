@@ -81,10 +81,37 @@ module.exports = (data) => {
                 })
                 .catch(error => {
                     return res.status(500)
-                        .json({ message: 'Something went wrong!' })
+                        .json({ message: 'Something went wrong!' });
                 });
             
             return res;
+        },
+
+        deleteAuthor: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can delete books." });
+            }
+
+            const authorId = req.params.id;
+
+            data.authors.getAuthorById(authorId)
+                .then(foundAuthor => {
+                    if(!foundAuthor) {
+                        return res.status(404)
+                            .json({ message: 'Author with provided ID does not exist.' });
+                    }
+
+                    data.authors.deleteAuthor(authorId)
+                        .then(() => {
+                            res.status(204)
+                                .json("Removed");
+                        });
+                })
+                .catch(error => {
+                    return res.status(500)
+                        .json({ message: 'Something went wrong!' });
+                });
         }
     }
 }

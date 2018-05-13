@@ -94,6 +94,7 @@ const init = (data) => {
     app.post('/authors', auth.authenticate(passport), authorsController.addAuthor);
     app.get('/authors/:id', authorsController.getAuthor);
     app.put('/authors/:id', auth.authenticate(passport), authorsController.updateAuthor);
+    app.delete('/authors/:id', auth.authenticate(passport), authorsController.deleteAuthor);            
 
     return Promise.resolve(server);
 };

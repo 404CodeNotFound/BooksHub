@@ -47,6 +47,11 @@ export default function books(state = {
                 ...state,
                 authors: updateItemInCollection(state.authors, action.author)
             };
+        case 'DELETE_AUTHOR_SUCCESS':
+            return {
+                ...state,
+                authors: removeFromCollection(state.authors, action.authorId)
+            };
         default:
             return state;
     }

@@ -140,4 +140,20 @@ module.exports = class AuthorsData {
                 });
         });
     }
+
+    deleteAuthor(id) {
+        return new Promise((resolve, reject) => {
+            Author.findOneAndUpdate({ '_id': id }, {
+                $set: {
+                    isDeleted: true
+                }
+            }, { new: true }, (err, author) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
+        });
+    }
 }

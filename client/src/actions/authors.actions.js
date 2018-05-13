@@ -19,6 +19,10 @@ export function updateAuthorSuccess(author) {
     return { type: 'UPDATE_AUTHOR_SUCCESS', author: author };
 }
 
+export function deleteAuthorSuccess(id) {
+    return { type: 'DELETE_AUTHOR_SUCCESS', authorId: id };
+}
+
 export function getAuthorBiography(id) {
     return function (dispatch) {
         return requester.get(`${api.AUTHORS}/${id}`)
@@ -68,6 +72,20 @@ export function updateAuthor(author) {
             .done(response => {
                 dispatch(updateAuthorSuccess(response.author));
                 dispatch(modalsActions.closeEditAuthorModal());
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function deleteAuthor(id) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.deleteAuthorized(token, `${api.AUTHORS}/${id}`)
+            .done(response => {
+                dispatch(deleteAuthorSuccess(id));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

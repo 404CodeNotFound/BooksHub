@@ -30,7 +30,7 @@ class AuthorRow extends Component {
                     <button className="action-btn" onClick={() => this.props.openEditAuthorModal(this.props.author)}>Edit</button>
                 </td>
                 <td>
-                    <button className="action-btn">Delete</button>
+                    <button className="action-btn" onClick={() => this.props.deleteAuthor(this.props.author._id)}>Delete</button>
                 </td>
             </tr>
         );
@@ -39,7 +39,8 @@ class AuthorRow extends Component {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        openEditAuthorModal: (author) => dispatch(modalsActions.openEditAuthorModal(author))
+        openEditAuthorModal: (author) => dispatch(modalsActions.openEditAuthorModal(author)),
+        deleteAuthor: (authorId) => dispatch(authorsActions.deleteAuthor(authorId))
     };
 }
 
