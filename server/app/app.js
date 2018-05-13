@@ -87,8 +87,10 @@ const init = (data) => {
     app.get('/latestbooks', booksController.getLatestBooks);      
     
     // Genres
-    app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);    
-
+    app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);
+    app.post('/genres', auth.authenticate(passport), genresController.addGenre);   
+    app.delete('/genres/:id', auth.authenticate(passport), genresController.deleteGenre);
+       
     // Authors
     app.get('/authors', auth.authenticate(passport), authorsController.getAllAuthors);
     app.post('/authors', auth.authenticate(passport), authorsController.addAuthor);

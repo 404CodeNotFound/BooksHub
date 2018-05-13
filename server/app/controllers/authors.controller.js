@@ -104,7 +104,7 @@ module.exports = (data) => {
 
                     data.authors.deleteAuthor(authorId)
                         .then(() => {
-                            res.status(204)
+                            return res.status(204)
                                 .json("Removed");
                         });
                 })

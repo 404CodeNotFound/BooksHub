@@ -41,6 +41,14 @@ export function closeEditAuthorModal() {
     return { type: 'CLOSE_EDIT_AUTHOR_MODAL' };
 }
 
+export function openAddGenreModalSuccess() {
+    return { type: 'OPEN_ADD_GENRE_MODAL' };
+}
+
+export function closeAddGenreModalSuccess() {
+    return { type: 'CLOSE_ADD_GENRE_MODAL' };
+}
+
 export function openAddAuthorModal() {
     return function (dispatch) {
         dispatch(openAddAuthorModalSuccess());
@@ -101,4 +109,16 @@ export function openEditAuthorModal(author) {
     return function (dispatch) {
         dispatch(openEditAuthorModalSuccess(author));
     }
+}
+
+export function openAddGenreModal() {
+    return function (dispatch) {
+        dispatch(openAddGenreModalSuccess());
+    };
+}
+
+export function closeAddGenreModal() {
+    return function (dispatch) {
+        dispatch(closeAddGenreModalSuccess());
+    };
 }

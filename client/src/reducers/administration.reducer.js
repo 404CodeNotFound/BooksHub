@@ -52,6 +52,26 @@ export default function books(state = {
                 ...state,
                 authors: removeFromCollection(state.authors, action.authorId)
             };
+        case 'GET_ALL_GENRES_SUCCESS':
+            return {
+                ...state,
+                genres: action.genres,
+                genresCount: action.genresCount
+            };
+        case 'ADD_GENRE_SUCCESS':
+            return {
+                ...state,
+                genres: [
+                    action.genre,
+                    ...state.genres
+                ],
+                genresCount: state.genresCount + 1
+            };
+        case 'DELETE_GENRE_SUCCESS':
+            return {
+                ...state,
+                genres: removeFromCollection(state.genres, action.genreId)
+            };
         default:
             return state;
     }

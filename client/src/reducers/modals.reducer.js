@@ -1,7 +1,8 @@
 export default function modals(state = { 
     showAddBookModal: false, showEditBookModal: false, bookToEdit: {} ,
     showEditUserModal: false, userToEdit: {},
-    showAddAuthorModal: false, showEditAuthorModal: false, authorToEdit: {} }, action) {
+    showAddAuthorModal: false, showEditAuthorModal: false, authorToEdit: {},
+    showAddGenreModal: false }, action) {
     switch (action.type) {
         case 'OPEN_ADD_BOOK_MODAL':
             return {
@@ -48,6 +49,14 @@ export default function modals(state = {
             return {
                 showEditAuthorModal: false,
                 authorToEdit: {}
+            };
+        case 'OPEN_ADD_GENRE_MODAL':
+            return {
+                showAddGenreModal: true
+            };
+        case 'CLOSE_ADD_GENRE_MODAL':
+            return {
+                showAddGenreModal: false
             };
         default:
             return state;
