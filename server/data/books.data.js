@@ -7,7 +7,7 @@ module.exports = class BooksData {
     getBookByTitle(title) {
         return new Promise((resolve, reject) => {
             return Book.findOne({ 'title': title, 'isDeleted': false })
-                .populate({ path: 'genres', select: 'name' })
+                .populate({ path: 'genres', match: { isDeleted: false }, select: 'name' })
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'reviews', populate: { path: 'user', select: 'username photo' } })
                 .populate({ path: 'ratings', select: 'user stars' })

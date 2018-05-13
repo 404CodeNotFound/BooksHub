@@ -355,6 +355,26 @@ module.exports = (data) => {
                     return res.status(500)
                         .json({ message: error.toString() });
                 });      
+        },
+        getAllUsers: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can view all users." });
+            }
+            
+            const page = req.query.page;
+
+            data.users.getAllUsers(page)
+                .then(result => {
+                    res.status(200)
+                        .json(result);
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: 'Something went wrong!' });
+                });
+            
+            return res;
         }
     }
 }

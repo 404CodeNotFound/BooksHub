@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AllBooksList from './books/AllBooksList';
 import AllAuthorsList from './authors/AllAuthorsList';
 import AllGenresList from './genres/AllGenresList';
+import AllUsersList from './users/AllUsersList';
 import '../../style/admin.panel.css';
 
 class AdminPanelPage extends Component {
@@ -59,8 +60,8 @@ class AdminPanelPage extends Component {
                                     <Route path="/administration/books" render={() => <AllBooksList />} />
                                     <Route path="/administration/authors" render={() => <AllAuthorsList />} />
                                     <Route path="/administration/genres" render={() => <AllGenresList />} />
-                                    {/* <Route path="/administration/events" render={() => <AllEventsList />}/>
-                                    <Route path="/administration/users" render={() => <AllUsersList />} /> */}
+                                    <Route path="/administration/users" render={() => <AllUsersList />} /> 
+                                    {/* <Route path="/administration/events" render={() => <AllEventsList />}/>*/}
                                 </div>
                             </div>
                         </div>

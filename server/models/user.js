@@ -83,7 +83,11 @@ module.exports = function init(mongoose) {
         recommended_books: [{
             type: Schema.ObjectId,
             ref: 'Book'
-        }]
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        }
     });
 
     const User = mongoose.model('User', UserSchema);

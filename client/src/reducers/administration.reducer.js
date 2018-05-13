@@ -72,6 +72,12 @@ export default function books(state = {
                 ...state,
                 genres: removeFromCollection(state.genres, action.genreId)
             };
+        case 'GET_ALL_USERS_SUCCESS':
+            return {
+                ...state,
+                users: action.users,
+                usersCount: action.usersCount
+            };
         default:
             return state;
     }

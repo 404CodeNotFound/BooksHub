@@ -42,6 +42,9 @@ const init = (data) => {
     app.post('/login', usersController.login);
     app.post('/register', usersController.register);
 
+    // Users
+    app.get('/users', auth.authenticate(passport), usersController.getAllUsers);
+    
     // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);
     app.put('/users/:username', auth.authenticate(passport), usersController.updateUserProfile);

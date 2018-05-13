@@ -21,6 +21,11 @@ module.exports = (data) => {
             return res;
         },
         getAllAuthors: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can view all books." });
+            }
+            
             const page = req.query.page;
             
             data.authors.getAllAuthors(page)

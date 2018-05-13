@@ -1,6 +1,6 @@
 const { User, Status } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 18;
+const itemsPerPage = 10;
 
 module.exports = class UserData {
     getUserByUsernameAndPassword(username, passHash) {
@@ -375,6 +375,26 @@ module.exports = class UserData {
 
                 return resolve(updatedUser);
             });
+        });
+    }
+
+    getAllUsers(page) {
+        return new Promise((resolve, reject) => {
+            User.find({ 'isDeleted': false })
+                .exec((err, users) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    const pageUsers = getPageOfCollection(users, page, itemsPerPage);
+
+                    const data = {
+                        users: pageUsers,
+                        usersCount: users.length
+                    };
+
+                    return resolve(data);
+                });
         });
     }
 }
