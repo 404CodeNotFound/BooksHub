@@ -25,6 +25,34 @@ export function closeEditUserModal() {
     return { type: 'CLOSE_EDIT_USER_MODAL' };
 }
 
+export function openAddAuthorModalSuccess() {
+    return { type: 'OPEN_ADD_AUTHOR_MODAL' };
+}
+
+export function closeAddAuthorModalSuccess() {
+    return { type: 'CLOSE_ADD_AUTHOR_MODAL' };
+}
+
+export function openEditAuthorModalSuccess(author) {
+    return { type: 'OPEN_EDIT_AUTHOR_MODAL', author: author };
+}
+
+export function closeEditAuthorModal() {
+    return { type: 'CLOSE_EDIT_AUTHOR_MODAL' };
+}
+
+export function openAddAuthorModal() {
+    return function (dispatch) {
+        dispatch(openAddAuthorModalSuccess());
+    };
+}
+
+export function closeAddAuthorModal() {
+    return function (dispatch) {
+        dispatch(closeAddAuthorModalSuccess());
+    };
+}
+
 export function openAddBookModal() {
     return function (dispatch) {
         dispatch(errorsActions.removeAllValidationErrors());
@@ -66,5 +94,11 @@ export function openEditUserModal(user) {
         };
 
         dispatch(openEditUserModalSuccess(mappedUser));
+    }
+}
+
+export function openEditAuthorModal(author) {
+    return function (dispatch) {
+        dispatch(openEditAuthorModalSuccess(author));
     }
 }

@@ -67,7 +67,7 @@ class EditBookModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-summary">Summary</label>
                         <div className="col-md-8">
-                            <textarea class="form-control" rows="5" id="book-summary" value={this.state.summary || ''} onChange={(event) => this.handleSummaryChange(event)}></textarea>
+                            <textarea className="form-control" rows="5" id="book-summary" value={this.state.summary || ''} onChange={(event) => this.handleSummaryChange(event)}></textarea>
                         </div>
                     </div>
                     <div className="form-group row">

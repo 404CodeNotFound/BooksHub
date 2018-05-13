@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as authorsActions from '../../../actions/authors.actions';
+import * as modalsActions from '../../../actions/modals.actions';
 
 class AuthorRow extends Component {
     render() {
@@ -19,13 +21,13 @@ class AuthorRow extends Component {
                     {this.props.author.birth_date.split('T')[0]}
                 </td>
                 <td>
-                    {this.props.author.website}
+                    <a href={this.props.author.website}>{this.props.author.website}</a>
                 </td>
                 <td>
                     <Link to={"/authors/" + this.props.author._id}>Details</Link>
                 </td>
                 <td>
-                    <button className="action-btn">Edit</button>
+                    <button className="action-btn" onClick={() => this.props.openEditAuthorModal(this.props.author)}>Edit</button>
                 </td>
                 <td>
                     <button className="action-btn">Delete</button>
@@ -35,5 +37,11 @@ class AuthorRow extends Component {
     }
 }
 
-export default connect(null, null)(AuthorRow);
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        openEditAuthorModal: (author) => dispatch(modalsActions.openEditAuthorModal(author))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(AuthorRow);
 

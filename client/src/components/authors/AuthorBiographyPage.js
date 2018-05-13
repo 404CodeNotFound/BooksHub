@@ -60,7 +60,7 @@ class AuthorBiographyPage extends Component {
                                                     Birth date
                                                 </dt>
                                                 <dd>
-                                                    {this.props.author.birth_date || '-'}
+                                                    {this.props.author.birth_date.split('T')[0] || '-'}
                                                 </dd>
                                                 <dt>
                                                     Biography
@@ -89,7 +89,7 @@ class AuthorBiographyPage extends Component {
                             <div className="col-md-12 text-center">
                                 <div className="row">
                                     {this.props.books.map(book =>
-                                        <div className="card background-grey col-md-2">
+                                        <div key={book._id} className="card background-grey col-md-2">
                                             <Link to={"/books/" + book.title}>
                                                 <img width="100px" className="card-img-top" src={book.photo} alt={"Card image cap " + book._id} />
                                             </Link>

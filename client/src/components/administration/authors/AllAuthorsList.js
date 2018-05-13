@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authorsActions from '../../../actions/authors.actions';
+import * as modalsActions from '../../../actions/modals.actions';
 import Pagination from "react-js-pagination";
 import AuthorRow from './AuthorRow';
+import AddAuthorModal from './AddAuthorModal';
+import EditAuthorModal from './EditAuthorModal';
 
 class AllAuthorsList extends Component {
     constructor(props) {
@@ -21,7 +24,7 @@ class AllAuthorsList extends Component {
             <div id="page-content-wrapper administration-box" key="authors-list">
                 <div id="authors">
                     <h2>Authors</h2>
-                    <button type="button" className="btn btn-main-green">+ Add</button>
+                    <button type="button" className="btn btn-main-green" onClick={this.props.openAddAuthorModal}>+ Add</button>
                     {this.props.authors.length > 0 &&
                         [
                         <table key="authors-table" className="table">
@@ -64,6 +67,14 @@ class AllAuthorsList extends Component {
                     }
                     
                 </div>
+
+                {this.props.isVisibleAddAuthorModal &&
+                    <AddAuthorModal />
+                }
+
+                {this.props.isVisibleEditAuthorModal &&
+                    <EditAuthorModal />
+                }
             </div>
         )
     }
@@ -77,13 +88,16 @@ class AllAuthorsList extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         authors: state.administration.authors,
-        authorsCount: state.administration.authorsCount
+        authorsCount: state.administration.authorsCount,
+        isVisibleAddAuthorModal: state.modals.showAddAuthorModal,
+        isVisibleEditAuthorModal: state.modals.showEditAuthorModal
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllAuthors: (page) => dispatch(authorsActions.getAllAuthors(page)),
+        openAddAuthorModal: () => dispatch(modalsActions.openAddAuthorModal())
     };
 }
 

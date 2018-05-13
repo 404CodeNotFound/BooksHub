@@ -91,7 +91,9 @@ const init = (data) => {
 
     // Authors
     app.get('/authors', auth.authenticate(passport), authorsController.getAllAuthors);
+    app.post('/authors', auth.authenticate(passport), authorsController.addAuthor);
     app.get('/authors/:id', authorsController.getAuthor);
+    app.put('/authors/:id', auth.authenticate(passport), authorsController.updateAuthor);
 
     return Promise.resolve(server);
 };

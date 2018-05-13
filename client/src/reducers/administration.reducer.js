@@ -33,6 +33,20 @@ export default function books(state = {
                 authors: action.authors,
                 authorsCount: action.authorsCount
             };
+        case 'ADD_AUTHOR_SUCCESS':
+            return {
+                ...state,
+                authors: [
+                    action.author,
+                    ...state.authors
+                ],
+                authorsCount: state.authorsCount + 1
+            };
+        case 'UPDATE_AUTHOR_SUCCESS':
+            return {
+                ...state,
+                authors: updateItemInCollection(state.authors, action.author)
+            };
         default:
             return state;
     }

@@ -56,7 +56,7 @@ module.exports = (data) => {
             data.users.getUserByUsername(user.username)
                 .then((existingUser) => {
                     if(existingUser) {
-                        res.status(404)
+                        res.status(400)
                             .json({ message: "User with that username already exists." });
                     } else {
                         user.photo = "http://www.verspers.nl/workspace/assets/images/empty_profile.png";
@@ -339,7 +339,7 @@ module.exports = (data) => {
         },
         updateUserProfile: (req, res) => {
             if(req.user.username !== req.params.username) {
-                res.status(403)
+                return res.status(403)
                     .json({ message: "Users can only edit their profiles." });
             }
 
@@ -348,11 +348,11 @@ module.exports = (data) => {
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {
-                    res.status(201)
+                    return res.status(201)
                         .json({ user: updatedUser });
                 })
                 .catch(error => {
-                    res.status(500)
+                    return res.status(500)
                         .json({ message: error.toString() });
                 });      
         }
