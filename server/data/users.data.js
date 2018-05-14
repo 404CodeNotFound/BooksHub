@@ -400,6 +400,7 @@ module.exports = class UserData {
     getAllUsers(page) {
         return new Promise((resolve, reject) => {
             User.find({ 'isDeleted': false })
+                .populate('favourite_genres')
                 .exec((err, users) => {
                     if (err) {
                         return reject(err);

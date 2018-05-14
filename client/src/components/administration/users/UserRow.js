@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
 import * as modalsActions from '../../../actions/modals.actions';
+import EditUserModal from '../../users/common/EditUserModal';
 
 class UserRow extends Component {
     render() {
@@ -38,6 +39,9 @@ class UserRow extends Component {
                 </td>
                 <td>
                     <button className="action-btn" onClick={() => this.props.openEditUserModal(this.props.user)}>Edit</button>
+                    {this.props.isVisibleEditUserModal &&
+                        <EditUserModal />
+                    }
                 </td>
                 <td>
                     <button className="action-btn" onClick={() => this.props.deleteUser(this.props.user)}>Delete</button>
@@ -47,11 +51,18 @@ class UserRow extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapStateToProps(state, ownProps) {
     return {
-        changeRole: (user) => dispatch(usersActions.changeRole(user))
+        isVisibleEditUserModal: state.modals.showEditUserModal,
     };
 }
 
-export default connect(null, mapDispatchToProps)(UserRow);
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        changeRole: (user) => dispatch(usersActions.changeRole(user)),
+        openEditUserModal: (user) => dispatch(modalsActions.openEditUserModal(user))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserRow);
 

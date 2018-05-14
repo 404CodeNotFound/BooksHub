@@ -52,11 +52,10 @@ class AllUsersList extends Component {
                                     <th></th>
                                 </tr>
                                 {this.props.users.map(user =>
-                                    <UserRow key={user._id} user={user} />
+                                    <UserRow key={user._id} user={user} userLanguages={user.languages} />
                                 )}
                             </tbody>
                         </table>,
-                    
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}

@@ -17,7 +17,7 @@ const LANGUAGES = [
 ];
 
 class EditUserModal extends Component {
-    constructor(props) {
+    constructor(props) {        
         super(props);
         this.state = {
             username: this.props.user.username,
@@ -39,6 +39,8 @@ class EditUserModal extends Component {
     }
 
     render() {
+        console.log(this.props.user);
+
         return (
             <Modal visible={true} onClickBackdrop={this.props.closeEditUserModal}>
                 <form onSubmit={this.handleSubmit}>

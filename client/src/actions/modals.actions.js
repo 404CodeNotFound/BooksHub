@@ -95,9 +95,13 @@ export function openEditUserModal(user) {
             return { label: genre.name, value: genre.name, id: genre._id };
         });
 
+        const languagesList = user.languages.map(language => {
+            return { label: language, value: language };
+        });
+
         const mappedUser = {
             ...user,
-            languages: user.selectedLanguages,
+            languages: languagesList,
             genres: genresSelectList
         };
 
