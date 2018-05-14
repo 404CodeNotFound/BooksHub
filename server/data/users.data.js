@@ -417,4 +417,20 @@ module.exports = class UserData {
                 });
         });
     }
+
+    deleteUser(id) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ '_id': id }, {
+                $set: {
+                    isDeleted: true
+                }
+            }, { new: true }, (err, user) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
+        });
+    }
 }

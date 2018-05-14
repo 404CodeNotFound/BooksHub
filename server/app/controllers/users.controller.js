@@ -338,13 +338,13 @@ module.exports = (data) => {
             return res;
         },
         updateUserProfile: (req, res) => {
-            if(req.user.username !== req.params.username) {
+            if(req.user.role !== 'Admin' && req.user.username !== req.params.username) {
                 return res.status(403)
                     .json({ message: "Users can only edit their profiles." });
             }
 
             const userData = req.body;
-            userData.username = req.user.username;
+            userData.username = req.body.username;
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {
@@ -401,6 +401,33 @@ module.exports = (data) => {
                 .catch(error => {
                     return res.status(500)
                         .json({ message: 'Something went wrong.' });
+                });
+        },
+
+        deleteUser: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can delete users." });
+            }
+
+            const userId = req.params.id;
+
+            data.users.getUserById(userId)
+                .then(foundUser => {
+                    if(!foundUser) {
+                        return res.status(404)
+                            .json({ message: 'User with provided ID does not exist.' });
+                    }
+
+                    data.users.deleteUser(userId)
+                        .then(() => {
+                            return res.status(204)
+                                .json("Removed");
+                        });
+                })
+                .catch(error => {
+                    return res.status(500)
+                        .json({ message: 'Something went wrong!' });
                 });
         }
     }

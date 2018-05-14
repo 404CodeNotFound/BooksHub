@@ -83,6 +83,16 @@ export default function books(state = {
                 ...state,
                 users: updateItemInCollection(state.users, action.user)
             };
+        case 'UPDATE_USER_SUCCESS':
+            return {
+                ...state,
+                users: updateItemInCollection(state.users, action.user)
+            };
+        case 'DELETE_USER_SUCCESS':
+            return {
+                ...state,
+                users: removeFromCollection(state.users, action.userId)
+            };
         default:
             return state;
     }

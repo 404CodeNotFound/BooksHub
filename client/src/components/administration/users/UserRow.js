@@ -40,11 +40,11 @@ class UserRow extends Component {
                 <td>
                     <button className="action-btn" onClick={() => this.props.openEditUserModal(this.props.user)}>Edit</button>
                     {this.props.isVisibleEditUserModal &&
-                        <EditUserModal />
+                        <EditUserModal isAdminPage={true} />
                     }
                 </td>
                 <td>
-                    <button className="action-btn" onClick={() => this.props.deleteUser(this.props.user)}>Delete</button>
+                    <button className="action-btn" onClick={() => this.props.deleteUser(this.props.user._id)}>Delete</button>
                 </td>
             </tr>
         );
@@ -60,7 +60,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         changeRole: (user) => dispatch(usersActions.changeRole(user)),
-        openEditUserModal: (user) => dispatch(modalsActions.openEditUserModal(user))
+        openEditUserModal: (user) => dispatch(modalsActions.openEditUserModal(user)),
+        deleteUser: (id) => dispatch(usersActions.deleteUser(id))
     };
 }
 

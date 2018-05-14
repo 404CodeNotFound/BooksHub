@@ -208,7 +208,7 @@ class EditUserModal extends Component {
             favouriteQuote: this.state.favourite_quote
         };
 
-        this.props.updateProfile(user);
+        this.props.updateProfile(user, this.props.isAdminPage);
     }
 }
 
@@ -221,7 +221,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        updateProfile: (user) => dispatch(usersActions.updateProfile(user)),
+        updateProfile: (user, isAdminPage) => dispatch(usersActions.updateProfile(user, isAdminPage)),
         closeEditUserModal: () => dispatch(modalsActions.closeEditUserModal()),
         getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues())
     };
