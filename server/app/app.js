@@ -44,6 +44,7 @@ const init = (data) => {
 
     // Users
     app.get('/users', auth.authenticate(passport), usersController.getAllUsers);
+    app.put('/users/:id/role', auth.authenticate(passport), usersController.changeRole);
     
     // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);

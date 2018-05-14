@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
-import * as modalsActions from '../../../actions/modals.actions';
 import Pagination from "react-js-pagination";
 import UserRow from './UserRow';
 
@@ -22,7 +21,6 @@ class AllUsersList extends Component {
             <div id="page-content-wrapper administration-box" key="users-list">
                 <div id="users">
                     <h2>Users</h2>
-                    <button type="button" className="btn btn-main-green">+ Add</button>
                     {this.props.users.length > 0 &&
                         [
                         <table key="users-table" className="table">

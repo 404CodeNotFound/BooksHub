@@ -378,6 +378,25 @@ module.exports = class UserData {
         });
     }
 
+    changeRole(userId, currentRole) {
+        const newRole = currentRole === "Admin" ? "User" : "Admin";
+
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ _id: userId }, {
+                $set: {
+                    role: newRole,
+                }
+            }, { new: true })
+            .exec(function(error, updatedUser) {
+                if (error) {
+                    return reject(error);
+                }
+
+                return resolve(updatedUser);
+            });
+        });
+    }
+
     getAllUsers(page) {
         return new Promise((resolve, reject) => {
             User.find({ 'isDeleted': false })

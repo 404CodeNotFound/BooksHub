@@ -31,6 +31,10 @@ export function getAllUsersSuccess(users, usersCount) {
     return { type: 'GET_ALL_USERS_SUCCESS', users: users, usersCount: usersCount };
 }
 
+export function changeRoleSuccess(user) {
+    return { type: 'CHANGE_ROLE_SUCCESS', user };
+}
+
 export function logout() {
     return function (dispatch) {
         localStorage.removeItem('token');
@@ -137,6 +141,20 @@ export function getAllUsers(page) {
         return requester.getAuthorized(token, `${api.USERS}?page=${page}`)
             .done(response => {
                 dispatch(getAllUsersSuccess(response.users, response.usersCount));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function changeRole(user) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+    
+        return requester.putAuthorized(token, `${api.USERS}/${user._id}/role`, user)
+            .done(response => {
+                dispatch(changeRoleSuccess(response.user));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

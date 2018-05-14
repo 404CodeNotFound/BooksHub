@@ -78,6 +78,11 @@ export default function books(state = {
                 users: action.users,
                 usersCount: action.usersCount
             };
+        case 'CHANGE_ROLE_SUCCESS':
+            return {
+                ...state,
+                users: updateItemInCollection(state.users, action.user)
+            };
         default:
             return state;
     }

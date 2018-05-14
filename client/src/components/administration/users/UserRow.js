@@ -30,22 +30,28 @@ class UserRow extends Component {
                     {this.props.user.role}
                 </td>
                 <td>
-                    {this.props.user.role === 'Admin' ? (
-                        <button className="action-btn">Make admin</button>
+                    {this.props.user.role !== 'Admin' ? (
+                        <button className="action-btn" onClick={() => this.props.changeRole(this.props.user)}>Make admin</button>
                     ) : (
-                        <button className="action-btn">Remove admin</button>
+                        <button className="action-btn" onClick={() => this.props.changeRole(this.props.user)}>Remove admin</button>
                     )}
                 </td>
                 <td>
                     <button className="action-btn" onClick={() => this.props.openEditUserModal(this.props.user)}>Edit</button>
                 </td>
                 <td>
-                    <button className="action-btn" onClick={() => this.props.deleteUser(this.props.user._id)}>Delete</button>
+                    <button className="action-btn" onClick={() => this.props.deleteUser(this.props.user)}>Delete</button>
                 </td>
             </tr>
         );
     }
 }
 
-export default connect(null, null)(UserRow);
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        changeRole: (user) => dispatch(usersActions.changeRole(user))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(UserRow);
 

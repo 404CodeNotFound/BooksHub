@@ -353,7 +353,7 @@ module.exports = (data) => {
                 })
                 .catch(error => {
                     return res.status(500)
-                        .json({ message: error.toString() });
+                        .json({ message: 'Something went wrong.' });
                 });      
         },
         getAllUsers: (req, res) => {
@@ -375,6 +375,33 @@ module.exports = (data) => {
                 });
             
             return res;
+        },
+        changeRole: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can change user roles." });
+            }
+
+            const userId = req.params.id;
+            const role = req.body.role;
+            
+            data.users.getUserById(userId)
+                .then(existingUser => {
+                    if (!existingUser) {
+                        return res.status(404)
+                            .json({ message: "User with provided id does not exist."});
+                    }
+
+                    return data.users.changeRole(userId, role);
+                })
+                .then((updatedUser) => {
+                    return res.status(201)
+                        .json({ user: updatedUser });
+                })
+                .catch(error => {
+                    return res.status(500)
+                        .json({ message: 'Something went wrong.' });
+                });
         }
     }
 }
