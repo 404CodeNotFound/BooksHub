@@ -59,9 +59,9 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
+        deleteUser: (id) => dispatch(usersActions.deleteUser(id)),
         changeRole: (user) => dispatch(usersActions.changeRole(user)),
         openEditUserModal: (user) => dispatch(modalsActions.openEditUserModal(user)),
-        deleteUser: (id) => dispatch(usersActions.deleteUser(id))
     };
 }
 
