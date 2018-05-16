@@ -10,7 +10,7 @@ import * as modalsActions from '../../../actions/modals.actions';
 import * as loadersActions from '../../../actions/loaders.actions';
 
 class AllBooksList extends Component {
-    state = { activePage: 1, isOpen: false };
+    state = { activePage: 1 };
 
     componentDidMount() {
         this.props.showLoader();
@@ -27,36 +27,37 @@ class AllBooksList extends Component {
                     <div id="books">
                         <h2>Books</h2>
                         <button type="button" className="btn btn-main-green" onClick={this.props.openAddBookModal}>+ Add</button>
-                        <table className="table">
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        PhotoUrl
-                        </th>
-                                    <th>
-                                        Title
-                        </th>
-                                    <th>
-                                        ISBN
-                        </th>
-                                    <th>
-                                        Published
-                        </th>
-                                    <th>
-                                        Author
-                        </th>
-                                    <th>
-                                        Publisher
-                        </th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                {this.props.books.map(book =>
-                                    <BookRow key={book._id} book={book} />
-                                )}
-                            </tbody>
-                        </table>
                         {this.props.books.length > 0 &&
+                            [<table key="books-table" className="table">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            PhotoUrl
+                                        </th>
+                                        <th>
+                                            Title
+                                        </th>
+                                        <th>
+                                            ISBN
+                                        </th>
+                                        <th>
+                                            Published
+                                        </th>
+                                        <th>
+                                            Author
+                                        </th>
+                                        <th>
+                                            Publisher
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    {this.props.books.map(book =>
+                                        <BookRow key={book._id} book={book} />
+                                    )}
+                                </tbody>
+                            </table>,
+                            
                             <div key="pages" className="row">
                                 <Pagination
                                     activePage={this.state.activePage}
@@ -65,16 +66,19 @@ class AllBooksList extends Component {
                                     pageRangeDisplayed={5}
                                     onChange={this.selectPage}
                                 />
-                            </div>
+                            </div>]
                         }
+
                     </div>
-                    {this.props.isVisibleAddBookModal &&
+                    {this.props.isVisibleAddBookModal && 
                         <AddBookModal />
                     }
-                    {this.props.isVisibleEditBookModal &&
-                        <EditBookModal toggleModal={this.toggleModal} />
-                    }
+                    {this.props.isVisibleEditBookModal && 
+                        <EditBookModal />        
+                    }                
                 </div>
+                // ] :
+                // <div className="loader"></div>
         )
     }
 

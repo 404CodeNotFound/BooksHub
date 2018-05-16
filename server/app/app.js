@@ -42,6 +42,11 @@ const init = (data) => {
     app.post('/login', usersController.login);
     app.post('/register', usersController.register);
 
+    // Users
+    app.get('/users', auth.authenticate(passport), usersController.getAllUsers);
+    app.put('/users/:id/role', auth.authenticate(passport), usersController.changeRole);
+    app.delete('/users/:id', auth.authenticate(passport), usersController.deleteUser);
+    
     // User Profile Sections
     app.get('/users/:username', usersController.getUserProfile);
     app.put('/users/:username', auth.authenticate(passport), usersController.updateUserProfile);
@@ -87,10 +92,16 @@ const init = (data) => {
     app.get('/latestbooks', booksController.getLatestBooks);      
     
     // Genres
-    app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);    
-
+    app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);
+    app.post('/genres', auth.authenticate(passport), genresController.addGenre);   
+    app.delete('/genres/:id', auth.authenticate(passport), genresController.deleteGenre);
+       
     // Authors
+    app.get('/authors', auth.authenticate(passport), authorsController.getAllAuthors);
+    app.post('/authors', auth.authenticate(passport), authorsController.addAuthor);
     app.get('/authors/:id', authorsController.getAuthor);
+    app.put('/authors/:id', auth.authenticate(passport), authorsController.updateAuthor);
+    app.delete('/authors/:id', auth.authenticate(passport), authorsController.deleteAuthor);            
 
     return Promise.resolve(server);
 };

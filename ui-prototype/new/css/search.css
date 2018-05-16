@@ -1,0 +1,250 @@
+.icon .fa {
+    font-size: 14pt !important;
+    cursor: pointer;
+}
+
+.input {
+    border: none !important;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #555555;   
+}
+
+#search-input-field::placeholder {
+    color: #555555;
+}
+
+.search-input-options {
+    background-color: #fff;
+    color: #555555;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+.search-form {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 50%;
+}
+
+.search-input {
+    width: 92%;
+    padding-left: 5%;
+}
+
+.search-submit {
+    padding-top: 5%;
+}
+
+.options {
+    width: 40%;
+}
+
+.search-panel {
+    border: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.selected {
+    color: #4eb980;
+}
+
+.checkbox {
+    padding-left: 20px; 
+}
+.checkbox label {
+    display: inline-block;
+    position: relative;
+    padding-left: 5px; 
+}
+.checkbox label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    margin-left: -20px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out; 
+}
+.checkbox label::after {
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 0;
+    top: 0;
+    margin-left: -20px;
+    padding-left: 3px;
+    padding-top: 1px;
+    font-size: 11px;
+    color: #555555; 
+}
+.checkbox input[type="checkbox"] {
+    opacity: 0; 
+}
+.checkbox input[type="checkbox"]:focus + label::before {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; 
+}
+.checkbox input[type="checkbox"]:checked + label::after {
+    font-family: 'FontAwesome';
+    content: "\f00c"; 
+    }
+.checkbox input[type="checkbox"]:disabled + label {
+    opacity: 0.65; 
+}
+.checkbox input[type="checkbox"]:disabled + label::before {
+    background-color: #eeeeee;
+    cursor: not-allowed; 
+}
+  
+.checkbox-success input[type="checkbox"]:checked + label::before {
+    background-color: #5cb85c;
+    border-color: #5cb85c; 
+}
+.checkbox-success input[type="checkbox"]:checked + label::after {
+    color: #fff; 
+}
+
+#search-results-books {
+    padding: 0 !important;
+}
+
+.icon {
+    display: block;
+}
+
+#btn-search {
+    cursor: pointer;
+     margin-top: 34%; 
+}
+
+.btn {
+    margin: 0px !important;
+}
+
+.panel {
+    margin-top: 5%;
+}
+
+div.card {
+    margin-top: 5%;
+    margin-left: 7%;
+    border: none !important;
+}
+
+.card-block {
+    background: white;
+    color: #565656;
+    font-style: normal;
+    font-weight: 400;
+    position: relative;
+}
+
+.card-text, .card-title {
+    margin-bottom: 2px;
+}
+
+.card-footer {
+    background: none;
+    border: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.card-footer:last-child {
+    border-radius: 0;
+}
+
+.pagination {
+    margin-top: 10%;
+}
+
+.pagination li {
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: #565656;
+    padding: 5px 10px 5px;
+    margin-right: 2px;
+    cursor: pointer;    
+}
+.pagination li.active, .pagination li:hover {
+    background-color: #4eb980;   
+    border-color: #4eb980; 
+    color: white;
+}
+.pages {
+    margin-top: 10%;
+}
+
+.users {
+    margin-top: 5%;
+}
+
+.users img {
+    display: initial !important;
+}
+
+.background-image {
+    background-color: #4eb980;
+}
+
+@media only screen and (max-width: 1097px) {
+    .search-form {
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 92%;
+        padding-left: 5%;
+    }
+
+    .search-submit {
+        padding-top: 5%;
+    }
+
+    .options {
+        text-align: center !important;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .search-input-options {
+        margin-top: 50%;
+    }
+
+    .filters {
+        margin: 0 !important;
+        padding-left: 20% !important;  
+    }
+
+    .filter {
+        font-size: 12px;
+        width: 50%;
+        float: left;
+    }
+
+    .filter h4 {
+        font-size: 16px !important;
+    }
+
+    .card {
+        margin-right: 7%;
+    }
+
+    #search-results-events h3 {
+        margin-top: 5%;
+    }
+}

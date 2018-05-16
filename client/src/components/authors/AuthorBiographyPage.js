@@ -37,37 +37,36 @@ class AuthorBiographyPage extends Component {
                                                 </div>
                                                 <p>
                                                     <i className="fa fa-envelope one"></i>
-                                                    <a href={this.props.author.website} target="blank" className="green-link">{this.props.author.website}</a>
+                                                    <a href={this.props.author.website} target="blank" className="green-link">{this.props.author.website || '-'}</a>
                                                 </p>
                                             </div>
                                             <hr />
                                             <dl className="container details dl-horizontal">
                                                 <dt>
                                                     Nationality
-                                        </dt>
+                                                </dt>
 
                                                 <dd>
-                                                    {this.props.author.nationality} </dd>
+                                                    {this.props.author.nationality || '-'} </dd>
 
                                                 <dt>
                                                     Age
-                                        </dt>
+                                                </dt>
 
                                                 <dd>
-                                                    {this.props.author.age} </dd>
+                                                    {this.props.author.age || '-'} </dd>
 
                                                 <dt>
                                                     Birth date
-    </dt>
+                                                </dt>
                                                 <dd>
-                                                    {this.props.author.birth_date}
+                                                    {this.props.author.birth_date.split('T')[0] || '-'}
                                                 </dd>
                                                 <dt>
                                                     Biography
-                                        </dt>
-
+                                                </dt>
                                                 <dd>
-                                                    {this.props.author.biography}
+                                                    {this.props.author.biography || '-'}
                                                 </dd>
                                             </dl>
                                             <p>
@@ -90,7 +89,7 @@ class AuthorBiographyPage extends Component {
                             <div className="col-md-12 text-center">
                                 <div className="row">
                                     {this.props.books.map(book =>
-                                        <div className="card background-grey col-md-2">
+                                        <div key={book._id} className="card background-grey col-md-2">
                                             <Link to={"/books/" + book.title}>
                                                 <img width="100px" className="card-img-top" src={book.photo} alt={"Card image cap " + book._id} />
                                             </Link>

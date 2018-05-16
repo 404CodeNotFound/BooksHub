@@ -56,7 +56,7 @@ module.exports = (data) => {
             data.users.getUserByUsername(user.username)
                 .then((existingUser) => {
                     if(existingUser) {
-                        res.status(404)
+                        res.status(400)
                             .json({ message: "User with that username already exists." });
                     } else {
                         user.photo = "http://www.verspers.nl/workspace/assets/images/empty_profile.png";
@@ -338,23 +338,97 @@ module.exports = (data) => {
             return res;
         },
         updateUserProfile: (req, res) => {
-            if(req.user.username !== req.params.username) {
-                res.status(403)
+            if(req.user.role !== 'Admin' && req.user.username !== req.params.username) {
+                return res.status(403)
                     .json({ message: "Users can only edit their profiles." });
             }
 
             const userData = req.body;
-            userData.username = req.user.username;
+            userData.username = req.body.username;
 
             data.users.updateUser(userData)
                 .then((updatedUser) => {
-                    res.status(201)
+                    return res.status(201)
                         .json({ user: updatedUser });
                 })
                 .catch(error => {
-                    res.status(500)
-                        .json({ message: error.toString() });
+                    return res.status(500)
+                        .json({ message: 'Something went wrong.' });
                 });      
+        },
+        getAllUsers: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can view all users." });
+            }
+            
+            const page = req.query.page;
+
+            data.users.getAllUsers(page)
+                .then(result => {
+                    res.status(200)
+                        .json(result);
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: 'Something went wrong!' });
+                });
+            
+            return res;
+        },
+        changeRole: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can change user roles." });
+            }
+
+            const userId = req.params.id;
+            const role = req.body.role;
+            
+            data.users.getUserById(userId)
+                .then(existingUser => {
+                    if (!existingUser) {
+                        return res.status(404)
+                            .json({ message: "User with provided id does not exist."});
+                    }
+
+                    return data.users.changeRole(userId, role);
+                })
+                .then((updatedUser) => {
+                    return res.status(201)
+                        .json({ user: updatedUser });
+                })
+                .catch(error => {
+                    return res.status(500)
+                        .json({ message: 'Something went wrong.' });
+                });
+        },
+
+        deleteUser: (req, res) => {
+            if(req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: "Only Administrators can delete users." });
+            }
+
+            const userId = req.params.id;
+
+            data.users.getUserById(userId)
+                .then(foundUser => {
+                    if(!foundUser) {
+                        return res.status(404)
+                            .json({ message: 'User with provided ID does not exist.' });
+                    }
+
+                    data.users.deleteUser(userId)
+                        .then(() => {
+                            return res.status(204)
+                                .json("Removed");
+                        });
+                })
+                .catch(error => {
+                    return res.status(500)
+                        .json({ message: 'Something went wrong!' });
+                });
         }
     }
 }

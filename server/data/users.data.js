@@ -1,6 +1,6 @@
 const { User, Status } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 18;
+const itemsPerPage = 10;
 
 module.exports = class UserData {
     getUserByUsernameAndPassword(username, passHash) {
@@ -45,6 +45,7 @@ module.exports = class UserData {
         return new Promise((resolve, reject) => {
             User.findOne({ 'username': username })
                 .populate('requests')
+                .populate('favourite_genres')
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
@@ -360,19 +361,76 @@ module.exports = class UserData {
                     nationality: user.nationality,
                     age: user.age,
                     gender: user.gender,
-                    // birth_date: new Date(user.birthdate),
+                    birth_date: user.birthdate,
                     languages: user.languages.split(', '),
-                    favourite_quote: user.favouriteQuote
+                    favourite_quote: user.favouriteQuote,
+                    favourite_genres: user.genres.split(', '),
                 }
-            },
-                { new: true },
-                (error, updatedUser) => {
-                    if (error) {
-                        return reject(error);
+            }, { new: true })
+            .populate('favourite_genres')
+            .exec(function(error, updatedUser) {
+                if (error) {
+                    return reject(error);
+                }
+
+                return resolve(updatedUser);
+            });
+        });
+    }
+
+    changeRole(userId, currentRole) {
+        const newRole = currentRole === "Admin" ? "User" : "Admin";
+
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ _id: userId }, {
+                $set: {
+                    role: newRole,
+                }
+            }, { new: true })
+            .exec(function(error, updatedUser) {
+                if (error) {
+                    return reject(error);
+                }
+
+                return resolve(updatedUser);
+            });
+        });
+    }
+
+    getAllUsers(page) {
+        return new Promise((resolve, reject) => {
+            User.find({ 'isDeleted': false })
+                .populate('favourite_genres')
+                .exec((err, users) => {
+                    if (err) {
+                        return reject(err);
                     }
 
-                    return resolve(updatedUser);
+                    const pageUsers = getPageOfCollection(users, page, itemsPerPage);
+
+                    const data = {
+                        users: pageUsers,
+                        usersCount: users.length
+                    };
+
+                    return resolve(data);
                 });
+        });
+    }
+
+    deleteUser(id) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ '_id': id }, {
+                $set: {
+                    isDeleted: true
+                }
+            }, { new: true }, (err, user) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
         });
     }
 }

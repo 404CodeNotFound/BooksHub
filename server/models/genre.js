@@ -12,7 +12,11 @@ module.exports = function init(mongoose) {
         books: [{
             type: Schema.ObjectId,
             ref: 'Book'
-        }]
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
     });
 
     const Genre = mongoose.model('Genre', GenreSchema);

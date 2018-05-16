@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AllBooksList from './books/AllBooksList';
+import AllAuthorsList from './authors/AllAuthorsList';
+import AllGenresList from './genres/AllGenresList';
+import AllUsersList from './users/AllUsersList';
 import '../../style/admin.panel.css';
 
 class AdminPanelPage extends Component {
@@ -54,10 +57,10 @@ class AdminPanelPage extends Component {
 
                                 <div className="line col-md-9">
                                     <Route path="/administration/books" render={() => <AllBooksList />} />
-                                    {/* <Route path="/administration/events" render={() => <AllEventsList />}/>
-                                    <Route path="/administration/users" render={() => <AllUsersList />} />
                                     <Route path="/administration/authors" render={() => <AllAuthorsList />} />
-                                    <Route path="/administration/genres" render={() => <AllGenresList />} /> */}
+                                    <Route path="/administration/genres" render={() => <AllGenresList />} />
+                                    <Route path="/administration/users" render={() => <AllUsersList />} /> 
+                                    {/* <Route path="/administration/events" render={() => <AllEventsList />}/>*/}
                                 </div>
                             </div>
                         </div>
