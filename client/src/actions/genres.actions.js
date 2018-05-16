@@ -41,6 +41,7 @@ export function getAllGenres() {
 
         return requester.getAuthorized(token, `${api.GENRES}`)
             .done(response => {
+                debugger;
                 dispatch(getAllGenresSuccess(response.genres, response.genresCount));
             })
             .fail(error => {

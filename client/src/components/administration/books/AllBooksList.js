@@ -57,7 +57,7 @@ class AllBooksList extends Component {
                                     )}
                                 </tbody>
                             </table>,
-                            
+
                             <div key="pages" className="row">
                                 <Pagination
                                     activePage={this.state.activePage}
@@ -70,15 +70,13 @@ class AllBooksList extends Component {
                         }
 
                     </div>
-                    {this.props.isVisibleAddBookModal && 
+                    {this.props.isVisibleAddBookModal &&
                         <AddBookModal />
                     }
-                    {this.props.isVisibleEditBookModal && 
-                        <EditBookModal />        
-                    }                
+                    {this.props.isVisibleEditBookModal &&
+                        <EditBookModal />
+                    }
                 </div>
-                // ] :
-                // <div className="loader"></div>
         )
     }
 
@@ -89,7 +87,6 @@ class AllBooksList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     return {
         books: state.administration.books,
         booksCount: state.administration.booksCount,

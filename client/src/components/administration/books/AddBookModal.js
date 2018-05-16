@@ -7,6 +7,15 @@ import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 import * as errorsActions from '../../../actions/error.actions';
 
+const LANGUAGES = [
+    { label: 'Bulgarian', value: 'Bulgarian' },
+    { label: 'English', value: 'English' },
+    { label: 'French', value: 'French' },
+    { label: 'Spanish', value: 'Spanish' },
+    { label: 'German', value: 'German' },
+    { label: 'Italian', value: 'Italian' },
+];
+
 class AddBookModal extends Component {
     state = {
         title: '',
@@ -79,7 +88,13 @@ class AddBookModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-language">Language</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-language" name="Language" type="text" onChange={(event) => this.handleLanguageChange(event)} />
+                            <Select
+                                closeOnSelect={true}
+                                onChange={this.handleLanguageChange}
+                                options={LANGUAGES}
+                                placeholder="Select language"
+                                value={this.state.language}
+                            />
                         </div>
                     </div>
                     <div className="form-group row">
@@ -161,8 +176,8 @@ class AddBookModal extends Component {
         this.setState({ photo: event.target.value });
     }
 
-    handleLanguageChange = (event) => {
-        this.setState({ language: event.target.value });
+    handleLanguageChange = (value) => {
+        this.setState({ language: value });
     }
 
     handleGenresChange = (value) => {
@@ -180,7 +195,7 @@ class AddBookModal extends Component {
             publisher: this.state.publisher,
             summary: this.state.summary,
             photo: this.state.photo,
-            language: this.state.language,
+            language: this.state.language.label,
             genres: genres.join(', ')
         };
 
@@ -191,9 +206,9 @@ class AddBookModal extends Component {
 function mapStateToProps(state, ownProps) {
     const titleError = state.errors.validationErrors.find(error => error.param === 'title');
     const authorFirstNameError = state.errors.validationErrors.find(error => error.param === 'authorFirstName');
-    const authorLastNameError = state.errors.validationErrors.find(error => error.param === 'authorLastName');    
+    const authorLastNameError = state.errors.validationErrors.find(error => error.param === 'authorLastName');
     const photoError = state.errors.validationErrors.find(error => error.param === 'photo');
-    const genresError = state.errors.validationErrors.find(error => error.param === 'genres');    
+    const genresError = state.errors.validationErrors.find(error => error.param === 'genres');
 
     return {
         genresSelectValues: state.genres.genresSelectValues,
