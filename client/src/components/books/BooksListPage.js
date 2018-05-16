@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as booksActions from '../../actions/books.actions';
 import BookPartial from './BookPartial';
+import { BarLoader } from 'react-css-loaders';
+import * as booksActions from '../../actions/books.actions';
+import * as loadersActions from '../../actions/loaders.actions';
 
 class BooksListPage extends Component {
     backgroundImage = {
@@ -9,6 +11,8 @@ class BooksListPage extends Component {
     };
 
     componentDidMount() {
+        this.props.showLoader();
+
         if (this.props.currentUser.id) {
             this.props.getRecommendedBooks();
         } else {
@@ -18,34 +22,32 @@ class BooksListPage extends Component {
 
     render() {
         return (
-            (this.props.recommendedBooks.length > 0 || this.props.latestBooks.length > 0) ?
-                <article>
-                    <header className="section background-image text-center" style={this.backgroundImage}>
-                        <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
-                            {this.props.currentUser.id ? "Recommended" : "Latest"} books
-              </h1>
-                        <img className="arrow-object" src="img/arrow-object-white.svg" alt="arrow" />
-                    </header>
-                    <section className="section background-white">
-                        <div className="container">
+            <article>
+                <header className="section background-image text-center" style={this.backgroundImage}>
+                    <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                        {this.props.currentUser.id ? "Recommended" : "Latest"} books
+                        </h1>
+                    <img className="arrow-object" src="img/arrow-object-white.svg" alt="arrow" />
+                </header>
+                <section className="section background-white">
+                    <div className="container">
+                        {this.props.isLoaderVisible ?
+                            <div className="loader-page">
+                                <BarLoader color="#4eb980" size="11" />
+                            </div> :
+                            (this.props.books.length <= 0) ? 
+                            <div className="row">
+                                There is no books.
+                            </div> :
                             <div className="line row">
-                                {this.props.recommendedBooks.length > 0 &&
-                                    this.props.recommendedBooks.map(book =>
+                                    {this.props.books.map(book =>
                                         <BookPartial book={book} />
-                                    )
-                                }
-
-                                {this.props.latestBooks.length > 0 &&
-                                    this.props.latestBooks.map(book =>
-                                        <BookPartial book={book} />
-                                    )
-                                }
+                                    )}
                             </div>
-                        </div>
-                    </section>
-                </article>
-                :
-                <div className="loader"></div>
+                        }
+                    </div>
+                </section>
+            </article>
         )
     }
 }
@@ -55,14 +57,15 @@ function mapStateToProps(state, ownProps) {
     const userId = localStorage.getItem('id');
 
     return {
-        recommendedBooks: state.books.recommendedBooks,
-        latestBooks: state.books.latestBooks,
+        books: state.books.books,
         currentUser: { username: username, id: userId },
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
+        showLoader: () => dispatch(loadersActions.showLoader()),
         getRecommendedBooks: () => dispatch(booksActions.getRecommendedBooks()),
         getLatestBooks: () => dispatch(booksActions.getLatestBooks())
     };

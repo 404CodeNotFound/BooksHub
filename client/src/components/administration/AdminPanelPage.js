@@ -8,14 +8,13 @@ class AdminPanelPage extends Component {
     state = { links: ['active', '', '', '', ''] };
     render() {
         return (
-            this.props.books !== null ?
                 <article>
                     <header className="section background-image text-center">
                         <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                             Admin Panel
                         </h1>
                         <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
-                    </header>,
+                    </header>
                         <section className="section background-white">
                         <div className="container" id="admin-page-content">
                             <div className="row">
@@ -64,8 +63,6 @@ class AdminPanelPage extends Component {
                         </div>
                     </section >
                 </article>
-                :
-                <div className="loader"></div>
         )
     }
 

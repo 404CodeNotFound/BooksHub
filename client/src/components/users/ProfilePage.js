@@ -25,7 +25,10 @@ class ProfilePage extends Component {
 
     render() {
         return (
-            this.props.user !== null ?
+            this.props.user === null ?
+                <div className="loader-page">
+                    <BarLoader color="#4eb980" size="11" />
+                </div> :
                 [<header key="profile-header" className="section background-image text-center">
                     <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                         {this.props.user.username === this.props.currentUser.username ?
@@ -149,10 +152,7 @@ class ProfilePage extends Component {
                     </div>
                     <EditUserModal isVisible={this.state.isOpen} toggleModal={this.toggleModal} user={this.props.user} />
                 </section >
-                ] :
-                <div className="loader-page">
-                    <BarLoader color="#4eb980" size="11" />
-                </div>
+                ]
         )
     }
 

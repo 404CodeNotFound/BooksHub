@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import WriteReview from './WriteReview';
 import BookReviewsList from './BookReviewsList';
+import { BarLoader } from 'react-css-loaders';
 import * as booksActions from '../../actions/books.actions';
+import * as loadersActions from '../../actions/loaders.actions';
 import '../../style/book.details.css';
 
 class BookDetailsPage extends Component {
     componentDidMount() {
+        this.props.showLoader();
         this.props.getBookDetails();
     }
 
     render() {
         return (
-            this.props.book !== null ?
                 <article>
                     <header className="section background-image text-center">
                         <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
@@ -23,6 +25,11 @@ class BookDetailsPage extends Component {
                     </header>
 
                     <div className="container">
+                        {this.props.isLoaderVisible ? 
+                        <div className="loader-page">
+                            <BarLoader color="#4eb980" size="11" />
+                        </div>
+                        :
                         <section className="background-white section">
                             <div className="row col-md-12 book-info">
                                 <div className="col-lg-4 col-md-7 col-sm-6 col-xs-12 animated  animation-done bounceInLeft book-cover">
@@ -143,14 +150,13 @@ class BookDetailsPage extends Component {
                                 </div>
                             </div>
                         </section>
+                        }
                     </div>
                     {(this.props.currentUser.username && this.props.canWriteReview) &&
                         <WriteReview />
                     }
                     <BookReviewsList />
                 </article>
-                :
-                <div className="loader"></div>
         )
     }
 
@@ -182,7 +188,8 @@ function mapStateToProps(state, ownProps) {
         currentUser: { username: username, id: userId },
         canWriteReview: state.books.canWriteReview,
         currentUserRating: state.books.currentUserRating,
-        bookStatus: state.books.bookStatus
+        bookStatus: state.books.bookStatus,
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
@@ -191,7 +198,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.title, userId)),
         rateBook: (bookId, userId, rating) => dispatch(booksActions.rateBook(userId, bookId, rating)),
-        markBook: (bookId, userId, status) => dispatch(booksActions.markBook(bookId, userId, status))
+        markBook: (bookId, userId, status) => dispatch(booksActions.markBook(bookId, userId, status)),
+        showLoader: () => dispatch(loadersActions.showLoader())
     };
 }
 

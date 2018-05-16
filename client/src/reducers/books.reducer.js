@@ -1,5 +1,5 @@
 export default function books(state = {
-    book: null, latestBooks: [], recommendedBooks: []
+    book: { author: {}, genres: [], reviews: [] }, books: []
 }, action) {
     switch (action.type) {
         case 'GET_BOOK_DETAILS_SUCCESS':
@@ -36,15 +36,10 @@ export default function books(state = {
                 ...state,
                 bookStatus: action.result.bookStatus
             };
-        case 'GET_RECOMMENDED_BOOKS_SUCCESS':
+        case 'GET_FILTERED_BOOKS_SUCCESS':
             return {
                 ...state,
-                recommendedBooks: action.books
-            };
-        case 'GET_LATEST_BOOKS_SUCCESS':
-            return {
-                ...state,
-                latestBooks: action.books
+                books: action.books
             };
         default:
             return state;

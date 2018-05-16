@@ -44,12 +44,15 @@ class AddBookModal extends Component {
                         <label className="col-md-2 control-label">Author</label>
                         <div className="col-md-4">
                             <input className="form-control" id="book-author-firstName" placeholder="First Name" type="text" onChange={(event) => this.handleAuthorFirstNameChange(event)} />
-                            {this.props.authorError &&
-                                <div className="error">{this.props.authorError.msg}</div>
+                            {this.props.authorFirstNameError &&
+                                <div className="error">{this.props.authorFirstNameError.msg}</div>
                             }
                         </div>
                         <div className="col-md-4">
                             <input className="form-control" id="book-author-lastName" placeholder="Last Name" type="text" onChange={(event) => this.handleAuthorLastNameChange(event)} />
+                            {this.props.authorLastNameError &&
+                                <div className="error">{this.props.authorLastNameError.msg}</div>
+                            }
                         </div>
                     </div>
                     <div className="form-group row">
@@ -96,6 +99,9 @@ class AddBookModal extends Component {
                                 joinValues
                                 value={this.state.genres}
                             />
+                            {this.props.genresError &&
+                                <div className="error">{this.props.genresError.msg}</div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -184,14 +190,18 @@ class AddBookModal extends Component {
 
 function mapStateToProps(state, ownProps) {
     const titleError = state.errors.validationErrors.find(error => error.param === 'title');
-    const authorError = state.errors.validationErrors.find(error => error.param === 'authorFirstName.authorLastName');
+    const authorFirstNameError = state.errors.validationErrors.find(error => error.param === 'authorFirstName');
+    const authorLastNameError = state.errors.validationErrors.find(error => error.param === 'authorLastName');    
     const photoError = state.errors.validationErrors.find(error => error.param === 'photo');
+    const genresError = state.errors.validationErrors.find(error => error.param === 'genres');    
 
     return {
         genresSelectValues: state.administration.genresSelectValues,
         titleError: titleError,
-        authorError: authorError,
-        photoError: photoError
+        authorFirstNameError: authorFirstNameError,
+        authorLastNameError: authorLastNameError,
+        photoError: photoError,
+        genresError: genresError
     };
 }
 

@@ -176,8 +176,10 @@ module.exports = (data) => {
                 const book = req.body;
 
                 req.checkBody('title', 'Title is required.').notEmpty();
-                req.checkBody(['authorFirstName', 'authorLastName'], 'Author name is required.').notEmpty();
+                req.checkBody('authorFirstName', 'Author first name is required.').notEmpty();
+                req.checkBody('authorLastName', 'Author last name is required.').notEmpty();
                 req.checkBody('photo', 'Photo is required.').notEmpty();
+                req.checkBody('genres', 'You should select at least one genre.').notEmpty();
 
                 const errors = req.validationErrors();
 
@@ -200,6 +202,7 @@ module.exports = (data) => {
                                 .json({ book: createdBook });
                         })
                         .catch(error => {
+                            console.log(error);
                             res.status(500)
                                 .json({ message: 'Something went wrong!' })
                         });

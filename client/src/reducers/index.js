@@ -6,6 +6,7 @@ import books from './books.reducer';
 import administration from './administration.reducer';
 import modals from './modals.reducer';
 import authors from './authors.reducer';
+import loaders from './loaders.reducer';
 
 const reducer = combineReducers({
     users,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
     books,
     errors,
     modals,
+    loaders,
     authors,
     administration
 });

@@ -2,17 +2,14 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 import * as modalsActions from './modals.actions';
+import * as loadersActions from './loaders.actions';
 
 export function getUserBooksSuccess(result) {
     return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
 }
 
-export function getRecommendedBooksSuccess(books) {
-    return { type: 'GET_RECOMMENDED_BOOKS_SUCCESS', books };
-}
-
-export function getLatestBooksSuccess(books) {
-    return { type: 'GET_LATEST_BOOKS_SUCCESS', books };
+export function getFilteredBooksSuccess(books) {
+    return { type: 'GET_FILTERED_BOOKS_SUCCESS', books };
 }
 
 export function getBookDetailsSuccess(book, canWriteReview, currentUserRating, bookStatus) {
@@ -95,6 +92,7 @@ export function getBookDetails(title, userId) {
                 }
 
                 dispatch(getBookDetailsSuccess(response.book, userCanWriteReview, currentUserRating.stars, bookStatus.name));
+                dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -146,7 +144,8 @@ export function getRecommendedBooks() {
         const token = localStorage.getItem('token');
         return requester.getAuthorized(token, `${api.RECOMMENDED_BOOKS}`)
             .done(response => {
-                dispatch(getRecommendedBooksSuccess(response.books));
+                dispatch(getFilteredBooksSuccess(response.books));
+                dispatch(loadersActions.hideLoader());                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -158,7 +157,8 @@ export function getLatestBooks() {
     return function (dispatch) {
         return requester.get(`${api.LATEST_BOOKS}`)
             .done(response => {
-                dispatch(getLatestBooksSuccess(response.books));
+                dispatch(getFilteredBooksSuccess(response.books));
+                dispatch(loadersActions.hideLoader());                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -170,8 +170,9 @@ export function getAllBooks(page) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
         return requester.getAuthorized(token, `${api.BOOKS}?page=${page}`)
-            .done(response => {
+            .done(response => {        
                 dispatch(getAllBooksSuccess(response));
+                dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

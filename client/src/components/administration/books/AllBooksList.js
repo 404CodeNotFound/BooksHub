@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as booksActions from '../../../actions/books.actions';
-import * as modalsActions from '../../../actions/modals.actions';
 import BookRow from './BookRow';
 import Pagination from "react-js-pagination";
 import AddBookModal from './AddBookModal';
 import EditBookModal from './EditBookModal';
+import { BarLoader } from 'react-css-loaders';
+import * as booksActions from '../../../actions/books.actions';
+import * as modalsActions from '../../../actions/modals.actions';
+import * as loadersActions from '../../../actions/loaders.actions';
 
 class AllBooksList extends Component {
     state = { activePage: 1, isOpen: false };
 
     componentDidMount() {
+        this.props.showLoader();
         this.props.getAllBooks(this.state.activePage);
     }
 
     render() {
         return (
-            this.props.books.length > 0 ?
-                [<div id="page-content-wrapper administration-box" key="books-list">
+            this.props.isLoaderVisible ?
+                <div className="loader-page">
+                    <BarLoader color="#4eb980" size="11" />
+                </div> :
+                <div id="page-content-wrapper administration-box" key="books-list">
                     <div id="books">
                         <h2>Books</h2>
                         <button type="button" className="btn btn-main-green" onClick={this.props.openAddBookModal}>+ Add</button>
@@ -62,15 +68,13 @@ class AllBooksList extends Component {
                             </div>
                         }
                     </div>
-                    {this.props.isVisibleAddBookModal && 
-                    <AddBookModal />
+                    {this.props.isVisibleAddBookModal &&
+                        <AddBookModal />
                     }
-                    {this.props.isVisibleEditBookModal && 
-                        <EditBookModal toggleModal={this.toggleModal} />        
-                    }                
+                    {this.props.isVisibleEditBookModal &&
+                        <EditBookModal toggleModal={this.toggleModal} />
+                    }
                 </div>
-                ] :
-                <div className="loader"></div>
         )
     }
 
@@ -81,18 +85,21 @@ class AllBooksList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     return {
         books: state.administration.books,
         booksCount: state.administration.booksCount,
         isVisibleAddBookModal: state.modals.showAddBookModal,
-        isVisibleEditBookModal: state.modals.showEditBookModal
+        isVisibleEditBookModal: state.modals.showEditBookModal,
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllBooks: (pageNumber) => dispatch(booksActions.getAllBooks(pageNumber)),
-        openAddBookModal: () => dispatch(modalsActions.openAddBookModal())
+        openAddBookModal: () => dispatch(modalsActions.openAddBookModal()),
+        showLoader: () => dispatch(loadersActions.showLoader())
     };
 }
 
