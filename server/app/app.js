@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const path = require('path');
 const auth = require('../config/auth.config');
+const errors = require('../utils/error.constants');
 
 const init = (data) => {
     const app = express();

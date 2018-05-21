@@ -139,9 +139,10 @@ module.exports = (data) => {
                             throw Error(errors.PERMISSIONS_DENIED);
                         }
 
-                        const userId = request.receiver;
-                        return data.users.deleteRequest(userId, requestId);
+                        return request;
                     })
+                    .then(request => data.requests.deleteRequest(request))
+                    .then(request => data.users.deleteRequest(request.receiver, requestId))
                     .then(() => {
                         res.status(200)
                             .json("Removed");

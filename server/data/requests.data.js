@@ -47,6 +47,7 @@ module.exports = class RequestsData {
                 if (err) {
                     return reject(err);
                 } else {
+                    console.log(request);
                     return resolve(request);
                 }
             });
