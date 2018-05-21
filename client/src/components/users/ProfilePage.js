@@ -167,10 +167,9 @@ class ProfilePage extends Component {
     }
 
     sendInvitation = () => {
-        const senderId = localStorage.getItem('id');
         const receiverId = this.props.user._id;
 
-        this.props.sendInvitation(senderId, receiverId);
+        this.props.sendInvitation(receiverId);
     }
 
     showInviteButton = () => {
@@ -199,7 +198,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getProfile: dispatch(usersActions.getProfile(ownProps.match.params.username)),
-        sendInvitation: (senderId, receiverId) => dispatch(invitationsActions.sendInvitation(senderId, receiverId)),
+        sendInvitation: (receiverId) => dispatch(invitationsActions.sendInvitation(receiverId)),
         openEditUserModal: (user) => dispatch(modalsActions.openEditUserModal(user))
     };
 }

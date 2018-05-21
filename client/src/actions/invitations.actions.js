@@ -27,10 +27,10 @@ export function getInvitations(id, page) {
     };
 }
 
-export function sendInvitation(senderId, receiverId) {
+export function sendInvitation(receiverId) {
     const token = localStorage.getItem('token');
     return function (dispatch) {
-        return requester.postAuthorized(token, `${api.USERS}/${receiverId}/requests`, { id: senderId })
+        return requester.postAuthorized(token, `${api.USERS}/${receiverId}/requests`)
             .done(() => {
                 dispatch(sendInvitationSuccess());
             })

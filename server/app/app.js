@@ -74,7 +74,7 @@ const init = (data) => {
     
     // Requests of User
     app.get('/users/:id/requests', auth.authenticate(passport), requestsController.getPendingUserRequests);
-    app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequests);
+    app.post('/users/:id/requests', auth.authenticate(passport), requestsController.sendRequest);
     app.put('/requests/:id', auth.authenticate(passport), requestsController.acceptRequest);            
     app.delete('/requests/:id', auth.authenticate(passport), requestsController.declineRequest);            
                 

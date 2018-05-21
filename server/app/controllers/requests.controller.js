@@ -1,3 +1,5 @@
+const errors = require('../../utils/error.constants');
+
 module.exports = (data) => {
     return {
         getPendingUserRequests: (req, res) => {
@@ -6,20 +8,28 @@ module.exports = (data) => {
 
             if (!userId) {
                 res.status(400)
-                    .json({ message: "You should provide user id." });
+                    .json({ message: errors.MISSING_USER_ID });
+
+                return res;
+            } else if(userId != req.user._id) {
+                res.status(403)
+                    .json({message: errors.PERMISSIONS_DENIED});
+
+                return res;
             } else {
                 data.users.getUserById(userId)
                     .then(user => {
                         if (!user) {
                             res.status(404)
-                                .json({ message: "User was not found." })
+                                .json({ message: errors.USER_NOT_FOUND });
 
                             return res;
                         }
                     })
                     .catch(error => {
                         res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                            .json({ message: errors.SERVER_ERROR });
+
                         return res;
                     });
 
@@ -27,54 +37,35 @@ module.exports = (data) => {
                     .then(requests => {
                         res.status(200)
                             .json(requests);
+                        return res;
                     })
                     .catch(error => {
                         res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                            .json({ message: errors.SERVER_ERROR });
+                        return res;
                     });
             }
-
-            return res;
         },
-        sendRequests: (req, res) => {
+        sendRequest: (req, res) => {
             const receiverId = req.params.id;
-            const senderId = req.body.id;
+            const senderId = req.user._id;
 
             if (!receiverId) {
                 res.status(400)
-                    .json({ message: "You should provide id of receiver." });
-            } else if (!senderId) {
-                res.status(400)
-                    .json({ message: "You should provide id of sender." });
+                    .json({ message: errors.MISSING_USER_ID });
             } else {
                 data.users.getUserById(receiverId)
                     .then(user => {
                         if (!user) {
                             res.status(404)
-                                .json({ message: "Receiver was not found." });
+                                .json({ message: errors.RECEIVER_NOT_FOUND });
 
                             return res;
                         }
                     })
                     .catch(error => {
                         res.status(500)
-                            .json({ message: 'Something went wrong!' });
-
-                        return res;
-                    });
-
-                data.users.getUserById(senderId)
-                    .then(user => {
-                        if (!user) {
-                            res.status(404)
-                                .json({ message: "Sender was not found." });
-
-                            return res;
-                        }
-                    })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                            .json({ message: errors.SERVER_ERROR });
 
                         return res;
                     });
@@ -84,11 +75,12 @@ module.exports = (data) => {
                         return data.users.addRequest(receiverId, request._id);
                     })
                     .then(user => {
-                        res.status(201).json("Created");
+                        res.status(201)
+                            .json("Created");
                     })
                     .catch(error => {
                         res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                            .json({ message: errors.SERVER_ERROR });
                     });
             }
 
@@ -98,19 +90,34 @@ module.exports = (data) => {
             const requestId = req.params.id;
             if (!requestId) {
                 res.status(400)
-                    .json({ message: "You should provide id of request." });
+                    .json({ message: errors.MISSING_REQUEST_ID });
             } else {
-                data.requests.getAndDeleteRequest(requestId)
+                data.requests.getRequest(requestId)
                     .then(request => {
-                        const receiverId = request.receiver;
-                        const senderId = request.sender;
+                        if (!request) {
+                            throw Error(errors.REQUEST_NOT_FOUND);
+                        }
 
-                        return data.users.connectUsers(receiverId, senderId);
+                        if (!req.user._id.equals(request.receiver)) {
+                            throw Error(errors.PERMISSIONS_DENIED);
+                        }
+
+                        return request;
                     })
+                    .then(request => data.requests.deleteRequest(request))
+                    .then((request) => data.users.connectUsers(request.receiver, request.sender))
                     .then(() => res.status(201).json("Accepted"))
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                        if (error.message === errors.REQUEST_NOT_FOUND) {
+                            res.status(404)
+                                .json({ message: errors.REQUEST_NOT_FOUND });
+                        } else if (error.message === errors.PERMISSIONS_DENIED) {
+                            res.status(403)
+                                .json({ message: errors.PERMISSIONS_DENIED });
+                        } else {
+                            res.status(500)
+                                .json({ message: errors.SERVER_ERROR });
+                        }
                     });
             }
 
@@ -120,19 +127,36 @@ module.exports = (data) => {
             const requestId = req.params.id;
             if (!requestId) {
                 res.status(400)
-                    .json({ message: "You should provide id of request." });
+                    .json({ message: errors.MISSING_REQUEST_ID });
             } else {
-                data.requests.getAndDeleteRequest(requestId)
+                data.requests.getRequest(requestId)
                     .then(request => {
+                        if (!request) {
+                            throw Error(errors.REQUEST_NOT_FOUND);
+                        }
+
+                        if (!req.user._id.equals(request.receiver)) {
+                            throw Error(errors.PERMISSIONS_DENIED);
+                        }
+
                         const userId = request.receiver;
                         return data.users.deleteRequest(userId, requestId);
                     })
                     .then(() => {
-                        res.status(200).json("Removed");
+                        res.status(200)
+                            .json("Removed");
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                        if (error.message === errors.REQUEST_NOT_FOUND) {
+                            res.status(404)
+                                .json({ message: errors.REQUEST_NOT_FOUND });
+                        } else if (error.message === errors.PERMISSIONS_DENIED) {
+                            res.status(403)
+                                .json({ message: errors.PERMISSIONS_DENIED });
+                        } else {
+                            res.status(500)
+                                .json({ message: errors.SERVER_ERROR });
+                        }
                     });
             }
 
