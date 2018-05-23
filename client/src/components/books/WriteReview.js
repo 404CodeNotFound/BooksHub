@@ -34,7 +34,7 @@ class WriteReview extends Component {
         event.preventDefault();
         const reviewContent = this.state.reviewContent;
 
-        this.props.sendReview(reviewContent, this.props.currentUser.id, this.props.book._id);
+        this.props.sendReview(reviewContent, this.props.book._id);
         this.setState({ author: '', text: '' });
     }
 }
@@ -51,7 +51,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        sendReview: (content, userId, bookId) => dispatch(reviewsActions.sendReview(content, userId, bookId))
+        sendReview: (content, bookId) => dispatch(reviewsActions.sendReview(content, bookId))
     };
 }
 

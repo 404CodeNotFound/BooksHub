@@ -49,9 +49,12 @@ module.exports = class ReviewsData {
         });
     }
 
-    createReview(receivedReview) {
+    createReview(receivedReview, userId, bookId) {
         return new Promise((resolve, reject) => {
             const review = new Review(receivedReview);
+            review.user = userId;
+            review.book = bookId;
+
             review.save((err, createdReview) => {
                 if (err) {
                     return reject(err);

@@ -1,3 +1,6 @@
+const errors = require('../../utils/error.constants');
+const generateErrorResponse = require('../../utils/error.responses');
+
 module.exports = (data) => {
     return {
         getBook: (req, res) => {
@@ -5,21 +8,19 @@ module.exports = (data) => {
 
             if (!title) {
                 res.status(400)
-                    .json({ message: "You should provide title of book." });
+                    .json({ message: errors.MISSING_BOOK_TITLE });
             } else {
                 data.books.getBookByTitle(title)
                     .then(book => {
                         if (!book) {
-                            res.status(404)
-                                .json({ message: "Book was not found." })
+                            throw Error(errors.BOOK_NOT_FOUND);
                         } else {
                             res.status(200)
                                 .json({ book });
                         }
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                        generateErrorResponse(res, error.message);
                     });
             }
 
@@ -27,26 +28,31 @@ module.exports = (data) => {
         },
         addReview: (req, res) => {
             const review = req.body;
-            if (!review.user) {
+            const userId = req.user._id;
+            const bookId = req.params.id;
+
+            if (!bookId) {
                 res.status(400)
-                    .json({ message: "You should provide id of user." });
-            } else if (!review.book) {
-                res.status(400)
-                    .json({ message: "You should provide id of book." });
+                    .json({ message: errors.MISSING_BOOK_ID });
             } else if (!review.content) {
                 res.status(400)
-                    .json({ message: "You should provide content of review." });
+                    .json({ message: errors.MISSING_REVIEW_CONTENT });
             } else {
-                data.reviews.createReview(review)
-                    .then(createdReview => data.books.addReviewToBook(createdReview.book, createdReview))
-                    .then(createdReview => data.users.addReviewToUser(review.user, createdReview))
+                data.books.getBookById(bookId)
+                    .then(book => {
+                        if (!book) {
+                            throw Error(errors.BOOK_NOT_FOUND);
+                        }
+                    })
+                    .then(() => data.reviews.createReview(review, userId, bookId))
+                    .then(createdReview => data.books.addReviewToBook(bookId, createdReview))
+                    .then(createdReview => data.users.addReviewToUser(userId, createdReview))
                     .then(createdReview => {
                         res.status(201)
                             .json({ review: createdReview });
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                        generateErrorResponse(res, error.message);
                     });
             }
 
@@ -54,23 +60,29 @@ module.exports = (data) => {
         },
         rateBook: (req, res) => {
             const receivedRating = req.body;
-            if (!receivedRating.user) {
+            const userId = req.user._id;
+            const bookId = req.params.id;
+
+            if (!bookId) {
                 res.status(400)
-                    .json({ message: "You should provide id of user." });
-            } else if (!receivedRating.book) {
-                res.status(400)
-                    .json({ message: "You should provide id of book." });
+                    .json({ message: errors.MISSING_BOOK_ID });
             } else if (!receivedRating.stars) {
                 res.status(400)
-                    .json({ message: "You should provide rating." });
+                    .json({ message: errors.MISSING_RATING });
             } else {
-                data.ratings.postOrUpdateRating(receivedRating)
+                data.books.getBookById(bookId)
+                    .then(book => {
+                        if (!book) {
+                            throw Error(errors.BOOK_NOT_FOUND);
+                        }
+                    })
+                    .then(() => data.ratings.postOrUpdateRating(userId, bookId, receivedRating))
                     .then(result => {
                         if (!result.isUpdated) {
-                            return data.users.rateBook(result.rating)
+                            return data.users.rateBook(userId, result.rating)
                                 .then(rating => data.books.addRatingToBook(rating))
                         } else {
-                            return data.books.updateTotalRatingOfBook(receivedRating.book);
+                            return data.books.updateTotalRatingOfBook(bookId);
                         }
                     })
                     .then(result => {
@@ -78,26 +90,31 @@ module.exports = (data) => {
                             .json(result);
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
-                    })
+                        generateErrorResponse(res, error.message);
+                    });
             }
 
             return res;
         },
         markBook: (req, res) => {
             const status = req.body;
-            if (!status.user) {
+            const userId = req.user._id;
+            const bookId = req.params.id;
+
+            if (!bookId) {
                 res.status(400)
-                    .json({ message: "You should provide id of user." });
-            } else if (!status.book) {
-                res.status(400)
-                    .json({ message: "You should provide id of book." });
+                    .json({ message: errors.MISSING_BOOK_ID });
             } else if (!status.name) {
                 res.status(400)
-                    .json({ message: "You should type of status." });
+                    .json({ message: errors.MISSING_STATUS_TYPE });
             } else {
-                data.statuses.postOrUpdateStatus(status)
+                data.books.getBookById(bookId)
+                    .then(book => {
+                        if (!book) {
+                            throw Error(errors.BOOK_NOT_FOUND);
+                        }
+                    })
+                    .then(() => data.statuses.postOrUpdateStatus(bookId, userId, status))
                     .then(result => {
                         if (!result.isUpdated) {
                             return data.users.markBook(result.status)
@@ -111,8 +128,7 @@ module.exports = (data) => {
                             .json(result);
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                        generateErrorResponse(res, error.message);
                     })
             }
 
@@ -134,8 +150,7 @@ module.exports = (data) => {
                         .json({ books: books });
                 })
                 .catch(error => {
-                    res.status(500)
-                        .json({ message: 'Something went wrong!' })
+                    generateErrorResponse(res, error.message);
                 });
 
             return res;
@@ -147,8 +162,7 @@ module.exports = (data) => {
                         .json({ books: books });
                 })
                 .catch(error => {
-                    res.status(500)
-                        .json({ message: 'Something went wrong!' })
+                    generateErrorResponse(res, error.message);
                 });
 
             return res;
@@ -156,25 +170,29 @@ module.exports = (data) => {
         getAllBooks: (req, res) => {
             const page = req.query.page;
 
-            data.books.getAllBooks(page)
-                .then(result => {
-                    res.status(200)
-                        .json(result);
-                })
-                .catch(error => {
-                    res.status(500)
-                        .json({ message: 'Something went wrong!' })
-                });
+            if (req.user.role !== 'Admin') {
+                res.status(403)
+                    .json({ message: errors.PERMISSIONS_DENIED });
+            } else {
+                data.books.getAllBooks(page)
+                    .then(result => {
+                        res.status(200)
+                            .json(result);
+                    })
+                    .catch(error => {
+                        generateErrorResponse(res, error.message);
+                    });
+            }
 
             return res;
         },
         addBook: (req, res) => {
             if (req.user.role !== 'Admin') {
                 res.status(403)
-                    .json({ message: "Only Administrator can add new book." });
+                    .json({ message: errors.PERMISSIONS_DENIED });
             } else {
                 const book = req.body;
-                
+
                 req.checkBody('title', 'Title is required.').notEmpty();
                 req.checkBody('authorFirstName', 'Author first name is required.').notEmpty();
                 req.checkBody('authorLastName', 'Author last name is required.').notEmpty();
@@ -187,7 +205,14 @@ module.exports = (data) => {
                     res.status(400)
                         .json(errors);
                 } else {
-                    data.authors.getOrAddAuthorByName(book.authorFirstName, book.authorLastName)
+                    data.authors.getAuthorByName(book.authorFirstName, book.authorLastName)
+                        .then(author => {
+                            if (!author) {
+                                return data.authors.createAuthorByName(book.authorFirstName, book.authorLastName);
+                            }
+
+                            return author;
+                        })
                         .then(author => {
                             const genres = book.genres.split(', ');
                             return data.books.createBook(book.title, author._id, book.isbn, book.publisher,
@@ -202,9 +227,7 @@ module.exports = (data) => {
                                 .json({ book: createdBook });
                         })
                         .catch(error => {
-                            console.log(error);
-                            res.status(500)
-                                .json({ message: 'Something went wrong!' })
+                            generateErrorResponse(res, error.message);
                         });
                 }
             }
@@ -212,9 +235,13 @@ module.exports = (data) => {
             return res;
         },
         editBook: (req, res) => {
+            const bookId = req.params.id;
             if (req.user.role !== 'Admin') {
                 res.status(403)
-                    .json({ message: "Only Administrator can edit book." });
+                    .json({ message: errors.PERMISSIONS_DENIED });
+            } else if (!bookId) {
+                res.status(400)
+                    .json({ message: errors.MISSING_BOOK_ID });
             } else {
                 const book = req.body;
                 req.checkBody('title', 'Title is required.').notEmpty();
@@ -226,16 +253,22 @@ module.exports = (data) => {
                     res.status(400)
                         .json(errors);
                 } else {
-                    const genres = book.genres.split(', ');
-                    data.books.updateBook(book.id, book.title, book.isbn, book.publisher,
-                        book.photo, book.language, book.summary, genres)
+                    data.books.getBookById(bookId)
+                        .then((foundBook) => {
+                            if (!foundBook) {
+                                throw Error(errors.BOOK_NOT_FOUND);
+                            }
+
+                            const genres = book.genres.split(', ');
+                            return data.books.updateBook(bookId, book.title, book.isbn, book.publisher,
+                                book.photo, book.language, book.summary, genres);
+                        })
                         .then(updatedBook => {
                             res.status(201)
                                 .json({ book: updatedBook });
                         })
                         .catch(error => {
-                            res.status(500)
-                                .json({ message: 'Something went wrong!' })
+                            generateErrorResponse(res, error.message);
                         });
                 }
             }
@@ -245,17 +278,23 @@ module.exports = (data) => {
         deleteBook(req, res) {
             if (req.user.role !== 'Admin') {
                 res.status(403)
-                    .json({ message: "Only Administrator can delete book." });
+                    .json({ message: errors.PERMISSIONS_DENIED });
             } else {
                 const bookId = req.params.id;
-                data.books.deleteBook(bookId)
+                data.books.getBookById(bookId)
+                    .then((book) => {
+                        if (!book) {
+                            throw Error(errors.BOOK_NOT_FOUND);
+                        }
+
+                        return data.books.deleteBook(bookId);
+                    })
                     .then(() => {
                         res.status(200)
                             .json("Removed");
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                        generateErrorResponse(res, error.message);
                     });
             }
 

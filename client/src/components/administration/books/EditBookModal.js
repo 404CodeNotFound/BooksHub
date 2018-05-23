@@ -129,7 +129,6 @@ class EditBookModal extends Component {
     submitBook = (event) => {
         const g = this.state.genres;
         const genres = g.map((selectedItem) => selectedItem.id);
-        debugger;
         const book = {
             id: this.props.book._id,
             title: this.state.title,

@@ -40,13 +40,11 @@ export function deleteReview(userId, reviewId) {
     };
 }
 
-export function sendReview(content, userId, bookId) {
+export function sendReview(content, bookId) {
     const token = localStorage.getItem('token');
     return function (dispatch) {
         const review = {
             content: content,
-            user: userId,
-            book: bookId,
             posted_on: new Date()
         };
         return requester.postAuthorized(token, `${api.BOOKS}/${bookId}/reviews`, review)

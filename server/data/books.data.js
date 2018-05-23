@@ -22,6 +22,19 @@ module.exports = class BooksData {
         });
     }
 
+    getBookById(id) {
+        return new Promise((resolve, reject) => {
+            return Book.findOne({ '_id': id, 'isDeleted': false },
+                (err, book) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(book);
+                    }
+                });
+        });
+    }
+
     addReviewToBook(bookId, review) {
         return new Promise((resolve, reject) => {
             Book.findById(bookId, (err, book) => {
@@ -96,7 +109,7 @@ module.exports = class BooksData {
 
     getLatestBooks() {
         return new Promise((resolve, reject) => {
-            Book.find({'isDeleted': false})
+            Book.find({ 'isDeleted': false })
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .sort({ 'date_published': '-1' })
                 .limit(4)
@@ -114,7 +127,7 @@ module.exports = class BooksData {
         return new Promise((resolve, reject) => {
             Book.find({ 'isDeleted': false })
                 .populate({ path: 'author', select: 'first_name last_name' })
-                .populate({ path: 'genres', select: 'name' })                
+                .populate({ path: 'genres', select: 'name' })
                 .sort({ 'date_published': '-1' })
                 .exec((err, books) => {
                     if (err) {

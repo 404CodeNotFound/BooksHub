@@ -166,7 +166,7 @@ class BookDetailsPage extends Component {
     }
 
     handleRateBook = (rating) => {
-        this.props.rateBook(this.props.book._id, this.props.currentUser.id, rating);
+        this.props.rateBook(this.props.book._id, rating);
     }
 
     shouldBeMarked = (rating) => {
@@ -197,7 +197,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     const userId = localStorage.getItem('id');
     return {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.title, userId)),
-        rateBook: (bookId, userId, rating) => dispatch(booksActions.rateBook(userId, bookId, rating)),
+        rateBook: (bookId, rating) => dispatch(booksActions.rateBook(bookId, rating)),
         markBook: (bookId, userId, status) => dispatch(booksActions.markBook(bookId, userId, status)),
         showLoader: () => dispatch(loadersActions.showLoader())
     };

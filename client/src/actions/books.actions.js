@@ -100,12 +100,10 @@ export function getBookDetails(title, userId) {
     };
 }
 
-export function rateBook(userId, bookId, rating) {
+export function rateBook(bookId, rating) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
         const body = {
-            user: userId,
-            book: bookId,
             stars: rating,
             rated_on: new Date()
         };
@@ -202,8 +200,8 @@ export function addBook(book) {
 export function editBook(book) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
-
-        return requester.putAuthorized(token, `${api.BOOKS}/${book._id}`, book)
+        console.log(book.id);
+        return requester.putAuthorized(token, `${api.BOOKS}/${book.id}`, book)
             .done(response => {
                 dispatch(editBookSuccess(response.book));
                 dispatch(modalsActions.closeEditBookModal());

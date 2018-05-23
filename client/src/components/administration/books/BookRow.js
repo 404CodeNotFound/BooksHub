@@ -27,13 +27,13 @@ class BookRow extends Component {
                     {this.props.book.publisher}
                 </td>
                 <td>
-                    <Link to={"/books/" + this.props.book.title}>Details |</Link>
+                    <Link to={"/books/" + this.props.book.title}>Details</Link>
                 </td>
                 <td>
-                    <button className="action-btn" onClick={() => this.props.openEditBookModal(this.props.book)}>Edit |</button>
+                    <button className="action-btn" onClick={() => this.props.openEditBookModal(this.props.book)}>Edit</button>
                 </td>
                 <td>
-                    <button className="action-btn" onClick={() => this.props.deleteBook(this.props.book._id)}>Delete |</button>
+                    <button className="action-btn" onClick={() => this.props.deleteBook(this.props.book._id)}>Delete</button>
                 </td>
             </tr>
         );

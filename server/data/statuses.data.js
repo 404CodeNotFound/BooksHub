@@ -1,20 +1,22 @@
 const { Status } = require('../models')
 
 module.exports = class BooksData {
-    postOrUpdateStatus(receivedStatus) {
-        return this.findStatusByBookAndUser(receivedStatus.book, receivedStatus.user)
+    postOrUpdateStatus(bookId, userId, receivedStatus) {
+        return this.findStatusByBookAndUser(bookId, userId)
             .then(foundStatus => {
                 if (foundStatus) {
                     return this.updateStatus(foundStatus, receivedStatus.name);
                 } else {
-                    return this.createStatus(receivedStatus);
+                    return this.createStatus(bookId, userId, receivedStatus);
                 }
             });
     }
 
-    createStatus(receivedStatus) {
+    createStatus(bookId, userId, receivedStatus) {
         return new Promise((resolve, reject) => {
-            const status = new Status(receivedStatus);
+            let status = new Status(receivedStatus);
+            status.user = userId;
+            status.book = bookId;
             status.save((err, savedStatus) => {
                 if (err) {
                     return reject(err);

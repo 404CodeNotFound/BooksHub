@@ -4,23 +4,6 @@ const getPageOfCollection = require('../utils/pagination');
 const itemsPerPage = 10;
 
 module.exports = class AuthorsData {
-    getOrAddAuthorByName(firstName, lastName) {
-        return new Promise((resolve, reject) => {
-            return Author.findOne({ 'first_name': firstName, 'last_name': lastName },
-                (err, author) => {
-                    if (err) {
-                        return reject(err);
-                    } else {
-                        if (!author) {
-                            return this.createAuthorByName(firstName, lastName);
-                        }
-
-                        return resolve(author);
-                    }
-                });
-        });
-    }
-
     getAuthorByName(firstname, lastname) {
         return new Promise((resolve, reject) => {
             return Author.findOne({ 'first_name': firstname, 'last_name': lastname },

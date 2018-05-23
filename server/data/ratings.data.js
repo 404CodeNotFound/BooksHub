@@ -1,22 +1,24 @@
 const { Rating } = require('../models');
 
 module.exports = class RatingsData {
-    postOrUpdateRating(receivedRating) {
-        return this.findRatingByBookAndUser(receivedRating.book, receivedRating.user)
+    postOrUpdateRating(userId, bookId, receivedRating) {
+        return this.findRatingByBookAndUser(bookId, userId)
             .then(foundRating => {
                 if (foundRating) {
-                    console.log('found');
                     return this.updateRating(foundRating, receivedRating.stars);
                 } else {
-                    return this.createRating(receivedRating);
+                    return this.createRating(userId, bookId, receivedRating);
                 }
             })
             .catch(err => reject(err));
     }
 
-    createRating(receivedRating) {
+    createRating(userId, bookId, receivedRating) {
         return new Promise((resolve, reject) => {
             const rating = new Rating(receivedRating);
+            rating.user = userId;
+            rating.book = bookId;
+            
             rating.save((err, savedRating) => {
                 if (err) {
                     return reject(err);
