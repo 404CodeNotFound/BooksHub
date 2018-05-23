@@ -617,11 +617,11 @@ nav {
     background: none;
 }
 
-li.active-item::before {
+a.active-item::before {
     background: #4eb980 none repeat scroll 0 0;
 }
 
-.top-nav>ul>li>a::before, .top-nav>ul>.active-item>a::before, #logout-btn::before {
+.top-nav>ul>li>a::before, .top-nav>ul>li>a.active-item::before, #logout-btn::before {
     width: 6px;
     height: 6px;
     display: block;
@@ -641,7 +641,7 @@ li.active-item::before {
     -webkit-transition: all 0.20s linear 0s;
 }
 
-.top-nav>ul>li>a:hover::before, .top-nav>ul>.active-item>a::before, #logout-btn:hover::before {
+.top-nav>ul>li>a:hover::before, .top-nav>ul>li>a.active-item::before, #logout-btn:hover::before {
     bottom: 10px;
     opacity: 1;
 }

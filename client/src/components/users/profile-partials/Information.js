@@ -27,61 +27,61 @@ class Information extends Component {
                     Nationality
                 </dt>
                 <dd>
-                    {this.props.user.nationality}
+                    {this.props.user.nationality ? this.props.user.nationality : "-"}
                 </dd>
 
                 <dt>
                     Gender
                 </dt>
                 <dd>
-                    {this.props.user.gender}
+                    {this.props.user.gender ? this.props.user.gender : "-"}
                 </dd>
 
                 <dt>
                     Birthdate
                 </dt>
                 <dd>
-                    {this.props.user.birth_date.split('T')[0]}
-                </dd>
+                    {this.props.user.birth_date ? this.props.user.birth_date.split('T')[0] : "-"}
+                </dd> 
 
                 <dt>
                     Age
                 </dt>
 
                 <dd>
-                    {this.props.user.age}
+                    {this.props.user.age ? this.props.user.age : "-"}
                 </dd>
 
                 <dt>
                     Gender
                 </dt>
                 <dd>
-                    {this.props.user.gender}
+                    {this.props.user.gender ? this.props.user.gender : "-"}
                 </dd>
 
                 <dt>
                     Languages
                 </dt>
                 <dd>
-                     {this.props.user.selectedLanguages.map(language =>
+                     {this.props.user.selectedLanguages.length > 0 ? this.props.user.selectedLanguages.map(language =>
                         <span key={language.label}>{language.label} </span>
-                    )}  
+                    ) : "-"}  
                 </dd>
 
                 <dt>
                     Favourite Quote
                 </dt>
                 <dd>
-                    {this.props.user.favourite_quote}
+                    {this.props.user.favourite_quote ? this.props.user.favourite_quote : "-"}
                 </dd>
 
                 <dt>
                     Favourite Genres
                 </dt>
                 <dd>
-                    {this.props.user.selectedGenres.map(genre =>
+                    {this.props.user.selectedGenres.length > 0 ? this.props.user.selectedGenres.map(genre =>
                         <span key={genre.label}>{genre.label} </span>
-                    )}
+                    ) : "-"}
                 </dd>
             </dl>
         )

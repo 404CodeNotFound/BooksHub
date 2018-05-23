@@ -41,7 +41,7 @@ class BooksListPage extends Component {
                             </div> :
                             <div className="line row">
                                     {this.props.books.map(book =>
-                                        <BookPartial book={book} />
+                                        <BookPartial book={book} key={book._id} />
                                     )}
                             </div>
                         }

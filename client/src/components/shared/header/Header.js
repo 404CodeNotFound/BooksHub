@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import $ from 'jquery';
 import * as usersActions from '../../../actions/users.actions';
 
 class Header extends Component {
-    state = {
-        links:['active-item', '', '', '', '', '']
-    };
-
     render() {
         return (
             <header role="banner" className="position-absolute">
@@ -24,14 +20,14 @@ class Header extends Component {
 
                         <div className="top-nav left-menu">
                             <ul className="right top-ul chevron">
-                                <li className={this.state.links[0]}>
-                                    <Link to="/" onClick={() => this.changeActiveLink(0)}>Home</Link>
+                                <li>
+                                    <NavLink exact to="/" activeClassName="active-item">Home</NavLink>
                                 </li>
-                                <li className={this.state.links[1]}>
-                                    <Link to="/books" onClick={() => this.changeActiveLink(1)}>Books</Link>
+                                <li>
+                                    <NavLink exact to="/books" activeClassName="active-item">Books</NavLink>
                                 </li>
-                                <li className={this.state.links[2]}>
-                                    <Link to="/events" onClick={() => this.changeActiveLink(2)}>Events</Link>
+                                <li>
+                                    <NavLink exact to="/events" activeClassName="active-item">Events</NavLink>
                                 </li>
                             </ul>
                         </div>
@@ -45,21 +41,21 @@ class Header extends Component {
 
                         <div className="top-nav right-menu">
                             <ul className="top-ul chevron">
-                                <li className={this.state.links[3]}>
-                                    <Link to="/search" onClick={() => this.changeActiveLink(3)}>Search</Link>
+                                <li>
+                                    <NavLink exact to="/search" activeClassName="active-item">Search</NavLink>
                                 </li>
-                                <li className={this.state.links[4]}>
+                                <li>
                                     {!this.props.currentUser ?
-                                        <Link to="/login" onClick={() => this.changeActiveLink(4)}>Log in</Link> :
+                                        <NavLink exact to="/login" activeClassName="active-item">Log in</NavLink> :
                                         (this.props.currentUserRole === 'Admin' ?
-                                            <Link to="/administration/books" onClick={() => this.changeActiveLink(4)}>Admin Panel</Link> :
-                                            <Link to={"/users/" + this.props.currentUser + "/profile"} onClick={() => this.changeActiveLink(4)}>My Profile</Link>
+                                            <NavLink exact to="/administration/books" activeClassName="active-item">Admin Panel</NavLink> :
+                                            <NavLink exact to={"/users/" + this.props.currentUser + "/profile"} activeClassName="active-item">My Profile</NavLink>
                                         )
                                     }
                                 </li>
-                                <li className={this.state.links[5]}>
+                                <li>
                                     {!this.props.currentUser ?
-                                        <Link to="/register" onClick={() => this.changeActiveLink(5)}>Register</Link> :
+                                        <NavLink exact to="/register" activeClassName="active-item">Register</NavLink> :
                                         <Link to="/" onClick={this.props.logout}>Logout</Link>
                                     }
                                 </li>
@@ -71,18 +67,18 @@ class Header extends Component {
         );
     }
 
-    changeActiveLink = (index) => {
-        let changedLinks = [];
-        for (let i = 0; i < 6; i++) {
-            if (i === index) {
-                changedLinks[i] = 'active-item';
-            } else {
-                changedLinks[i] = '';
-            }
-        }
+    // changeActiveLink = (index) => {
+    //     let changedLinks = [];
+    //     for (let i = 0; i < 6; i++) {
+    //         if (i === index) {
+    //             changedLinks[i] = 'active-item';
+    //         } else {
+    //             changedLinks[i] = '';
+    //         }
+    //     }
 
-        this.setState({ links: changedLinks });
-    }
+    //     this.setState({ links: changedLinks });
+    // }
 }
 
 function mapStateToProps(state, ownProps) {

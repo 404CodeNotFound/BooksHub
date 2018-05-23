@@ -20,19 +20,20 @@ class ProfilePage extends Component {
 
     render() {
         return (
-            this.props.user === null ?
-                <div className="loader-page">
-                    <BarLoader color="#4eb980" size="11" />
-                </div> :
                 [<header key="profile-header" className="section background-image text-center">
                     <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
-                        {this.props.user.username === this.props.currentUser.username ?
+                        {this.props.user === null ? "Profile ": 
+                            (this.props.user.username === this.props.currentUser.username) ?
                             <span>Hello, {this.props.user.first_name} {this.props.user.last_name}!</span> :
                             <span>{this.props.user.first_name} {this.props.user.last_name}</span>
                         }
                     </h1>
                     <img className="arrow-object" src="../../img/arrow-object-white.svg" alt="arrow" />
                 </header>,
+                this.props.user === null ?
+                <div className="loader-page" key="loader">
+                    <BarLoader color="#4eb980" size="11" />
+                </div> :
                 <section key="profile-section" className="background-white dashboard section">
                     <div className="row">
                         <div className="col-md-3">
