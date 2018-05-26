@@ -6,6 +6,15 @@ import * as booksActions from '../../../actions/books.actions';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 
+const LANGUAGES = [
+    { label: 'Bulgarian', value: 'Bulgarian' },
+    { label: 'English', value: 'English' },
+    { label: 'French', value: 'French' },
+    { label: 'Spanish', value: 'Spanish' },
+    { label: 'German', value: 'German' },
+    { label: 'Italian', value: 'Italian' },
+];
+
 class EditBookModal extends Component {
     state = {
         title: this.props.book.title,
@@ -61,7 +70,13 @@ class EditBookModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="book-language">Language</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="book-language" value={this.state.language || ''} type="text" onChange={(event) => this.handleLanguageChange(event)} />
+                            <Select
+                                closeOnSelect={true}
+                                onChange={this.handleLanguageChange}
+                                options={LANGUAGES}
+                                placeholder="Select language"
+                                value={this.state.language}
+                            />
                         </div>
                     </div>
                     <div className="form-group row">
@@ -117,12 +132,11 @@ class EditBookModal extends Component {
         this.setState({ photo: event.target.value });
     }
 
-    handleLanguageChange = (event) => {
-        this.setState({ language: event.target.value });
+    handleLanguageChange = (value) => {
+        this.setState({ language: value });
     }
 
     handleGenresChange = (value) => {
-        debugger;
         this.setState({ genres: value });
     }
 
@@ -136,7 +150,7 @@ class EditBookModal extends Component {
             publisher: this.state.publisher,
             summary: this.state.summary,
             photo: this.state.photo,
-            language: this.state.language,
+            language: this.state.language.label,
             genres: genres.join(', ')
         };
 

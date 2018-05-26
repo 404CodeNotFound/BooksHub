@@ -76,6 +76,7 @@ export function closeAddBookModal() {
 
 export function openEditBookModal(book) {
     return function (dispatch) {
+        debugger;
         const genresAsSelectList = book.genres.map(genre => {
             return { value: genre.name, label: genre.name, id: genre._id };
         });

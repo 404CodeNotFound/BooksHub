@@ -181,7 +181,9 @@ module.exports = class BooksData {
                     genres: genres
                 }
             },
-                { new: true }, (err, savedBook) => {
+                { new: true })
+                .populate({ path: 'genres', select: 'name' })
+                .exec((err, savedBook) => {
                     if (err) {
                         return reject(err);
                     } else {

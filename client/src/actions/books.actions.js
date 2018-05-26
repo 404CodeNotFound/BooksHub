@@ -200,7 +200,6 @@ export function addBook(book) {
 export function editBook(book) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
-        console.log(book.id);
         return requester.putAuthorized(token, `${api.BOOKS}/${book.id}`, book)
             .done(response => {
                 dispatch(editBookSuccess(response.book));

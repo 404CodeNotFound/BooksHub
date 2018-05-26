@@ -35,7 +35,7 @@ class AddBookModal extends Component {
 
     render() {
         return (
-            <Modal visible={true} dialogClassName="modal-lg">
+            <Modal visible={true} onClickBackdrop={this.props.closeAddBookModal} dialogClassName="modal-lg">
                 <div className="modal-header">
                     <h5 className="modal-title">Add new book</h5>
                 </div>
