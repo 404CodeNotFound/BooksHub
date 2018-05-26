@@ -12,7 +12,7 @@ class Header extends Component {
 
     render() {
         return (
-            <header role="banner" className="position-absolute">
+            <header role="banner" className="header-absolute">
                 <nav className="background-transparent background-primary-dott full-width sticky">
                     <div className="top-nav">
                         <div className="logo hide-l hide-xl hide-xxl">

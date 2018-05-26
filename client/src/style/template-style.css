@@ -558,7 +558,7 @@ hr.break.background-primary {
     border-top: 2px dotted #4eb980;
 }
 
-header.position-absolute {
+header.header-absolute {
     position: absolute;
     top: 0;
     width: 100%;
@@ -727,7 +727,7 @@ nav.fixed .left-menu, nav.fixed .right-menu {
 }
 
 @media screen and (max-width:768px) {
-    header.position-absolute {
+    header.header-absolute {
         background: #fff none repeat scroll 0 0;
         position: relative;
     }
