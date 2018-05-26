@@ -21,7 +21,7 @@ class EditBookModal extends Component {
         isbn: this.props.book.isbn,
         summary: this.props.book.summary,
         photo: this.props.book.photo,
-        language: this.props.book.language,
+        language: LANGUAGES.find(l => l.label === this.props.book.language),
         publisher: this.props.book.publisher,
         genres: this.props.book.genres
     };

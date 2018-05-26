@@ -18,7 +18,7 @@ class BookRow extends Component {
                     {this.props.book.isbn}
                 </td>
                 <td>
-                    {this.props.book.date_published}
+                    {this.props.book.date_published.split('T')[0]}
                 </td>
                 <td>
                     {this.props.book.author.first_name} {this.props.book.author.last_name}
