@@ -5,6 +5,11 @@ import $ from 'jquery';
 import * as usersActions from '../../../actions/users.actions';
 
 class Header extends Component {
+    state = {
+        links: ['active-item', '', '', '', '', ''],
+        isMobile: false
+    };
+
     render() {
         return (
             <header role="banner" className="position-absolute">
@@ -16,12 +21,12 @@ class Header extends Component {
                                 <img className="logo-dark" src="../img/book-logo.png" alt="book-logo" />
                             </Link>
                         </div>
-                        <p className="nav-text"></p>
+                        <p className="nav-text" onClick={this.changeNavigationVisibility}></p>
 
                         <div className="top-nav left-menu">
-                            <ul className="right top-ul chevron">
-                                <li>
-                                    <NavLink exact to="/" activeClassName="active-item">Home</NavLink>
+                            <ul className={"right top-ul chevron " + (this.state.isMobile ? 'show-menu' : '')}>
+                                <li className={this.state.links[0]}>
+                                    <Link to="/" onClick={() => this.changeActiveLink(0)}>Home</Link>
                                 </li>
                                 <li>
                                     <NavLink exact to="/books" activeClassName="active-item">Books</NavLink>
@@ -40,9 +45,9 @@ class Header extends Component {
                         </ul>
 
                         <div className="top-nav right-menu">
-                            <ul className="top-ul chevron">
-                                <li>
-                                    <NavLink exact to="/search" activeClassName="active-item">Search</NavLink>
+                            <ul className={"top-ul chevron " + (this.state.isMobile ? 'show-menu' : '')}>
+                                <li className={this.state.links[3]}>
+                                    <Link to="/search" onClick={() => this.changeActiveLink(3)}>Search</Link>
                                 </li>
                                 <li>
                                     {!this.props.currentUser ?
@@ -67,23 +72,27 @@ class Header extends Component {
         );
     }
 
-    // changeActiveLink = (index) => {
-    //     let changedLinks = [];
-    //     for (let i = 0; i < 6; i++) {
-    //         if (i === index) {
-    //             changedLinks[i] = 'active-item';
-    //         } else {
-    //             changedLinks[i] = '';
-    //         }
-    //     }
+    changeActiveLink = (index) => {
+        let changedLinks = [];
+        for (let i = 0; i < 6; i++) {
+            if (i === index) {
+                changedLinks[i] = 'active-item';
+            } else {
+                changedLinks[i] = '';
+            }
+        }
 
-    //     this.setState({ links: changedLinks });
-    // }
+        this.setState({ links: changedLinks });
+    }
+
+    changeNavigationVisibility = () => {
+        this.setState({ ...this.state, isMobile: !this.state.isMobile });
+    }
 }
 
 function mapStateToProps(state, ownProps) {
     const currentUser = localStorage.getItem('username');
-    const currentUserRole = localStorage.getItem('role');    
+    const currentUserRole = localStorage.getItem('role');
     return {
         currentUser: currentUser,
         currentUserRole: currentUserRole
@@ -103,6 +112,11 @@ $(window).scroll(function () {
     else {
         $('.sticky').removeClass("fixed");
     }
+});
+
+$('.nav-text').click(function () {
+    console.log('navigation')
+    $('.top-nav > ul').toggleClass('show-menu', 'fast');
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
