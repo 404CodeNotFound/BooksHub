@@ -40,8 +40,6 @@ module.exports = (data) => {
                 });
         },
         register: (req, res) => {
-            // TODO - redirect to profile if user is already signed in
-
             const user = req.body;
 
             if (!user.username || !user.password || !user.email) {

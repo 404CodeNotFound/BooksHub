@@ -17,6 +17,7 @@ const init = (data) => {
     const usersController = require('./controllers/users.controller')(data);
     const requestsController = require('./controllers/requests.controller')(data);
     const booksController = require('./controllers/books.controller')(data); 
+    const eventsController = require('./controllers/events.controller')(data); 
     const genresController = require('./controllers/genres.controller')(data);
     const authorsController = require('./controllers/authors.controller')(data);   
     
@@ -92,6 +93,10 @@ const init = (data) => {
     app.get('/recommendedbooks', auth.authenticate(passport), booksController.getRecommendedBooks);
     app.get('/latestbooks', booksController.getLatestBooks);      
     
+    // Events
+    app.get('/events', auth.authenticate(passport), eventsController.getAllEvents);
+    app.post('/events', auth.authenticate(passport), eventsController.addEvent);            
+
     // Genres
     app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);
     app.post('/genres', auth.authenticate(passport), genresController.addGenre);   

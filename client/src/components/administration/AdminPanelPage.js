@@ -5,6 +5,7 @@ import AllBooksList from './books/AllBooksList';
 import AllAuthorsList from './authors/AllAuthorsList';
 import AllGenresList from './genres/AllGenresList';
 import AllUsersList from './users/AllUsersList';
+import AllEventsList from './events/AllEventsList';
 import '../../style/admin.panel.css';
 
 class AdminPanelPage extends Component {
@@ -60,7 +61,7 @@ class AdminPanelPage extends Component {
                                     <Route path="/administration/authors" render={() => <AllAuthorsList />} />
                                     <Route path="/administration/genres" render={() => <AllGenresList />} />
                                     <Route path="/administration/users" render={() => <AllUsersList />} /> 
-                                    {/* <Route path="/administration/events" render={() => <AllEventsList />}/>*/}
+                                    <Route path="/administration/events" render={() => <AllEventsList />}/>
                                 </div>
                             </div>
                         </div>

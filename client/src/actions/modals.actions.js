@@ -49,6 +49,14 @@ export function closeAddGenreModalSuccess() {
     return { type: 'CLOSE_ADD_GENRE_MODAL' };
 }
 
+export function openAddEventModalSuccess() {
+    return { type: 'OPEN_ADD_EVENT_MODAL' };
+}
+
+export function closeAddEventModalSuccess() {
+    return { type: 'CLOSE_ADD_EVENT_MODAL' };
+}
+
 export function openAddAuthorModal() {
     return function (dispatch) {
         dispatch(openAddAuthorModalSuccess());
@@ -125,5 +133,17 @@ export function openAddGenreModal() {
 export function closeAddGenreModal() {
     return function (dispatch) {
         dispatch(closeAddGenreModalSuccess());
+    };
+}
+
+export function openAddEventModal() {
+    return function (dispatch) {
+        dispatch(openAddEventModalSuccess());
+    };
+}
+
+export function closeAddEventModal() {
+    return function (dispatch) {
+        dispatch(closeAddEventModalSuccess());
     };
 }

@@ -6,11 +6,11 @@ module.exports = function init(mongoose) {
             type: String,
             required: true
         },
-        start_time: {
+        start_date: {
             type: Date,
             required: true
         },
-        end_time: Date,
+        end_date: Date,
         place: {
             type: String,
             required: true

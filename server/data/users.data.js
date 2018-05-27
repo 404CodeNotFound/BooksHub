@@ -433,4 +433,19 @@ module.exports = class UserData {
             });
         });
     }
+
+    addEventToUserCollection(eventId, username) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ username: username },
+            { $push: { events: eventId} },
+            { new: true }, (err, savedEvent) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(savedEvent);
+                }
+            }
+        )
+        });
+    }
 }

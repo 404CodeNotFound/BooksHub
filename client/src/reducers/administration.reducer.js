@@ -93,6 +93,12 @@ export default function books(state = {
                 ...state,
                 users: removeFromCollection(state.users, action.userId)
             };
+        case 'GET_ALL_EVENTS_SUCCESS':
+            return {
+                ...state,
+                events: action.events,
+                eventsCount: action.eventsCount
+            };
         default:
             return state;
     }
