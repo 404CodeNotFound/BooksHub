@@ -8,7 +8,9 @@ const api = {
     GENRES: 'http://localhost:3003/genres',
     AUTHORS: 'http://localhost:3003/authors',    
     RECOMMENDED_BOOKS: 'http://localhost:3003/recommendedbooks',
-    LATEST_BOOKS: 'http://localhost:3003/latestbooks'
+    RECOMMENDED_EVENTS: 'http://localhost:3003/recommendedevents',
+    LATEST_BOOKS: 'http://localhost:3003/latestbooks',
+    LATEST_EVENTS: 'http://localhost:3003/latestevents'
 };
 
 module.exports = api;

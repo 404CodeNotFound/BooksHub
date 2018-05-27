@@ -23,7 +23,39 @@ module.exports = (data) => {
     
             return res;
         },
+        getRecommendedEvents: (req, res) => {
+            const userId = req.user._id;
 
+            data.users.getFavouriteGenres(userId)
+                .then(genres => {
+                    if (genres.length > 0) {
+                        // return data.events.getEventsByGenres(genres);
+                    }
+
+                    return data.events.getLatestEvents();
+                })
+                .then(events => {
+                    res.status(200)
+                        .json({ events: events });
+                })
+                .catch(error => {
+                    generateErrorResponse(res, error.message);
+                });
+
+            return res;
+        },
+        getLatestEvents: (req, res) => {
+            data.events.getLatestEvents()
+                .then(events => {
+                    res.status(200)
+                        .json({ events: events });
+                })
+                .catch(error => {
+                    generateErrorResponse(res, error.message);
+                });
+
+            return res;
+        },
         addEvent: (req, res) => {
             const event = req.body;
             

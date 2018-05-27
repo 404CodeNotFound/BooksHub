@@ -99,6 +99,9 @@ const init = (data) => {
     app.put('/events/:id', auth.authenticate(passport), eventsController.editEvent);
     app.delete('/events/:id', auth.authenticate(passport), eventsController.deleteEvent);
     
+    app.get('/recommendedevents', auth.authenticate(passport), eventsController.getRecommendedEvents);
+    app.get('/latestevents', eventsController.getLatestEvents);
+
     // Genres
     app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);
     app.post('/genres', auth.authenticate(passport), genresController.addGenre);   

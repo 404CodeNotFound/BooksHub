@@ -15,7 +15,7 @@ class BookPartial extends Component {
                         </Link>
                         <h5>
                             <small>by
-                          <Link to={"/authors/" + this.props.book.author._id} className="green-link"> {this.props.book.author.first_name} {this.props.book.author.last_name}</Link>
+                                <Link to={"/authors/" + this.props.book.author._id} className="green-link"> {this.props.book.author.first_name} {this.props.book.author.last_name}</Link>
                             </small>
                         </h5>
                     </div>

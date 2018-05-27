@@ -2,6 +2,7 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as modalsActions from './modals.actions';
 import * as errorActions from './error.actions';
+import * as loadersActions from './loaders.actions';
 
 export function getUserEventsSuccess(result) {
     return { type: 'GET_USER_EVENTS_SUCCESS', events: result.events, eventsCount: result.eventsCount };
@@ -9,6 +10,10 @@ export function getUserEventsSuccess(result) {
 
 export function getAllEventsSuccess(events, eventsCount) {
     return { type: 'GET_ALL_EVENTS_SUCCESS', events: events, eventsCount: eventsCount };
+}
+
+export function getFilteredEventsSuccess(events) {
+    return { type: 'GET_FILTERED_EVENTS_SUCCESS', events };
 }
 
 export function addEventSuccess(event) {
@@ -25,7 +30,6 @@ export function deleteEventSuccess(id) {
 
 export function getJoinedEvents(id, page) {
     return function (dispatch) {
-        debugger;
         return requester.get(`${api.USERS}/${id}/joinedevents?page=${page}`)
             .done(response => {
                 debugger;
@@ -57,6 +61,34 @@ export function getAllEvents(page) {
         return requester.getAuthorized(token, `${api.EVENTS}?page=${page}`)
             .done(response => {
                 dispatch(getAllEventsSuccess(response.events, response.eventsCount));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function getRecommendedEvents() {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.getAuthorized(token, `${api.RECOMMENDED_EVENTS}`)
+            .done(response => {
+                dispatch(getFilteredEventsSuccess(response.events));
+                dispatch(loadersActions.hideLoader());                
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function getLatestEvents() {
+    return function (dispatch) {
+        return requester.get(`${api.LATEST_EVENTS}`)
+            .done(response => {
+                dispatch(getFilteredEventsSuccess(response.events));
+                dispatch(loadersActions.hideLoader());                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

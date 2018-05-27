@@ -3,6 +3,7 @@ import users from './users.reducer';
 import invitations from './invitations.reducer';
 import errors from './error.reducer';
 import books from './books.reducer';
+import events from './events.reducer';
 import genres from './genres.reducer';
 import administration from './administration.reducer';
 import modals from './modals.reducer';
@@ -13,6 +14,7 @@ const reducer = combineReducers({
     users,
     invitations,
     books,
+    events,
     genres,
     errors,
     modals,
