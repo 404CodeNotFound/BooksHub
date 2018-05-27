@@ -99,13 +99,26 @@ export default function books(state = {
                 events: action.events,
                 eventsCount: action.eventsCount
             };
+        case 'ADD_EVENT_SUCCESS':
+            return {
+                ...state,
+                events: [
+                    action.event,
+                    ...state.events
+                ],
+                eventsCount: state.eventsCount + 1
+            };
+        case 'EDIT_EVENT_SUCCESS':
+            return {
+                ...state,
+                events: updateItemInCollection(state.events, action.event)
+            };
         default:
             return state;
     }
 }
 
 function updateItemInCollection(collection, updatedItem) {
-    debugger;
     const length = collection.length;
     const index = collection.findIndex(item => item._id === updatedItem._id);
     updatedItem.author = collection[index].author;

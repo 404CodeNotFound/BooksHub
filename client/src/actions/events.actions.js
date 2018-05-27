@@ -15,6 +15,10 @@ export function addEventSuccess(event) {
     return { type: 'ADD_EVENT_SUCCESS', event };
 }
 
+export function editEventSuccess(event) {
+    return { type: 'EDIT_EVENT_SUCCESS', event };
+}
+
 export function getJoinedEvents(id, page) {
     return function (dispatch) {
         debugger;
@@ -59,11 +63,30 @@ export function getAllEvents(page) {
 export function addEvent(event) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
-
+        debugger;
         return requester.postAuthorized(token, `${api.EVENTS}`, event)
             .done(response => {
                 dispatch(addEventSuccess(response.event));
                 dispatch(modalsActions.closeAddEventModal());                                
+            })
+            .fail(error => {
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
+            });
+    };
+}
+
+export function editEvent(event) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.putAuthorized(token, `${api.EVENTS}/${event.id}`, event)
+            .done(response => {
+                dispatch(editEventSuccess(response.event));
+                dispatch(modalsActions.closeEditEventModal());
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {

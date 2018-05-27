@@ -27,6 +27,9 @@ module.exports = class EventsData {
     getAllEvents(page) {
         return new Promise((resolve, reject) => {
             Event.find({ 'isDeleted': false })
+                .populate({ path: 'genres', select: 'name' })
+                .populate('creator')
+                .sort({ 'start_date ': '-1' })
                 .exec((err, events) => {
                     if (err) {
                         return reject(err);
@@ -43,6 +46,20 @@ module.exports = class EventsData {
                 });
         });
     }
+
+    getEventById(id) {
+        return new Promise((resolve, reject) => {
+            return Event.findOne({ '_id': id, 'isDeleted': false },
+                (err, event) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(event);
+                    }
+                });
+        });
+    }
+
 
     createEvent(newEvent) {
         return new Promise((resolve, reject) => {
@@ -67,6 +84,33 @@ module.exports = class EventsData {
                     return resolve(createdEvent);
                 }
             });
+        });
+    }
+
+    updateEvent(eventId, event) {
+        return new Promise((resolve, reject) => {
+            Event.findOneAndUpdate({ _id: eventId }, {
+                $set: {
+                    title: event.title,
+                    start_date: event.start_date,
+                    end_date: event.end_date,
+                    place: event.place,
+                    city: event.city,
+                    photo: event.photo,
+                    details: event.details,
+                    genres: event.genres
+                }
+            },
+                { new: true })
+                .populate({ path: 'genres', select: 'name' })
+                .populate('creator')
+                .exec((err, savedEvent) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(savedEvent);
+                    }
+                });
         });
     }
 }

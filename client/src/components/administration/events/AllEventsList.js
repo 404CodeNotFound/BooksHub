@@ -38,10 +38,10 @@ class AllEventsList extends Component {
                                         Title
                                     </th>
                                     <th>
-                                        Start time
+                                        Start date
                                     </th>
                                     <th>
-                                        End time
+                                        End date
                                     </th>
                                     <th>
                                         Place

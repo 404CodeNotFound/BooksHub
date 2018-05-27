@@ -11,6 +11,7 @@ module.exports = {
     MISSING_RATING: "You should provide rating.",
     MISSING_STATUS_TYPE: "You should type of status.",
     MISSING_AUTHOR_ID: "You should provide author id.",
+    MISSING_EVENT_ID: "You should provide event id.",
     INCORRECT_LOGIN_DATA: "Incorrect username or password.",    
     INCORRECT_REGISTER_DATA: "Username, email and password are required.",
     USERNAME_CONFLICT: "User with that username already exists.",
@@ -20,7 +21,8 @@ module.exports = {
     REQUEST_NOT_FOUND: "Request was not found.",
     REVIEW_NOT_FOUND: "Review was not found.",
     COMMENT_NOT_FOUND: "Comment was not found.", 
-    BOOK_NOT_FOUND: "Book was not found.",   
+    BOOK_NOT_FOUND: "Book was not found.",
+    EVENT_NOT_FOUND: "Event was not found.",   
     PERMISSIONS_DENIED: "Permissions denied!",
     SERVER_ERROR: "Something went wrong!"
 }

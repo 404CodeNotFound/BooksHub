@@ -4,24 +4,23 @@ import Modal from 'react-bootstrap4-modal';
 import DatePicker from 'react-date-picker';
 // import TimePicker from 'react-time-picker';
 import Select from 'react-select';
-// import Autocomplete from 'react-autocomplete';
 import * as eventsActions from '../../../actions/events.actions';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 import * as errorsActions from '../../../actions/error.actions';
 
-class AddEventModal extends Component {
+class EditEventModal extends Component {
     state = {
-        title: '',
-        start_date: new Date(),
-        end_date: new Date(),
+        title: this.props.event.title,
+        start_date: new Date(this.props.event.start_date.split('T')[0]),
+        end_date: new Date(this.props.event.end_date.split('T')[0]),
         start_time: '00:00',
         end_time: '00:00',
-        place: '',
-        city: '',
-        details: '',
-        photo: '',
-        genres: []
+        place: this.props.event.place,
+        city: this.props.event.city,
+        details: this.props.event.details,
+        photo: this.props.event.photo,
+        genres: this.props.event.genres
     };
 
     componentDidMount() {
@@ -30,15 +29,15 @@ class AddEventModal extends Component {
 
     render() {
         return (
-            <Modal visible={true} onClickBackdrop={this.props.closeAddEventModal} dialogClassName="modal-lg">
+            <Modal visible={true} onClickBackdrop={this.props.closeEditEventModal} dialogClassName="modal-lg">
                 <div className="modal-header">
-                    <h5 className="modal-title">Add new event</h5>
+                    <h5 className="modal-title">Edit event</h5>
                 </div>
                 <div className="modal-body">
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-title">Title</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="event-title" name="Title" type="text" onChange={this.handleTitleChange} />
+                            <input className="form-control" id="event-title" name="Title" type="text"  value={this.state.title || ''} onChange={this.handleTitleChange} />
                             {this.props.titleError &&
                                 <div className="error">{this.props.titleError.msg}</div>
                             }
@@ -48,7 +47,7 @@ class AddEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="start_date">Start date</label>
                         <div className="col-md-8">
-                            <DatePicker value={this.state.start_date} onChange={this.handleStartDateChange} />
+                            <DatePicker  value={this.state.start_date} onChange={this.handleStartDateChange} />
                             {this.props.startDateError &&
                                 <div className="error">{this.props.startDateError.msg}</div>
                             }
@@ -58,10 +57,7 @@ class AddEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="end_date">End date</label>
                         <div className="col-md-8">
-                            <DatePicker onChange={this.handleEndDateChange} value={this.state.end_date} />
-                            {this.props.endDateError &&
-                                <div className="error">{this.props.EndDateError.msg}</div>
-                            }
+                            <DatePicker value={this.state.end_date} onChange={this.handleEndDateChange} />
                         </div>
                     </div>
 
@@ -76,7 +72,7 @@ class AddEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-place">Place</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="event-place" name="Place" type="text" onChange={this.handlePlaceChange} />
+                            <input className="form-control" id="event-place" name="Place" type="text" value={this.state.place || ''} onChange={this.handlePlaceChange} />
                             {this.props.placeError &&
                                 <div className="error">{this.props.placeError.msg}</div>
                             }
@@ -85,7 +81,7 @@ class AddEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-city">City(town)</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="event-city" name="City" type="text" onChange={this.handleCityChange} />
+                            <input className="form-control" id="event-city" name="City" type="text" value={this.state.city || ''} onChange={this.handleCityChange} />
                             {this.props.cityError &&
                                 <div className="error">{this.props.cityError.msg}</div>
                             }
@@ -94,7 +90,7 @@ class AddEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-photo">Photo</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="event-photo" name="Photo" type="text" onChange={this.handlePhotoChange} />
+                            <input className="form-control" id="event-photo" name="Photo" type="text" value={this.state.photo || ''} onChange={this.handlePhotoChange} />
                             {this.props.photoError &&
                                 <div className="error">{this.props.photoError.msg}</div>
                             }
@@ -103,7 +99,7 @@ class AddEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-details">Details</label>
                         <div className="col-md-8">
-                            <textarea className="form-control" rows="5" id="event-details" onChange={this.handleDetailsChange}></textarea>
+                            <textarea className="form-control" rows="5" id="event-details" value={this.state.details || ''} onChange={this.handleDetailsChange}></textarea>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -126,9 +122,9 @@ class AddEventModal extends Component {
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" onClick={this.handleSubmit}>
-                        Add
+                        Edit
                     </button>
-                    <button type="button" className="btn btn-primary" onClick={this.props.closeAddEventModal}>
+                    <button type="button" className="btn btn-primary" onClick={this.props.closeEditEventModal}>
                         Cancel
                     </button>
                 </div>
@@ -159,9 +155,6 @@ class AddEventModal extends Component {
 
         this.setState({ end_date: value });
     }
-
-    // handleStartTimeChange = start_time => this.setState({ start_time })
-
 
     handlePlaceChange = (event) => {
         if (this.props.placeError) {
@@ -199,6 +192,7 @@ class AddEventModal extends Component {
         const genres = this.state.genres.map(genre => genre.id);
 
         const event = {
+            id: this.props.event._id,
             title: this.state.title,
             start_date: this.state.start_date,
             end_date: this.state.end_date,
@@ -206,10 +200,12 @@ class AddEventModal extends Component {
             city: this.state.city,
             photo: this.state.photo,
             details: this.state.details,            
-            genres: genres.join(', ')
+            genres: genres.join(', '),
+            creator: this.props.event.creator.username
         };
 
-        this.props.saveEvent(event);
+        console.log(event);
+        this.props.updateEvent(event, this.props.isAdminPage);
     }
 }
 
@@ -222,6 +218,7 @@ function mapStateToProps(state, ownProps) {
     const genresError = state.errors.validationErrors.find(error => error.param === 'genres');
 
     return {
+        event: state.modals.eventToEdit,
         genresSelectValues: state.genres.genresSelectValues,
         titleError: titleError,
         startDateError: startDateError,
@@ -234,11 +231,11 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        saveEvent: (event) => dispatch(eventsActions.addEvent(event)),
-        closeAddEventModal: () => dispatch(modalsActions.closeAddEventModal()),
+        updateEvent: (event, isAdminPage) => dispatch(eventsActions.editEvent(event, isAdminPage)),
+        closeEditEventModal: () => dispatch(modalsActions.closeEditEventModal()),
         getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues()),
         removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddEventModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditEventModal);

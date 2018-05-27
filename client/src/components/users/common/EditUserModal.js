@@ -194,7 +194,7 @@ class EditUserModal extends Component {
         event.preventDefault();
         const languages = this.state.languages.map(language => language.label);
         const genres = this.state.genres.map(genre => genre.id);
-        var user = {
+        const user = {
             username: this.state.username,
             email: this.state.email,
             firstname: this.state.firstname,

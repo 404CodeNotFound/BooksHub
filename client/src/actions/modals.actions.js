@@ -12,7 +12,6 @@ export function openEditBookModalSuccess(mappedBook) {
     return { type: 'OPEN_EDIT_BOOK_MODAL', book: mappedBook };
 }
 
-
 export function closeEditBookModal() {
     return { type: 'CLOSE_EDIT_BOOK_MODAL' };
 }
@@ -57,6 +56,14 @@ export function closeAddEventModalSuccess() {
     return { type: 'CLOSE_ADD_EVENT_MODAL' };
 }
 
+export function openEditEventModalSuccess(mappedEvent) {
+    return { type: 'OPEN_EDIT_EVENT_MODAL', event: mappedEvent };
+}
+
+export function closeEditEventModal() {
+    return { type: 'CLOSE_EDIT_EVENT_MODAL' };
+}
+
 export function openAddAuthorModal() {
     return function (dispatch) {
         dispatch(openAddAuthorModalSuccess());
@@ -84,7 +91,6 @@ export function closeAddBookModal() {
 
 export function openEditBookModal(book) {
     return function (dispatch) {
-        debugger;
         const genresAsSelectList = book.genres.map(genre => {
             return { value: genre.name, label: genre.name, id: genre._id };
         });
@@ -138,6 +144,7 @@ export function closeAddGenreModal() {
 
 export function openAddEventModal() {
     return function (dispatch) {
+        dispatch(errorsActions.removeAllValidationErrors());
         dispatch(openAddEventModalSuccess());
     };
 }
@@ -145,5 +152,20 @@ export function openAddEventModal() {
 export function closeAddEventModal() {
     return function (dispatch) {
         dispatch(closeAddEventModalSuccess());
+    };
+}
+
+export function openEditEventModal(event) {
+    return function (dispatch) {
+        const genresAsSelectList = event.genres.map(genre => {
+            return { value: genre.name, label: genre.name, id: genre._id };
+        });
+        const mappedEvent = {
+            ...event,
+            genres: genresAsSelectList
+        };
+        
+        dispatch(errorsActions.removeAllValidationErrors());
+        dispatch(openEditEventModalSuccess(mappedEvent));
     };
 }
