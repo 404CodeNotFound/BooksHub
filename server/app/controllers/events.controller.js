@@ -26,7 +26,7 @@ module.exports = (data) => {
 
         addEvent: (req, res) => {
             const event = req.body;
-            console.log(event);
+            
             req.checkBody('title', 'Title is required.').notEmpty();
             req.checkBody('start_date', 'Start date is required.').notEmpty();
             req.checkBody('place', 'Place is required.').notEmpty();
@@ -104,6 +104,32 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        deleteEvent: (req, res) => {
+            if (req.user.role !== 'Admin') {
+                return res.status(403)
+                    .json({ message: errors.PERMISSIONS_DENIED });
+            }
+
+            const eventId = req.params.id;
+
+            data.events.getEventById(eventId)
+                .then(foundEvent => {
+                    if (!foundEvent) {
+                        return res.status(404)
+                            .json({ message: errors.EVENT_NOT_FOUND });
+                    }
+
+                    data.events.deleteEvent(eventId)
+                        .then(() => {
+                            return res.status(204)
+                                .json("Removed");
+                        });
+                })
+                .catch(error => {
+                    return res.status(500)
+                        .json({ message: errors.SERVER_ERROR });
+                });
         }
     }
 }

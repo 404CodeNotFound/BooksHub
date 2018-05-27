@@ -40,7 +40,7 @@ class EventRow extends Component {
                     }
                 </td>
                 <td>
-                    {/* <button className="action-btn" onClick={() => this.props.deleteUser(this.props.user._id)}>Delete</button> */}
+                    <button className="action-btn" onClick={() => this.props.deleteEvent(this.props.event._id)}>Delete</button>
                 </td>
             </tr>
         );
@@ -55,7 +55,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        // deleteUser: (id) => dispatch(usersActions.deleteUser(id)),
+        deleteEvent: (id) => dispatch(eventsActions.deleteEvent(id)),
         openEditEventModal: (event) => dispatch(modalsActions.openEditEventModal(event)),
     };
 }

@@ -204,7 +204,6 @@ class EditEventModal extends Component {
             creator: this.props.event.creator.username
         };
 
-        console.log(event);
         this.props.updateEvent(event, this.props.isAdminPage);
     }
 }

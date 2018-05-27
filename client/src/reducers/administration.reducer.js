@@ -113,6 +113,11 @@ export default function books(state = {
                 ...state,
                 events: updateItemInCollection(state.events, action.event)
             };
+        case 'DELETE_EVENT_SUCCESS':
+            return {
+                ...state,
+                events: removeFromCollection(state.events, action.eventId)
+            };
         default:
             return state;
     }

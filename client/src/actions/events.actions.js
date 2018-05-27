@@ -19,6 +19,10 @@ export function editEventSuccess(event) {
     return { type: 'EDIT_EVENT_SUCCESS', event };
 }
 
+export function deleteEventSuccess(id) {
+    return { type: 'DELETE_EVENT_SUCCESS', eventId: id };
+}
+
 export function getJoinedEvents(id, page) {
     return function (dispatch) {
         debugger;
@@ -87,6 +91,24 @@ export function editEvent(event) {
             .done(response => {
                 dispatch(editEventSuccess(response.event));
                 dispatch(modalsActions.closeEditEventModal());
+            })
+            .fail(error => {
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
+            });
+    };
+}
+
+export function deleteEvent(id) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.deleteAuthorized(token, `${api.EVENTS}/${id}`)
+            .done(response => {
+                dispatch(deleteEventSuccess(id));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {

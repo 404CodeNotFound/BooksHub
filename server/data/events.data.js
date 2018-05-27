@@ -113,4 +113,20 @@ module.exports = class EventsData {
                 });
         });
     }
+
+    deleteEvent(id) {
+        return new Promise((resolve, reject) => {
+            Event.findOneAndUpdate({ '_id': id }, {
+                $set: {
+                    isDeleted: true
+                }
+            }, { new: true }, (err, event) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve();
+                }
+            });
+        });
+    }
 }
