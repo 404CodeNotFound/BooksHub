@@ -24,8 +24,9 @@ module.exports = class BooksData {
 
     getBookById(id) {
         return new Promise((resolve, reject) => {
-            return Book.findOne({ '_id': id, 'isDeleted': false },
-                (err, book) => {
+            return Book.findOne({ '_id': id, 'isDeleted': false })
+                .populate({path: 'author', select: 'first_name last_name'})
+                .exec((err, book) => {
                     if (err) {
                         return reject(err);
                     } else {
@@ -162,7 +163,7 @@ module.exports = class BooksData {
                 if (err) {
                     return reject(err);
                 } else {
-                    return resolve(createdBook);
+                    return resolve(this.getBookById(createdBook._id));
                 }
             })
         });

@@ -1,6 +1,7 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
+import * as successActions from './success.actions';
 
 export function getUserCommentsSuccess(result) {
     return { type: 'GET_COMMENTS_SUCCESS', comments: result.comments, commentsCount: result.commentsCount };
@@ -28,6 +29,7 @@ export function deleteComment(userId, commentId) {
         return requester.deleteAuthorized(token, `${api.USERS}/${userId}/comments/${commentId}`, {})
             .done(() => {
                 dispatch(deleteCommentSuccess(commentId));
+                dispatch(successActions.actionSucceeded('Selected comment was removed!'))
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));                

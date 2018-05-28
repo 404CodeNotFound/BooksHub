@@ -3,6 +3,7 @@ import api from '../requesters/api';
 import * as errorActions from './error.actions';
 import * as modalsActions from './modals.actions';
 import * as loadersActions from './loaders.actions';
+import * as successActions from './success.actions';
 
 export function getUserBooksSuccess(result) {
     return { type: 'GET_USER_BOOKS_SUCCESS', books: result.books, booksCount: result.booksCount };
@@ -111,6 +112,7 @@ export function rateBook(bookId, rating) {
         return requester.putAuthorized(token, `${api.BOOKS}/${bookId}/rating`, body)
             .done(response => {
                 dispatch(rateBookSuccess({ userRating: body.stars, bookRating: response.bookRating }));
+                dispatch(successActions.actionSucceeded('Your vote was saved!'));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -130,6 +132,7 @@ export function markBook(bookId, userId, status) {
         return requester.putAuthorized(token, `${api.BOOKS}/${bookId}/statuses`, body)
             .done(response => {
                 dispatch(markBookSuccess({ bookStatus: response.bookStatus }));
+                dispatch(successActions.actionSucceeded('Your have marked this book!'));                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -185,7 +188,8 @@ export function addBook(book) {
         return requester.postAuthorized(token, `${api.BOOKS}`, book)
             .done(response => {
                 dispatch(addBookSuccess(response.book));
-                dispatch(modalsActions.closeAddBookModal());                                
+                dispatch(modalsActions.closeAddBookModal());
+                dispatch(successActions.actionSucceeded('The book was published!'));                                                
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
@@ -204,6 +208,7 @@ export function editBook(book) {
             .done(response => {
                 dispatch(editBookSuccess(response.book));
                 dispatch(modalsActions.closeEditBookModal());
+                dispatch(successActions.actionSucceeded('The information about book was updated!'));                                                                
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
@@ -222,6 +227,7 @@ export function deleteBook(bookId) {
         return requester.deleteAuthorized(token, `${api.BOOKS}/${bookId}`)
             .done(response => {
                 dispatch(deleteBookSuccess(bookId));
+                dispatch(successActions.actionSucceeded('Selected book was removed!'));                                                                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

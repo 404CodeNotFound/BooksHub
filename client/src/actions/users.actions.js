@@ -2,6 +2,7 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 import * as modalsActions from './modals.actions';
+import * as successActions from './success.actions';
 
 export function loginSuccess() {
     return { type: 'LOGIN_SUCCESS' };
@@ -51,6 +52,7 @@ export function logout() {
         localStorage.removeItem('role');        
         
         dispatch(logoutSuccess());
+        dispatch(successActions.actionSucceeded('You have been logged out!'));
     }
 }
 
@@ -64,6 +66,7 @@ export function login(username, password) {
                 localStorage.setItem('role', response.user.role);
 
                 dispatch(loginSuccess());
+                dispatch(successActions.actionSucceeded('You have been logged in!'));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -76,6 +79,7 @@ export function register(username, password, email, firstname, lastname) {
         return requester.post(api.REGISTER, { username: username, password: password, email: email, first_name: firstname, last_name: lastname })
             .done(response => {
                 dispatch(registerSuccess());
+                dispatch(successActions.actionSucceeded('You have been registered!'));                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -140,6 +144,7 @@ export function updateProfile(user, isAdminPage) {
                 }
                 
                 dispatch(modalsActions.closeEditUserModal());
+                dispatch(successActions.actionSucceeded('Your profile was updated!'));                                                        
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -168,6 +173,7 @@ export function changeRole(user) {
         return requester.putAuthorized(token, `${api.USERS}/${user._id}/role`, user)
             .done(response => {
                 dispatch(changeRoleSuccess(response.user));
+                dispatch(successActions.actionSucceeded('The role of selected user was changed!'));                                    
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -182,6 +188,7 @@ export function deleteUser(id) {
         return requester.deleteAuthorized(token, `${api.USERS}/${id}`)
             .done(response => {
                 dispatch(deleteUserSuccess(id));
+                dispatch(successActions.actionSucceeded('Selected user was removed!'));                                    
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
