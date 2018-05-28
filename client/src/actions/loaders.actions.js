@@ -1,4 +1,5 @@
 export function showLoader() {
+    debugger;
     return { type: 'SHOW_LOADER' };
 }
 

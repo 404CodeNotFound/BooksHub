@@ -6,11 +6,11 @@ class BookPartial extends Component {
         return (
             <div className="col-md-3 margin-bottom-60">
                 <div className="float-left">
-                    <Link to={"/books/" + this.props.book.title}>
+                    <Link to={"/books/" + this.props.book._id}>
                         <img src={this.props.book.photo} width="200px" alt={this.props.book._id} />
                     </Link>
                     <div>
-                        <Link to={"/books/" + this.props.book.title}>
+                        <Link to={"/books/" + this.props.book._id}>
                             <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{this.props.book.title}</h3>
                         </Link>
                         <h5>
@@ -21,7 +21,7 @@ class BookPartial extends Component {
                     </div>
                     <p>
                         {this.props.book.summary.substr(0, 50)}...
-                      <Link className="text-more-info text-primary" to={"/books/" + this.props.book.title}>Read more</Link>
+                      <Link className="text-more-info text-primary" to={"/books/" + this.props.book._id}>Read more</Link>
                     </p>
                 </div>
             </div>

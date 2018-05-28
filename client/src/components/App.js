@@ -36,7 +36,7 @@ class App extends Component {
                             <Route path="/register" component={RegisterPage} />
                             <Route path="/users/:username" component={ProfilePage} />
                             <Route exact path="/books" component={BooksListPage} />
-                            <Route path="/books/:title" component={BookDetailsPage} />
+                            <Route path="/books/:id" component={BookDetailsPage} />
                             <Route path="/authors/:id" component={AuthorBiographyPage} />
                             <Route exact path="/events" component={EventsListPage} />
                             <Route path="/events/:id" component={EventDetailsPage} />

@@ -76,9 +76,9 @@ export function getReadBooks(id, page) {
     };
 }
 
-export function getBookDetails(title, userId) {
+export function getBookDetails(bookId, userId) {
     return function (dispatch) {
-        return requester.get(`${api.BOOKS}/${title}`)
+        return requester.get(`${api.BOOKS}/${bookId}`)
             .done(response => {
                 const userCanWriteReview = response.book.reviews.findIndex(review => review.user._id === userId) < 0;
                 let currentUserRating = response.book.ratings.find(rating => rating.user === userId);

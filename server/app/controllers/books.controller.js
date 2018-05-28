@@ -4,13 +4,13 @@ const generateErrorResponse = require('../../utils/error.responses');
 module.exports = (data) => {
     return {
         getBook: (req, res) => {
-            const title = req.params.title;
+            const id = req.params.id;
 
-            if (!title) {
+            if (!id) {
                 res.status(400)
-                    .json({ message: errors.MISSING_BOOK_TITLE });
+                    .json({ message: errors.MISSING_BOOK_ID });
             } else {
-                data.books.getBookByTitle(title)
+                data.books.getBookDetails(id)
                     .then(book => {
                         if (!book) {
                             throw Error(errors.BOOK_NOT_FOUND);
