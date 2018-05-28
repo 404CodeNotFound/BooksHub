@@ -11,6 +11,10 @@ import '../../style/admin.panel.css';
 class AdminPanelPage extends Component {
     state = { links: ['active', '', '', '', ''] };
     render() {
+        if(this.props.currentAdmin.role !== 'Admin') {
+            this.props.history.push("/");
+        }
+        
         return (
                 <article>
                     <header className="section background-image text-center">
@@ -87,9 +91,10 @@ class AdminPanelPage extends Component {
 function mapStateToProps(state, ownProps) {
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('id');
+    const role = localStorage.getItem('role');
 
     return {
-        currentAdmin: { username: username, id: userId }
+        currentAdmin: { username: username, id: userId, role: role }
     };
 }
 

@@ -179,7 +179,8 @@ class BookDetailsPage extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        if(!nextProps.book.title && nextProps.isLoaderVisible) {
+        debugger;
+        if(!nextProps.book.title && nextProps.error) {
             this.props.history.push("/NotFound");
         }
     }
@@ -195,7 +196,8 @@ function mapStateToProps(state, ownProps) {
         canWriteReview: state.books.canWriteReview,
         currentUserRating: state.books.currentUserRating,
         bookStatus: state.books.bookStatus,
-        isLoaderVisible: state.loaders.showLoader
+        isLoaderVisible: state.loaders.showLoader,
+        error: state.errors.error
     };
 }
 
