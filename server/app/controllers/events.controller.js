@@ -52,7 +52,9 @@ module.exports = (data) => {
             data.users.getFavouriteGenres(userId)
                 .then(genres => {
                     if (genres.length > 0) {
-                        // return data.events.getEventsByGenres(genres);
+                        genres = genres.map(genre => genre._id);
+                        
+                        return data.events.getRecommendedEvents(genres);
                     }
 
                     return data.events.getLatestEvents();

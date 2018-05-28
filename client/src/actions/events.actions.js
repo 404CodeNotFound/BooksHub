@@ -87,6 +87,7 @@ export function getAllEvents(page) {
         return requester.getAuthorized(token, `${api.EVENTS}?page=${page}`)
             .done(response => {
                 dispatch(getAllEventsSuccess(response.events, response.eventsCount));
+                dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

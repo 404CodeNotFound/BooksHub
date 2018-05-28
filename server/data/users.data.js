@@ -339,8 +339,9 @@ module.exports = class UserData {
 
     getFavouriteGenres(userId) {
         return new Promise((resolve, reject) => {
-            User.findById(userId,
-                (err, user) => {
+            User.findById(userId)
+                .populate({ path: 'favourite_genres', select: 'name'})
+                .exec((err, user) => {
                     if (err) {
                         return reject(err);
                     } else {

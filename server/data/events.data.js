@@ -47,13 +47,30 @@ module.exports = class EventsData {
         });
     }
 
+    getRecommendedEvents(favouriteGenres) {
+        return new Promise((resolve, reject) => {
+            Event.find({ 'isDeleted': false, genres: { $in: favouriteGenres }})
+                .sort({ 'start_date': '1' })
+                .limit(4)
+                .populate({ path: 'genres', select: 'name' })
+                .populate({ path: 'creator', select: 'username' })
+                .exec((err, events) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(events);
+                    }
+                })
+        });
+    }
+
     getLatestEvents() {
         return new Promise((resolve, reject) => {
             Event.find({ 'isDeleted': false })
-                .populate({ path: 'genres', select: 'name' })
-                .populate({ path: 'creator', select: 'username' })
                 .sort({ 'start_date': '1' })
                 .limit(4)
+                .populate({ path: 'genres', select: 'name' })
+                .populate({ path: 'creator', select: 'username' })
                 .exec((err, events) => {
                     if (err) {
                         return reject(err);

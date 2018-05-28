@@ -17,11 +17,16 @@ class AllEventsList extends Component {
     }
 
     componentDidMount() {
+        this.props.showLoader();
         this.props.getAllEvents(this.state.activePage);
     }
 
     render() {
         return (
+            this.props.isLoaderVisible ?
+            <div className="loader-page">
+                <BarLoader color="#4eb980" size="11" />
+            </div>:
             <div id="page-content-wrapper administration-box" key="events-list">
                 <div id="events">
                     <h2>Events</h2>
@@ -91,7 +96,8 @@ function mapStateToProps(state, ownProps) {
     return {
         events: state.administration.events,
         eventsCount: state.administration.eventsCount,
-        isVisibleAddEventModal: state.modals.showAddEventModal
+        isVisibleAddEventModal: state.modals.showAddEventModal,
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
@@ -99,6 +105,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllEvents: (page) => dispatch(eventsActions.getAllEvents(page)),
         openAddEventModal: () => dispatch(modalsActions.openAddEventModal()),
+        showLoader: () => dispatch(loadersActions.showLoader())
     };
 }
 
