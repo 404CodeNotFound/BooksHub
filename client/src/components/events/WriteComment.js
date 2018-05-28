@@ -4,6 +4,7 @@ import * as commentsActions from '../../actions/comments.actions';
 
 class WriteComment extends Component {
     constructor(props) {
+        super(props);
         this.state = {
             commentContent: ''
         };
@@ -11,52 +12,50 @@ class WriteComment extends Component {
 
     render() {
         return (
-            <section className="section background-grey" id="review-form">
+            <section className="section background-grey" id="comment-form">
                 <div className="line text-center">
                     <i className="icon-sli-pencil text-primary text-size-40"></i>
                     <h2 className="text-size-50 text-m-size-40">
-                        Leave a Review</h2>
+                        Leave a Comment</h2>
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>
                 <div className="container">
-                    <form method="post" onSubmit={(event) => this.submitReview(event)}>
-                        <textarea className="form-control col-md-6" id="review-content" name="Content"
-                            placeholder="Write your review here..." rows="5" onChange={(event) => this.handleReviewChange(event)}>
-                        </textarea>
-                        <input type="submit" value="Leave review" id="post-review-btn" className="btn-main-sm btn-block col-md-4 offset-md-4" />
-                    </form>
+                    <textarea className="form-control col-md-6" id="review-content" name="Content"
+                        placeholder="Write your comment here ..." value={this.state.commentContent} rows="5" onChange={this.handleCommentChange}>
+                    </textarea>
+                    <input type="submit" value="Leave comment" id="post-review-btn" className="btn-main-sm btn-block col-md-4 offset-md-4" onClick={this.handleSubmit} />
                 </div>
             </section>
         )
     }
 
-    handleReviewChange = (event) => {
-        this.setState({ reviewContent: event.target.value });
+    handleScrollToElement = (elementId) => {
+        const node = document.getElementById(elementId);
+        window.scrollTo(0, node.offsetTop);
     }
 
-    submitReview = (event) => {
-        event.preventDefault();
-        const reviewContent = this.state.reviewContent;
+    handleCommentChange = (event) => {
+        this.setState({ commentContent: event.target.value });
+    }
 
-        this.props.sendReview(reviewContent, this.props.book._id);
-        this.setState({ author: '', text: '' });
+    handleSubmit = () => {
+        this.props.writeComment(this.state.commentContent, this.props.eventId);
+        
+        this.setState({ commentContent: '' });
+        this.handleScrollToElement("comments");
     }
 }
 
 function mapStateToProps(state, ownProps) {
-    const username = localStorage.getItem('username');
-    const userId = localStorage.getItem('id');
-
     return {
-        book: state.books.book,
-        currentUser: { username: username, id: userId }
+        eventId: state.events.event._id,
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        sendReview: (content, bookId) => dispatch(reviewsActions.sendReview(content, bookId))
+        writeComment: (content, eventId) => dispatch(commentsActions.writeComment(content, eventId))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WriteReview);
+export default connect(mapStateToProps, mapDispatchToProps)(WriteComment);

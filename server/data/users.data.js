@@ -477,4 +477,21 @@ module.exports = class UserData {
         )
         });
     }
+
+    addComment(userId, comment) {
+        return new Promise((resolve, reject) => {
+            User.update(
+                { _id: userId }, 
+                { $push: { comments: comment._id } }
+            )
+            .populate('comments')
+            .exec((err, user) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(comment);
+                }
+            });
+        });
+    }
 }

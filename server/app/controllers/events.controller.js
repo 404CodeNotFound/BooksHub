@@ -207,6 +207,28 @@ module.exports = (data) => {
                     console.log(error);
                     generateErrorResponse(res, error.message);
                 });
-        }
+        },
+        addComment: (req, res) => {
+            const comment = req.body;
+            const userId = req.user._id;
+            const eventId = req.params.id;
+
+            data.events.getEventById(eventId)
+                .then(foundEvent => {
+                    if (!foundEvent) {
+                        throw Error(errors.EVENT_NOT_FOUND);
+                    }
+                })
+                .then(() => data.comments.createComment(comment, userId, eventId))
+                .then(createdComment => data.events.addComment(eventId, createdComment))
+                .then(createdComment => data.users.addComment(userId, createdComment))
+                .then(createdComment => {
+                    res.status(201)
+                        .json({ comment: createdComment });
+                })
+                .catch(error => {
+                    generateErrorResponse(res, error.message);
+                });
+        },
     }
 }

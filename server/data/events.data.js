@@ -80,7 +80,7 @@ module.exports = class EventsData {
     getFullEventById(id) {
         return new Promise((resolve, reject) => {
             return Event.findOne({ '_id': id, 'isDeleted': false })
-                .populate({ path: 'comments', populate: { path: 'creator', select: 'username photo' } })
+                .populate({ path: 'comments', populate: { path: 'user', select: 'username photo' } })
                 .populate({ path: 'participants', populate: { path: 'friends', select: '_id' }, select: 'username photo' })
                 .populate({ path: 'genres', select: 'name' })
                 .populate({ path: 'creator', select: 'username photo' })
@@ -175,6 +175,23 @@ module.exports = class EventsData {
                     return reject(err);
                 } else {
                     return resolve(updatedEvent);
+                }
+            });
+        });
+    }
+
+    addComment(eventId, comment) {
+        return new Promise((resolve, reject) => {
+            Event.update(
+                { _id: eventId }, 
+                { $push: { comments: comment._id } }
+            )
+            .populate('comments')
+            .exec((err, event) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(comment);
                 }
             });
         });

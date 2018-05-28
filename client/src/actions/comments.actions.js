@@ -10,6 +10,29 @@ export function deleteCommentSuccess(commentId) {
     return { type: 'DELETE_COMMENT_SUCCESS', id: commentId };
 }
 
+export function writeCommentSuccess(comment) {
+    return { type: 'WRITE_COMMENT_SUCCESS', comment };
+}
+
+export function writeComment(content, eventId) {
+    const token = localStorage.getItem('token');
+
+    return function (dispatch) {
+        const comment = {
+            content: content,
+            posted_on: new Date()
+        };
+        
+        return requester.postAuthorized(token, `${api.EVENTS}/${eventId}/comments`, comment)
+            .done((response) => {
+                dispatch(writeCommentSuccess(response.comment));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
 export function getUserComments(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/comments?page=${page}`)

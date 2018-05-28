@@ -8,6 +8,8 @@ import * as eventsActions from '../../actions/events.actions';
 import * as loadersActions from '../../actions/loaders.actions';
 import '../../style/event.details.css';
 import AllParticipantsList from './AllParticipantsList';
+import WriteComment from './WriteComment';
+import EventCommentsList from './EventCommentsList';
 
 class EventDetailsPage extends Component {
     state = {
@@ -126,14 +128,19 @@ class EventDetailsPage extends Component {
                                                 </Link>
                                             )}
                                             
-                                            {this.props.currentUser.username ?
-                                            <div id="joined-users-text">and {this.props.event.participants.length - 3 > 0 ? this.props.event.participants.length - 3 : ""} <a onClick={this.props.openAllParticipantsModal}>more</a> friends are going to the event.</div>
-                                            :
-                                            <div id="joined-users-text">and {this.props.event.participants.length - 3 > 0 ? this.props.event.participants.length - 3 : ""} <a onClick={this.props.openAllParticipantsModal}>more</a> people are going to the event.</div>
+                                            {this.props.event.participants.length > 0 &&
+                                                <div>
+                                                    {this.props.currentUser.username ?
+                                                    <div id="joined-users-text">and {this.props.event.participants.length - 3 > 0 ? this.props.event.participants.length - 3 : ""} <a onClick={this.props.openAllParticipantsModal}>more</a> friends are going to the event.</div>
+                                                    :
+                                                    <div id="joined-users-text">and {this.props.event.participants.length - 3 > 0 ? this.props.event.participants.length - 3 : ""} <a onClick={this.props.openAllParticipantsModal}>more</a> people are going to the event.</div>
+                                                    }
+                                                    {this.props.isParticipantsModalVisible &&
+                                                        <AllParticipantsList participants={this.props.event.participants} />
+                                                    }
+                                                </div>
                                             }
-                                            {this.props.isParticipantsModalVisible &&
-                                                <AllParticipantsList participants={this.props.event.participants} />
-                                            }
+                                            
                                             <div className="media-body">
                                             </div>
                                         </div>
@@ -156,7 +163,7 @@ class EventDetailsPage extends Component {
                                 <div className="col-md-3">
                                     {this.props.currentUser.username ?
                                         <div>
-                                            <button className="btn-main-sm col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center" id="write-comment">
+                                            <button className="btn-main-sm col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center" id="write-comment" onClick={event => this.handleScrollToElement(event, "comment-form")}>
                                                 <i className="fa fa-pencil"></i>Leave a comment
                                             </button>
                                         </div>
@@ -170,7 +177,7 @@ class EventDetailsPage extends Component {
                                     }
                                                                 
                                     <div>
-                                        <button className="btn-main-sm col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center" id="see-comments">
+                                        <button className="btn-main-sm col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center" id="see-comments" onClick={event => this.handleScrollToElement(event, "comments")}>
                                             <i className="fa fa-comment"></i>See all comments
                                         </button>
                                     </div>
@@ -179,10 +186,10 @@ class EventDetailsPage extends Component {
                         </section>
                         }
                     </div>
-                    {/*
+                    {this.props.currentUser.username &&
                         <WriteComment />
-                    } */}
-                    {/* <EventCommentsList /> */}
+                    }
+                    <EventCommentsList />
                 </article>
         )
     }

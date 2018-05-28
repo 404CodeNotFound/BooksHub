@@ -24,6 +24,25 @@ module.exports = class CommentsData {
         });
     }
 
+    createComment(comment, userId, eventId) {
+        return new Promise((resolve, reject) => {
+            const newComment = new Comment();
+            newComment.content = comment.content;
+            newComment.posted_on = comment.posted_on;
+            newComment.user = userId;
+            newComment.event = eventId;
+
+            newComment.save((err, createdComment) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    console.log(this.createdComment);
+                    return resolve(createdComment);
+                }
+            });
+        });
+    }
+
     deleteComment(id) {
         return new Promise((resolve, reject) => {
             Comment.remove({ '_id': id }, (err) => {

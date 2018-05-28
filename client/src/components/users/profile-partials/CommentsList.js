@@ -16,6 +16,7 @@ class CommentsList extends Component {
     }
 
     render() {
+        console.log(this.props.comments);
         return (
             [
                 <div key="title" className="line text-center">
@@ -35,11 +36,11 @@ class CommentsList extends Component {
                                             </button>
                                         }
                                         <p>{comment.content}</p>
-                                        <p style={postedOnStyle}>Posted on {comment.posted_on}</p>
+                                        <p style={postedOnStyle}>Posted on {comment.posted_on.split('T')[0]}</p>
                                     </div>
                                     <div className="for-book">
                                         for
-                                            <Link to={"/events/" + comment.event.title}> {comment.event.title}</Link>
+                                            <Link to={"/events/" + comment.event._id}> {comment.event.title}</Link>
                                     </div>
                                 </div>
                             </div>

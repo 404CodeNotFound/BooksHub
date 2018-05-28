@@ -16,14 +16,18 @@ export default function events(state = {
         case 'JOIN_EVENT_SUCCESS':
             return {
                 ...state,
-                // event: {
-                //     ...state.event,
-                //     participants: [
-                //         action.event.participants,
-                //         ...state.event.participants
-                //     ]
-                // },
                 canJoinEvent: false
+            };
+        case 'WRITE_COMMENT_SUCCESS':
+            return {
+                ...state,
+                event: {
+                    ...state.event,
+                    comments: [
+                        action.comment,
+                        ...state.event.comments
+                    ]
+                }
             };
         default:
             return state;

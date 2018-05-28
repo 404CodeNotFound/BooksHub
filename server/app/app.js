@@ -98,6 +98,7 @@ const init = (data) => {
     app.post('/events', auth.authenticate(passport), eventsController.addEvent);            
     app.put('/events/:id', auth.authenticate(passport), eventsController.editEvent);
     app.delete('/events/:id', auth.authenticate(passport), eventsController.deleteEvent);
+    app.post('/events/:id/comments', auth.authenticate(passport), eventsController.addComment);            
     
     app.get('/recommendedevents', auth.authenticate(passport), eventsController.getRecommendedEvents);
     app.get('/latestevents', eventsController.getLatestEvents);
