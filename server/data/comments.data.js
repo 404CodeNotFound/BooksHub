@@ -54,4 +54,17 @@ module.exports = class CommentsData {
             });
         });
     }
+
+    getComment(id) {
+        return new Promise((resolve, reject) => {
+            Comment.findById(id)
+                .exec((err, comment) => {
+                    if (err) {
+                        return reject(err);
+                    } else {                        
+                        return resolve(comment);
+                    }
+                });
+        });
+    }
 }
