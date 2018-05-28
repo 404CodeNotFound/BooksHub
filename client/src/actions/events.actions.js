@@ -40,8 +40,13 @@ export function getEventDetails(id, userId) {
     return function (dispatch) {
         return requester.get(`${api.EVENTS}/${id}`)
             .done(response => {
-                const canJoinEvent = response.event.participants.findIndex(participant => participant === userId) < 0;
-
+                const canJoinEvent = response.event.participants.findIndex(participant => participant._id === userId) < 0;
+                
+                if (userId) {
+                    const joinedFriends = response.event.participants.filter(participant => participant.friends.findIndex(friend => friend._id === userId) >= 0);
+                    response.event.participants = joinedFriends;
+                }
+                
                 dispatch(getEventDetailsSuccess(response.event, canJoinEvent));
                 dispatch(loadersActions.hideLoader());
             })
@@ -55,11 +60,9 @@ export function getJoinedEvents(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/joinedevents?page=${page}`)
             .done(response => {
-                debugger;
                 dispatch(getUserEventsSuccess(response));
             })
             .fail(error => {
-                debugger;
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     }

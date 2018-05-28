@@ -3,7 +3,8 @@ export default function modals(state = {
     showEditUserModal: false, userToEdit: {},
     showAddAuthorModal: false, showEditAuthorModal: false, authorToEdit: {},
     showAddGenreModal: false,
-    showAddEventModal: false, showEditEventModal: false, eventToEdit: {} }, action) {
+    showAddEventModal: false, showEditEventModal: false, eventToEdit: {},
+    showAllParticipantsModal: false }, action) {
     switch (action.type) {
         case 'OPEN_ADD_BOOK_MODAL':
             return {
@@ -76,6 +77,14 @@ export default function modals(state = {
             return {
                 showEditEventModal: false,
                 eventToEdit: {}
+            };
+        case 'OPEN_ALL_PARTICIPANTS_MODAL':
+            return {
+                showAllParticipantsModal: true
+            };
+        case 'CLOSE_ALL_PARTICIPANTS_MODAL':
+            return {
+                showAllParticipantsModal: false
             };
         default:
             return state;

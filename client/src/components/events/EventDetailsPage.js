@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { BarLoader } from 'react-css-loaders';
+import * as modalsActions from '../../actions/modals.actions';
 import * as eventsActions from '../../actions/events.actions';
 import * as loadersActions from '../../actions/loaders.actions';
 import '../../style/event.details.css';
+import AllParticipantsList from './AllParticipantsList';
 
 class EventDetailsPage extends Component {
     state = {
@@ -116,25 +118,27 @@ class EventDetailsPage extends Component {
                                     }
                                     <div id="stat-message"></div>
                                     
-                                    {this.props.currentUser.username &&
-                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-padding joined-friends">
-                                            <div className="media">
-                                                <a className="pull-left joined-users" href="#">
-                                                    <img className="media-object dp img-circle" src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100" />
-                                                </a>
-                                                <a className="pull-left joined-users" href="#">
-                                                    <img className="media-object dp img-circle" src="http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png" />
-                                                </a>
-                                                <a className="pull-left joined-users" href="#">
-                                                    <img className="media-object dp img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm" />
-                                                </a>
-                                                <div id="joined-users-text">and 5 more friends are going to the event.</div>
-                                                <div className="media-body">
-                                                </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-padding joined-friends">
+                                        <div className="media">
+                                            {this.props.event.participants.slice(0, 3).map(participant => 
+                                                <Link key={participant._id} to={"/users/" + participant.username} className="green-link">
+                                                    <img className="media-object dp img-circle" alt={participant.username} title={participant.username} src={participant.photo} />
+                                                </Link>
+                                            )}
+                                            
+                                            {this.props.currentUser.username ?
+                                            <div id="joined-users-text">and {this.props.event.participants.length - 3 > 0 ? this.props.event.participants.length - 3 : ""} <a onClick={this.props.openAllParticipantsModal}>more</a> friends are going to the event.</div>
+                                            :
+                                            <div id="joined-users-text">and {this.props.event.participants.length - 3 > 0 ? this.props.event.participants.length - 3 : ""} <a onClick={this.props.openAllParticipantsModal}>more</a> people are going to the event.</div>
+                                            }
+                                            {this.props.isParticipantsModalVisible &&
+                                                <AllParticipantsList participants={this.props.event.participants} />
+                                            }
+                                            <div className="media-body">
                                             </div>
                                         </div>
-                                    }
-
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div className="row description">
@@ -209,7 +213,8 @@ function mapStateToProps(state, ownProps) {
         event: state.events.event,
         currentUser: { username: username, id: userId },
         isLoaderVisible: state.loaders.showLoader,
-        canJoinEvent: state.events.canJoinEvent
+        canJoinEvent: state.events.canJoinEvent,
+        isParticipantsModalVisible: state.modals.showAllParticipantsModal
     };
 }
 
@@ -219,6 +224,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getEvent: () => dispatch(eventsActions.getEventDetails(ownProps.match.params.id, userId)),
         joinEvent: (eventId, user) => dispatch(eventsActions.joinEvent(eventId, user)),
+        openAllParticipantsModal: () => dispatch(modalsActions.openAllParticipantsModal()),  
         showLoader: () => dispatch(loadersActions.showLoader())
     };
 }

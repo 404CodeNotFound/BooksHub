@@ -81,6 +81,7 @@ module.exports = class EventsData {
         return new Promise((resolve, reject) => {
             return Event.findOne({ '_id': id, 'isDeleted': false })
                 .populate({ path: 'comments', populate: { path: 'creator', select: 'username photo' } })
+                .populate({ path: 'participants', populate: { path: 'friends', select: '_id' }, select: 'username photo' })
                 .populate({ path: 'genres', select: 'name' })
                 .populate({ path: 'creator', select: 'username photo' })
                 .exec((err, event) => {

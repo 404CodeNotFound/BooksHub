@@ -64,6 +64,14 @@ export function closeEditEventModal() {
     return { type: 'CLOSE_EDIT_EVENT_MODAL' };
 }
 
+export function openAllParticipantsModal() {
+    return { type: 'OPEN_ALL_PARTICIPANTS_MODAL' };
+}
+
+export function closeAllParticipantsModal() {
+    return { type: 'CLOSE_ALL_PARTICIPANTS_MODAL' };
+}
+
 export function openAddAuthorModal() {
     return function (dispatch) {
         dispatch(openAddAuthorModalSuccess());

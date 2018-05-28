@@ -165,6 +165,20 @@ module.exports = class UserData {
         });
     }
 
+    getAllUserFriends(id) {
+        return new Promise((resolve, reject) => {
+            User.findById(id)
+                .populate('friends')
+                .exec((err, user) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(user.friends);
+                    }
+                });
+        });
+    }
+
     getJoinedEvents(id, page) {
         return new Promise((resolve, reject) => {
             User.findById(id)
