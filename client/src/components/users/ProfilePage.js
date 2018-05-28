@@ -182,6 +182,12 @@ class ProfilePage extends Component {
 
         return true;
     }
+
+    componentWillUpdate(nextProps, nextState) {
+        if(!nextProps.user) {
+            this.props.history.push("/NotFound");
+        }
+    }
 }
 
 function mapStateToProps(state, ownProps) {

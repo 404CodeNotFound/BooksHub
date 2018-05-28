@@ -177,6 +177,12 @@ class BookDetailsPage extends Component {
         const markedAs = event.target.value;
         this.props.markBook(this.props.book._id, this.props.currentUser.id, markedAs);
     }
+
+    componentWillUpdate(nextProps, nextState) {
+        if(!nextProps.book.title && nextProps.isLoaderVisible) {
+            this.props.history.push("/NotFound");
+        }
+    }
 }
 
 function mapStateToProps(state, ownProps) {

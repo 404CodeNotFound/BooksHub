@@ -1,5 +1,6 @@
 const errors = require('../../utils/error.constants');
 const generateErrorResponse = require('../../utils/error.responses');
+const { ObjectId } = require('mongodb');
 
 module.exports = (data) => {
     return {
@@ -10,18 +11,23 @@ module.exports = (data) => {
                 res.status(400)
                     .json({ message: errors.MISSING_BOOK_ID });
             } else {
-                data.books.getBookDetails(id)
-                    .then(book => {
-                        if (!book) {
-                            throw Error(errors.BOOK_NOT_FOUND);
-                        } else {
-                            res.status(200)
-                                .json({ book });
-                        }
-                    })
-                    .catch(error => {
-                        generateErrorResponse(res, error.message);
-                    });
+                if (!ObjectId.isValid(id)) {
+                    return res.status(404)
+                        .json({ message: errors.BOOK_NOT_FOUND });
+                } else {
+                    data.books.getBookDetails(id)
+                        .then(book => {
+                            if (!book) {
+                                throw Error(errors.BOOK_NOT_FOUND);
+                            } else {
+                                res.status(200)
+                                    .json({ book });
+                            }
+                        })
+                        .catch(error => {
+                            generateErrorResponse(res, error.message);
+                        });
+                }
             }
 
             return res;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class HomePage extends Component {
     render() {
@@ -26,7 +27,7 @@ class HomePage extends Component {
                                 <div className="margin-left-60">
                                     <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">10000k</h3>
                                     <p>happy readers that browse tons of books and literary events</p>
-                                    <a className="text-more-info text-primary" href="login.html">Join us now</a>
+                                    <Link className="text-more-info text-primary" to="/login">Join us now</Link>
                                 </div>
                             </div>
                             <div className="s-12 m-6 l-4 margin-bottom-60">
@@ -36,7 +37,7 @@ class HomePage extends Component {
                                 <div className="margin-left-60">
                                     <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">10000k</h3>
                                     <p>books to browse, rate, review and recommend to your friends</p>
-                                    <a className="text-more-info text-primary" href="books.list.html">Browse books</a>
+                                    <Link className="text-more-info text-primary" to="/books">Browse books</Link>
                                 </div>
                             </div>
                             <div className="s-12 m-6 l-4 margin-bottom-60">
@@ -46,7 +47,7 @@ class HomePage extends Component {
                                 <div className="margin-left-60">
                                     <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">10000k</h3>
                                     <p>various literary events to browse, discuss and join</p>
-                                    <a className="text-more-info text-primary" href="events.list.html">Browse events</a>
+                                    <Link className="text-more-info text-primary" to="/events">Browse events</Link>
                                 </div>
                             </div>
                         </div>

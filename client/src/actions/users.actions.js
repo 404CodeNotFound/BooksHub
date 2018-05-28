@@ -102,7 +102,7 @@ export function getProfile(username) {
                 dispatch(getProfileSuccess(response.user, languagesSelectList, genresList));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                dispatch(errorActions.actionFailed(error.responseJSON.message));                    
             });
     };
 }

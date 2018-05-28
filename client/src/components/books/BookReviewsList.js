@@ -24,7 +24,7 @@ class BookReviewsListPage extends Component {
                                 <blockquote>
                                     {review.content}
                                     <cite>
-                                        <span><Link to={"/users/" + review.user.username + "/information"} className="green-link">{review.user.username} </Link></span>
+                                        <span><Link to={"/users/" + review.user.username + "/profile"} className="green-link">{review.user.username} </Link></span>
                                         <span>for </span>
                                         <span><Link to={"/books/" + this.props.book._id} className="green-link"> {this.props.book.title}</Link></span>
                                     </cite>

@@ -45,6 +45,7 @@ class App extends Component {
                             <Route exact path="/events" component={EventsListPage} />
                             <Route path="/events/:id" component={EventDetailsPage} />
                             <Route path="/administration" component={AdminPanelPage} />
+                            <Route path="/NotFound" component={NotFoundPage} />
                             <Route path="*" component={NotFoundPage} />
                         </Switch>
                         <Footer />
