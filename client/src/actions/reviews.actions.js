@@ -1,6 +1,7 @@
 import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
+import * as successActions from './success.actions';
 
 export function getUserReviewsSuccess(result) {
     return { type: 'GET_REVIEWS_SUCCESS', reviews: result.reviews, reviewsCount: result.reviewsCount };
@@ -50,6 +51,7 @@ export function sendReview(content, bookId) {
         return requester.postAuthorized(token, `${api.BOOKS}/${bookId}/reviews`, review)
             .done((response) => {
                 dispatch(writeReviewSuccess({review: response.review, canWriteReview: false}));
+                dispatch(successActions.actionSucceeded('Your message was published!'));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
