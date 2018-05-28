@@ -21,13 +21,13 @@ class BookRow extends Component {
                     {this.props.book.date_published.split('T')[0]}
                 </td>
                 <td>
-                    {this.props.book.author.first_name} {this.props.book.author.last_name}
+                    <Link to={"/authors/" + this.props.book.author._id}>{this.props.book.author.first_name} {this.props.book.author.last_name}</Link>
                 </td>
                 <td>
                     {this.props.book.publisher}
                 </td>
                 <td>
-                    <Link to={"/books/" + this.props.book.title}>Details</Link>
+                    <Link to={"/books/" + this.props.book._id}>Details</Link>
                 </td>
                 <td>
                     <button className="action-btn" onClick={() => this.props.openEditBookModal(this.props.book)}>Edit</button>

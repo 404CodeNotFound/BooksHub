@@ -2,6 +2,7 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 import * as modalsActions from './modals.actions';
+import * as loadersActions from './loaders.actions';
 
 export function getAuthorBiographySuccess(author) {
     return { type: 'GET_AUTHOR_SUCCESS', author };
@@ -28,6 +29,7 @@ export function getAuthorBiography(id) {
         return requester.get(`${api.AUTHORS}/${id}`)
             .done(response => {
                 dispatch(getAuthorBiographySuccess(response.author));
+                dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

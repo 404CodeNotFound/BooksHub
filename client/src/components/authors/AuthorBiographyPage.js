@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { BarLoader } from 'react-css-loaders';
 import * as authorsActions from '../../actions/authors.actions';
+import * as loadersActions from '../../actions/loaders.actions';
 import '../../style/author.css';
 
 class AuthorBiographyPage extends Component {
-    componentDidMount() {
+    componentWillMount() {
+        this.props.showLoader();
         this.props.getAuthor();
     }
 
     render() {
         return (
-            this.props.author.first_name ?
-                <article>
-                    <header className="section background-image text-center">
-                        <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
-                            Author Biography
-                </h1>
-                        <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
-                    </header>
-
-                    <div className="container">
+            <article>
+                <header className="section background-image text-center">
+                    <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                        Author Biography
+                        </h1>
+                    <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
+                </header>
+                {this.props.isLoaderVisible ?
+                    <div className="loader-page">
+                        <BarLoader color="#4eb980" size="11" />
+                    </div>
+                    :
+                    [<div className="container">
                         <section className="background-white section">
                             <div className="row author-details">
                                 <div className="panel panel-default">
@@ -60,7 +66,7 @@ class AuthorBiographyPage extends Component {
                                                     Birth date
                                                 </dt>
                                                 <dd>
-                                                    {this.props.author.birth_date.split('T')[0] || '-'}
+                                                    {this.props.author.birth_date ? this.props.author.birth_date.split('T')[0] || '-' : '-'}
                                                 </dd>
                                                 <dt>
                                                     Biography
@@ -77,7 +83,7 @@ class AuthorBiographyPage extends Component {
                                 </div>
                             </div>
                         </section>
-                    </div>
+                    </div>,
                     <section className="section background-grey" id="books-list">
                         <div className="line text-center">
                             <i className="icon-sli-book-open text-primary text-size-40"></i>
@@ -90,12 +96,12 @@ class AuthorBiographyPage extends Component {
                                 <div className="row">
                                     {this.props.books.map(book =>
                                         <div key={book._id} className="card background-grey col-md-2">
-                                            <Link to={"/books/" + book.title}>
+                                            <Link to={"/books/" + book._id}>
                                                 <img width="100px" className="card-img-top" src={book.photo} alt={"Card image cap " + book._id} />
                                             </Link>
                                             <div className="card-block background-grey">
                                                 <h5 className="card-title">
-                                                    <Link to={"/books/" + book.title} className="green-link">{book.title}</Link>
+                                                    <Link to={"/books/" + book._id} className="green-link">{book.title}</Link>
                                                 </h5>
                                                 <p className="card-text">
                                                     <small className="text-muted">{book.summary.substr(0, 60)}...</small>
@@ -110,9 +116,9 @@ class AuthorBiographyPage extends Component {
                             </div>
                         </div>
                     </section>
-                </article>
-                :
-                <div className="loader"></div>
+                    ]
+                }
+            </article>
         )
     }
 
@@ -124,15 +130,18 @@ class AuthorBiographyPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     return {
         author: state.authors.author,
-        books: state.authors.author.books
+        books: state.authors.author.books,
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getAuthor: () => dispatch(authorsActions.getAuthorBiography(ownProps.match.params.id))
+        getAuthor: () => dispatch(authorsActions.getAuthorBiography(ownProps.match.params.id)),
+        showLoader: () => dispatch(loadersActions.showLoader())
     };
 }
 

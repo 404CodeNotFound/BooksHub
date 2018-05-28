@@ -4,9 +4,9 @@ const calculateCurrentRating = require('../utils/rating');
 const itemsPerPage = 20;
 
 module.exports = class BooksData {
-    getBookByTitle(title) {
+    getBookDetails(id) {
         return new Promise((resolve, reject) => {
-            return Book.findOne({ 'title': title, 'isDeleted': false })
+            return Book.findOne({ '_id': id, 'isDeleted': false })
                 .populate({ path: 'genres', match: { isDeleted: false }, select: 'name' })
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'reviews', populate: { path: 'user', select: 'username photo' } })
