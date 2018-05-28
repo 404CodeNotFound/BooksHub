@@ -18,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-select/dist/react-select.css';
 import AuthorBiographyPage from './authors/AuthorBiographyPage';
 import EventsListPage from './events/EventsListPage';
+import EventDetailsPage from './events/EventDetailsPage';
 
 const SweetAlert = withSwalInstance(swal);
 
@@ -37,7 +38,8 @@ class App extends Component {
                             <Route exact path="/books" component={BooksListPage} />
                             <Route path="/books/:title" component={BookDetailsPage} />
                             <Route path="/authors/:id" component={AuthorBiographyPage} />
-                            <Route path="/events" component={EventsListPage} />
+                            <Route exact path="/events" component={EventsListPage} />
+                            <Route path="/events/:id" component={EventDetailsPage} />
                             <Route path="/administration" component={AdminPanelPage} />
                             <Route path="*" component={NotFoundPage} />
                         </Switch>

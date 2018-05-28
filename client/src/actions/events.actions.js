@@ -4,6 +4,10 @@ import * as modalsActions from './modals.actions';
 import * as errorActions from './error.actions';
 import * as loadersActions from './loaders.actions';
 
+export function getEventDetailsSuccess(event, canJoinEvent) {
+    return { type: 'GET_EVENT_DETAILS_SUCCESS', event, canJoinEvent };
+}
+
 export function getUserEventsSuccess(result) {
     return { type: 'GET_USER_EVENTS_SUCCESS', events: result.events, eventsCount: result.eventsCount };
 }
@@ -26,6 +30,25 @@ export function editEventSuccess(event) {
 
 export function deleteEventSuccess(id) {
     return { type: 'DELETE_EVENT_SUCCESS', eventId: id };
+}
+
+export function joinEventSuccess(event) {
+    return { type: 'JOIN_EVENT_SUCCESS', event };
+}
+
+export function getEventDetails(id, userId) {
+    return function (dispatch) {
+        return requester.get(`${api.EVENTS}/${id}`)
+            .done(response => {
+                const canJoinEvent = response.event.participants.findIndex(participant => participant === userId) < 0;
+
+                dispatch(getEventDetailsSuccess(response.event, canJoinEvent));
+                dispatch(loadersActions.hideLoader());
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
 }
 
 export function getJoinedEvents(id, page) {
@@ -141,6 +164,24 @@ export function deleteEvent(id) {
         return requester.deleteAuthorized(token, `${api.EVENTS}/${id}`)
             .done(response => {
                 dispatch(deleteEventSuccess(id));
+            })
+            .fail(error => {
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
+            });
+    };
+}
+
+export function joinEvent(eventId, user) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+
+        return requester.putAuthorized(token, `${api.EVENTS}/${eventId}/join`, user)
+            .done(response => {
+                dispatch(joinEventSuccess(response.event));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {

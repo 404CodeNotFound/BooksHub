@@ -448,4 +448,19 @@ module.exports = class UserData {
         )
         });
     }
+
+    addEventToUserJoinedEvents(eventId, username) {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ username: username },
+            { $push: { joined_events: eventId} },
+            { new: true }, (err, savedEvent) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(savedEvent);
+                }
+            }
+        )
+        });
+    }
 }

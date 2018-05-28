@@ -3,6 +3,29 @@ const generateErrorResponse = require('../../utils/error.responses');
 
 module.exports = (data) => {
     return {
+        getEvent: (req, res) => {
+            const eventId = req.params.id;
+
+            if (!eventId) {
+                res.status(400)
+                    .json({ message: errors.MISSING_EVENT_ID });
+            } else {
+                data.events.getFullEventById(eventId)
+                    .then(event => {
+                        if (!event) {
+                            throw Error(errors.EVENT_NOT_FOUND);
+                        } else {
+                            res.status(200)
+                                .json({ event });
+                        }
+                    })
+                    .catch(error => {
+                        generateErrorResponse(res, error.message);
+                    });
+            }
+
+            return res;
+        },
         getAllEvents: (req, res) => {
             if (req.user.role !== 'Admin') {
                 return res.status(403)
@@ -129,7 +152,6 @@ module.exports = (data) => {
                                 .json({ event: updatedEvent });
                         })
                         .catch(error => {
-                            console.log(error);
                             generateErrorResponse(res, error.message);
                         });
                 }
@@ -161,6 +183,29 @@ module.exports = (data) => {
                 .catch(error => {
                     return res.status(500)
                         .json({ message: errors.SERVER_ERROR });
+                });
+        },
+        addParticipant: (req, res) => {
+            const user = req.body;
+            const eventId = req.params.id;
+
+            data.events.getEventById(eventId)
+                .then(foundEvent => {
+                    if (!foundEvent) {
+                        return res.status(404)
+                            .json({ message: errors.EVENT_NOT_FOUND });
+                    }
+
+                    data.users.addEventToUserJoinedEvents(eventId, user.username)
+                        .then(() => data.events.addParticipant(eventId, user.id))
+                        .then(updatedEvent => {
+                            return res.status(201)
+                                .json({ event: updatedEvent });
+                        });
+                })
+                .catch(error => {
+                    console.log(error);
+                    generateErrorResponse(res, error.message);
                 });
         }
     }

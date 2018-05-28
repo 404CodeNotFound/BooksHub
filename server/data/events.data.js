@@ -66,8 +66,24 @@ module.exports = class EventsData {
 
     getEventById(id) {
         return new Promise((resolve, reject) => {
-            return Event.findOne({ '_id': id, 'isDeleted': false },
-                (err, event) => {
+            return Event.findOne({ '_id': id, 'isDeleted': false })
+                .exec((err, event) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(event);
+                    }
+                });
+        });
+    }
+
+    getFullEventById(id) {
+        return new Promise((resolve, reject) => {
+            return Event.findOne({ '_id': id, 'isDeleted': false })
+                .populate({ path: 'comments', populate: { path: 'creator', select: 'username photo' } })
+                .populate({ path: 'genres', select: 'name' })
+                .populate({ path: 'creator', select: 'username photo' })
+                .exec((err, event) => {
                     if (err) {
                         return reject(err);
                     } else {
@@ -141,6 +157,23 @@ module.exports = class EventsData {
                     return reject(err);
                 } else {
                     return resolve();
+                }
+            });
+        });
+    }
+
+    addParticipant(eventId, participantId) {
+        return new Promise((resolve, reject) => {
+            Event.update(
+                { _id: eventId }, 
+                { $push: { participants: participantId } }
+            )
+            .populate('participants')
+            .exec((err, updatedEvent) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(updatedEvent);
                 }
             });
         });

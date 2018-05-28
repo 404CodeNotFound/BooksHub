@@ -102,6 +102,9 @@ const init = (data) => {
     app.get('/recommendedevents', auth.authenticate(passport), eventsController.getRecommendedEvents);
     app.get('/latestevents', eventsController.getLatestEvents);
 
+    app.get('/events/:id', eventsController.getEvent);
+    app.put('/events/:id/join', auth.authenticate(passport), eventsController.addParticipant);
+    
     // Genres
     app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);
     app.post('/genres', auth.authenticate(passport), genresController.addGenre);   

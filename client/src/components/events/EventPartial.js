@@ -8,7 +8,7 @@ class EventPartial extends Component {
               <div className="box-item">
                 <div className="box-post">
                     {this.props.event.genres.map(genre => 
-                        <span className="label label-success">{genre.name}</span> 
+                        <span key={genre._id} className="label label-success">{genre.name}</span> 
                     )}
                     
                     <Link to={"/events/" + this.props.event._id}>

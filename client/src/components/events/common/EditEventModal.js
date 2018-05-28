@@ -10,19 +10,22 @@ import * as modalsActions from '../../../actions/modals.actions';
 import * as errorsActions from '../../../actions/error.actions';
 
 class EditEventModal extends Component {
-    state = {
-        title: this.props.event.title,
-        start_date: new Date(this.props.event.start_date.split('T')[0]),
-        end_date: new Date(this.props.event.end_date.split('T')[0]),
-        start_time: '00:00',
-        end_time: '00:00',
-        place: this.props.event.place,
-        city: this.props.event.city,
-        details: this.props.event.details,
-        photo: this.props.event.photo,
-        genres: this.props.event.genres
-    };
-
+    constructor(props) {        
+        super(props);
+        this.state = {
+            title: this.props.event.title,
+            start_date: new Date(this.props.event.start_date.split('T')[0]),
+            end_date: new Date(this.props.event.end_date.split('T')[0]),
+            start_time: '00:00',
+            end_time: '00:00',
+            place: this.props.event.place,
+            city: this.props.event.city,
+            details: this.props.event.details,
+            photo: this.props.event.photo,
+            genres: this.props.event.genres
+        };
+    }
+    
     componentDidMount() {
         this.props.getAllGenres();
     }

@@ -11,10 +11,6 @@ class EventsListPage extends Component {
         backgroundImage: "url(img/banner-blurred.jpg)"
     };
 
-    state = {
-        newLine: false
-    };
-
     componentDidMount() {
         this.props.showLoader();
 

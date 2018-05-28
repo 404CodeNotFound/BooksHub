@@ -11,19 +11,22 @@ import * as modalsActions from '../../../actions/modals.actions';
 import * as errorsActions from '../../../actions/error.actions';
 
 class AddEventModal extends Component {
-    state = {
-        title: '',
-        start_date: new Date(),
-        end_date: new Date(),
-        start_time: '00:00',
-        end_time: '00:00',
-        place: '',
-        city: '',
-        details: '',
-        photo: '',
-        genres: []
-    };
-
+    constructor(props) {        
+        super(props);
+        this.state = {
+            title: '',
+            start_date: new Date(),
+            end_date: new Date(),
+            start_time: '00:00',
+            end_time: '00:00',
+            place: '',
+            city: '',
+            details: '',
+            photo: '',
+            genres: []
+        };
+    }
+    
     componentDidMount() {
         this.props.getAllGenres();
     }
