@@ -322,17 +322,11 @@ module.exports = (data) => {
                     .json({ message: errors.MISSING_REVIEW_ID });
             }
 
-            data.reviews.getReview(reviewId)
+            data.reviews.getReviewById(reviewId)
                 .then(review => {
                     if (!review) {
                         throw Error(errors.REVIEW_NOT_FOUND);
-                    }
-                })
-                .then(() => data.users.getUserById(userId))
-                .then(user => {
-                    if (!user) {
-                        throw Error(errors.USER_NOT_FOUND);
-                    } else if (!user._id.equals(req.user._id)) {
+                    } else if(!review.user.equals(req.user._id)) {
                         throw Error(errors.PERMISSIONS_DENIED);
                     }
                 })

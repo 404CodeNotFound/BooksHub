@@ -2,6 +2,7 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as errorActions from './error.actions';
 import * as modalsActions from './modals.actions';
+import * as successActions from './success.actions';
 
 export function getAllGenresAsSelectValuesSuccess(genresSelectValues) {
     return { type: 'GET_GENRES_AS_SELECT_VALUES', genresSelectValues };
@@ -58,6 +59,7 @@ export function addGenre(genre) {
             .done(response => {
                 dispatch(addGenreSuccess(response.genre));
                 dispatch(modalsActions.closeAddGenreModal());
+                dispatch(successActions.actionSucceeded('The genre was published!'));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -72,6 +74,7 @@ export function deleteGenre(id) {
         return requester.deleteAuthorized(token, `${api.GENRES}/${id}`)
             .done(response => {
                 dispatch(deleteGenreSuccess(id));
+                dispatch(successActions.actionSucceeded('Selected genre was removed!'));                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

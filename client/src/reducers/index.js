@@ -9,6 +9,8 @@ import administration from './administration.reducer';
 import modals from './modals.reducer';
 import authors from './authors.reducer';
 import loaders from './loaders.reducer';
+import { reducer as toastr } from 'react-redux-toastr';
+import success from './success.reducer';
 
 const reducer = combineReducers({
     users,
@@ -20,7 +22,9 @@ const reducer = combineReducers({
     modals,
     loaders,
     authors,
-    administration
+    administration,
+    success,
+    toastr
 });
 
 export default reducer;

@@ -7,7 +7,7 @@ class BookPartial extends Component {
             <div className="col-md-3 margin-bottom-60">
                 <div className="float-left">
                     <Link to={"/books/" + this.props.book._id}>
-                        <img src={this.props.book.photo} width="200px" alt={this.props.book._id} />
+                        <img src={this.props.book.photo} width="200px" alt={"book-" + this.props.book._id} />
                     </Link>
                     <div>
                         <Link to={"/books/" + this.props.book._id}>

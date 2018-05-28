@@ -3,6 +3,7 @@ import api from '../requesters/api';
 import * as errorActions from './error.actions';
 import * as modalsActions from './modals.actions';
 import * as loadersActions from './loaders.actions';
+import * as successActions from './success.actions';
 
 export function getAuthorBiographySuccess(author) {
     return { type: 'GET_AUTHOR_SUCCESS', author };
@@ -59,6 +60,7 @@ export function addAuthor(author) {
             .done(response => {
                 dispatch(addAuthorSuccess(response.author));
                 dispatch(modalsActions.closeAddAuthorModal());
+                dispatch(successActions.actionSucceeded('The author was published!'));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -74,6 +76,7 @@ export function updateAuthor(author) {
             .done(response => {
                 dispatch(updateAuthorSuccess(response.author));
                 dispatch(modalsActions.closeEditAuthorModal());
+                dispatch(successActions.actionSucceeded('The author was updated!'));                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
@@ -88,6 +91,7 @@ export function deleteAuthor(id) {
         return requester.deleteAuthorized(token, `${api.AUTHORS}/${id}`)
             .done(response => {
                 dispatch(deleteAuthorSuccess(id));
+                dispatch(successActions.actionSucceeded('Selected author was removed!'));                
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

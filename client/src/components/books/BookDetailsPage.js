@@ -177,6 +177,13 @@ class BookDetailsPage extends Component {
         const markedAs = event.target.value;
         this.props.markBook(this.props.book._id, this.props.currentUser.id, markedAs);
     }
+
+    componentWillUpdate(nextProps, nextState) {
+        debugger;
+        if(!nextProps.book.title && nextProps.error) {
+            this.props.history.push("/NotFound");
+        }
+    }
 }
 
 function mapStateToProps(state, ownProps) {
@@ -189,7 +196,8 @@ function mapStateToProps(state, ownProps) {
         canWriteReview: state.books.canWriteReview,
         currentUserRating: state.books.currentUserRating,
         bookStatus: state.books.bookStatus,
-        isLoaderVisible: state.loaders.showLoader
+        isLoaderVisible: state.loaders.showLoader,
+        error: state.errors.error
     };
 }
 
