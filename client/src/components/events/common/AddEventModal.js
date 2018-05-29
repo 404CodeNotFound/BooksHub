@@ -9,9 +9,10 @@ import * as eventsActions from '../../../actions/events.actions';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 import * as errorsActions from '../../../actions/error.actions';
+import DatetimeRangePicker from 'react-datetime-range-picker';
 
 class AddEventModal extends Component {
-    constructor(props) {        
+    constructor(props) {
         super(props);
         this.state = {
             title: '',
@@ -26,7 +27,7 @@ class AddEventModal extends Component {
             genres: []
         };
     }
-    
+
     componentDidMount() {
         this.props.getAllGenres();
     }
@@ -49,32 +50,16 @@ class AddEventModal extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="start_date">Start date</label>
+                        <label className="col-md-2 control-label" htmlFor="start_date">From - To</label>
+                        
                         <div className="col-md-8">
-                            <DatePicker value={this.state.start_date} onChange={this.handleStartDateChange} />
+                            <DatetimeRangePicker onChange={this.handleStartDateChange} />
                             {this.props.startDateError &&
-                                <div className="error">{this.props.startDateError.msg}</div>
+                                [<div className="error" key="start-date-error">{this.props.startDateError.msg}</div>,
+                                <div className="error" key="end-date-error">{this.props.endDateError.msg}</div>]
                             }
                         </div>
                     </div>
-
-                    <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="end_date">End date</label>
-                        <div className="col-md-8">
-                            <DatePicker onChange={this.handleEndDateChange} value={this.state.end_date} />
-                            {this.props.endDateError &&
-                                <div className="error">{this.props.EndDateError.msg}</div>
-                            }
-                        </div>
-                    </div>
-
-                    {/* <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="start_time">Start date</label>
-                        <div className="col-md-8">
-                            {this.state.start_time}
-                            <TimePicker value={this.state.start_time} onChange={(value) => this.handleStartTimeChange(value)} />
-                        </div>
-                    </div> */}
 
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-place">Place</label>
@@ -125,7 +110,7 @@ class AddEventModal extends Component {
                             }
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" onClick={this.handleSubmit}>
@@ -152,15 +137,11 @@ class AddEventModal extends Component {
             this.props.removeValidationError('start_date');
         }
 
-        this.setState({ start_date: value });
-    }
-
-    handleEndDateChange = (value) => {
         if (this.props.endDateError) {
             this.props.removeValidationError('end_date');
         }
 
-        this.setState({ end_date: value });
+        this.setState({ start_date: value.start, end_date: value.end });
     }
 
     // handleStartTimeChange = start_time => this.setState({ start_time })
@@ -208,7 +189,7 @@ class AddEventModal extends Component {
             place: this.state.place,
             city: this.state.city,
             photo: this.state.photo,
-            details: this.state.details,            
+            details: this.state.details,
             genres: genres.join(', ')
         };
 
