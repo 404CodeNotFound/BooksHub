@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EventPartial from './EventPartial';
+import AddEventModal from './common/AddEventModal';
 import { BarLoader } from 'react-css-loaders';
 import * as eventsActions from '../../actions/events.actions';
 import * as loadersActions from '../../actions/loaders.actions';
+import * as modalsActions from '../../actions/modals.actions';
 import '../../style/events.list.css';
 
 class EventsListPage extends Component {
@@ -37,9 +39,22 @@ class EventsListPage extends Component {
                         </div> :
                         (this.props.events.length <= 0) ? 
                         <div className="row">
+                            {this.props.currentUser.id &&
+                            <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
+                                <i className="fa fa-plus"></i> Create new event
+                            </button>
+                            }
                             There is no events.
                         </div> :
                         <div className="line">
+                            {this.props.currentUser.id &&
+                            <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
+                                <i className="fa fa-plus"></i> Create new event
+                            </button>
+                            }
+                            {this.props.isVisibleAddEventModal &&
+                                <AddEventModal />
+                            }
                             <div className="row">
                                 {
                                     this.props.events.map(event =>
@@ -62,7 +77,8 @@ function mapStateToProps(state, ownProps) {
     return {
         events: state.events.events,
         currentUser: { username: username, id: userId },
-        isLoaderVisible: state.loaders.showLoader
+        isLoaderVisible: state.loaders.showLoader,
+        isVisibleAddEventModal: state.modals.showAddEventModal,        
     };
 }
 
@@ -70,7 +86,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         showLoader: () => dispatch(loadersActions.showLoader()),
         getRecommendedEvents: () => dispatch(eventsActions.getRecommendedEvents()),
-        getLatestEvents: () => dispatch(eventsActions.getLatestEvents())
+        getLatestEvents: () => dispatch(eventsActions.getLatestEvents()),
+        openAddEventModal: () => dispatch(modalsActions.openAddEventModal()),
     };
 }
 

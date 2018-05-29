@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap4-modal';
-import DatePicker from 'react-date-picker';
-// import TimePicker from 'react-time-picker';
 import Select from 'react-select';
 // import Autocomplete from 'react-autocomplete';
 import * as eventsActions from '../../../actions/events.actions';
@@ -18,8 +16,6 @@ class AddEventModal extends Component {
             title: '',
             start_date: new Date(),
             end_date: new Date(),
-            start_time: '00:00',
-            end_time: '00:00',
             place: '',
             city: '',
             details: '',
@@ -53,7 +49,7 @@ class AddEventModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="start_date">From - To</label>
                         
                         <div className="col-md-8">
-                            <DatetimeRangePicker onChange={this.handleStartDateChange} />
+                            <DatetimeRangePicker onChange={this.handleDateRange} />
                             {this.props.startDateError &&
                                 [<div className="error" key="start-date-error">{this.props.startDateError.msg}</div>,
                                 <div className="error" key="end-date-error">{this.props.endDateError.msg}</div>]
@@ -132,7 +128,7 @@ class AddEventModal extends Component {
         this.setState({ title: event.target.value });
     }
 
-    handleStartDateChange = (value) => {
+    handleDateRange = (value) => {
         if (this.props.startDateError) {
             this.props.removeValidationError('start_date');
         }
@@ -143,9 +139,6 @@ class AddEventModal extends Component {
 
         this.setState({ start_date: value.start, end_date: value.end });
     }
-
-    // handleStartTimeChange = start_time => this.setState({ start_time })
-
 
     handlePlaceChange = (event) => {
         if (this.props.placeError) {

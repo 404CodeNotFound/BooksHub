@@ -130,18 +130,19 @@ export function getLatestEvents() {
 export function addEvent(event, isAdminPage) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
-        debugger;
+
         return requester.postAuthorized(token, `${api.EVENTS}`, event)
             .done(response => {
-                if (!isAdminPage) {
-                    dispatch(addEventSuccess(response.event));
-                } else {
+                if (isAdminPage) {
                     dispatch(addEventAdminSuccess(response.event));
+                } else {
+                    dispatch(addEventSuccess(response.event));
                 }
 
                 dispatch(modalsActions.closeAddEventModal());                                
             })
             .fail(error => {
+                debugger;
                 if (error.responseJSON.hasOwnProperty('message')) {
                     dispatch(errorActions.actionFailed(error.responseJSON.message));
                 } else {

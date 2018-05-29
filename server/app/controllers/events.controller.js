@@ -98,7 +98,7 @@ module.exports = (data) => {
                     .json(errors);
             } else {
                 event.creatorId = req.user._id;
-
+                
                 data.events.createEvent(event)
                     .then(createdEvent => {
                         data.users.addEventToUserCollection(createdEvent._id, req.user.username);

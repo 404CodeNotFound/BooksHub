@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap4-modal';
-import DatePicker from 'react-date-picker';
-// import TimePicker from 'react-time-picker';
 import Select from 'react-select';
+import DatetimeRangePicker from 'react-datetime-range-picker';
 import * as eventsActions from '../../../actions/events.actions';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
@@ -14,10 +13,8 @@ class EditEventModal extends Component {
         super(props);
         this.state = {
             title: this.props.event.title,
-            start_date: new Date(this.props.event.start_date.split('T')[0]),
-            end_date: new Date(this.props.event.end_date.split('T')[0]),
-            start_time: '00:00',
-            end_time: '00:00',
+            start_date: new Date(this.props.event.start_date),
+            end_date: new Date(this.props.event.end_date),
             place: this.props.event.place,
             city: this.props.event.city,
             details: this.props.event.details,
@@ -50,27 +47,13 @@ class EditEventModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="start_date">Start date</label>
                         <div className="col-md-8">
-                            <DatePicker  value={this.state.start_date} onChange={this.handleStartDateChange} />
+                            <DatetimeRangePicker startDate={this.state.start_date} endDate={this.state.end_date} onChange={this.handleDateRange} />
                             {this.props.startDateError &&
-                                <div className="error">{this.props.startDateError.msg}</div>
+                                [<div className="error" key="start-date-error">{this.props.startDateError.msg}</div>,
+                                <div className="error" key="end-date-error">{this.props.endDateError.msg}</div>]
                             }
                         </div>
                     </div>
-
-                    <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="end_date">End date</label>
-                        <div className="col-md-8">
-                            <DatePicker value={this.state.end_date} onChange={this.handleEndDateChange} />
-                        </div>
-                    </div>
-
-                    {/* <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="start_time">Start date</label>
-                        <div className="col-md-8">
-                            {this.state.start_time}
-                            <TimePicker value={this.state.start_time} onChange={(value) => this.handleStartTimeChange(value)} />
-                        </div>
-                    </div> */}
 
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="event-place">Place</label>
@@ -143,20 +126,16 @@ class EditEventModal extends Component {
         this.setState({ title: event.target.value });
     }
 
-    handleStartDateChange = (value) => {
+    handleDateRange = (value) => {
         if (this.props.startDateError) {
             this.props.removeValidationError('start_date');
         }
 
-        this.setState({ start_date: value });
-    }
-
-    handleEndDateChange = (value) => {
         if (this.props.endDateError) {
             this.props.removeValidationError('end_date');
         }
 
-        this.setState({ end_date: value });
+        this.setState({ start_date: value.start, end_date: value.end });
     }
 
     handlePlaceChange = (event) => {
