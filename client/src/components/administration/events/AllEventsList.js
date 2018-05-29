@@ -80,7 +80,7 @@ class AllEventsList extends Component {
                 </div>
 
                 {this.props.isVisibleAddEventModal &&
-                    <AddEventModal />
+                    <AddEventModal isAdminPage={true} />
                 }
             </div>
         )

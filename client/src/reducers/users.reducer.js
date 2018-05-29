@@ -84,6 +84,15 @@ export default function users(state = {
                     selectedGenres: action.userGenres
                 }
             };
+        case 'ADD_EVENT_SUCCESS':
+            return {
+                ...state,
+                events: [
+                    action.event,
+                    ...state.events
+                ],
+                eventsCount: state.eventsCount + 1
+            };
         default:
             return state;
     }

@@ -99,7 +99,7 @@ export default function books(state = {
                 events: action.events,
                 eventsCount: action.eventsCount
             };
-        case 'ADD_EVENT_SUCCESS':
+        case 'ADD_EVENT_ADMIN_SUCCESS':
             return {
                 ...state,
                 events: [

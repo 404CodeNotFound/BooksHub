@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
 import * as eventsActions from '../../../actions/events.actions';
+import * as modalsActions from '../../../actions/modals.actions';
+import AddEventModal from '../../events/common/AddEventModal';
 
 class EventsList extends Component {
     state = { activePage: 1 };
@@ -23,9 +25,9 @@ class EventsList extends Component {
                     <h2 className="text-dark text-size-40 text-m-size-30">{this.props.title}</h2>
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
-                this.props.title === "Events Collection" && this.props.isMyProfile &&
-                <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" data-toggle="modal" data-target="#add-event-modal">
-                    <i className="fa fa-plus"></i>Create event
+                this.props.title === "Events Collection" && (this.props.userId === this.props.currentUser.id) &&
+                <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
+                    <i className="fa fa-plus"></i> New
                 </button>,
                 <div key="events-list" className="margin2x">
                     <div className="row">
@@ -34,18 +36,18 @@ class EventsList extends Component {
                                 <div className="float-left">
                                     <img src={event.photo} height="200px" alt="event" />
                                     <div>
-                                        <Link to={"/events/" + event.title}>
+                                        <Link to={"/events/" + event._id}>
                                         <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{event.title}</h3>
                                         </Link>
                                         <h5>
                                             <small>by
-                                                <Link href="profile.html" to={"/users/" + event.creator.username}> {event.creator.username}</Link>
+                                                <Link to={"/users/" + event.creator.username}> {event.creator.username}</Link>
                                             </small>
                                         </h5>
                                     </div>
                                     <p>
                                         {event.details.substr(0, 50)}...
-                                        <Link className="text-more-info text-primary" to={"/events/" + event.title}>Read more</Link>
+                                        <Link className="text-more-info text-primary" to={"/events/" + event._id}>Read more</Link>
                                     </p>
                                 </div>
                             </div>
@@ -63,6 +65,11 @@ class EventsList extends Component {
                             />
                         </div>
                     }
+                </div>,
+                <div key="add-event-modal">
+                    {this.props.isVisibleAddEventModal &&
+                    <AddEventModal />
+                    }
                 </div>
             ]
         );
@@ -79,16 +86,21 @@ class EventsList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    let userId = localStorage.getItem('id');
+
     return {
         events: state.users.events,
-        eventsCount: state.users.eventsCount
+        eventsCount: state.users.eventsCount,
+        currentUser: { id: userId },
+        isVisibleAddEventModal: state.modals.showAddEventModal,        
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getUserEvents: (id, page) => dispatch(eventsActions.getUserEvents(id, page)),
-        getJoinedEvents: (id, page) => dispatch(eventsActions.getJoinedEvents(id, page))
+        getJoinedEvents: (id, page) => dispatch(eventsActions.getJoinedEvents(id, page)),
+        openAddEventModal: () => dispatch(modalsActions.openAddEventModal()),
     };
 }
 

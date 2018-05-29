@@ -24,6 +24,10 @@ export function addEventSuccess(event) {
     return { type: 'ADD_EVENT_SUCCESS', event };
 }
 
+export function addEventAdminSuccess(event) {
+    return { type: 'ADD_EVENT_ADMIN_SUCCESS', event };
+}
+
 export function editEventSuccess(event) {
     return { type: 'EDIT_EVENT_SUCCESS', event };
 }
@@ -123,13 +127,18 @@ export function getLatestEvents() {
     };
 }
 
-export function addEvent(event) {
+export function addEvent(event, isAdminPage) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
         debugger;
         return requester.postAuthorized(token, `${api.EVENTS}`, event)
             .done(response => {
-                dispatch(addEventSuccess(response.event));
+                if (!isAdminPage) {
+                    dispatch(addEventSuccess(response.event));
+                } else {
+                    dispatch(addEventAdminSuccess(response.event));
+                }
+
                 dispatch(modalsActions.closeAddEventModal());                                
             })
             .fail(error => {
