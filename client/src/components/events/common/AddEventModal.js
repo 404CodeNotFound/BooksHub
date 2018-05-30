@@ -186,7 +186,7 @@ class AddEventModal extends Component {
             genres: genres.join(', ')
         };
 
-        this.props.saveEvent(event, this.props.isAdminPage);
+        this.props.saveEvent(event, this.props.page);
     }
 }
 
@@ -211,7 +211,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        saveEvent: (event, isAdminPage) => dispatch(eventsActions.addEvent(event, isAdminPage)),
+        saveEvent: (event, page) => dispatch(eventsActions.addEvent(event, page)),
         closeAddEventModal: () => dispatch(modalsActions.closeAddEventModal()),
         getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues()),
         removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))

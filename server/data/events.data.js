@@ -7,6 +7,7 @@ module.exports = class EventsData {
         return new Promise((resolve, reject) => {
             Event.find({ 'creator': id, 'isDeleted': false })
                 .populate('creator')
+                .populate({ path: 'genres', select: 'name' })
                 .exec((err, events) => {
                     if (err) {
                         return reject(err);

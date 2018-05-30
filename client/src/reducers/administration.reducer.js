@@ -108,12 +108,12 @@ export default function books(state = {
                 ],
                 eventsCount: state.eventsCount + 1
             };
-        case 'EDIT_EVENT_SUCCESS':
+        case 'EDIT_EVENT_ADMIN_SUCCESS':
             return {
                 ...state,
                 events: updateItemInCollection(state.events, action.event)
             };
-        case 'DELETE_EVENT_SUCCESS':
+        case 'DELETE_EVENT_ADMIN_SUCCESS':
             return {
                 ...state,
                 events: removeFromCollection(state.events, action.eventId)

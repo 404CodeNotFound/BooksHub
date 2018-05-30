@@ -119,7 +119,8 @@ module.exports = (data) => {
         editEvent: (req, res) => {
             const event = req.body;
             const eventId = req.params.id;
-            if (req.user.username !== event.creator) {
+            
+            if (req.user.role !== "Admin" && req.user.username !== event.creator) {
                 res.status(403)
                     .json({ message: errors.PERMISSIONS_DENIED });
             } else if (!eventId) {
@@ -162,11 +163,6 @@ module.exports = (data) => {
             return res;
         },
         deleteEvent: (req, res) => {
-            if (req.user.role !== 'Admin') {
-                return res.status(403)
-                    .json({ message: errors.PERMISSIONS_DENIED });
-            }
-
             const eventId = req.params.id;
 
             data.events.getEventById(eventId)
@@ -174,6 +170,11 @@ module.exports = (data) => {
                     if (!foundEvent) {
                         return res.status(404)
                             .json({ message: errors.EVENT_NOT_FOUND });
+                    }
+
+                    if (req.user.role !== 'Admin' && !req.user._id.equals(foundEvent.creator)) {
+                        return res.status(403)
+                            .json({ message: errors.PERMISSIONS_DENIED });
                     }
 
                     data.events.deleteEvent(eventId)
