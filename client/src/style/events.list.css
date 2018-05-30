@@ -50,3 +50,30 @@
 .background-image {
     background-image: url(../img/banner-blurred.jpg);
 }
+
+.event-cover {
+	position: relative;
+	display: inline-block;
+}
+
+.event-cover:hover img {
+    webkit-filter: blur(4px);
+    filter: blur(4px);
+}
+
+.event-cover:hover i {
+	display: block;
+}
+
+.event-cover i {
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+}
+
+.event-cover .fa-trash {
+    margin-right: 20%;
+}

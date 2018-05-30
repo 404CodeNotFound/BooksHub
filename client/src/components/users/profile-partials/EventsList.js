@@ -34,7 +34,15 @@ class EventsList extends Component {
                         {this.props.events.map(event =>
                             <div key={event._id} className="col-md-3 margin-bottom-60">
                                 <div className="float-left">
-                                    <img src={event.photo} height="200px" alt="event" />
+                                    <div className="event-cover">
+                                        <img src={event.photo} height="200px" alt="event" />
+                                        {event.creator._id === this.props.currentUser.id && (this.props.userId === this.props.currentUser.id) &&
+                                        <div>
+                                            <i className="fa fa-trash fa-2x" aria-hidden="true"></i>
+                                            <i className="fa fa-pencil fa-2x" aria-hidden="true"></i>
+                                        </div>
+                                        }
+                                    </div>
                                     <div>
                                         <Link to={"/events/" + event._id}>
                                         <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{event.title}</h3>
@@ -45,17 +53,10 @@ class EventsList extends Component {
                                             </small>
                                         </h5>
                                     </div>
-                                    <p>
-                                        {event.details.substr(0, 50)}...
-                                        {event.creator._id === this.props.currentUser.id &&
-                                        <div>
-                                            <i className="fa fa-trash fa-2x fa-border" aria-hidden="true"></i>
-                                            <i className="fa fa-pencil fa-2x fa-border" aria-hidden="true"></i>
-                                        </div>
-                                        }
-                                        
+                                    <div>
+                                        {event.details.substr(0, 50)}...                                        
                                         <Link className="text-more-info text-primary" to={"/events/" + event._id}>Read more</Link>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         )}
