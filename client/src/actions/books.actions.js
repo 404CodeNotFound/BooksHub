@@ -176,6 +176,7 @@ export function getAllBooks(page) {
                 dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
+                console.log(error);
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };

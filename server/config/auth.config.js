@@ -1,4 +1,3 @@
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -7,12 +6,13 @@ const { secret } = require('./config');
 
 const configAuth = {
     init: (app, { users }, passport, db) => {
-        app.use(cookieParser('keyboard cat'));
         app.use(bodyParser.urlencoded({
             extended: true,
         }));
+
         app.use(bodyParser.json());
         app.use(passport.initialize());
+        
         const options = {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: secret

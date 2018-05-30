@@ -3,15 +3,12 @@ const express = require('express');
 const passport = require('passport');
 var cors = require('cors');
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
-const path = require('path');
+const validator = require('express-validator');
 const auth = require('../config/auth.config');
-const errors = require('../utils/error.constants');
 
 const init = (data) => {
     const app = express();
     const server = require('http').Server(app);
-    const validator = require('express-validator');
 
     // Controllers
     const usersController = require('./controllers/users.controller')(data);
@@ -24,7 +21,6 @@ const init = (data) => {
     app.use('/libs', express.static('node_modules'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(expressValidator());
     app.use(cors());
     app.use(validator());
     
@@ -32,12 +28,6 @@ const init = (data) => {
 
     app.use((req, res, next) => {
         res.locals.user = req.user;
-        next();
-    });
-
-    app.use(require('connect-flash')());
-    app.use((req, res, next) => {
-        res.locals.messages = require('express-messages')(req, res);
         next();
     });
 

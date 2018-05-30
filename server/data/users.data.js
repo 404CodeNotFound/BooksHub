@@ -58,13 +58,19 @@ module.exports = class UserData {
 
     getReadingBooks(id, page) {
         return new Promise((resolve, reject) => {
-            Status.find({ 'user': id, 'name': 'CurentlyReading' })
-                .populate({ path: 'book', match: { isDeleted: false }})
+
+            Status.find({ user: id, name: 'CurrentlyReading' })
+                .populate({ path: 'book', match: { 'isDeleted': false } })
                 .exec((err, statuses) => {
                     if (err) {
                         return reject(err);
                     } else {
-                        const books = statuses.map(status => status.book);
+                        const books = [];
+                        statuses.forEach(status => {
+                            if(status.book) {
+                                books.push(status.book);
+                            }
+                        });
                         const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
 
                         let result = {
@@ -81,12 +87,17 @@ module.exports = class UserData {
     getWishlist(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'WantToRead' })
-                .populate({ path: 'book', match: { isDeleted: false }})
+                .populate({ path: 'book', match: { 'isDeleted': false }})
                 .exec((err, statuses) => {
                     if (err) {
                         return reject(err);
                     } else {
-                        const books = statuses.map(status => status.book);
+                        const books = [];
+                        statuses.forEach(status => {
+                            if(status.book) {
+                                books.push(status.book);
+                            }
+                        });
                         const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
 
                         let result = {
@@ -103,12 +114,17 @@ module.exports = class UserData {
     getReadBooks(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'Read' })
-                .populate({ path: 'book', match: { isDeleted: false }})
+                .populate({ path: 'book', match: { 'isDeleted': false }})
                 .exec((err, statuses) => {
                     if (err) {
                         return reject(err);
                     } else {
-                        const books = statuses.map(status => status.book);
+                        const books = [];
+                        statuses.forEach(status => {
+                            if(status.book) {
+                                books.push(status.book);
+                            }
+                        });
                         const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
 
                         let result = {
