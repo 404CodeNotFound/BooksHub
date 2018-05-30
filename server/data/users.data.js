@@ -43,7 +43,7 @@ module.exports = class UserData {
 
     getUserProfile(username) {
         return new Promise((resolve, reject) => {
-            User.findOne({ 'username': username })
+            User.findOne({ 'username': username, 'isDeleted': false })
                 .populate('requests')
                 .populate('favourite_genres')
                 .exec((err, user) => {
@@ -59,7 +59,7 @@ module.exports = class UserData {
     getReadingBooks(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'CurentlyReading' })
-                .populate('book')
+                .populate({ path: 'book', match: { isDeleted: false }})
                 .exec((err, statuses) => {
                     if (err) {
                         return reject(err);
@@ -81,7 +81,7 @@ module.exports = class UserData {
     getWishlist(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'WantToRead' })
-                .populate('book')
+                .populate({ path: 'book', match: { isDeleted: false }})
                 .exec((err, statuses) => {
                     if (err) {
                         return reject(err);
@@ -103,7 +103,7 @@ module.exports = class UserData {
     getReadBooks(id, page) {
         return new Promise((resolve, reject) => {
             Status.find({ 'user': id, 'name': 'Read' })
-                .populate('book')
+                .populate({ path: 'book', match: { isDeleted: false }})
                 .exec((err, statuses) => {
                     if (err) {
                         return reject(err);
@@ -125,7 +125,7 @@ module.exports = class UserData {
     getRecommendedBooks(id, page) {
         return new Promise((resolve, reject) => {
             User.findById(id)
-                .populate({ path: 'recommended_books', select: 'title photo summary', populate: { path: 'author', select: 'first_name last_name' } })
+                .populate({ path: 'recommended_books', match: { isDeleted: false }, select: 'title photo summary', populate: { path: 'author', select: 'first_name last_name' } })
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
@@ -147,7 +147,7 @@ module.exports = class UserData {
     getUserFriends(id, page) {
         return new Promise((resolve, reject) => {
             User.findById(id)
-                .populate('friends')
+                .populate({ path: 'friends', match: { isDeleted: false }})
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
@@ -168,7 +168,7 @@ module.exports = class UserData {
     getAllUserFriends(id) {
         return new Promise((resolve, reject) => {
             User.findById(id)
-                .populate('friends')
+                .populate({ path: 'friends', match: { isDeleted: false }})
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
@@ -184,6 +184,7 @@ module.exports = class UserData {
             User.findById(id)
                 .populate({
                     path: 'joined_events',
+                    match: { isDeleted: false },
                     populate: { path: 'creator' }
                 })
                 .exec((err, user) => {

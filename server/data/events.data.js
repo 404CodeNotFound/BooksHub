@@ -5,7 +5,7 @@ const itemsPerPage = 18;
 module.exports = class EventsData {
     getUserEvents(id, page) {
         return new Promise((resolve, reject) => {
-            Event.find({ 'creator': id })
+            Event.find({ 'creator': id, 'isDeleted': false })
                 .populate('creator')
                 .exec((err, events) => {
                     if (err) {

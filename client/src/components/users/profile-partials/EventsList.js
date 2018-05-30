@@ -47,6 +47,13 @@ class EventsList extends Component {
                                     </div>
                                     <p>
                                         {event.details.substr(0, 50)}...
+                                        {event.creator._id === this.props.currentUser.id &&
+                                        <div>
+                                            <i className="fa fa-trash fa-2x fa-border" aria-hidden="true"></i>
+                                            <i className="fa fa-pencil fa-2x fa-border" aria-hidden="true"></i>
+                                        </div>
+                                        }
+                                        
                                         <Link className="text-more-info text-primary" to={"/events/" + event._id}>Read more</Link>
                                     </p>
                                 </div>
