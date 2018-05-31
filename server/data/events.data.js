@@ -1,6 +1,7 @@
 const { Event } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 18;
+const itemsPerPageAdmin = 10;
+const itemsPerPageUser = 5;
 
 module.exports = class EventsData {
     getUserEvents(id, page) {
@@ -11,7 +12,7 @@ module.exports = class EventsData {
                     if (err) {
                         return reject(err);
                     } else {
-                        const eventsOnPage = getPageOfCollection(events, page, itemsPerPage);
+                        const eventsOnPage = getPageOfCollection(events, page, itemsPerPageUser);
 
                         let result = {
                             events: eventsOnPage,
@@ -35,7 +36,7 @@ module.exports = class EventsData {
                         return reject(err);
                     }
 
-                    const pageEvents = getPageOfCollection(events, page, itemsPerPage);
+                    const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
 
                     const data = {
                         events: pageEvents,

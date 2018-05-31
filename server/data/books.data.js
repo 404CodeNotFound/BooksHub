@@ -1,7 +1,7 @@
 const { Book } = require('../models')
 const getPageOfCollection = require('../utils/pagination');
 const calculateCurrentRating = require('../utils/rating');
-const itemsPerPage = 20;
+const itemsPerPage = 10;
 
 module.exports = class BooksData {
     getBookDetails(id) {

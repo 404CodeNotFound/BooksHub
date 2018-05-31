@@ -301,7 +301,7 @@ module.exports = class UserData {
     }
 
     rateBook(rating) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, rejsect) => {
             User.findById(rating.user, (err, user) => {
                 if (err) {
                     return reject(err);
