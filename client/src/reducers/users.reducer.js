@@ -93,6 +93,18 @@ export default function users(state = {
                 ],
                 eventsCount: state.eventsCount + 1
             };
+        case 'EDIT_EVENT_SUCCESS':
+            return {
+                ...state,
+                events: updateItemInCollection(state.events, action.event),
+                eventsCount: state.eventsCount + 1
+            };
+        case 'DELETE_EVENT_SUCCESS':
+            return {
+                ...state,
+                events: removeFromCollection(state.events, action.eventId),
+                eventsCount: state.eventsCount - 1
+            };
         default:
             return state;
     }
@@ -103,6 +115,18 @@ function removeFromCollection(collection, id) {
     const index = collection.findIndex(item => item._id === id);
     const newCollection = [
         ...collection.slice(0, index),
+        ...collection.slice(index + 1, length)
+    ];
+
+    return newCollection;
+}
+
+function updateItemInCollection(collection, updatedItem) {
+    const length = collection.length;
+    const index = collection.findIndex(item => item._id === updatedItem._id);
+    const newCollection = [
+        ...collection.slice(0, index),
+        updatedItem,
         ...collection.slice(index + 1, length)
     ];
 

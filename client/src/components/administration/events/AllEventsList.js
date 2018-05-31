@@ -7,6 +7,7 @@ import Pagination from "react-js-pagination";
 import EventRow from './EventRow';
 import { BarLoader } from 'react-css-loaders';
 import AddEventModal from './../../events/common/AddEventModal';
+import * as constants from '../../../utils/constants';
 
 class AllEventsList extends Component {
     constructor(props) {
@@ -80,7 +81,7 @@ class AllEventsList extends Component {
                 </div>
 
                 {this.props.isVisibleAddEventModal &&
-                    <AddEventModal isAdminPage={true} />
+                    <AddEventModal page={constants.ADMINISTRATION_PAGE} />
                 }
             </div>
         )

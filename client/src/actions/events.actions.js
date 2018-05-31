@@ -3,6 +3,7 @@ import api from '../requesters/api';
 import * as modalsActions from './modals.actions';
 import * as errorActions from './error.actions';
 import * as loadersActions from './loaders.actions';
+import * as constants from '../utils/constants';
 
 export function getEventDetailsSuccess(event, canJoinEvent) {
     return { type: 'GET_EVENT_DETAILS_SUCCESS', event, canJoinEvent };
@@ -28,12 +29,20 @@ export function addEventAdminSuccess(event) {
     return { type: 'ADD_EVENT_ADMIN_SUCCESS', event };
 }
 
+export function editEventAdminSuccess(event) {
+    return { type: 'EDIT_EVENT_ADMIN_SUCCESS', event };
+}
+
 export function editEventSuccess(event) {
     return { type: 'EDIT_EVENT_SUCCESS', event };
 }
 
 export function deleteEventSuccess(id) {
     return { type: 'DELETE_EVENT_SUCCESS', eventId: id };
+}
+
+export function deleteEventAdminSuccess(id) {
+    return { type: 'DELETE_EVENT_ADMIN_SUCCESS', eventId: id };
 }
 
 export function joinEventSuccess(event) {
@@ -127,15 +136,15 @@ export function getLatestEvents() {
     };
 }
 
-export function addEvent(event, isAdminPage) {
+export function addEvent(event, page) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
 
         return requester.postAuthorized(token, `${api.EVENTS}`, event)
             .done(response => {
-                if (isAdminPage) {
+                if (page === constants.ADMINISTRATION_PAGE) {
                     dispatch(addEventAdminSuccess(response.event));
-                } else {
+                } else if (page === constants.USER_PROFILE_PAGE) {
                     dispatch(addEventSuccess(response.event));
                 }
 
@@ -152,13 +161,18 @@ export function addEvent(event, isAdminPage) {
     };
 }
 
-export function editEvent(event) {
+export function editEvent(event, isAdminPage) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
 
         return requester.putAuthorized(token, `${api.EVENTS}/${event.id}`, event)
             .done(response => {
-                dispatch(editEventSuccess(response.event));
+                if (isAdminPage) {
+                    dispatch(editEventAdminSuccess(response.event));
+                } else {
+                    dispatch(editEventSuccess(response.event));
+                }
+
                 dispatch(modalsActions.closeEditEventModal());
             })
             .fail(error => {
@@ -171,13 +185,17 @@ export function editEvent(event) {
     };
 }
 
-export function deleteEvent(id) {
+export function deleteEvent(id, isAdminPage) {
     return function (dispatch) {
         const token = localStorage.getItem('token');
 
         return requester.deleteAuthorized(token, `${api.EVENTS}/${id}`)
             .done(response => {
-                dispatch(deleteEventSuccess(id));
+                if (isAdminPage) {
+                    dispatch(deleteEventAdminSuccess(id));
+                } else {
+                    dispatch(deleteEventSuccess(id));
+                }
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
