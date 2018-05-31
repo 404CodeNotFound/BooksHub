@@ -60,10 +60,10 @@ class EventDetailsPage extends Component {
                                         </dt>
             
                                         <dd>
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <i className="fa fa-calendar" aria-hidden="true"></i>
                                             {this.props.event.start_date ? this.props.event.start_date.split('T')[0] : "-"} <br />
 
-                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <i className="fa fa-clock-o" aria-hidden="true"></i>
                                             {this.props.event.start_date ? this.props.event.start_date.split('T')[1].split(":")[0] + ":" + this.props.event.start_date.split('T')[1].split(":")[1] : ""}
                                         </dd>
             
@@ -72,10 +72,10 @@ class EventDetailsPage extends Component {
                                         </dt>
             
                                         <dd>
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <i className="fa fa-calendar" aria-hidden="true"></i>
                                             {this.props.event.end_date ? this.props.event.end_date.split('T')[0] : "-"} <br />
 
-                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <i className="fa fa-clock-o" aria-hidden="true"></i>
                                             {this.props.event.end_date ? this.props.event.end_date.split('T')[1].split(":")[0] + ":" + this.props.event.end_date.split('T')[1].split(":")[1] : ""}
                                         </dd>
             

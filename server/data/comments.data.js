@@ -36,7 +36,6 @@ module.exports = class CommentsData {
                 if (err) {
                     return reject(err);
                 } else {
-                    console.log(this.createdComment);
                     return resolve(createdComment);
                 }
             });

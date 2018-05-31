@@ -214,6 +214,7 @@ module.exports = (data) => {
         addComment: (req, res) => {
             const comment = req.body;
             const userId = req.user._id;
+            const username = req.user.username;
             const eventId = req.params.id;
 
             data.events.getEventById(eventId)
@@ -226,8 +227,16 @@ module.exports = (data) => {
                 .then(createdComment => data.events.addComment(eventId, createdComment))
                 .then(createdComment => data.users.addComment(userId, createdComment))
                 .then(createdComment => {
-                    res.status(201)
-                        .json({ comment: createdComment });
+                    data.users.getUserById(userId)
+                        .then((user) => {
+                            if (!user) {
+                                return res.status(404)
+                                    .json(errors.MISSING_USER_ID);
+                            } else {
+                                return res.status(201)
+                                .json({ comment: createdComment, user: user });
+                            }
+                        });
                 })
                 .catch(error => {
                     generateErrorResponse(res, error.message);

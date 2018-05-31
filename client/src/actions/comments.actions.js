@@ -26,7 +26,13 @@ export function writeComment(content, eventId) {
         
         return requester.postAuthorized(token, `${api.EVENTS}/${eventId}/comments`, comment)
             .done((response) => {
-                dispatch(writeCommentSuccess(response.comment));
+                const comment = response.comment;
+                comment.user = {
+                    _id: response.comment.user,
+                    username: response.user.username,
+                    photo: response.user.photo
+                }
+                dispatch(writeCommentSuccess(comment));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
