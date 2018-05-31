@@ -1,6 +1,6 @@
 const { Review } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 1;
+const itemsPerPage = 8;
 
 module.exports = class ReviewsData {
     getReviews(id, page) {

@@ -38,7 +38,7 @@ class BooksList extends Component {
                                     </div>
                                     <p>
                                         {book.summary.substr(0, 70)}...
-                                        <Link className="text-more-info text-primary" to={"/books/" + book.title}>Read more</Link>
+                                        <Link className="text-more-info text-primary" to={"/books/" + book._id}>Read more</Link>
                                     </p>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@ class BooksList extends Component {
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}
-                                itemsCountPerPage={1}
+                                itemsCountPerPage={8}
                                 totalItemsCount={this.props.booksCount}
                                 pageRangeDisplayed={5}
                                 onChange={this.selectPage}

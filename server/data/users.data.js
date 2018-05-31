@@ -1,6 +1,8 @@
 const { User, Status } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 10;
+const usersPerPage = 96;
+const booksPerPage = 8;
+const eventsPerPage = 8;
 
 module.exports = class UserData {
     getUserByUsernameAndPassword(username, passHash) {
@@ -71,7 +73,7 @@ module.exports = class UserData {
                                 books.push(status.book);
                             }
                         });
-                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+                        const booksOnPage = getPageOfCollection(books, page, booksPerPage);
 
                         let result = {
                             books: booksOnPage,
@@ -98,7 +100,7 @@ module.exports = class UserData {
                                 books.push(status.book);
                             }
                         });
-                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+                        const booksOnPage = getPageOfCollection(books, page, booksPerPage);
 
                         let result = {
                             books: booksOnPage,
@@ -125,7 +127,7 @@ module.exports = class UserData {
                                 books.push(status.book);
                             }
                         });
-                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+                        const booksOnPage = getPageOfCollection(books, page, booksPerPage);
 
                         let result = {
                             books: booksOnPage,
@@ -147,7 +149,7 @@ module.exports = class UserData {
                         return reject(err);
                     } else {
                         const books = user.recommended_books;
-                        const booksOnPage = getPageOfCollection(books, page, itemsPerPage);
+                        const booksOnPage = getPageOfCollection(books, page, booksPerPage);
 
                         let result = {
                             books: booksOnPage,
@@ -168,7 +170,7 @@ module.exports = class UserData {
                     if (err) {
                         return reject(err);
                     } else {
-                        const friendsOnPage = getPageOfCollection(user.friends, page, itemsPerPage);
+                        const friendsOnPage = getPageOfCollection(user.friends, page, usersPerPage);
 
                         let result = {
                             friends: friendsOnPage,
@@ -207,7 +209,7 @@ module.exports = class UserData {
                     if (err) {
                         return reject(err);
                     } else {
-                        const eventsOnPage = getPageOfCollection(user.joined_events, page, itemsPerPage);
+                        const eventsOnPage = getPageOfCollection(user.joined_events, page, eventsPerPage);
 
                         let result = {
                             events: eventsOnPage,
@@ -438,7 +440,7 @@ module.exports = class UserData {
                         return reject(err);
                     }
 
-                    const pageUsers = getPageOfCollection(users, page, itemsPerPage);
+                    const pageUsers = getPageOfCollection(users, page, usersPerPage);
 
                     const data = {
                         users: pageUsers,

@@ -16,7 +16,6 @@ class CommentsList extends Component {
     }
 
     render() {
-        console.log(this.props.comments);
         return (
             [
                 <div key="title" className="line text-center">
@@ -24,6 +23,7 @@ class CommentsList extends Component {
                     <h2 className="text-dark text-size-40 text-m-size-30">{this.props.title}</h2>
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
+                this.props.comments.length > 0 ?
                 <div key="list" className="margin2x">
                     {this.props.comments.map(comment =>
                         <div key={comment._id} className="row review">
@@ -50,14 +50,15 @@ class CommentsList extends Component {
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}
-                                itemsCountPerPage={1}
+                                itemsCountPerPage={8}
                                 totalItemsCount={this.props.commentsCount}
                                 pageRangeDisplayed={5}
                                 onChange={this.selectPage}
                             />
                         </div>
                     }
-                </div>
+                </div> :
+                <div key="no-items" className="no-items">You have no comments yet.</div>
             ]
         );
     }

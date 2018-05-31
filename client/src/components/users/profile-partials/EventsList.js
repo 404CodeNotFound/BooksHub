@@ -75,9 +75,9 @@ class EventsList extends Component {
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}
-                                itemsCountPerPage={4}
+                                itemsCountPerPage={8}
                                 totalItemsCount={this.props.eventsCount}
-                                pageRangeDisplayed={4}
+                                pageRangeDisplayed={5}
                                 onChange={this.selectPage}
                             />
                         </div>

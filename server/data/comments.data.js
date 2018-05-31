@@ -1,6 +1,6 @@
 const { Comment } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 1;
+const itemsPerPage = 8;
 
 module.exports = class CommentsData {
     getComments(id, page) {

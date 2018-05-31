@@ -20,28 +20,30 @@ class FriendsList extends Component {
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 <div key="friends-list">
-                    <div className="row">
-                        {this.props.users.map(user =>
-                            <div key={user._id} className="col-md-1 margin-bottom-60">
-                                <div className="float-left user">
-                                    <Link to={"/users/" + user.username}>
-                                        <img src={user.photo} width="200px" className="img-circle" alt="avatar" />
-                                        <p>{user.first_name} {user.last_name}</p>
-                                    </Link>
+                    {this.props.users.length > 0 ?
+                        [<div key="friends" className="row">
+                            {this.props.users.map(user =>
+                                <div key={user._id} className="col-md-1 margin-bottom-60">
+                                    <div className="float-left user">
+                                        <Link to={"/users/" + user.username}>
+                                            <img src={user.photo} width="200px" className="img-circle" alt="avatar" />
+                                            <p>{user.first_name} {user.last_name}</p>
+                                        </Link>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>,
-                    {this.props.users.length > 0 &&
+                            )}
+                        </div>,
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}
-                                itemsCountPerPage={18}
+                                itemsCountPerPage={96}
                                 totalItemsCount={this.props.friendsCount}
                                 pageRangeDisplayed={5}
                                 onChange={this.selectPage}
                             />
-                        </div>
+                        </div>]
+                        :
+                        <div key="no-items" className="no-items">You have no friends yet.</div>
                     }
                 </div>
             ]
