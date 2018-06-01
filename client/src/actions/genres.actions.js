@@ -38,11 +38,10 @@ export function getAllGenresAsSelectValues() {
 
 export function getAllGenres() {
     return function (dispatch) {
-        const token = localStorage.getItem('token');
+        // const token = localStorage.getItem('token');
 
-        return requester.getAuthorized(token, `${api.GENRES}`)
+        return requester.get(`${api.GENRES}`)
             .done(response => {
-                debugger;
                 dispatch(getAllGenresSuccess(response.genres, response.genresCount));
             })
             .fail(error => {

@@ -215,4 +215,26 @@ module.exports = class EventsData {
             });
         });
     }
+
+    searchEvents(searchValue) {
+        return new Promise((resolve, reject) => {
+            Event.find({ "title": { "$regex": searchValue, "$options": "i" }, 'isDeleted': false })
+                .populate('creator')
+                .sort({ 'start_date ': '-1' })
+                .exec((err, events) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
+
+                    const data = {
+                        events: events,
+                        eventsCount: events.length
+                    };
+
+                    return resolve(data);
+                });
+        });
+    }
 }

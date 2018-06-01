@@ -49,6 +49,10 @@ export function joinEventSuccess(event) {
     return { type: 'JOIN_EVENT_SUCCESS', event };
 }
 
+export function searchEventSuccess(events, eventsCount) {
+    return { type: 'SEARCH_EVENTS_SUCCESS', events: events, eventsCount: eventsCount };        
+}
+
 export function getEventDetails(id, userId) {
     return function (dispatch) {
         return requester.get(`${api.EVENTS}/${id}`)
@@ -221,6 +225,18 @@ export function joinEvent(eventId, user) {
                 } else {
                     dispatch(errorActions.validationFailed(error.responseJSON));
                 }
+            });
+    };
+}
+
+export function searchEvent(searchValue) {
+    return function (dispatch) {
+        return requester.get(`${api.EVENTS_SEARCH}?phrase=${searchValue}`)
+            .done(response => {
+                dispatch(searchEventSuccess(response.events, response.eventsCount));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
 }

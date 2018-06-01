@@ -242,5 +242,22 @@ module.exports = (data) => {
                     generateErrorResponse(res, error.message);
                 });
         },
+        searchEvents: (req, res) => {
+            // const page = req.query.page;
+            const searchValue = req.query.phrase;
+                        
+            data.events.searchEvents(searchValue)
+                .then(result => {
+                    res.status(200)
+                        .json(result);
+                })
+                .catch(error => {
+                    console.log(error);
+                    res.status(500)
+                        .json({ message: errors.SERVER_ERROR });
+                });
+    
+            return res;
+        }
     }
 }

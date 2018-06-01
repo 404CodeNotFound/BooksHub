@@ -85,19 +85,19 @@ const init = (data) => {
     
     // Events
     app.get('/events', auth.authenticate(passport), eventsController.getAllEvents);
-    app.post('/events', auth.authenticate(passport), eventsController.addEvent);            
+    app.post('/events', auth.authenticate(passport), eventsController.addEvent);
+    app.get('/events/search', eventsController.searchEvents);    
+    app.get('/events/:id', eventsController.getEvent);
     app.put('/events/:id', auth.authenticate(passport), eventsController.editEvent);
     app.delete('/events/:id', auth.authenticate(passport), eventsController.deleteEvent);
+    app.put('/events/:id/join', auth.authenticate(passport), eventsController.addParticipant);           
     app.post('/events/:id/comments', auth.authenticate(passport), eventsController.addComment);            
     
     app.get('/recommendedevents', auth.authenticate(passport), eventsController.getRecommendedEvents);
     app.get('/latestevents', eventsController.getLatestEvents);
-
-    app.get('/events/:id', eventsController.getEvent);
-    app.put('/events/:id/join', auth.authenticate(passport), eventsController.addParticipant);
     
     // Genres
-    app.get('/genres', auth.authenticate(passport), genresController.getAllGenres);
+    app.get('/genres', genresController.getAllGenres);
     app.post('/genres', auth.authenticate(passport), genresController.addGenre);   
     app.delete('/genres/:id', auth.authenticate(passport), genresController.deleteGenre);
        

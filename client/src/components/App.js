@@ -19,6 +19,7 @@ import * as successActions from '../actions/success.actions';
 import AuthorBiographyPage from './authors/AuthorBiographyPage';
 import EventsListPage from './events/EventsListPage';
 import EventDetailsPage from './events/EventDetailsPage';
+import SearchPage from './search/SearchPage';
 import ReduxToastr from 'react-redux-toastr';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-select/dist/react-select.css';
@@ -45,6 +46,7 @@ class App extends Component {
                             <Route exact path="/events" component={EventsListPage} />
                             <Route path="/events/:id" component={EventDetailsPage} />
                             <Route path="/administration" component={AdminPanelPage} />
+                            <Route exact path="/search" component={SearchPage} />
                             <Route path="/NotFound" component={NotFoundPage} />
                             <Route path="*" component={NotFoundPage} />
                         </Switch>

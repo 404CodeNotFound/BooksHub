@@ -11,6 +11,7 @@ import authors from './authors.reducer';
 import loaders from './loaders.reducer';
 import { reducer as toastr } from 'react-redux-toastr';
 import success from './success.reducer';
+import search from './search.reducer';
 
 const reducer = combineReducers({
     users,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
     authors,
     administration,
     success,
+    search,
     toastr
 });
 
