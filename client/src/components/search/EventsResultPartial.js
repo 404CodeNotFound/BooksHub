@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import * as eventsActions from '../../actions/events.actions';
 import * as genresActions from '../../actions/genres.actions';
-import '../../style/search.css';
 
 class EventsResultPartial extends Component {
     constructor(props) {

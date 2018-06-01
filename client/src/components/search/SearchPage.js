@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
 import * as eventsActions from '../../actions/events.actions';
+import * as usersActions from '../../actions/users.actions';
 import EventsResultPage from '../search/EventsResultPartial';
+import UsersResultPage from '../search/UsersResultPartial';
 import '../../style/search.css';
 
 const searchItems = {
@@ -202,110 +203,9 @@ class SearchPage extends Component {
                             <EventsResultPage events={this.props.events} searchValue={this.state.searchValue} search={this.props.searchEvent} />
                         }
 
-                        {/* <div className="panel container" id="search-results-users">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <h3>Found users</h3>
-                                    <div className="users">
-                                        <div className="row">
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user1</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user2</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user3</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user4</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user5</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user6</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user7</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user8</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user9</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user10</a>
-                                                </p>
-                                            </div>
-                                            <div className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                                <img src="https://en.opensuse.org/images/0/0b/Icon-user.png" className="img-circle" alt="image" styles="width: 70px;" />
-                                                <p>
-                                                    <a href="profile.html">user11</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-offset-5 pages total center">
-                                                Page 1 of 1
-                                                <div className="pagination-container center">
-                                                    <ul className="pagination">
-                                                        <li className="active">
-                                                            <a>1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a>2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a>3</a>
-                                                        </li>
-                                                        <li>
-                                                            <a>4</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                        {this.props.users.length > 0 &&
+                            <UsersResultPage users={this.props.users} />
+                        }
                     </div>
                 </section>
             </div>
@@ -336,7 +236,8 @@ class SearchPage extends Component {
         } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
             this.props.searchEvent(this.state.searchValue);
         } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
-
+            console.log('here');
+            this.props.searchUser(this.state.searchValue);
         }
     }
 }
@@ -344,12 +245,14 @@ class SearchPage extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         events: state.search.events,
+        users: state.search.users,
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        searchEvent: (searchValue, filters) => dispatch(eventsActions.searchEvent(searchValue, filters))
+        searchEvent: (searchValue, filters) => dispatch(eventsActions.searchEvent(searchValue, filters)),
+        searchUser: (searchValue) => dispatch(usersActions.searchUser(searchValue)),
     };
 }
 

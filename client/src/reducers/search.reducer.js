@@ -10,6 +10,12 @@ export default function search(state = {
                 events: action.events,
                 eventsCount: action.eventsCount
             };
+        case 'SEARCH_USERS_SUCCESS':
+            return {
+                ...state,
+                users: action.users,
+                usersCount: action.usersCount
+            };
         default:
             return state;
     }

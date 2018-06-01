@@ -36,6 +36,7 @@ const init = (data) => {
 
     // Users
     app.get('/users', auth.authenticate(passport), usersController.getAllUsers);
+    app.get('/users/search', usersController.searchUsers);
     app.put('/users/:id/role', auth.authenticate(passport), usersController.changeRole);
     app.delete('/users/:id', auth.authenticate(passport), usersController.deleteUser);
     

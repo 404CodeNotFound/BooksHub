@@ -44,6 +44,10 @@ export function deleteUserSuccess(id) {
     return { type: 'DELETE_USER_SUCCESS', userId: id };
 }
 
+export function searchUsersSuccess(users, usersCount) {
+    return { type: 'SEARCH_USERS_SUCCESS', users: users, usersCount: usersCount };
+}
+
 export function logout() {
     return function (dispatch) {
         localStorage.removeItem('token');
@@ -189,6 +193,19 @@ export function deleteUser(id) {
             .done(response => {
                 dispatch(deleteUserSuccess(id));
                 dispatch(successActions.actionSucceeded('Selected user was removed!'));                                    
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function searchUser(searchValue) {
+    return function (dispatch) {
+        return requester.get(`${api.USERS_SEARCH}?phrase=${searchValue}`)
+            .done(response => {
+                debugger;
+                dispatch(searchUsersSuccess(response.users, response.usersCount));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

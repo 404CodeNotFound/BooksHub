@@ -470,6 +470,24 @@ module.exports = (data) => {
                     return res.status(500)
                         .json({ message: errors.SERVER_ERROR });
                 });
-        }
+        },
+
+        searchUsers: (req, res) => {
+            // const page = req.query.page;
+            const searchValue = req.query.phrase;
+
+            console.log('controller');
+            data.users.searchUsers(searchValue)
+                .then(result => {
+                    res.status(200)
+                        .json(result);
+                })
+                .catch(error => {
+                    res.status(500)
+                        .json({ message: errors.SERVER_ERROR });
+                });
+
+            return res;
+        },
     }
 }

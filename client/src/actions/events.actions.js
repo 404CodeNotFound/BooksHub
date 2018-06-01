@@ -234,9 +234,8 @@ export function searchEvent(searchValue, filters) {
         return requester.get(`${api.EVENTS_SEARCH}?phrase=${searchValue}`)
             .done(response => {
                 let eventsResult = response.events;
+                console.log(response);
                 if (filters) {
-                    console.log(response.events);
-                    
                     eventsResult = response.events.filter(event => {
                         const genres = event.genres.map(genre => genre.name);
                         return containsFilters(genres, filters);

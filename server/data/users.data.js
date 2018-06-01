@@ -514,4 +514,25 @@ module.exports = class UserData {
             });
         });
     }
+
+    searchUsers(searchValue) {
+        return new Promise((resolve, reject) => {
+            User.find({ "username": { "$regex": searchValue, "$options": "i" }, 'isDeleted': false })
+                .select('username photo')
+                .exec((err, users) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    // const pageUsers = getPageOfCollection(users, page, usersPerPage);
+                    
+                    const data = {
+                        users: users,
+                        usersCount: users.length
+                    };
+                    
+                    return resolve(data);
+                });
+        });
+    }
 }
