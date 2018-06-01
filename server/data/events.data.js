@@ -220,6 +220,7 @@ module.exports = class EventsData {
         return new Promise((resolve, reject) => {
             Event.find({ "title": { "$regex": searchValue, "$options": "i" }, 'isDeleted': false })
                 .populate('creator')
+                .populate({ path: 'genres', select: 'name' })
                 .sort({ 'start_date ': '-1' })
                 .exec((err, events) => {
                     if (err) {

@@ -30,9 +30,9 @@ class SearchPage extends Component {
                                 <div className="search-form">
                                     <div className="row">
                                         <div className="search-input">
-                                            <input type="text" className="input" id="search-input-field" value={this.state.searchValue} onChange={this.handleSearchChange} autoFocus />
+                                            <input type="text" className="input" id="search-input-field" value={this.state.searchValue} onChange={this.handleSearchChange} onKeyPress={this.handleKeyPress} />
                                         </div>
-                                        <div className="search-submit">
+                                        <div className="search-submit" onClick={this.handleSearch}>
                                             <i className="fa fa-search" id="btn-search"></i>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@ class SearchPage extends Component {
 
                 <section className="full-width background-white text-center" id="results">
                     <div className="margin2x">
-                        <div className="panel container" id="search-results-books">
+                        {/* <div className="panel container" id="search-results-books">
                             <div className="row">
                                 <div className="col-md-3 filters">
                                     <div className="filter">
@@ -196,13 +196,13 @@ class SearchPage extends Component {
                                 </div>
                             </div>
 
-                        </div>
+                        </div> */}
 
                         {this.props.events.length > 0 &&
-                        <EventsResultPage events={this.props.events} />
+                            <EventsResultPage events={this.props.events} searchValue={this.state.searchValue} search={this.props.searchEvent} />
                         }
 
-                        <div className="panel container" id="search-results-users">
+                        {/* <div className="panel container" id="search-results-users">
                             <div className="row">
                                 <div className="col-md-12">
                                     <h3>Found users</h3>
@@ -305,7 +305,7 @@ class SearchPage extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
             </div>
@@ -322,12 +322,20 @@ class SearchPage extends Component {
         this.setState({
             searchValue: event.target.value
         });
+    }
 
-        if (this.state.searchItem === searchItems.BOOKS) {
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.handleSearch(event);
+        }
+    }
+
+    handleSearch = (event) => {
+        if (this.state.searchItem === searchItems.BOOKS && this.state.searchValue) {
 
         } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
             this.props.searchEvent(this.state.searchValue);
-        } else if (this.state.searchItem === searchItems.USERS) {
+        } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
 
         }
     }
@@ -341,7 +349,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        searchEvent: (searchValue) => dispatch(eventsActions.searchEvent(searchValue))
+        searchEvent: (searchValue, filters) => dispatch(eventsActions.searchEvent(searchValue, filters))
     };
 }
 

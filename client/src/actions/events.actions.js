@@ -229,14 +229,34 @@ export function joinEvent(eventId, user) {
     };
 }
 
-export function searchEvent(searchValue) {
+export function searchEvent(searchValue, filters) {
     return function (dispatch) {
         return requester.get(`${api.EVENTS_SEARCH}?phrase=${searchValue}`)
             .done(response => {
-                dispatch(searchEventSuccess(response.events, response.eventsCount));
+                let eventsResult = response.events;
+                if (filters) {
+                    console.log(response.events);
+                    
+                    eventsResult = response.events.filter(event => {
+                        const genres = event.genres.map(genre => genre.name);
+                        return containsFilters(genres, filters);
+                    });
+                }
+
+                dispatch(searchEventSuccess(eventsResult, response.eventsCount));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
+}
+
+function containsFilters(set, subset) {
+    for (var element of subset) {
+        if (set.indexOf(element) < 0) {
+            return false;
+        }
+    }
+
+    return true;
 }

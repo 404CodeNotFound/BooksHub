@@ -6,6 +6,13 @@ import * as genresActions from '../../actions/genres.actions';
 import '../../style/search.css';
 
 class EventsResultPartial extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filters: new Set(),
+        };
+    }
+
     componentDidMount() {
         this.props.getAllGenres();        
     }
@@ -21,7 +28,7 @@ class EventsResultPartial extends Component {
                             </div>
                             {this.props.genres.map(genre => 
                                 <div key={genre._id} className="row checkbox checkbox-success">
-                                    <input id={genre.name} type="checkbox" />
+                                    <input id={genre.name} type="checkbox" name="genre" value={genre.name} onChange={this.handleFilterChange} />
                                     <label htmlFor={genre.name}>
                                         {genre.name}
                                     </label>
@@ -33,10 +40,9 @@ class EventsResultPartial extends Component {
                         <h3>Found Events</h3>
                         <div className="row">
                             {this.props.events.map(event =>
-                            <div key={event._id} className="card col-md-4">
+                            <div key={event._id} className="card col-lg-3">
                                 <Link to={"/events/" + event._id}>
-                                    <img height="100px" className="card-img-top img-thumbnail" src={event.photo}
-                                        alt="Card image cap" />
+                                    <img height="100px" className="card-img-top img-thumbnail" src={event.photo} alt="" />
                                 </Link>
                                 <div className="card-block">
                                     <h4 className="card-title">
@@ -53,7 +59,7 @@ class EventsResultPartial extends Component {
                             </div>
                             )}
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-md-offset-5 pages total center">
                                 Page 1 of 1
                                 <div className="pagination-container center">
@@ -73,11 +79,26 @@ class EventsResultPartial extends Component {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
         )
+    }
+
+    handleFilterChange = (event) => {
+        console.log(event.target.value + " - " + event.target.checked);
+
+        if (event.target.checked) {
+            this.state.filters.add(event.target.value);
+        } else {
+            this.state.filters.delete(event.target.value);
+        }
+
+        if (this.props.searchValue) {
+            console.log(this.state.filters);            
+            this.props.search(this.props.searchValue, this.state.filters);
+        }
     }
 }
 
@@ -89,7 +110,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getAllGenres: () => dispatch(genresActions.getAllGenres()),        
+        getAllGenres: () => dispatch(genresActions.getAllGenres()),
     };
 }
 
