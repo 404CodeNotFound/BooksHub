@@ -7,7 +7,6 @@ import EventsResultPage from '../search/EventsResultPartial';
 import UsersResultPage from '../search/UsersResultPartial';
 import BooksResultPage from '../search/BooksResultPartial';
 import '../../style/search.css';
-import * as constants from '../../utils/constants';
 
 const searchItems = {
     BOOKS: "Books",
@@ -20,7 +19,10 @@ class SearchPage extends Component {
         super(props);
         this.state = {
             searchItem: searchItems.BOOKS,
-            searchValue: ''
+            searchValue: '',
+            showBooksResults: false,
+            showEventsResults: false,
+            showUsersResults: false,           
         };
     }
 
@@ -78,15 +80,15 @@ class SearchPage extends Component {
 
                 <section className="full-width background-white text-center" id="results">
                     <div className="margin2x">
-                        {this.props.books.length > 0 &&
+                        {this.state.showBooksResults &&
                             <BooksResultPage books={this.props.books} searchValue={this.state.searchValue} search={this.props.searchBook} />
                         }
 
-                        {this.props.events.length > 0 &&
+                        {this.state.showEventsResults &&
                             <EventsResultPage events={this.props.events} searchValue={this.state.searchValue} search={this.props.searchEvent} />
                         }
 
-                        {this.props.users.length > 0 &&
+                        {this.state.showUsersResults &&
                             <UsersResultPage users={this.props.users} />
                         }
                     </div>
@@ -97,13 +99,16 @@ class SearchPage extends Component {
 
     handleSearchItemChange = (event) => {
         this.setState({
-            searchItem: event.target.value
+            searchItem: event.target.value,
+            showBooksResults: false,
+            showEventsResults: false,
+            showUsersResults: false,
         });
     }
 
     handleSearchChange = (event) => {
         this.setState({
-            searchValue: event.target.value
+            searchValue: event.target.value,
         });
     }
 
@@ -115,10 +120,22 @@ class SearchPage extends Component {
 
     handleSearch = (event) => {
         if (this.state.searchItem === searchItems.BOOKS && this.state.searchValue) {
+            this.setState({
+                showBooksResults: true,
+            });
+
             this.props.searchBook(this.state.searchValue, this.props.searchBooksBy);
         } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
+            this.setState({
+                showEventsResults: true,
+            });
+
             this.props.searchEvent(this.state.searchValue);
         } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
+            this.setState({
+                showUsersResults: true,
+            });
+
             this.props.searchUser(this.state.searchValue);
         }
     }

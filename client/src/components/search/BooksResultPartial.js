@@ -15,7 +15,8 @@ class BooksResultPartial extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllGenres();        
+        this.props.getAllGenres();
+        this.props.updateSearchType(constants.SEARCH_BOOK_BY_TITLE);
     }
 
     render() {

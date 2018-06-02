@@ -233,33 +233,6 @@ module.exports = class BooksData {
         });
     }
 
-    searchBooksByAuthor(searchValue) {
-        return new Promise((resolve, reject) => {
-            // Book.find({ $or:[{ "author.first_name": { "$regex": searchValue, "$options": "i" }} , { "author.last_name": { "$regex": searchValue, "$options": "i" }}], 'isDeleted': false })
-            Book.find({ 'isDeleted': false })
-                .where('author.first_name').equals('Nelson')
-                // .select('title photo genres author date_published')
-                .populate({ path: 'author', select: 'first_name last_name' })
-                // .populate({ path: 'genres', select: 'name' })
-                .exec((err, books) => {
-                    if (err) {
-                        return reject(err);
-                    }
-
-                    console.log('books data');
-                    console.log(books);
-                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
-
-                    const data = {
-                        books: books,
-                        booksCount: books.length
-                    };
-
-                    return resolve(data);
-                });
-        });
-    }
-
     searchBooksBySummary(keywords) {
         return new Promise((resolve, reject) => {
             Book.find({'isDeleted': false })

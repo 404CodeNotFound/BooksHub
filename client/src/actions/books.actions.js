@@ -273,7 +273,6 @@ export function searchBooks(searchValue, searchType, filters) {
                     booksResult = response.books;
                 }
 
-                console.log(booksResult);
                 if (filters) {
                     booksResult = booksResult.filter(book => {
                         const genres = book.genres.map(genre => genre.name);
