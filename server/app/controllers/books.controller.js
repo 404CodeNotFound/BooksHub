@@ -305,6 +305,33 @@ module.exports = (data) => {
             }
 
             return res;
+        },
+        searchBooks: (req, res) => {
+            // const page = req.query.page;
+            const searchValue = req.query.phrase;
+            const searchType = req.query.searchBy;
+
+            if (searchType === "title") {
+                data.books.searchBooksByTitle(searchValue)
+                    .then(result => {
+                        res.status(200)
+                            .json(result);
+                    })
+                    .catch(error => {
+                        generateErrorResponse(res, error.message);
+                    });
+            } else if (searchType === "author") {
+                data.books.searchBooksByAuthor(searchValue)
+                    .then(result => {
+                        res.status(200)
+                            .json(result);
+                    })
+                    .catch(error => {
+                        generateErrorResponse(res, error.message);
+                    });
+            }
+            
+            return res;
         }
     }
 }

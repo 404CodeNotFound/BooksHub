@@ -16,6 +16,12 @@ export default function search(state = {
                 users: action.users,
                 usersCount: action.usersCount
             };
+        case 'SEARCH_BOOKS_SUCCESS':
+            return {
+                ...state,
+                books: action.books,
+                booksCount: action.booksCount
+            };
         default:
             return state;
     }

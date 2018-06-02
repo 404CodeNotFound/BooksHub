@@ -73,7 +73,8 @@ const init = (data) => {
                 
     // Books
     app.get('/books', auth.authenticate(passport), booksController.getAllBooks);
-    app.post('/books', auth.authenticate(passport), booksController.addBook);            
+    app.post('/books', auth.authenticate(passport), booksController.addBook);
+    app.get('/books/search', booksController.searchBooks);    
     app.get('/books/:id', booksController.getBook);
     app.put('/books/:id', auth.authenticate(passport), booksController.editBook);
     app.delete('/books/:id', auth.authenticate(passport), booksController.deleteBook);            

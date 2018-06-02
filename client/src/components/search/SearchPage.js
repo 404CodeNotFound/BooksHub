@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as eventsActions from '../../actions/events.actions';
 import * as usersActions from '../../actions/users.actions';
+import * as booksActions from '../../actions/books.actions';
 import EventsResultPage from '../search/EventsResultPartial';
 import UsersResultPage from '../search/UsersResultPartial';
+import BooksResultPage from '../search/BooksResultPartial';
 import '../../style/search.css';
+import * as constants from '../../utils/constants';
 
 const searchItems = {
     BOOKS: "Books",
@@ -75,129 +78,9 @@ class SearchPage extends Component {
 
                 <section className="full-width background-white text-center" id="results">
                     <div className="margin2x">
-                        {/* <div className="panel container" id="search-results-books">
-                            <div className="row">
-                                <div className="col-md-3 filters">
-                                    <div className="filter">
-                                        <div className="row">
-                                            <h4>Filter by Genre:</h4>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="mystery" type="checkbox" />
-                                            <label htmlFor="mystery">
-                                                Mystery
-                                            </label>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="romance" type="checkbox" />
-                                            <label htmlFor="romance">
-                                                Romance
-                                            </label>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="thriller" type="checkbox" />
-                                            <label htmlFor="thriller">
-                                                Thriller
-                                            </label>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="dramma" type="checkbox" />
-                                            <label htmlFor="dramma">
-                                                Dramma
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="filter">
-                                        <div className="row">
-                                            <h4>Search by:</h4>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="title" type="checkbox" />
-                                            <label htmlFor="title">
-                                                Title
-                                            </label>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="author" type="checkbox" />
-                                            <label htmlFor="author">
-                                                Author
-                                            </label>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="language" type="checkbox" />
-                                            <label htmlFor="language">
-                                                Language
-                                            </label>
-                                        </div>
-                                        <div className="row checkbox checkbox-success">
-                                            <input id="summary" type="checkbox" />
-                                            <label htmlFor="summary">
-                                                Summary
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-8">
-                                    <div className="row">
-                                        <div className="card col-md-3">
-                                            <a href="book.html">
-                                                <img width="100px" className="card-img-top" src="https://images.gr-assets.com/books/1437916050l/26506.jpg" alt="Card image cap" />
-                                            </a>
-                                            <div className="card-block">
-                                                <h5 className="card-title">
-                                                    <a href="book.html">Sisters</a>
-                                                </h5>
-                                                <p className="card-text">by
-                                                    <a href="author.html">Danielle Steel</a>
-                                                </p>
-                                                <p className="card-text">
-                                                    <small className="text-muted">Published on 2018.03.23</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="card col-md-3">
-                                            <a href="book.html">
-                                                <img width="100px" className="card-img-top" src="https://panmacmillan.azureedge.net/pml/panmacmillancorporatesite/media/panmacmillan/cover-images/lucy-diamond/__thumbnails/9781509815661one%20night%20in%20italy_6_jpg_264_400.jpg" alt="Card image cap" />
-                                            </a>
-                                            <div className="card-block">
-                                                <h5 className="card-title">
-                                                    <a href="book.html">One night in Italy</a>
-                                                </h5>
-                                                <p className="card-text">by
-                                                    <a href="author.html">Lucy Diamond</a>
-                                                </p>
-                                                <p className="card-text">
-                                                    <small className="text-muted">Published on 2018.03.23</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-offset-5 pages total center">
-                                            Page 1 of 1
-                                            <div className="pagination-container center">
-                                                <ul className="pagination">
-                                                    <li className="active">
-                                                        <a>1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a>2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a>3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a>4</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div> */}
+                        {this.props.books.length > 0 &&
+                            <BooksResultPage books={this.props.books} searchValue={this.state.searchValue} search={this.props.searchBook} />
+                        }
 
                         {this.props.events.length > 0 &&
                             <EventsResultPage events={this.props.events} searchValue={this.state.searchValue} search={this.props.searchEvent} />
@@ -232,11 +115,10 @@ class SearchPage extends Component {
 
     handleSearch = (event) => {
         if (this.state.searchItem === searchItems.BOOKS && this.state.searchValue) {
-
+            this.props.searchBook(this.state.searchValue, constants.SEARCH_BOOK_BY_TITLE);
         } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
             this.props.searchEvent(this.state.searchValue);
         } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
-            console.log('here');
             this.props.searchUser(this.state.searchValue);
         }
     }
@@ -246,6 +128,7 @@ function mapStateToProps(state, ownProps) {
     return {
         events: state.search.events,
         users: state.search.users,
+        books: state.search.books,
     };
 }
 
@@ -253,6 +136,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         searchEvent: (searchValue, filters) => dispatch(eventsActions.searchEvent(searchValue, filters)),
         searchUser: (searchValue) => dispatch(usersActions.searchUser(searchValue)),
+        searchBook: (searchValue, searchType, filters) => dispatch(booksActions.searchBooks(searchValue, searchType, filters)),
     };
 }
 

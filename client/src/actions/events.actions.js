@@ -234,7 +234,6 @@ export function searchEvent(searchValue, filters) {
         return requester.get(`${api.EVENTS_SEARCH}?phrase=${searchValue}`)
             .done(response => {
                 let eventsResult = response.events;
-                console.log(response);
                 if (filters) {
                     eventsResult = response.events.filter(event => {
                         const genres = event.genres.map(genre => genre.name);
@@ -242,7 +241,7 @@ export function searchEvent(searchValue, filters) {
                     });
                 }
 
-                dispatch(searchEventSuccess(eventsResult, response.eventsCount));
+                dispatch(searchEventSuccess(eventsResult, eventsResult.length ? eventsResult.length : response.eventsCount));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

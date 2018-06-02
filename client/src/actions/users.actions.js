@@ -204,7 +204,6 @@ export function searchUser(searchValue) {
     return function (dispatch) {
         return requester.get(`${api.USERS_SEARCH}?phrase=${searchValue}`)
             .done(response => {
-                debugger;
                 dispatch(searchUsersSuccess(response.users, response.usersCount));
             })
             .fail(error => {

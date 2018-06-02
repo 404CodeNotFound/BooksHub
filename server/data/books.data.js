@@ -210,4 +210,49 @@ module.exports = class BooksData {
                 });
         });
     }
+
+    searchBooksByTitle(searchValue) {
+        return new Promise((resolve, reject) => {
+            Book.find({ "title": { "$regex": searchValue, "$options": "i" }, 'isDeleted': false })
+                .select('title photo genres author date_published')
+                .populate({ path: 'author', select: 'first_name last_name' })
+                .populate({ path: 'genres', select: 'name' })
+                .exec((err, books) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
+                    const data = {
+                        books: books,
+                        booksCount: books.length
+                    };
+
+                    return resolve(data);
+                });
+        });
+    }
+
+    searchBooksByAuthor(searchValue) {
+        return new Promise((resolve, reject) => {
+            Book.find({ $and:[{ "firstName": { "$regex": searchValue, "$options": "i" }} , { "lastName": { "$regex": searchValue, "$options": "i" }}], 'isDeleted': false })
+                .select('title photo genres author date_published')
+                .populate({ path: 'author', select: 'first_name last_name' })
+                .populate({ path: 'genres', select: 'name' })
+                .exec((err, books) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
+                    
+                    const data = {
+                        books: books,
+                        booksCount: books.length
+                    };
+
+                    return resolve(data);
+                });
+        });
+    }
 }

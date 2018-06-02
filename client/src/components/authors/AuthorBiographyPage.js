@@ -26,7 +26,7 @@ class AuthorBiographyPage extends Component {
                         <BarLoader color="#4eb980" size="11" />
                     </div>
                     :
-                    [<div className="container">
+                    [<div key="author-info" className="container">
                         <section className="background-white section">
                             <div className="row author-details">
                                 <div className="panel panel-default">
@@ -84,7 +84,7 @@ class AuthorBiographyPage extends Component {
                             </div>
                         </section>
                     </div>,
-                    <section className="section background-grey" id="books-list">
+                    <section key="author-books" className="section background-grey" id="books-list">
                         <div className="line text-center">
                             <i className="icon-sli-book-open text-primary text-size-40"></i>
                             <h2 className="text-size-50 text-m-size-40">

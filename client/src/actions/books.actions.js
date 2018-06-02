@@ -41,6 +41,10 @@ export function deleteBookSuccess(bookId) {
     return { type: 'DELETE_BOOK_SUCCESS', bookId: bookId };
 }
 
+export function searchBooksSuccess(books, booksCount) {
+    return { type: 'SEARCH_BOOKS_SUCCESS', books, booksCount };
+}
+
 export function getCurrentlyReadingBooks(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/reading?page=${page}`)
@@ -246,4 +250,36 @@ export function getRecommendedBooksByFriends(id, page) {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
             });
     };
+}
+
+export function searchBooks(searchValue, searchType, filters, ) {
+    debugger;
+    return function (dispatch) {
+        return requester.get(`${api.BOOKS_SEARCH}?searchBy=${searchType}&phrase=${searchValue}`)
+            .done(response => {       
+                let booksResult = response.books;
+                if (filters) {
+                    booksResult = response.books.filter(book => {
+                        const genres = book.genres.map(genre => genre.name);
+                        return containsFilters(genres, filters);
+                    });
+                }
+
+                dispatch(searchBooksSuccess(booksResult, booksResult.length ? booksResult.length : response.booksCount));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+
+function containsFilters(set, subset) {
+    for (var element of subset) {
+        if (set.indexOf(element) < 0) {
+            return false;
+        }
+    }
+
+    return true;
 }
