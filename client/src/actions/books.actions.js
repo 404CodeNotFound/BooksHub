@@ -45,6 +45,10 @@ export function searchBooksSuccess(books, booksCount) {
     return { type: 'SEARCH_BOOKS_SUCCESS', books, booksCount };
 }
 
+export function updateSearchType(searchType) {
+    return { type: 'UPDATE_SEARCH_TYPE', searchType };
+}
+
 export function getCurrentlyReadingBooks(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/reading?page=${page}`)
@@ -252,14 +256,26 @@ export function getRecommendedBooksByFriends(id, page) {
     };
 }
 
-export function searchBooks(searchValue, searchType, filters, ) {
-    debugger;
+export function searchBooks(searchValue, searchType, filters) {
     return function (dispatch) {
         return requester.get(`${api.BOOKS_SEARCH}?searchBy=${searchType}&phrase=${searchValue}`)
-            .done(response => {       
-                let booksResult = response.books;
+            .done(response => { 
+                debugger;
+                let booksResult = [];
+                if (searchType === "author") {
+                    const booksByAuthors = response.map(item => item.books);
+                    booksByAuthors.forEach(books => {
+                        books.forEach(book => {
+                            booksResult.push(book);
+                        });
+                    });
+                } else {
+                    booksResult = response.books;
+                }
+
+                console.log(booksResult);
                 if (filters) {
-                    booksResult = response.books.filter(book => {
+                    booksResult = booksResult.filter(book => {
                         const genres = book.genres.map(genre => genre.name);
                         return containsFilters(genres, filters);
                     });

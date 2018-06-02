@@ -235,17 +235,21 @@ module.exports = class BooksData {
 
     searchBooksByAuthor(searchValue) {
         return new Promise((resolve, reject) => {
-            Book.find({ $and:[{ "firstName": { "$regex": searchValue, "$options": "i" }} , { "lastName": { "$regex": searchValue, "$options": "i" }}], 'isDeleted': false })
-                .select('title photo genres author date_published')
+            // Book.find({ $or:[{ "author.first_name": { "$regex": searchValue, "$options": "i" }} , { "author.last_name": { "$regex": searchValue, "$options": "i" }}], 'isDeleted': false })
+            Book.find({ 'isDeleted': false })
+                .where('author.first_name').equals('Nelson')
+                // .select('title photo genres author date_published')
                 .populate({ path: 'author', select: 'first_name last_name' })
-                .populate({ path: 'genres', select: 'name' })
+                // .populate({ path: 'genres', select: 'name' })
                 .exec((err, books) => {
                     if (err) {
                         return reject(err);
                     }
 
+                    console.log('books data');
+                    console.log(books);
                     // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
-                    
+
                     const data = {
                         books: books,
                         booksCount: books.length
@@ -255,4 +259,43 @@ module.exports = class BooksData {
                 });
         });
     }
+
+    searchBooksBySummary(keywords) {
+        return new Promise((resolve, reject) => {
+            Book.find({'isDeleted': false })
+                .select('title photo genres author date_published summary')
+                .populate({ path: 'author', select: 'first_name last_name' })
+                .populate({ path: 'genres', select: 'name' })
+                .exec((err, books) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
+                    
+                    const filteredBooks = books.filter(book => {
+                        return containsKeywords(book.summary, keywords);
+                    });
+
+                    console.log(filteredBooks);
+
+                    const data = {
+                        books: filteredBooks,
+                        booksCount: books.length
+                    };
+
+                    return resolve(data);
+                });
+        });
+    }
+}
+
+function containsKeywords(text, keywords) {
+    for (let i=0; i < keywords.length; i++) {
+        if (!text.toLowerCase().includes(keywords[i].toLowerCase())) {
+            return false;
+        }
+    }
+
+    return true;
 }

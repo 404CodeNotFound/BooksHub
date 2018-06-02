@@ -17,6 +17,22 @@ module.exports = class AuthorsData {
         });
     }
 
+    searchBooksByAuthor(searchValue) {
+        return new Promise((resolve, reject) => {
+            return Author.find({ $or:[ { "first_name": { "$regex": searchValue, "$options": "i" }}, { "last_name": { "$regex": searchValue, "$options": "i" }} ], 'isDeleted': false })
+                .select('books -_id')
+                .populate({ path: 'books', populate: { path: 'author', select: 'first_name last_name' }, select: 'title photo genres author date_published'})
+                .populate({ path: 'books', populate: { path: 'genres', select: 'name' }, select: 'title photo genres author date_published' })
+                .exec((err, authorsBooks) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(authorsBooks);
+                    }
+                });
+        });
+    }
+
     createAuthorByName(firstName, lastName) {
         return new Promise((resolve, reject) => {
             const author = new Author();

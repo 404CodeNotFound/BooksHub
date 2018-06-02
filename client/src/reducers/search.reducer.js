@@ -1,4 +1,7 @@
+import * as constants from '../utils/constants';
+
 export default function search(state = {
+    searchBooks: constants.SEARCH_BOOK_BY_TITLE,
     books: [],
     events: [],
     users: [],
@@ -21,6 +24,11 @@ export default function search(state = {
                 ...state,
                 books: action.books,
                 booksCount: action.booksCount
+            };
+        case 'UPDATE_SEARCH_TYPE':
+            return {
+                ...state,
+                searchBooks: action.searchType
             };
         default:
             return state;

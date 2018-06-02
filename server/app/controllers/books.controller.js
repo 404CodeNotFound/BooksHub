@@ -321,7 +321,19 @@ module.exports = (data) => {
                         generateErrorResponse(res, error.message);
                     });
             } else if (searchType === "author") {
-                data.books.searchBooksByAuthor(searchValue)
+                data.authors.searchBooksByAuthor(searchValue)
+                    .then(result => {
+                        res.status(200)
+                            .json(result);
+                    })
+                    .catch(error => {
+                        generateErrorResponse(res, error.message);
+                    });
+            } else if (searchType === "summary") {
+                const keywords = searchValue.split(" ");
+                console.log(keywords);
+                
+                data.books.searchBooksBySummary(keywords)
                     .then(result => {
                         res.status(200)
                             .json(result);

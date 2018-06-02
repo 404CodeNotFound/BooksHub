@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as genresActions from '../../actions/genres.actions';
+import * as booksActions from '../../actions/books.actions';
 import * as constants from '../../utils/constants';
 
 class BooksResultPartial extends Component {
@@ -9,7 +10,7 @@ class BooksResultPartial extends Component {
         super(props);
         this.state = {
             filters: new Set(),
-            searchType: constants.SEARCH_BOOK_BY_TITLE
+            searchType: constants.SEARCH_BOOK_BY_TITLE,
         };
     }
 
@@ -40,15 +41,21 @@ class BooksResultPartial extends Component {
                                 <h4>Search by:</h4>
                             </div>
                             <div className="row">
-                                <input id="title" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_TITLE} onChange={this.handleSearchTypeChange} />
+                                <input id="title" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_TITLE} onChange={this.handleSearchByChange} />
                                 <label htmlFor="title">
                                     Title
                                 </label>
                             </div>
                             <div className="row">
-                                <input id="author" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_AUTHOR} onChange={this.handleSearchTypeChange} />
+                                <input id="author" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_AUTHOR} onChange={this.handleSearchByChange} />
                                 <label htmlFor="author">
                                     Author
+                                </label>
+                            </div>
+                            <div className="row">
+                                <input id="summary" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_SUMMARY} onChange={this.handleSearchByChange} />
+                                <label htmlFor="summary">
+                                    Summary
                                 </label>
                             </div>
                             {/* <div className="row checkbox checkbox-success">
@@ -57,12 +64,7 @@ class BooksResultPartial extends Component {
                                     Language
                                 </label>
                             </div>
-                            <div className="row checkbox checkbox-success">
-                                <input id="summary" type="checkbox" />
-                                <label htmlFor="summary">
-                                    Summary
-                                </label>
-                            </div> */}
+                             */}
                         </div>
                     </div>
 
@@ -123,20 +125,18 @@ class BooksResultPartial extends Component {
         }
 
         if (this.props.searchValue) {
-            this.props.search(this.props.searchValue, this.state.filters);
+            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters);
         }
     }
 
-    handleSearchTypeChange = (event) => {
-        console.log(event.target.value);
-        if (event.target.checked) {
-            this.setState({
-                searchType: event.target.value
-            });
+    handleSearchByChange = (event) => {
+        this.setState({
+            searchType: event.target.value
+        }, () => {
+            this.props.updateSearchType(this.state.searchType);
 
-            console.log(this.state.searchType);
-            // this.props.search(this.props.searchValue, this.state.searchType, this.state.filters);
-        }
+            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters);
+        });
     }
 }
 
@@ -149,6 +149,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getAllGenres: () => dispatch(genresActions.getAllGenres()),
+        updateSearchType: (searchType) => dispatch(booksActions.updateSearchType(searchType)),
     };
 }
 

@@ -115,7 +115,7 @@ class SearchPage extends Component {
 
     handleSearch = (event) => {
         if (this.state.searchItem === searchItems.BOOKS && this.state.searchValue) {
-            this.props.searchBook(this.state.searchValue, constants.SEARCH_BOOK_BY_TITLE);
+            this.props.searchBook(this.state.searchValue, this.props.searchBooksBy);
         } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
             this.props.searchEvent(this.state.searchValue);
         } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
@@ -129,6 +129,7 @@ function mapStateToProps(state, ownProps) {
         events: state.search.events,
         users: state.search.users,
         books: state.search.books,
+        searchBooksBy: state.search.searchBooks
     };
 }
 

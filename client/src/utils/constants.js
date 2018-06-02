@@ -5,4 +5,5 @@ module.exports = {
 
     SEARCH_BOOK_BY_TITLE: "title",
     SEARCH_BOOK_BY_AUTHOR: "author",
+    SEARCH_BOOK_BY_SUMMARY: "summary",
 }
