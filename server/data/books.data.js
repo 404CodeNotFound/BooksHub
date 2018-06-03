@@ -212,6 +212,24 @@ module.exports = class BooksData {
         });
     }
 
+    getBooksByGenres(genres) {
+        return new Promise((resolve, reject) => {
+            Book.find({ 'isDeleted': false, genres: { $in: genres }})
+                .sort({ 'start_date': '1' })
+                .limit(4)
+                .populate({ path: 'genres', select: 'name' })
+                .populate({ path: 'author', select: 'frist_name last_name' })
+                .exec((err, books) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        const recommendedBooks = getRandomRecommendedBooks(books);
+                        return resolve(recommendedBooks);
+                    }
+                })
+        });
+    }
+
     searchBooksByTitle(searchValue) {
         return new Promise((resolve, reject) => {
             Book.find({ "title": { "$regex": searchValue, "$options": "i" }, 'isDeleted': false })
@@ -272,4 +290,12 @@ function containsKeywords(text, keywords) {
     }
 
     return true;
+}
+
+function getRandomRecommendedBooks(books) {
+    const count = 4;
+    const shuffled = books.sort(() => .5 - Math.random());
+    let selected = shuffled.slice(0, count);
+
+    return selected;
 }

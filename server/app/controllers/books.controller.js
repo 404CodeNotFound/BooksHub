@@ -146,7 +146,7 @@ module.exports = (data) => {
             data.users.getFavouriteGenres(userId)
                 .then(genres => {
                     if (genres.length > 0) {
-                        return data.genres.getBooksByGenres(genres);
+                        return data.books.getBooksByGenres(genres);
                     }
 
                     return data.books.getLatestBooks();
@@ -229,13 +229,6 @@ module.exports = (data) => {
                             return createdBook;
                         })
                         .then(createdBook => {
-                            createdBook.genres.forEach(genre => {
-                                data.genres.addBookToGenreCollection(createdBook._id, genre);
-                            });
-                            
-                            return createdBook;
-                        })
-                        .then(createdBook => {
                             res.status(201)
                                 .json({ book: createdBook });
                         })
@@ -266,13 +259,14 @@ module.exports = (data) => {
                     res.status(400)
                         .json(errors);
                 } else {
+                    const genres = book.genres.split(', ');
+                    
                     data.books.getBookById(bookId)
                         .then((foundBook) => {
                             if (!foundBook) {
                                 throw Error(errors.BOOK_NOT_FOUND);
                             }
 
-                            const genres = book.genres.split(', ');
                             return data.books.updateBook(bookId, book.title, book.isbn, book.publisher,
                                 book.photo, book.language, book.summary, genres);
                         })
