@@ -186,12 +186,17 @@ module.exports = class UserData {
     getAllUserFriends(id) {
         return new Promise((resolve, reject) => {
             User.findById(id)
-                .populate({ path: 'friends', match: { isDeleted: false }})
+                .populate({ path: 'friends', match: { isDeleted: false, role: 'User' }, select: 'username photo' })
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);
                     } else {
-                        return resolve(user.friends);
+                        let result = {
+                            friends: user.friends,
+                            friendsCount: user.friends.length
+                        };
+                        
+                        return resolve(result);
                     }
                 });
         });
@@ -533,6 +538,22 @@ module.exports = class UserData {
                     
                     return resolve(data);
                 });
+        });
+    }
+
+    addRecommendedBook(userId, bookId) {
+        return new Promise((resolve, reject) => {
+            User.update(
+                { _id: userId }, 
+                { $addToSet: { recommended_books: bookId } }
+            )
+            .exec((err, updatedUser) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(updatedUser);
+                }
+            });
         });
     }
 }

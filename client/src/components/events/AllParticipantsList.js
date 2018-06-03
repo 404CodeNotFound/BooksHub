@@ -13,8 +13,8 @@ class AllParticipantsList extends Component {
                 </div>
                 <div className="modal-body">
                     
-                <div class="friend-list">
-                    <div class="row">
+                <div className="friend-list">
+                    <div className="row">
                         {this.props.participants.map(participant => 
                             <ParticipantPartial key={participant._id} participant={participant} />
                         )}

@@ -50,6 +50,8 @@ const init = (data) => {
     app.get('/users/:id/read', usersController.getReadBooks);
     app.get('/users/:id/recommended', usersController.getRecommendedBooks);        
 
+    app.put('/users/:userId/recommend/:bookId', auth.authenticate(passport), usersController.recommendBook);
+    
     // Friends of User
     app.get('/users/:id/friends', usersController.getUserFriends);
 
@@ -81,7 +83,6 @@ const init = (data) => {
     app.post('/books/:id/reviews', auth.authenticate(passport), booksController.addReview);
     app.put('/books/:id/rating', auth.authenticate(passport), booksController.rateBook);
     app.put('/books/:id/statuses', auth.authenticate(passport), booksController.markBook);
-    
     app.get('/recommendedbooks', auth.authenticate(passport), booksController.getRecommendedBooks);
     app.get('/latestbooks', booksController.getLatestBooks);      
     

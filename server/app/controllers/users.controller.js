@@ -181,6 +181,7 @@ module.exports = (data) => {
                 })
                 .then(() => data.users.getRecommendedBooks(id, page))
                 .then(books => {
+                    console.log(books);
                     return res.status(200)
                         .json(books);
                 })
@@ -196,19 +197,26 @@ module.exports = (data) => {
                 return res.status(400)
                     .json({ message: errors.MISSING_USER_ID });
             }
-
+            
             data.users.getUserById(id)
                 .then(user => {
                     if (!user) {
                         throw Error(errors.USER_NOT_FOUND);
                     }
                 })
-                .then(() => data.users.getUserFriends(id, page))
-                .then(friends => {
+                .then(() => {
+                    if (page) {
+                        return data.users.getUserFriends(id, page);
+                    } else {
+                        return data.users.getAllUserFriends(id);
+                    }
+                })
+                .then(result => {
                     return res.status(200)
-                        .json(friends);
+                        .json(result);
                 })
                 .catch(error => {
+                    console.log(error);
                     generateErrorResponse(res, error.message);
                 });
         },
@@ -489,5 +497,30 @@ module.exports = (data) => {
 
             return res;
         },
+        recommendBook: (req, res) => {
+            const userId = req.params.userId;
+            const bookId = req.params.bookId;
+
+            data.users.getUserById(userId)
+                .then(user => {
+                    if (!user) {
+                        throw Error(errors.USER_NOT_FOUND);
+                    }
+                })
+                .then(() => data.books.getBookById(bookId))
+                .then(book => {
+                    if (!book) {
+                        throw Error(errors.BOOK_NOT_FOUND);
+                    }
+                })
+                .then(() => data.users.addRecommendedBook(userId, bookId))
+                .then(updatedUser => {
+                    return res.status(201)
+                        .json(updatedUser);
+                })
+                .catch(error => {
+                    generateErrorResponse(res, error.message);
+                });
+        }
     }
 }

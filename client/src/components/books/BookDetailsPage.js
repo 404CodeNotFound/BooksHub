@@ -5,8 +5,10 @@ import WriteReview from './WriteReview';
 import BookReviewsList from './BookReviewsList';
 import { BarLoader } from 'react-css-loaders';
 import * as booksActions from '../../actions/books.actions';
+import * as modalsActions from '../../actions/modals.actions';
 import * as loadersActions from '../../actions/loaders.actions';
 import '../../style/book.details.css';
+import RecommendBookModal from './RecommendBookModal';
 
 class BookDetailsPage extends Component {
     componentDidMount() {
@@ -143,8 +145,14 @@ class BookDetailsPage extends Component {
                                         <button className="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link" onClick={event => this.handleScrollToElement(event, "reviews")}>
                                             <i className="fa fa-comments"></i> See reviews</button>
                                         {this.props.currentUser.username &&
-                                            <button className="btn-main-sm col-md-3 col-sm-12">
-                                                <i className="fa fa-user"></i> Recommend</button>
+                                            (this.props.currentUser.role !== "Admin" &&
+                                                [<button key="recommend-btn" className="btn-main-sm col-md-3 col-sm-12" onClick={this.props.openRecommendBookModal}>
+                                                    <i className="fa fa-user"></i> Recommend
+                                                </button>,
+                                                (this.props.isVisibleRecommendBookModal &&
+                                                    <RecommendBookModal key="recommend-modal" book={{ title: this.props.book.title, id: this.props.book._id }}/>
+                                                )]
+                                            )
                                         }
                                     </div>
                                 </div>
@@ -179,7 +187,6 @@ class BookDetailsPage extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        debugger;
         if(!nextProps.book.title && nextProps.error) {
             this.props.history.push("/NotFound");
         }
@@ -189,13 +196,15 @@ class BookDetailsPage extends Component {
 function mapStateToProps(state, ownProps) {
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('id');
+    const userRole = localStorage.getItem('role');
 
     return {
         book: state.books.book,
-        currentUser: { username: username, id: userId },
+        currentUser: { username: username, id: userId, role: userRole },
         canWriteReview: state.books.canWriteReview,
         currentUserRating: state.books.currentUserRating,
         bookStatus: state.books.bookStatus,
+        isVisibleRecommendBookModal: state.modals.showRecommendBookModal,
         isLoaderVisible: state.loaders.showLoader,
         error: state.errors.error
     };
@@ -207,6 +216,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.id, userId)),
         rateBook: (bookId, rating) => dispatch(booksActions.rateBook(bookId, rating)),
         markBook: (bookId, userId, status) => dispatch(booksActions.markBook(bookId, userId, status)),
+        openRecommendBookModal: () => dispatch(modalsActions.openRecommendBookModal()),
         showLoader: () => dispatch(loadersActions.showLoader())
     };
 }

@@ -105,6 +105,10 @@ export default function users(state = {
                 events: removeFromCollection(state.events, action.eventId),
                 eventsCount: state.eventsCount - 1
             };
+        case 'RECOMMEND_BOOK_SUCCESS':
+            return {
+                ...state
+            };
         default:
             return state;
     }

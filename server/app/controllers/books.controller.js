@@ -331,7 +331,6 @@ module.exports = (data) => {
                     });
             } else if (searchType === "summary") {
                 const keywords = searchValue.split(" ");
-                console.log(keywords);
                 
                 data.books.searchBooksBySummary(keywords)
                     .then(result => {

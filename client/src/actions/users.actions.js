@@ -48,6 +48,10 @@ export function searchUsersSuccess(users, usersCount) {
     return { type: 'SEARCH_USERS_SUCCESS', users: users, usersCount: usersCount };
 }
 
+export function recommendBookSuccess() {
+    return { type: 'RECOMMEND_BOOK_SUCCESS' };
+}
+
 export function logout() {
     return function (dispatch) {
         localStorage.removeItem('token');
@@ -114,6 +118,18 @@ export function getProfile(username) {
 export function getFriends(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/friends?page=${page}`)
+            .done(response => {
+                dispatch(getFriendsSuccess(response));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function getAllUserFriends(id) {
+    return function (dispatch) {
+        return requester.get(`${api.USERS}/${id}/friends`)
             .done(response => {
                 dispatch(getFriendsSuccess(response));
             })
@@ -205,6 +221,20 @@ export function searchUser(searchValue) {
         return requester.get(`${api.USERS_SEARCH}?phrase=${searchValue}`)
             .done(response => {
                 dispatch(searchUsersSuccess(response.users, response.usersCount));
+            })
+            .fail(error => {
+                dispatch(errorActions.actionFailed(error.responseJSON.message));
+            });
+    };
+}
+
+export function recommendBook(userId, bookId) {
+    return function (dispatch) {
+        const token = localStorage.getItem('token');
+        
+        return requester.putAuthorized(token, `${api.USERS}/${userId}/recommend/${bookId}`)
+            .done(response => {
+                dispatch(recommendBookSuccess());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

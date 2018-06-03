@@ -4,7 +4,8 @@ export default function modals(state = {
     showAddAuthorModal: false, showEditAuthorModal: false, authorToEdit: {},
     showAddGenreModal: false,
     showAddEventModal: false, showEditEventModal: false, eventToEdit: {},
-    showAllParticipantsModal: false }, action) {
+    showAllParticipantsModal: false,
+    showRecommendBookModal: false }, action) {
     switch (action.type) {
         case 'OPEN_ADD_BOOK_MODAL':
             return {
@@ -85,6 +86,14 @@ export default function modals(state = {
         case 'CLOSE_ALL_PARTICIPANTS_MODAL':
             return {
                 showAllParticipantsModal: false
+            };
+        case 'OPEN_RECOMMEND_BOOK_MODAL':
+            return {
+                showRecommendBookModal: true
+            };
+        case 'CLOSE_RECOMMEND_BOOK_MODAL':
+            return {
+                showRecommendBookModal: false
             };
         default:
             return state;

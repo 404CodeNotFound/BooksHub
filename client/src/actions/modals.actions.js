@@ -72,6 +72,14 @@ export function closeAllParticipantsModal() {
     return { type: 'CLOSE_ALL_PARTICIPANTS_MODAL' };
 }
 
+export function openRecommendBookModal(friends) {
+    return { type: 'OPEN_RECOMMEND_BOOK_MODAL' };
+}
+
+export function closeRecommendBookModal() {
+    return { type: 'CLOSE_RECOMMEND_BOOK_MODAL' };
+}
+
 export function openAddAuthorModal() {
     return function (dispatch) {
         dispatch(openAddAuthorModalSuccess());
