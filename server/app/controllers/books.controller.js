@@ -85,7 +85,7 @@ module.exports = (data) => {
                     .then(() => data.ratings.postOrUpdateRating(userId, bookId, receivedRating))
                     .then(result => {
                         if (!result.isUpdated) {
-                            return data.users.rateBook(userId, result.rating)
+                            return data.users.rateBook(result.rating)
                                 .then(rating => data.books.addRatingToBook(rating))
                         } else {
                             return data.books.updateTotalRatingOfBook(bookId);

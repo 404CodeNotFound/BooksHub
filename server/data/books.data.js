@@ -1,6 +1,7 @@
 const { Book } = require('../models')
 const getPageOfCollection = require('../utils/pagination');
-const calculateCurrentRating = require('../utils/rating');
+const {calculateNewRating} = require('../utils/rating');
+const {calculateRating} = require('../utils/rating');
 const itemsPerPage = 10;
 
 module.exports = class BooksData {
@@ -58,8 +59,8 @@ module.exports = class BooksData {
                     if (err) {
                         return reject(err);
                     } else {
-                        book.ratings.push(rating);
-                        book.rating = calculateCurrentRating(book.ratings);
+                        book.rating = calculateNewRating(book.ratings, rating);
+                        book.ratings.push(rating._id);                        
                         book.save();
                         return resolve({ bookRating: book.rating });
                     }
@@ -97,7 +98,7 @@ module.exports = class BooksData {
                     } else {
                         let bookRating = 0;
                         if (book.ratings.length > 0) {
-                            bookRating = calculateCurrentRating(book.ratings);
+                            bookRating = calculateRating(book.ratings);
                         }
 
                         book.rating = bookRating;
