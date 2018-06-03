@@ -6,7 +6,7 @@ module.exports = class GenresData {
         return new Promise((resolve, reject) => {
             let newGenre = new Genre();
             newGenre.name = genre.name;
-            
+
             newGenre.save((err, createdGenre) => {
                 if (err) {
                     return reject(err);
@@ -19,33 +19,33 @@ module.exports = class GenresData {
 
     getBooksByGenres(genres) {
         return new Promise((resolve, reject) => {
-            let books = [];
-            const genresCount = genres.length;
-            for (let i = 0; i < genresCount; i++) {
-                const genreId = genres[i];
-                Genre.findById(genreId)
-                    .populate({
-                        path: 'books',
-                        populate: {
-                            path: 'author',
-                            select: 'first_name last_name'
-                        }
-                    })
-                    .select('books')
-                    .limit(4)
-                    .exec((err, foundBooks) => {
-                        if (err) {
-                            return reject(err);
-                        } else {
-                            books = [...books, ...foundBooks.books];
+            Genre.find({ '_id': { $in: genres } })
+                .populate({
+                    path: 'books',
+                    populate: {
+                        path: 'author',
+                        select: 'first_name last_name'
+                    }
+                })
+                .select('books')
+                .limit(4)
+                .exec((err, foundCollection) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        let books = [];
+                        foundCollection.forEach(booksInCollection => {
+                            booksInCollection.books.forEach(book => {
+                                if (!book.isDeleted) {
+                                    books.push(book);
+                                }
+                            });
+                        });
 
-                            if (i === genresCount - 1) {
-                                const randomBooks = getRandomRecommendedBooks(books);
-                                return resolve(randomBooks);
-                            }
-                        }
-                    });
-            }
+                        const randomBooks = getRandomRecommendedBooks(books);
+                        return resolve(randomBooks);
+                    }
+                });
         });
     }
 
