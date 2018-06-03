@@ -89,6 +89,22 @@ module.exports = class GenresData {
             });
         });
     }
+
+    addBookToGenreCollection(bookId, genreId) {
+        return new Promise((resolve, reject) => {
+            Genre.findOneAndUpdate({ '_id': genreId }, {
+                $push: {
+                    books: bookId
+                }
+            }, { new: true }, (err, genre) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(genre);
+                }
+            });
+        });
+    }
 }
 
 function getRandomRecommendedBooks(books) {

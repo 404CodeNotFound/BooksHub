@@ -229,6 +229,13 @@ module.exports = (data) => {
                             return createdBook;
                         })
                         .then(createdBook => {
+                            createdBook.genres.forEach(genre => {
+                                data.genres.addBookToGenreCollection(createdBook._id, genre);
+                            });
+                            
+                            return createdBook;
+                        })
+                        .then(createdBook => {
                             res.status(201)
                                 .json({ book: createdBook });
                         })
