@@ -57,7 +57,7 @@ class InvitationsList extends Component {
                         />
                     </div>]
                     :
-                    <div key="no-items" className="no-items">You have no invitations.</div>
+                    <div key="no-items" className="no-elements">You have no invitations.</div>
             ]
         );
     }

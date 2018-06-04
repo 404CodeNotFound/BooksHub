@@ -193,3 +193,16 @@ img.profile-photo-lg {
 .text-green {
     color: #8dc63f;
 }
+
+#link-to-map {
+    color: #4eb980 !important;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+}
+
+#link-to-map:hover {
+    border: 1px solid #4eb980;
+    text-decoration: none;
+    border-radius: 11%;
+}

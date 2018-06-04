@@ -22,21 +22,22 @@ class SearchPage extends Component {
             searchValue: '',
             showBooksResults: false,
             showEventsResults: false,
-            showUsersResults: false,           
+            showUsersResults: false,
+            arrowImageSrc: "img/arrow-object-dark.svg"          
         };
     }
 
     render() {
         return (
-            <div>
-                <header className="section background-image text-center">
+            [
+                <header className="section background-image text-center" key="header">
                     <div className="search-panel" id="banner">
                         <div className="container col-md-6 col-md-offset-2 col-sm-12" id="search-form">
                             <div className="row search-input-options">
                                 <div className="search-form">
                                     <div className="row">
                                         <div className="search-input">
-                                            <input type="text" className="input" id="search-input-field" value={this.state.searchValue} onChange={this.handleSearchChange} onKeyPress={this.handleKeyPress} />
+                                            <input type="text" className="input" id="search-input-field" value={this.state.searchValue} onChange={this.handleSearchChange} onKeyPress={this.handleKeyPress} placeholder="Search" />
                                         </div>
                                         <div className="search-submit" onClick={this.handleSearch}>
                                             <i className="fa fa-search" id="btn-search"></i>
@@ -47,38 +48,37 @@ class SearchPage extends Component {
                                     <label className="btn">
                                         <input type="radio" name="searchItem" value="Books" id='books-category' onChange={this.handleSearchItemChange} checked={this.state.searchItem === searchItems.BOOKS} />
                                         <span className="icon">
-                                            <i className="fa fa-book"></i>
+                                            <i className={"fa fa-book" + (this.state.searchItem === searchItems.BOOKS ? ' selected' : '')}></i>
                                         </span>
                                         <span>
-                                            <small>BOOKS</small>
+                                            <small className={this.state.searchItem === searchItems.BOOKS ? 'selected' : ''}>BOOKS</small>
                                         </span>
                                     </label>
                                     <label className="btn">
                                         <input type="radio" name="searchItem" value="Events" id='events-category' onChange={this.handleSearchItemChange} checked={this.state.searchItem === searchItems.EVENTS} />
                                         <span className="icon">
-                                            <i className="fa fa-calendar"></i>
+                                            <i className={"fa fa-calendar" + (this.state.searchItem === searchItems.EVENTS ? ' selected' : '')}></i>
                                         </span>
                                         <span>
-                                            <small>EVENTS</small>
+                                            <small className={this.state.searchItem === searchItems.EVENTS ? 'selected' : ''}>EVENTS</small>
                                         </span>
                                     </label>
                                     <label className="btn">
                                         <input type="radio" name="searchItem" value="Users" id='users-category' onChange={this.handleSearchItemChange} checked={this.state.searchItem === searchItems.USERS} />
                                         <span className="icon">
-                                            <i className="fa fa-users"></i>
+                                            <i className={"fa fa-users" + (this.state.searchItem === searchItems.USERS ? ' selected' : '')}></i>
                                         </span>
                                         <span>
-                                            <small>USERS</small>
+                                            <small className={this.state.searchItem === searchItems.USERS ? 'selected' : ''}>USERS</small>
                                         </span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
-                </header>
-
-                <section className="full-width background-white text-center" id="results">
+                    <img className="arrow-object" src={this.state.arrowImageSrc} alt="" />
+                </header>,
+                <section className="full-width background-white text-center" id="results" key="results">
                     <div className="margin2x">
                         {this.state.showBooksResults &&
                             <BooksResultPage books={this.props.books} searchValue={this.state.searchValue} search={this.props.searchBook} />
@@ -93,7 +93,7 @@ class SearchPage extends Component {
                         }
                     </div>
                 </section>
-            </div>
+            ]
         )
     }
 
@@ -104,6 +104,8 @@ class SearchPage extends Component {
             showEventsResults: false,
             showUsersResults: false,
         });
+
+        this.setState({arrowImageSrc: "img/arrow-object-dark.svg"});        
     }
 
     handleSearchChange = (event) => {
@@ -138,6 +140,8 @@ class SearchPage extends Component {
 
             this.props.searchUser(this.state.searchValue);
         }
+
+        this.setState({arrowImageSrc: "img/arrow-object-white.svg"});
     }
 }
 

@@ -60,11 +60,13 @@ class EventDetailsPage extends Component {
                                         </dt>
             
                                         <dd>
-                                            <i className="fa fa-calendar" aria-hidden="true"></i>
-                                            {this.props.event.start_date ? this.props.event.start_date.split('T')[0] : "-"} <br />
-
-                                            <i className="fa fa-clock-o" aria-hidden="true"></i>
-                                            {this.props.event.start_date ? this.props.event.start_date.split('T')[1].split(":")[0] + ":" + this.props.event.start_date.split('T')[1].split(":")[1] : ""}
+                                            <span>
+                                                <i className="fa fa-calendar" aria-hidden="true"></i> {this.props.event.start_date ? this.props.event.start_date.split('T')[0] : "-"}
+                                            </span>
+                                            <br />
+                                            <span>
+                                                <i className="fa fa-clock-o" aria-hidden="true"></i> {this.props.event.start_date ? this.props.event.start_date.split('T')[1].split(":")[0] + ":" + this.props.event.start_date.split('T')[1].split(":")[1] : ""}
+                                            </span>
                                         </dd>
             
                                         <dt>
@@ -72,11 +74,13 @@ class EventDetailsPage extends Component {
                                         </dt>
             
                                         <dd>
-                                            <i className="fa fa-calendar" aria-hidden="true"></i>
-                                            {this.props.event.end_date ? this.props.event.end_date.split('T')[0] : "-"} <br />
-
-                                            <i className="fa fa-clock-o" aria-hidden="true"></i>
-                                            {this.props.event.end_date ? this.props.event.end_date.split('T')[1].split(":")[0] + ":" + this.props.event.end_date.split('T')[1].split(":")[1] : ""}
+                                        <span>
+                                            <i className="fa fa-calendar" aria-hidden="true"></i> {this.props.event.end_date ? this.props.event.end_date.split('T')[0] : "-"}
+                                        </span>
+                                        <br />
+                                        <span>
+                                            <i className="fa fa-clock-o" aria-hidden="true"></i> {this.props.event.end_date ? this.props.event.end_date.split('T')[1].split(":")[0] + ":" + this.props.event.end_date.split('T')[1].split(":")[1] : ""}
+                                        </span>
                                         </dd>
             
                                         <dt>
@@ -94,10 +98,7 @@ class EventDetailsPage extends Component {
                                         <dd>
                                             {this.props.event.place ?
                                             <div>
-                                                {this.props.event.place}
-                                                <div>
-                                                    <button className="btn btn-main-sm" onClick={event => this.handleScrollToElement(event, "address")}>See on map</button>
-                                                </div>
+                                                {this.props.event.place} <button id="link-to-map" onClick={event => this.handleScrollToElement(event, "address")}><i className="fa fa-map-marker"></i> See on map</button>
                                             </div>
                                             : 
                                             "-"
@@ -165,7 +166,7 @@ class EventDetailsPage extends Component {
                             <section className="row map" id="address">
                                 <div className="col-md-9 md-offset-4">
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.2445257412037!2d-83.38776768490345!3d33.960553980630905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f66d243f82a089%3A0x341662aad6b920ee!2sAvid+Bookshop+on+Prince+Ave.!5e0!3m2!1sbg!2sbg!4v1521896710502"
-                                        width="100%" frameBorder="0" style={{border:0}} allowFullScreen>
+                                        width="100%" frameBorder="0" style={{border:0}} allowFullScreen title="map">
                                     </iframe>
                                 </div>
                                 <div className="col-md-3">

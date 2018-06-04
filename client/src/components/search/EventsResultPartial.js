@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as genresActions from '../../actions/genres.actions';
 
 class EventsResultPartial extends Component {
@@ -12,7 +12,7 @@ class EventsResultPartial extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllGenres();        
+        this.props.getAllGenres();
     }
 
     render() {
@@ -24,7 +24,7 @@ class EventsResultPartial extends Component {
                             <div className="row">
                                 <h4>Filter by Genre:</h4>
                             </div>
-                            {this.props.genres.map(genre => 
+                            {this.props.genres.map(genre =>
                                 <div key={genre._id} className="row checkbox checkbox-success">
                                     <input id={genre.name} type="checkbox" name="genre" value={genre.name} onChange={this.handleFilterChange} />
                                     <label htmlFor={genre.name}>
@@ -35,27 +35,29 @@ class EventsResultPartial extends Component {
                         </div>
                     </div>
                     <div className="col-md-8">
-                        <h3>Found Events</h3>
                         <div className="row">
-                            {this.props.events.map(event =>
-                            <div key={event._id} className="card col-lg-3">
-                                <Link to={"/events/" + event._id}>
-                                    <img height="100px" className="card-img-top img-thumbnail" src={event.photo} alt="" />
-                                </Link>
-                                <div className="card-block">
-                                    <h4 className="card-title">
-                                        <Link to={"/events/" + event._id}>{event.title}</Link>
-                                    </h4>
-                                    <p className="card-text">
-                                        <i className="fa fa-calendar"></i> {event.start_date ? event.start_date.split('T')[0] : ''}
-                                    </p>
-                                    <p className="card-text">
-                                        <small className="text-muted">
-                                            <i className="fa fa-map-marker"></i> {event.place}, {event.city}</small>
-                                    </p>
-                                </div>
-                            </div>
-                            )}
+                            {this.props.events.length > 0 ?
+                                this.props.events.map(event =>
+                                    <div key={event._id} className="card col-lg-3">
+                                        <Link to={"/events/" + event._id}>
+                                            <img height="100px" className="card-img-top img-thumbnail" src={event.photo} alt="" />
+                                        </Link>
+                                        <div className="card-block">
+                                            <h4 className="card-title">
+                                                <Link to={"/events/" + event._id}>{event.title}</Link>
+                                            </h4>
+                                            <p className="card-text">
+                                                <i className="fa fa-calendar"></i> {event.start_date ? event.start_date.split('T')[0] : ''}
+                                            </p>
+                                            <p className="card-text">
+                                                <small className="text-muted">
+                                                    <i className="fa fa-map-marker"></i> {event.place}, {event.city}</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                ) :
+                                <p>No events were found.</p>
+                            }
                         </div>
                         {/* <div className="row">
                             <div className="col-md-offset-5 pages total center">
@@ -94,7 +96,7 @@ class EventsResultPartial extends Component {
         }
 
         if (this.props.searchValue) {
-            console.log(this.state.filters);            
+            console.log(this.state.filters);
             this.props.search(this.props.searchValue, this.state.filters);
         }
     }
@@ -102,7 +104,7 @@ class EventsResultPartial extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        genres: state.administration.genres,        
+        genres: state.administration.genres,
     };
 }
 

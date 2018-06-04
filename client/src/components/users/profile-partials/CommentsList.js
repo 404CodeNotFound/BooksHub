@@ -24,29 +24,28 @@ class CommentsList extends Component {
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 this.props.comments.length > 0 ?
-                <div key="list" className="margin2x">
-                    {this.props.comments.map(comment =>
-                        <div key={comment._id} className="row review">
-                            <div className="col-xs-12 col-md-12">
-                                <div className="mbr-testimonial card">
-                                    <div className="card-block">
-                                        {this.props.isMyProfile &&
-                                            <button className="btn-xs delete-review" onClick={(event) => this.props.deleteComment(this.props.userId, comment._id)}>
-                                                <i className="fa fa-trash-o"></i>
-                                            </button>
-                                        }
-                                        <p>{comment.content}</p>
-                                        <p style={postedOnStyle}>Posted on {comment.posted_on.split('T')[0]}</p>
-                                    </div>
-                                    <div className="for-book">
-                                        for
+                    <div key="list" className="margin2x">
+                        {this.props.comments.map(comment =>
+                            <div key={comment._id} className="row review">
+                                <div className="col-xs-12 col-md-12">
+                                    <div className="mbr-testimonial card">
+                                        <div className="card-block">
+                                            {this.props.isMyProfile &&
+                                                <button className="btn-xs delete-review" onClick={(event) => this.props.deleteComment(this.props.userId, comment._id)}>
+                                                    <i className="fa fa-trash-o"></i>
+                                                </button>
+                                            }
+                                            <p>{comment.content}</p>
+                                            <p style={postedOnStyle}>Posted on {comment.posted_on.split('T')[0]}</p>
+                                        </div>
+                                        <div className="for-book">
+                                            for
                                             <Link to={"/events/" + comment.event._id}> {comment.event.title}</Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                    {this.props.comments.length > 0 &&
+                        )}
                         <div key="pages" className="row">
                             <Pagination
                                 activePage={this.state.activePage}
@@ -56,9 +55,9 @@ class CommentsList extends Component {
                                 onChange={this.selectPage}
                             />
                         </div>
-                    }
+                        }
                 </div> :
-                <div key="no-items" className="no-items">You have no comments yet.</div>
+                    <div key="no-elements" className="no-elements">You have no comments yet.</div>
             ]
         );
     }

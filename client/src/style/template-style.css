@@ -726,6 +726,12 @@ nav.fixed .left-menu, nav.fixed .right-menu {
     color: #4eb980 !important;
 }
 
+.no-elements {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 @media screen and (max-width:768px) {
     header.header-absolute {
         background: #fff none repeat scroll 0 0;

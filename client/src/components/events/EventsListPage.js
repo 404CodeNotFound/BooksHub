@@ -43,8 +43,7 @@ class EventsListPage extends Component {
                             <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
                                 <i className="fa fa-plus"></i> Create new event
                             </button>
-                            }
-                            There is no events.
+                            } There is no events.
                         </div> :
                         <div className="line">
                             {this.props.currentUser.id &&

@@ -277,6 +277,10 @@ dd {
     color: lightskyblue;
 }
 
+.new-event-row {
+    padding-bottom: 2%;
+}
+
 @media only screen and (max-width: 768px) {
     #currently-reading-books, #read-books, #want-to-read-books, #my-events, #joined-events, #reviews, #comments, #invitations {
         padding-left: 10%;

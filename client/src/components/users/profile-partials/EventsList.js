@@ -28,45 +28,50 @@ class EventsList extends Component {
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 this.props.title === "Events Collection" && (this.props.userId === this.props.currentUser.id) &&
-                <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
-                    <i className="fa fa-plus"></i> New
-                </button>,
+                <div className="row new-event-row">
+                    <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
+                        <i className="fa fa-plus"></i> New
+                </button>
+                </div>,
                 <div key="events-list" className="margin2x">
                     <div className="row">
-                        {this.props.events.map(event =>
-                            <div key={event._id} className="col-md-3 margin-bottom-60">
-                                <div className="float-left">
-                                    {event.creator._id === this.props.currentUser.id && (this.props.userId === this.props.currentUser.id) ?
-                                    <div className="event-cover">
-                                        <img src={event.photo} height="200px" alt="event" />
+                        {this.props.events.length > 0 ?
+                            this.props.events.map(event =>
+                                <div key={event._id} className="col-md-3 margin-bottom-60">
+                                    <div className="float-left">
+                                        {event.creator._id === this.props.currentUser.id && (this.props.userId === this.props.currentUser.id) ?
+                                            <div className="event-cover">
+                                                <img src={event.photo} height="200px" alt="event" />
+                                                <div>
+                                                    <i className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => this.props.deleteEvent(event._id, false)}></i>
+                                                    <i className="fa fa-pencil fa-2x" aria-hidden="true" onClick={() => this.props.openEditEventModal(event)}></i>
+                                                </div>
+                                            </div>
+                                            :
+                                            <div>
+                                                <img src={event.photo} height="200px" alt="event" />
+                                            </div>
+                                        }
+
                                         <div>
-                                            <i className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => this.props.deleteEvent(event._id, false)}></i>
-                                            <i className="fa fa-pencil fa-2x" aria-hidden="true" onClick={() => this.props.openEditEventModal(event)}></i>
+                                            <Link to={"/events/" + event._id}>
+                                                <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{event.title}</h3>
+                                            </Link>
+                                            <h5>
+                                                <small>by
+                                                <Link to={"/users/" + event.creator.username}> {event.creator.username}</Link>
+                                                </small>
+                                            </h5>
+                                        </div>
+                                        <div>
+                                            {event.details.substr(0, 50)}...
+                                        <Link className="text-more-info text-primary" to={"/events/" + event._id}>Read more</Link>
                                         </div>
                                     </div>
-                                    :
-                                    <div>
-                                        <img src={event.photo} height="200px" alt="event" />
-                                    </div>
-                                    }
-                                    
-                                    <div>
-                                        <Link to={"/events/" + event._id}>
-                                        <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{event.title}</h3>
-                                        </Link>
-                                        <h5>
-                                            <small>by
-                                                <Link to={"/users/" + event.creator.username}> {event.creator.username}</Link>
-                                            </small>
-                                        </h5>
-                                    </div>
-                                    <div>
-                                        {event.details.substr(0, 50)}...                                        
-                                        <Link className="text-more-info text-primary" to={"/events/" + event._id}>Read more</Link>
-                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            ) :
+                            <span key="no-elements" className="no-elements">You have no events yet.</span>
+                        }
                         {this.props.isVisibleEditEventModal &&
                             <EditEventModal />
                         }
@@ -85,7 +90,7 @@ class EventsList extends Component {
                 </div>,
                 <div key="add-event-modal">
                     {this.props.isVisibleAddEventModal &&
-                    <AddEventModal page={constants.USER_PROFILE_PAGE} />
+                        <AddEventModal page={constants.USER_PROFILE_PAGE} />
                     }
                 </div>
             ]
@@ -110,7 +115,7 @@ function mapStateToProps(state, ownProps) {
         eventsCount: state.users.eventsCount,
         currentUser: { id: userId },
         isVisibleAddEventModal: state.modals.showAddEventModal,
-        isVisibleEditEventModal: state.modals.showEditEventModal,        
+        isVisibleEditEventModal: state.modals.showEditEventModal,
     };
 }
 
@@ -118,7 +123,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getUserEvents: (id, page) => dispatch(eventsActions.getUserEvents(id, page)),
         getJoinedEvents: (id, page) => dispatch(eventsActions.getJoinedEvents(id, page)),
-        deleteEvent: (id, isAdminPage) => dispatch(eventsActions.deleteEvent(id, isAdminPage)),        
+        deleteEvent: (id, isAdminPage) => dispatch(eventsActions.deleteEvent(id, isAdminPage)),
         openAddEventModal: () => dispatch(modalsActions.openAddEventModal()),
         openEditEventModal: (event) => dispatch(modalsActions.openEditEventModal(event)),
     };

@@ -12,7 +12,8 @@ class BookReviewsListPage extends Component {
                         Reviews</h2>
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>
-                {this.props.book.reviews.map(review =>
+                {this.props.book.reviews.length > 0 ?
+                this.props.book.reviews.map(review =>
                     <span key={review._id}>
                         <div key={review._id} className="review row">
                             <div className="col-md-2 col-xs-2">
@@ -33,7 +34,9 @@ class BookReviewsListPage extends Component {
                         </div>
                         <hr key={"line " + review._id} />
                     </span>
-                )}
+                ) : 
+                <div className="no-elements">There are no reviews for this book yet.</div>
+            }
 
             </section>
         )

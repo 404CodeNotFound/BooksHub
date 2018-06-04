@@ -13,27 +13,30 @@ class EventCommentsList extends Component {
                     </h2>
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>
-                {this.props.event.comments.map(comment =>
-                    <div key={comment._id} className="row">
-                        <div className="col-md-10 offset-md-1">
-                            <div className="mbr-testimonial card">
-                                <div className="card-block">
-                                    <p className="comment">{comment.content}</p>
-                                    <p className="date-posted">Posted on {comment.posted_on.split('T')[0]}</p>
-                                </div>
-                                <div className="mbr-author card-footer">
-                                    <div className="mbr-author-name">
-                                        by
+                {this.props.event.comments.length > 0 ?
+                    this.props.event.comments.map(comment =>
+                        <div key={comment._id} className="row">
+                            <div className="col-md-10 offset-md-1">
+                                <div className="mbr-testimonial card">
+                                    <div className="card-block">
+                                        <p className="comment">{comment.content}</p>
+                                        <p className="date-posted">Posted on {comment.posted_on.split('T')[0]}</p>
+                                    </div>
+                                    <div className="mbr-author card-footer">
+                                        <div className="mbr-author-name">
+                                            by
                                         <Link to={"/users/" + comment.user.username} className="green-link">
-                                            <img src={comment.user.photo} id="review-user-img" alt="" className="img-circle" width="2%" />
-                                        </Link>
-                                        <Link to={"/users/" + comment.user.username}>{comment.user.username}</Link>
+                                                <img src={comment.user.photo} id="review-user-img" alt="" className="img-circle" width="2%" />
+                                            </Link>
+                                            <Link to={"/users/" + comment.user.username}>{comment.user.username}</Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    ) :
+                    <div className="no-elements">There are no comments for this event yet.</div>
+                }
             </section>
         )
     }

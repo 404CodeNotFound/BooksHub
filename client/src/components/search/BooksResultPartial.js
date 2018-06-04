@@ -31,7 +31,7 @@ class BooksResultPartial extends Component {
                             {this.props.genres.map(genre => 
                                 <div key={genre._id} className="row checkbox checkbox-success">
                                     <input id={genre.name} type="checkbox" name="genre" value={genre.name} onChange={this.handleFilterChange} />
-                                    <label htmlFor={genre.name}>
+                                    <label htmlFor={genre.name} className="genre-label">
                                         {genre.name}
                                     </label>
                                 </div>
@@ -41,19 +41,19 @@ class BooksResultPartial extends Component {
                             <div className="row">
                                 <h4>Search by:</h4>
                             </div>
-                            <div className="row">
+                            <div className={"row radio" + (this.state.searchType === constants.SEARCH_BOOK_BY_TITLE ? ' radio-selected': '')}>
                                 <input id="title" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_TITLE} onChange={this.handleSearchByChange} />
                                 <label htmlFor="title">
                                     Title
                                 </label>
                             </div>
-                            <div className="row">
+                            <div className={"row radio" + (this.state.searchType === constants.SEARCH_BOOK_BY_AUTHOR ? ' radio-selected': '')}>
                                 <input id="author" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_AUTHOR} onChange={this.handleSearchByChange} />
                                 <label htmlFor="author">
                                     Author
                                 </label>
                             </div>
-                            <div className="row">
+                            <div className={"row radio" + (this.state.searchType === constants.SEARCH_BOOK_BY_SUMMARY ? ' radio-selected': '')}>
                                 <input id="summary" type="radio" name="search-by" value={constants.SEARCH_BOOK_BY_SUMMARY} onChange={this.handleSearchByChange} />
                                 <label htmlFor="summary">
                                     Summary
@@ -71,7 +71,8 @@ class BooksResultPartial extends Component {
 
                     <div className="col-md-8">
                         <div className="row">
-                            {this.props.books.map(book =>
+                        {this.props.books.length > 0 ?
+                            this.props.books.map(book =>
                                 <div key={book._id} className="card col-md-3">
                                     <Link to={"/books/" + book._id}>
                                         <img width="100px" className="card-img-top" src={book.photo} alt={book.title} />
@@ -81,14 +82,16 @@ class BooksResultPartial extends Component {
                                             <Link to={"/books/" + book._id}>{book.title}</Link>
                                         </h5>
                                         <p className="card-text">by
-                                            <Link to={"/authors/" + book.author._id}>{book.author.first_name} {book.author.last_name}</Link>
+                                            <Link to={"/authors/" + book.author._id}> {book.author.first_name} {book.author.last_name}</Link>
                                         </p>
                                         <p className="card-text">
                                             <small className="text-muted">Published on {book.date_published.split('T')[0]}</small>
                                         </p>
                                     </div>
                                 </div>
-                            )}
+                            ) :
+                            <p>No books were found.</p>
+                        }
                                                         
                         </div>
                         {/* <div className="row">

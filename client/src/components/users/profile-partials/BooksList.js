@@ -29,20 +29,23 @@ class BooksList extends Component {
                 </div>,
                 <div key="books-list" className="margin2x">
                     <div className="row">
-                        {this.props.books.map(book =>
-                            <div key={book._id} className="col-md-3 margin-bottom-60">
-                                <div className="float-left">
-                                    <img src={book.photo} width="200px" alt="book-logo" className="margin-bottom-20" />
-                                    <div>
-                                        <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{book.title}</h3>
-                                    </div>
-                                    <p>
-                                        {book.summary.substr(0, 70)}...
+                        {this.props.books.length > 0 ?
+                            this.props.books.map(book =>
+                                <div key={book._id} className="col-md-3 margin-bottom-60">
+                                    <div className="float-left">
+                                        <img src={book.photo} width="200px" alt="book-logo" className="margin-bottom-20" />
+                                        <div>
+                                            <h3 className="text-strong text-size-20 text-line-height-1 margin-bottom-20">{book.title}</h3>
+                                        </div>
+                                        <p>
+                                            {book.summary.substr(0, 70)}...
                                         <Link className="text-more-info text-primary" to={"/books/" + book._id}>Read more</Link>
-                                    </p>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            ) :
+                            <span className="no-elements">There are no marked books in this category yet.</span>
+                        }
                     </div>,
                     {this.props.books.length > 0 &&
                         <div key="pages" className="row">

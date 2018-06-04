@@ -43,7 +43,7 @@ class FriendsList extends Component {
                             />
                         </div>]
                         :
-                        <div key="no-items" className="no-items">You have no friends yet.</div>
+                        <span key="no-items" className="no-elements">You have no friends yet.</span>
                     }
                 </div>
             ]

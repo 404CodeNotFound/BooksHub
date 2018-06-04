@@ -58,7 +58,7 @@ class ReviewsList extends Component {
                             </div>
                         }
                     </div> :
-                    <div key="no-items" className="no-items">You have no reviews yet.</div>
+                    <div key="no-items" className="no-elements">You have no reviews yet.</div>
             ]
         );
     }
