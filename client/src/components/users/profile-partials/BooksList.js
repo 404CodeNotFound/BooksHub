@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         getCurrentlyReadingBooks: (id, page) => dispatch(booksActions.getCurrentlyReadingBooks(id, page)),
         getWantToReadBooks: (id, page) => dispatch(booksActions.getWantToReadBooks(id, page)),
         getReadBooks: (id, page) => dispatch(booksActions.getReadBooks(id, page)),
-        getRecommendedBooks: (id, page) => dispatch(booksActions.getRecommendedBooks(id, page))
+        getRecommendedBooks: (id, page) => dispatch(booksActions.getRecommendedBooksByFriends(id, page))
     };
 }
 

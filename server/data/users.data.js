@@ -186,7 +186,7 @@ module.exports = class UserData {
     getAllUserFriends(id) {
         return new Promise((resolve, reject) => {
             User.findById(id)
-                .populate({ path: 'friends', match: { isDeleted: false, role: 'User' }, select: 'username photo' })
+                .populate({ path: 'friends', match: { isDeleted: false }, select: 'username photo' })
                 .exec((err, user) => {
                     if (err) {
                         return reject(err);

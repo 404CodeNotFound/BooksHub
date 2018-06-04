@@ -1,6 +1,10 @@
 .icon .fa {
-    font-size: 14pt !important;
+    font-size: 14pt !important;    
     cursor: pointer;
+}
+
+.btn .span {
+    color: #4eb980 !important;
 }
 
 .input {
