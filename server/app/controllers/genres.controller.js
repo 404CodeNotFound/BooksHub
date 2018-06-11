@@ -30,10 +30,18 @@ module.exports = (data) => {
                 } else {
                     const genre = req.body;
 
-                    data.genres.createGenre(genre)
-                        .then(createdGenre => {
-                            res.status(201)
-                                .json({ genre: createdGenre });
+                    data.genres.getGenreByName(genre.name)
+                        .then(genreName => {
+                            if (genreName) {
+                                res.status(400)
+                                    .json({ message: 'Genre with that name already exists.' });
+                            } else {
+                                data.genres.createGenre(genre)
+                                    .then(createdGenre => {
+                                        res.status(201)
+                                            .json({ genre: createdGenre });
+                                    });
+                            }
                         })
                         .catch(error => {
                             res.status(500)

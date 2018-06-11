@@ -42,6 +42,19 @@ module.exports = class GenresData {
         });
     }
 
+    getGenreByName(name) {
+        return new Promise((resolve, reject) => {
+            return Genre.findOne({ name: name, isDeleted: false }, 'name')
+                .exec((err, genre) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(genre);
+                    }
+                });     
+        });
+    }
+
     deleteGenre(id) {
         return new Promise((resolve, reject) => {
             Genre.findOneAndUpdate({ '_id': id }, {
