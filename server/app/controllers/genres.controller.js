@@ -1,3 +1,5 @@
+const errors = require('../../utils/error.constants');
+
 module.exports = (data) => {
     return {
         getAllGenres: (req, res) => {
@@ -34,7 +36,7 @@ module.exports = (data) => {
                         .then(genreName => {
                             if (genreName) {
                                 res.status(400)
-                                    .json({ message: 'Genre with that name already exists.' });
+                                    .json({ message: errors.GENRE_CONFLICT });
                             } else {
                                 data.genres.createGenre(genre)
                                     .then(createdGenre => {

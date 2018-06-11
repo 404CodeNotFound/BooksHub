@@ -39,8 +39,6 @@ class EditUserModal extends Component {
     }
 
     render() {
-        console.log(this.props.user);
-
         return (
             <Modal visible={true} onClickBackdrop={this.props.closeEditUserModal}>
                 <form onSubmit={this.handleSubmit}>
