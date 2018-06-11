@@ -82,6 +82,7 @@ export function closeRecommendBookModal() {
 
 export function openAddAuthorModal() {
     return function (dispatch) {
+        dispatch(errorsActions.removeAllValidationErrors());        
         dispatch(openAddAuthorModalSuccess());
     };
 }
@@ -142,12 +143,14 @@ export function openEditUserModal(user) {
 
 export function openEditAuthorModal(author) {
     return function (dispatch) {
+        dispatch(errorsActions.removeAllValidationErrors());        
         dispatch(openEditAuthorModalSuccess(author));
     }
 }
 
 export function openAddGenreModal() {
     return function (dispatch) {
+        dispatch(errorsActions.removeAllValidationErrors());        
         dispatch(openAddGenreModalSuccess());
     };
 }

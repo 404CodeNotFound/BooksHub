@@ -48,19 +48,28 @@ module.exports = (data) => {
         addAuthor: (req, res) => {
             if (req.user.role !== 'Admin') {
                 res.status(403)
-                    .json({ message: "Only Administrators can add new books." });
+                    .json({ message: "Only Administrators can add new authors." });
             } else {
                 const author = req.body;
 
-                data.authors.createAuthor(author)
-                    .then(createdAuthor => {
-                        res.status(201)
-                            .json({ author: createdAuthor });
-                    })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
-                    });
+                req.checkBody('firstname', 'First name is required.').notEmpty();
+                req.checkBody('lastname', 'Last name is required.').notEmpty();
+
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    res.status(400)
+                        .json(errors);
+                } else {
+                    data.authors.createAuthor(author)
+                        .then(createdAuthor => {
+                            res.status(201)
+                                .json({ author: createdAuthor });
+                        })
+                        .catch(error => {
+                            generateErrorResponse(res, error.message);
+                        });
+                }
             }
 
             return res;
@@ -72,26 +81,36 @@ module.exports = (data) => {
                     .json({ message: "Only Administrators can update books." });
             }
 
-            const authorId = req.params.id;
-            const author = req.body;
+            req.checkBody('firstname', 'First name is required.').notEmpty();
+            req.checkBody('lastname', 'Last name is required.').notEmpty();
 
-            data.authors.getAuthorById(authorId)
-                .then(existingAuthor => {
-                    if (!existingAuthor) {
-                        return res.status(404)
-                            .json({ message: "Author with that id has not been found." });
-                    }
+            const errors = req.validationErrors();            
 
-                    data.authors.updateAuthor(authorId, author)
-                        .then(updatedAuthor => {
-                            return res.status(201)
-                                .json({ author: updatedAuthor });
-                        })
-                })
-                .catch(error => {
-                    return res.status(500)
-                        .json({ message: 'Something went wrong!' });
-                });
+            if (errors) {
+                res.status(400)
+                    .json(errors);
+            } else {
+                const authorId = req.params.id;
+                const author = req.body;
+
+                data.authors.getAuthorById(authorId)
+                    .then(existingAuthor => {
+                        if (!existingAuthor) {
+                            return res.status(404)
+                                .json({ message: "Author with that id has not been found." });
+                        }
+
+                        data.authors.updateAuthor(authorId, author)
+                            .then(updatedAuthor => {
+                                return res.status(201)
+                                    .json({ author: updatedAuthor });
+                            })
+                    })
+                    .catch(error => {
+                        return res.status(500)
+                            .json({ message: 'Something went wrong!' });
+                    });
+            }
 
             return res;
         },

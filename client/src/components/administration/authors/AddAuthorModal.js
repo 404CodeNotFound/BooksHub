@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap4-modal';
 import DatePicker from 'react-date-picker';
 import * as authorsActions from '../../../actions/authors.actions';
 import * as modalsActions from '../../../actions/modals.actions';
+import * as errorsActions from '../../../actions/error.actions';
 
 class AddAuthorModal extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class AddAuthorModal extends Component {
 
     render () {
         return (
-            <Modal visible={true} dialogClassName="modal-lg">
+            <Modal visible={true} onClickBackdrop={this.props.closeAddAuthorModal} dialogClassName="modal-lg">
                 <div className="modal-header">
                     <h5 className="modal-title">Add new author</h5>
                 </div>
@@ -30,6 +31,9 @@ class AddAuthorModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="firstname">Firstname</label>
                         <div className="col-md-8">
                             <input className="form-control" id="firstname" name="firstname" type="text" onChange={this.handleFirstnameChange} />
+                            {this.props.firstnameError &&
+                                <div className="error">{this.props.firstnameError.msg}</div>
+                            }
                         </div>
                     </div>
 
@@ -37,6 +41,9 @@ class AddAuthorModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="lastname">Lastname</label>
                         <div className="col-md-8">
                             <input className="form-control" id="lastname" name="lastname" type="text" onChange={this.handleLastnameChange} />
+                            {this.props.lastnameError &&
+                                <div className="error">{this.props.lastnameError.msg}</div>
+                            }
                         </div>
                     </div>
                     
@@ -88,10 +95,18 @@ class AddAuthorModal extends Component {
     }
 
     handleFirstnameChange = (event) => {
+        if (this.props.firstnameError) {
+            this.props.removeValidationError('firstname');
+        }
+
         this.setState({ firstname: event.target.value });
     }
 
     handleLastnameChange = (event) => {
+        if (this.props.lastnameError) {
+            this.props.removeValidationError('lastname');
+        }
+
         this.setState({ lastname: event.target.value });
     }
 
@@ -131,11 +146,22 @@ class AddAuthorModal extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapStateToProps(state, ownProps) {
+    const firstnameError = state.errors.validationErrors.find(error => error.param === 'firstname');
+    const lastnameError = state.errors.validationErrors.find(error => error.param === 'lastname');
+
     return {
-        addAuthor: (author) => dispatch(authorsActions.addAuthor(author)),
-        closeAddAuthorModal: () => dispatch(modalsActions.closeAddAuthorModal())
+        firstnameError: firstnameError,
+        lastnameError: lastnameError,        
     };
 }
 
-export default connect(null, mapDispatchToProps)(AddAuthorModal);
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        addAuthor: (author) => dispatch(authorsActions.addAuthor(author)),
+        closeAddAuthorModal: () => dispatch(modalsActions.closeAddAuthorModal()),
+        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddAuthorModal);

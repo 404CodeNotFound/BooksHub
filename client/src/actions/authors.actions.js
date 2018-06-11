@@ -63,7 +63,11 @@ export function addAuthor(author) {
                 dispatch(successActions.actionSucceeded('The author was published!'));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
             });
     };
 }
@@ -79,7 +83,11 @@ export function updateAuthor(author) {
                 dispatch(successActions.actionSucceeded('The author was updated!'));                
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
             });
     };
 }

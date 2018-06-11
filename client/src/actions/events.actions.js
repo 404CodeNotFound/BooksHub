@@ -2,6 +2,7 @@ import requester from '../requesters/requester';
 import api from '../requesters/api';
 import * as modalsActions from './modals.actions';
 import * as errorActions from './error.actions';
+import * as successActions from './success.actions';
 import * as loadersActions from './loaders.actions';
 import * as constants from '../utils/constants';
 
@@ -152,10 +153,10 @@ export function addEvent(event, page) {
                     dispatch(addEventSuccess(response.event));
                 }
 
-                dispatch(modalsActions.closeAddEventModal());                                
+                dispatch(modalsActions.closeAddEventModal());
+                dispatch(successActions.actionSucceeded('The event was created!'));                                
             })
             .fail(error => {
-                debugger;
                 if (error.responseJSON.hasOwnProperty('message')) {
                     dispatch(errorActions.actionFailed(error.responseJSON.message));
                 } else {
@@ -178,6 +179,7 @@ export function editEvent(event, isAdminPage) {
                 }
 
                 dispatch(modalsActions.closeEditEventModal());
+                dispatch(successActions.actionSucceeded('The event was edited!'));                
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {

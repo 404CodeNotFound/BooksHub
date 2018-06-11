@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-bootstrap4-modal';
 import Select from 'react-select';
-// import Autocomplete from 'react-autocomplete';
 import * as eventsActions from '../../../actions/events.actions';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
