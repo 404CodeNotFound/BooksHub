@@ -78,3 +78,13 @@
 .event-cover .fa-trash {
     margin-right: 20%;
 }
+
+.no-events {
+    font-size: 1.5em;
+    margin: 1.5% 2.6%;
+}
+
+#create-event-btn {
+    margin-left: 2% !important;
+    padding: 1% 2%; 
+}

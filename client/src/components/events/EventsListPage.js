@@ -38,12 +38,16 @@ class EventsListPage extends Component {
                             <BarLoader color="#4eb980" size="11" />
                         </div> :
                         (this.props.events.length <= 0) ? 
-                        <div className="row">
+                        <div>
                             {this.props.currentUser.id &&
                             <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
                                 <i className="fa fa-plus"></i> Create new event
                             </button>
-                            } There is no events.
+                            } 
+                            {this.props.isVisibleAddEventModal &&
+                                <AddEventModal />
+                            }
+                            <div className="no-events"> There is no events. </div>
                         </div> :
                         <div className="line">
                             {this.props.currentUser.id &&
@@ -51,6 +55,7 @@ class EventsListPage extends Component {
                                 <i className="fa fa-plus"></i> Create new event
                             </button>
                             }
+                            
                             {this.props.isVisibleAddEventModal &&
                                 <AddEventModal />
                             }
