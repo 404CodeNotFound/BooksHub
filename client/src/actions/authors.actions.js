@@ -80,7 +80,7 @@ export function updateAuthor(author) {
             .done(response => {
                 dispatch(updateAuthorSuccess(response.author));
                 dispatch(modalsActions.closeEditAuthorModal());
-                dispatch(successActions.actionSucceeded('The author was updated!'));                
+                dispatch(successActions.actionSucceeded('The author was updated!'));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {

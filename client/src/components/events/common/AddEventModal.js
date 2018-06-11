@@ -213,7 +213,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         saveEvent: (event, page) => dispatch(eventsActions.addEvent(event, page)),
         closeAddEventModal: () => dispatch(modalsActions.closeAddEventModal()),
         getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues()),
-        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
+        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param)),
     };
 }
 

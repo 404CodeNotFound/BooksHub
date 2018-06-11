@@ -154,7 +154,7 @@ export function addEvent(event, page) {
                 }
 
                 dispatch(modalsActions.closeAddEventModal());
-                dispatch(successActions.actionSucceeded('The event was created!'));                                
+                dispatch(successActions.actionSucceeded('The event was created!'));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
@@ -179,7 +179,7 @@ export function editEvent(event, isAdminPage) {
                 }
 
                 dispatch(modalsActions.closeEditEventModal());
-                dispatch(successActions.actionSucceeded('The event was edited!'));                
+                dispatch(successActions.actionSucceeded('The event was edited!'));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
@@ -202,6 +202,8 @@ export function deleteEvent(id, isAdminPage) {
                 } else {
                     dispatch(deleteEventSuccess(id));
                 }
+
+                dispatch(successActions.actionSucceeded('The event was deleted!'));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {
@@ -220,6 +222,8 @@ export function joinEvent(eventId, user) {
         return requester.putAuthorized(token, `${api.EVENTS}/${eventId}/join`, user)
             .done(response => {
                 dispatch(joinEventSuccess(response.event));
+                
+                dispatch(successActions.actionSucceeded('You joined this event!'));
             })
             .fail(error => {
                 if (error.responseJSON.hasOwnProperty('message')) {

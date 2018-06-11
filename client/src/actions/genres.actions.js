@@ -61,7 +61,11 @@ export function addGenre(genre) {
                 dispatch(successActions.actionSucceeded('The genre was published!'));
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
             });
     };
 }

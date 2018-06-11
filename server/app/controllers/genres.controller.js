@@ -20,17 +20,26 @@ module.exports = (data) => {
                 res.status(403)
                     .json({ message: "Only Administrators can add new genres." });
             } else {
-                const genre = req.body;
+                req.checkBody('name', 'Name is required.').notEmpty();
 
-                data.genres.createGenre(genre)
-                    .then(createdGenre => {
-                        res.status(201)
-                            .json({ genre: createdGenre });
-                    })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
-                    });
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    return res.status(400)
+                        .json(errors);
+                } else {
+                    const genre = req.body;
+
+                    data.genres.createGenre(genre)
+                        .then(createdGenre => {
+                            res.status(201)
+                                .json({ genre: createdGenre });
+                        })
+                        .catch(error => {
+                            res.status(500)
+                                .json({ message: 'Something went wrong!' });
+                        });
+                }
             }
 
             return res;

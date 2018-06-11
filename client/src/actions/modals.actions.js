@@ -150,7 +150,7 @@ export function openEditAuthorModal(author) {
 
 export function openAddGenreModal() {
     return function (dispatch) {
-        dispatch(errorsActions.removeAllValidationErrors());        
+        dispatch(errorsActions.removeAllValidationErrors());
         dispatch(openAddGenreModalSuccess());
     };
 }

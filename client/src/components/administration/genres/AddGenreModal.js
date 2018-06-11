@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-bootstrap4-modal';
 import * as genresActions from '../../../actions/genres.actions';
 import * as modalsActions from '../../../actions/modals.actions';
+import * as errorsActions from '../../../actions/error.actions';
 
 class AddGenreModal extends Component {
     constructor(props) {
@@ -23,6 +24,9 @@ class AddGenreModal extends Component {
                         <label className="col-md-2 control-label" htmlFor="name">Name</label>
                         <div className="col-md-8">
                             <input className="form-control" id="name" name="name" type="text" onChange={this.handleNameChange} />
+                            {this.props.nameError &&
+                                <div className="error">{this.props.nameError.msg}</div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -39,6 +43,10 @@ class AddGenreModal extends Component {
     }
 
     handleNameChange = (event) => {
+        if (this.props.nameError) {
+            this.props.removeValidationError('name');
+        }
+
         this.setState({ name: event.target.value });
     }
 
@@ -51,11 +59,20 @@ class AddGenreModal extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapStateToProps(state, ownProps) {
+    const nameError = state.errors.validationErrors.find(error => error.param === 'name');
+
     return {
-        addGenre: (genre) => dispatch(genresActions.addGenre(genre)),
-        closeAddGenreModal: () => dispatch(modalsActions.closeAddGenreModal())
+        nameError: nameError
     };
 }
 
-export default connect(null, mapDispatchToProps)(AddGenreModal);
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        addGenre: (genre) => dispatch(genresActions.addGenre(genre)),
+        closeAddGenreModal: () => dispatch(modalsActions.closeAddGenreModal()),
+        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddGenreModal);

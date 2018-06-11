@@ -33,6 +33,7 @@ export function writeComment(content, eventId) {
                     photo: response.user.photo
                 }
                 dispatch(writeCommentSuccess(comment));
+                dispatch(successActions.actionSucceeded('Comment was added!'));
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
