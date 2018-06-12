@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as usersActions from '../../actions/users.actions';
+import * as errorsActions from '../../actions/error.actions';
 import '../../style/register.css';
 import background from '../../style/banner-blurred.jpg';
 
@@ -16,8 +17,26 @@ class RegisterPage extends Component {
             password: '',
             email: '',
             firstname: '',
-            lastname: ''
+            lastname: '',
+            isSubmitted: false
         };
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        debugger;
+        if(nextProps.isSuccessful && nextState.isSubmitted && !nextProps.usernameError 
+            && !nextProps.passwordError && !nextProps.emailError && !nextProps.firstNameError && !nextProps.lastNameError) {
+            this.setState({
+                username: '',
+                password: '',
+                email: '',
+                firstname: '',
+                lastname: '',
+                isSubmitted: false
+            });
+
+            this.props.history.push("/login");
+        }
     }
 
     render() {
@@ -34,18 +53,27 @@ class RegisterPage extends Component {
                                 <label className="col-md-2 control-label" htmlFor="username">Username</label>
                                 <div className="col-md-8">
                                     <input className="form-control" id="username" name="username" type="text" onChange={this.handleUsernameChange} />
+                                    {this.props.usernameError &&
+                                        <div className="error">{this.props.usernameError.msg}</div>
+                                    }
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-md-2 control-label" htmlFor="password">Password</label>
                                 <div className="col-md-8">
                                     <input className="form-control" id="password" name="password" type="password" onChange={this.handlePasswordChange} />
+                                    {this.props.passwordError &&
+                                        <div className="error">{this.props.passwordError.msg}</div>
+                                    }
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-md-2 control-label" htmlFor="email">Email</label>
                                 <div className="col-md-8">
                                     <input className="form-control" id="email" name="email" type="text" onChange={this.handleEmailChange} />
+                                    {this.props.emailError &&
+                                        <div className="error">{this.props.emailError.msg}</div>
+                                    }
                                 </div>
                             </div>
 
@@ -53,46 +81,67 @@ class RegisterPage extends Component {
                                 <label className="col-md-2 control-label" htmlFor="firstname">First Name</label>
                                 <div className="col-md-8">
                                     <input className="form-control" id="firstname" name="firstname" type="text" onChange={this.handleFirstnameChange} />
+                                    {this.props.firstNameError &&
+                                        <div className="error">{this.props.firstNameError.msg}</div>
+                                    }
                                 </div>
                             </div>
 
                             <div className="form-group row">
-                                <label className="col-md-2 control-label"htmlFor="lastname">Last Name</label>
+                                <label className="col-md-2 control-label" htmlFor="lastname">Last Name</label>
                                 <div className="col-md-8">
                                     <input className="form-control" id="lastname" name="lastname" type="text" onChange={this.handleLastnameChange} />
+                                    {this.props.lastNameError &&
+                                        <div className="error">{this.props.lastNameError.msg}</div>
+                                    }
                                 </div>
                             </div>
 
                             <div className="form-group row">
                                 <div className="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Register" className="btn-register" id="register-submit"/>
+                                    <input type="submit" value="Register" className="btn-register" id="register-submit" />
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />   
+                <img className="arrow-object" src="img/arrow-object-dark.svg" alt="" />
             </header>
         );
     }
 
     handleUsernameChange = (event) => {
+        if (this.props.usernameError) {
+            this.props.removeValidationError('username');
+        }
         this.setState({ username: event.target.value });
     };
 
     handlePasswordChange = (event) => {
+        if (this.props.passwordError) {
+            this.props.removeValidationError('password');
+        }
         this.setState({ password: event.target.value });
     };
 
     handleEmailChange = (event) => {
+        if (this.props.emailError) {
+            this.props.removeValidationError('email');
+        }
         this.setState({ email: event.target.value });
     };
 
     handleFirstnameChange = (event) => {
+        if (this.props.firstNameError) {
+            this.props.removeValidationError('first_name');
+        }
         this.setState({ firstname: event.target.value });
     };
 
     handleLastnameChange = (event) => {
+        if (this.props.lastNameError) {
+            this.props.removeValidationError('last_name');
+        }
         this.setState({ lastname: event.target.value });
     };
 
@@ -105,23 +154,33 @@ class RegisterPage extends Component {
         const lastname = this.state.lastname;
 
         this.props.register(username, password, email, firstname, lastname);
-        this.setState({
-            username: '',
-            password: '',
-            email: '',
-            firstname: '',
-            lastname: ''
-        });
+        this.setState({isSubmitted: true});
+    };
+}
 
-        this.props.history.push("/login");
+function mapStateToProps(state, ownProps) {
+    const usernameError = state.errors.validationErrors.find(error => error.param === 'username');
+    const firstNameError = state.errors.validationErrors.find(error => error.param === 'first_name');
+    const lastNameError = state.errors.validationErrors.find(error => error.param === 'last_name');
+    const passwordError = state.errors.validationErrors.find(error => error.param === 'password');
+    const emailError = state.errors.validationErrors.find(error => error.param === 'email');
+
+    return {
+        usernameError: usernameError,
+        passwordError: passwordError,
+        emailError: emailError,
+        firstNameError: firstNameError,
+        lastNameError: lastNameError,
+        isSuccessful: state.users.isRegisterSuccessful
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         register: (username, password, email, firstname, lastname) =>
-            dispatch(usersActions.register(username, password, email, firstname, lastname))
+            dispatch(usersActions.register(username, password, email, firstname, lastname)),
+        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
     };
 }
 
-export default connect(null, mapDispatchToProps)(RegisterPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

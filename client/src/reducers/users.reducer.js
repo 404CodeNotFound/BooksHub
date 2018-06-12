@@ -1,5 +1,5 @@
 export default function users(state = {
-    profile: null, isLoggedIn: false,
+    profile: null, isLoggedIn: false, isRegisterSuccessful: false,
     books: [], friends: [], invitations: [], comments: [], reviews: [], events: []
 }, action) {
     switch (action.type) {
@@ -9,7 +9,8 @@ export default function users(state = {
             };
         case 'REGISTER_SUCCESS':
             return {
-                ...state
+                ...state,
+                isRegisterSuccessful: true
             };
         case 'LOGOUT_SUCCESS':
             return {

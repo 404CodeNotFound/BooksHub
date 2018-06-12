@@ -42,35 +42,43 @@ module.exports = (data) => {
         register: (req, res) => {
             const user = req.body;
 
-            if (!user.username || !user.password || !user.email) {
+            req.checkBody('username', 'Username is required.').notEmpty();
+            req.checkBody('password', 'Password is required.').notEmpty();
+            req.checkBody('email', 'Email is required.').notEmpty();
+            req.checkBody('first_name', 'First name is required.').notEmpty();
+            req.checkBody('last_name', 'Last name is required.').notEmpty();
+
+            const errors = req.validationErrors();
+
+            if (errors) {
                 res.status(400)
-                    .json({ message: errors.INCORRECT_REGISTER_DATA });
+                    .json(errors);
+            } else {
+                user.passHash = crypto.SHA1(user.password).toString();
+                user.password = "";
+
+                data.users.getUserByUsername(user.username)
+                    .then((existingUser) => {
+                        if (existingUser) {
+                            res.status(409)
+                                .json({ message: errors.USERNAME_CONFLICT });
+                        } else {
+                            user.photo = "http://www.verspers.nl/workspace/assets/images/empty_profile.png";
+                            user.birth_date = new Date(2018, 01, 01);
+                            user.gender = "Male";
+
+                            data.users.createUser(user)
+                                .then(createdUser => {
+                                    res.status(201)
+                                        .json({ user: createdUser });
+                                });
+                        }
+                    })
+                    .catch((error) => {
+                        res.status(500)
+                            .json({ message: errors.SERVER_ERROR });
+                    });
             }
-
-            user.passHash = crypto.SHA1(user.password).toString();
-            user.password = "";
-
-            data.users.getUserByUsername(user.username)
-                .then((existingUser) => {
-                    if (existingUser) {
-                        res.status(409)
-                            .json({ message: errors.USERNAME_CONFLICT });
-                    } else {
-                        user.photo = "http://www.verspers.nl/workspace/assets/images/empty_profile.png";
-                        user.birth_date = new Date(2018, 01, 01);
-                        user.gender = "Male";
-
-                        data.users.createUser(user)
-                            .then(createdUser => {
-                                res.status(201)
-                                    .json({ user: createdUser });
-                            });
-                    }
-                })
-                .catch((error) => {
-                    res.status(500)
-                        .json({ message: errors.SERVER_ERROR });
-                });
         },
         getUserProfile(req, res, next) {
             const username = req.params.username;
@@ -197,7 +205,7 @@ module.exports = (data) => {
                 return res.status(400)
                     .json({ message: errors.MISSING_USER_ID });
             }
-            
+
             data.users.getUserById(id)
                 .then(user => {
                     if (!user) {
@@ -334,7 +342,7 @@ module.exports = (data) => {
                 .then(review => {
                     if (!review) {
                         throw Error(errors.REVIEW_NOT_FOUND);
-                    } else if(!review.user.equals(req.user._id)) {
+                    } else if (!review.user.equals(req.user._id)) {
                         throw Error(errors.PERMISSIONS_DENIED);
                     }
                 })
@@ -383,7 +391,7 @@ module.exports = (data) => {
                         .json("Removed");
                 })
                 .catch(error => {
-                   generateErrorResponse(res, error.message);
+                    generateErrorResponse(res, error.message);
                 });
         },
         updateUserProfile: (req, res) => {
