@@ -5,12 +5,23 @@ import * as genresActions from '../../actions/genres.actions';
 import * as booksActions from '../../actions/books.actions';
 import * as constants from '../../utils/constants';
 
+const LANGUAGES = [
+    'All',    
+	'Bulgarian',
+	'English',
+	'French',
+	'Spanish',
+	'German',
+    'Italian',
+];
+
 class BooksResultPartial extends Component {
     constructor(props) {
         super(props);
         this.state = {
             filters: new Set(),
             searchType: constants.SEARCH_BOOK_BY_TITLE,
+            languageFilter: LANGUAGES[0],
         };
     }
 
@@ -24,19 +35,6 @@ class BooksResultPartial extends Component {
             <div className="panel container" id="search-results-books">
                 <div className="row">
                     <div className="col-md-3 filters">
-                        <div className="filter">
-                            <div className="row">
-                                <h4>Filter by Genre:</h4>
-                            </div>
-                            {this.props.genres.map(genre => 
-                                <div key={genre._id} className="row checkbox checkbox-success">
-                                    <input id={genre.name} type="checkbox" name="genre" value={genre.name} onChange={this.handleFilterChange} />
-                                    <label htmlFor={genre.name} className="genre-label">
-                                        {genre.name}
-                                    </label>
-                                </div>
-                            )}
-                        </div>
                         <div className="filter">
                             <div className="row">
                                 <h4>Search by:</h4>
@@ -59,13 +57,32 @@ class BooksResultPartial extends Component {
                                     Summary
                                 </label>
                             </div>
-                            {/* <div className="row checkbox checkbox-success">
-                                <input id="language" type="checkbox" />
-                                <label htmlFor="language">
-                                    Language
-                                </label>
+                        </div>
+                        <div className="filter">
+                            <div className="row">
+                                <h4>Filter by Genre:</h4>
                             </div>
-                             */}
+                            {this.props.genres.map(genre => 
+                                <div key={genre._id} className="row checkbox checkbox-success">
+                                    <input id={genre.name} type="checkbox" name="genre" value={genre.name} onChange={this.handleFilterChange} />
+                                    <label htmlFor={genre.name} className="genre-label">
+                                        {genre.name}
+                                    </label>
+                                </div>
+                            )}
+                        </div>
+                        <div className="filter">
+                            <div className="row">
+                                <h4>Filter by Language:</h4>
+                            </div>
+                            {LANGUAGES.map(language =>
+                                <div key={language} className="row radio radio-selected">
+                                    <input id={language} type="radio" name="language" value={language} onChange={this.handleLanguageFilterChange} checked={this.state.languageFilter === language ?  true : false } />
+                                    <label htmlFor={language}>
+                                        {language}
+                                    </label>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -129,8 +146,16 @@ class BooksResultPartial extends Component {
         }
 
         if (this.props.searchValue) {
-            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters);
+            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilter);
         }
+    }
+
+    handleLanguageFilterChange = (event) => {
+        this.setState({
+            languageFilter: event.target.value
+        }, () => {
+            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilter);
+        });
     }
 
     handleSearchByChange = (event) => {
@@ -139,7 +164,7 @@ class BooksResultPartial extends Component {
         }, () => {
             this.props.updateSearchType(this.state.searchType);
 
-            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters);
+            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilter);
         });
     }
 }

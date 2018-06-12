@@ -127,21 +127,25 @@ class SearchPage extends Component {
             });
 
             this.props.searchBook(this.state.searchValue, this.props.searchBooksBy);
+
+            this.setState({arrowImageSrc: "img/arrow-object-white.svg"});            
         } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
             this.setState({
                 showEventsResults: true,
             });
 
             this.props.searchEvent(this.state.searchValue);
+
+            this.setState({arrowImageSrc: "img/arrow-object-white.svg"});            
         } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
             this.setState({
                 showUsersResults: true,
             });
 
             this.props.searchUser(this.state.searchValue);
-        }
 
-        this.setState({arrowImageSrc: "img/arrow-object-white.svg"});
+            this.setState({arrowImageSrc: "img/arrow-object-white.svg"});            
+        }
     }
 }
 
@@ -158,7 +162,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         searchEvent: (searchValue, filters) => dispatch(eventsActions.searchEvent(searchValue, filters)),
         searchUser: (searchValue) => dispatch(usersActions.searchUser(searchValue)),
-        searchBook: (searchValue, searchType, filters) => dispatch(booksActions.searchBooks(searchValue, searchType, filters)),
+        searchBook: (searchValue, searchType, filters, languageFilter) => dispatch(booksActions.searchBooks(searchValue, searchType, filters, languageFilter)),
     };
 }
 
