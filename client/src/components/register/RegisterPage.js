@@ -18,27 +18,8 @@ class RegisterPage extends Component {
             email: '',
             firstname: '',
             lastname: '',
-            isSubmitted: false
         };
     }
-
-    componentWillUpdate(nextProps, nextState) {
-        debugger;
-        if(nextProps.isSuccessful && nextState.isSubmitted && !nextProps.usernameError 
-            && !nextProps.passwordError && !nextProps.emailError && !nextProps.firstNameError && !nextProps.lastNameError) {
-            this.setState({
-                username: '',
-                password: '',
-                email: '',
-                firstname: '',
-                lastname: '',
-                isSubmitted: false
-            });
-
-            this.props.history.push("/login");
-        }
-    }
-
     render() {
         return (
             <header className="section-top-padding background-image-main text-center" style={style}>
@@ -153,8 +134,8 @@ class RegisterPage extends Component {
         const firstname = this.state.firstname;
         const lastname = this.state.lastname;
 
-        this.props.register(username, password, email, firstname, lastname);
-        this.setState({isSubmitted: true});
+        this.props.register(username, password, email, firstname, lastname)
+            .then(() => this.props.history.push('/login'));
     };
 }
 
