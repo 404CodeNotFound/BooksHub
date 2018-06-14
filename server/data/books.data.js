@@ -233,7 +233,7 @@ module.exports = class BooksData {
     searchBooksByTitle(searchValue) {
         return new Promise((resolve, reject) => {
             Book.find({ "title": { "$regex": searchValue, "$options": "i" }, 'isDeleted': false })
-                .select('title photo genres author date_published')
+                .select('title photo genres author date_published language')
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'genres', select: 'name' })
                 .exec((err, books) => {
@@ -241,7 +241,6 @@ module.exports = class BooksData {
                         return reject(err);
                     }
 
-                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
                     const data = {
                         books: books,
                         booksCount: books.length
@@ -255,7 +254,7 @@ module.exports = class BooksData {
     searchBooksBySummary(keywords) {
         return new Promise((resolve, reject) => {
             Book.find({'isDeleted': false })
-                .select('title photo genres author date_published summary')
+                .select('title photo genres author date_published summary language')
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'genres', select: 'name' })
                 .exec((err, books) => {
@@ -263,13 +262,9 @@ module.exports = class BooksData {
                         return reject(err);
                     }
 
-                    // const pageEvents = getPageOfCollection(events, page, itemsPerPageAdmin);
-                    
                     const filteredBooks = books.filter(book => {
                         return containsKeywords(book.summary, keywords);
                     });
-
-                    console.log(filteredBooks);
 
                     const data = {
                         books: filteredBooks,

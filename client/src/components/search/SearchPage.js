@@ -166,7 +166,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         searchEvent: (searchValue, filters) => dispatch(eventsActions.searchEvent(searchValue, filters)),
         searchUser: (searchValue) => dispatch(usersActions.searchUser(searchValue)),
-        searchBook: (searchValue, searchType, filters, languageFilter) => dispatch(booksActions.searchBooks(searchValue, searchType, filters, languageFilter)),
+        searchBook: (searchValue, searchType, filters, languageFilters) => dispatch(booksActions.searchBooks(searchValue, searchType, filters, languageFilters)),
     };
 }
 

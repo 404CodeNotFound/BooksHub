@@ -255,9 +255,9 @@ export function getRecommendedBooksByFriends(id, page) {
     };
 }
 
-export function searchBooks(searchValue, searchType, filters, languageFilter) {
+export function searchBooks(searchValue, searchType, filters, languageFilters) {
     return function (dispatch) {
-        return requester.get(`${api.BOOKS_SEARCH}?searchBy=${searchType}&phrase=${searchValue}&language=${languageFilter}`)
+        return requester.get(`${api.BOOKS_SEARCH}?searchBy=${searchType}&phrase=${searchValue}`)
             .done(response => { 
                 let booksResult = [];
                 if (searchType === "author") {
@@ -271,16 +271,18 @@ export function searchBooks(searchValue, searchType, filters, languageFilter) {
                     booksResult = response.books;
                 }
 
-                if (filters) {
+                if (filters && filters.size > 0) {
+                    console.log('genre filters');
                     booksResult = booksResult.filter(book => {
                         const genres = book.genres.map(genre => genre.name);
                         return containsFilters(genres, filters);
                     });
                 }
-                debugger;
-                if (languageFilter) {
+
+                if (languageFilters && languageFilters.size > 0) {
+                    console.log('language filters');
                     booksResult = booksResult.filter(book => {
-                        return book.language === languageFilter;
+                        return  languageFilters.has(book.language);
                     });
                 }
 

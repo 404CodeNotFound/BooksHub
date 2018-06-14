@@ -308,12 +308,9 @@ module.exports = (data) => {
             return res;
         },
         searchBooks: (req, res) => {
-            // const page = req.query.page;
             const searchValue = req.query.phrase;
             const searchType = req.query.searchBy;
             const languageFilter = req.query.language;
-
-            console.log(languageFilter);
 
             if (searchType === "title") {
                 data.books.searchBooksByTitle(searchValue)
