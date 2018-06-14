@@ -11,6 +11,10 @@ import '../../style/book.details.css';
 import RecommendBookModal from './RecommendBookModal';
 
 class BookDetailsPage extends Component {
+    backgroundImage = {
+        backgroundImage: "url(../img/banner-blurred.jpg)"
+    };
+
     componentDidMount() {
         this.props.showLoader();
         this.props.getBookDetails();
@@ -19,7 +23,7 @@ class BookDetailsPage extends Component {
     render() {
         return (
                 <article>
-                    <header className="section background-image text-center">
+                    <header className="section text-center" style={this.backgroundImage}>
                         <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                             Book Details
                       </h1>

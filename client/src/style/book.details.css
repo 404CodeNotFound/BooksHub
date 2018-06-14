@@ -80,10 +80,6 @@ dd {
     margin-left: 15% !important;
 }
 
-.background-image {
-    background-image: url(../img/banner-blurred.jpg);
-}
-
 .icon-sli-pencil.text-primary, 
 .icon-sli-speech.text-primary {
     color: #4eb980 !important;

@@ -10,6 +10,10 @@ import '../../style/admin.panel.css';
 
 class AdminPanelPage extends Component {
     state = { links: ['active', '', '', '', ''] };
+    backgroundImage = {
+        backgroundImage: "url(../img/banner-blurred.jpg)"
+    };
+    
     render() {
         if(this.props.currentUserRole !== 'Admin') {
             this.props.history.push("/");
@@ -17,7 +21,7 @@ class AdminPanelPage extends Component {
         
         return (
                 <article>
-                    <header className="section background-image text-center">
+                    <header className="section text-center" style={this.backgroundImage}>
                         <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                             Admin Panel
                         </h1>

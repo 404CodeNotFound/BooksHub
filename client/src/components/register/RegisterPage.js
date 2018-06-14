@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import * as usersActions from '../../actions/users.actions';
 import * as errorsActions from '../../actions/error.actions';
 import '../../style/register.css';
-import background from '../../style/banner-blurred.jpg';
 
 const style = {
-    backgroundImage: `url(${background})`
+    backgroundImage: `url("img/banner-blurred.jpg")`
 };
 
 class RegisterPage extends Component {

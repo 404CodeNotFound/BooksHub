@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as usersActions from '../../actions/users.actions';
 import '../../style/login.css';
-import background from '../../style/banner-blurred.jpg';
 
 const style = {
-    backgroundImage: `url(${background})`
+    backgroundImage: `url("img/banner-blurred.jpg")`
 };
 
 class LoginPage extends Component {

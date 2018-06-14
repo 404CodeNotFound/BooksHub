@@ -47,10 +47,6 @@ dd {
     margin-left: 15% !important;
 }
 
-.background-image {
-    background-image: url(../img/banner-blurred.jpg);
-}
-
 .no-padding.col-lg-3, .no-padding.col-md-3, .no-padding.col-sm-10, .no-padding.col-lg-6, .no-padding.col-md-6, .no-padding.col-sm-12 {
      padding-left: 0px; 
      padding-right: 0px;

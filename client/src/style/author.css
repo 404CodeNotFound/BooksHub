@@ -87,10 +87,6 @@ dd {
     border-radius: 11%;
 }
 
-.background-image {
-    background-image: url(../img/banner-blurred.jpg);
-}
-
 .icon-sli-book-open.text-primary {
     color: #4eb980 !important;
 }

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
+const style = {
+    backgroundImage: `url("img/banner.jpg")`
+};
+
 class HomePage extends Component {
     render() {
         return (
             [
-                <header key="header" className="section-top-padding background-image-main text-center main-header">
+                <header key="header" className="section-top-padding background-image-main text-center main-header" style={style}>
                     <h1 className="text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-40 margin-top-110">
                         Today a reader, tomorrow a leader.
                     </h1>
