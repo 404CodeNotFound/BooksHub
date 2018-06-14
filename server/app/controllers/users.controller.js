@@ -189,7 +189,6 @@ module.exports = (data) => {
                 })
                 .then(() => data.users.getRecommendedBooks(id, page))
                 .then(books => {
-                    console.log(books);
                     return res.status(200)
                         .json(books);
                 })
@@ -224,7 +223,6 @@ module.exports = (data) => {
                         .json(result);
                 })
                 .catch(error => {
-                    console.log(error);
                     generateErrorResponse(res, error.message);
                 });
         },
@@ -489,10 +487,8 @@ module.exports = (data) => {
         },
 
         searchUsers: (req, res) => {
-            // const page = req.query.page;
             const searchValue = req.query.phrase;
 
-            console.log('controller');
             data.users.searchUsers(searchValue)
                 .then(result => {
                     res.status(200)

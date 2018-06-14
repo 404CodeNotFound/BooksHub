@@ -59,27 +59,7 @@ class EventsResultPartial extends Component {
                                 <p>No events were found.</p>
                             }
                         </div>
-                        {/* <div className="row">
-                            <div className="col-md-offset-5 pages total center">
-                                Page 1 of 1
-                                <div className="pagination-container center">
-                                    <ul className="pagination">
-                                        <li className="active">
-                                            <a>1</a>
-                                        </li>
-                                        <li>
-                                            <a>2</a>
-                                        </li>
-                                        <li>
-                                            <a>3</a>
-                                        </li>
-                                        <li>
-                                            <a>4</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> */}
+                        
                     </div>
                 </div>
             </div>
@@ -87,18 +67,17 @@ class EventsResultPartial extends Component {
     }
 
     handleFilterChange = (event) => {
-        console.log(event.target.value + " - " + event.target.checked);
-
         if (event.target.checked) {
             this.state.filters.add(event.target.value);
         } else {
             this.state.filters.delete(event.target.value);
         }
 
-        if (this.props.searchValue) {
-            console.log(this.state.filters);
-            this.props.search(this.props.searchValue, this.state.filters);
-        }
+        this.props.search(this.props.searchValue, this.state.filters);
+        
+        // if (this.props.searchValue) {
+        //     this.props.search(this.props.searchValue, this.state.filters);
+        // }
     }
 }
 

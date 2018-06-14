@@ -125,7 +125,7 @@ class SearchPage extends Component {
     }
 
     handleSearch = (event) => {
-        if (this.state.searchItem === searchItems.BOOKS && this.state.searchValue) {
+        if (this.state.searchItem === searchItems.BOOKS) {
             this.setState({
                 showBooksResults: true,
             });
@@ -133,7 +133,7 @@ class SearchPage extends Component {
             this.props.searchBook(this.state.searchValue, this.props.searchBooksBy);
 
             this.setState({arrowImageSrc: "img/arrow-object-white.svg"});            
-        } else if (this.state.searchItem === searchItems.EVENTS && this.state.searchValue) {
+        } else if (this.state.searchItem === searchItems.EVENTS) {
             this.setState({
                 showEventsResults: true,
             });
@@ -141,7 +141,8 @@ class SearchPage extends Component {
             this.props.searchEvent(this.state.searchValue);
 
             this.setState({arrowImageSrc: "img/arrow-object-white.svg"});            
-        } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
+        // } else if (this.state.searchItem === searchItems.USERS && this.state.searchValue) {
+        } else if (this.state.searchItem === searchItems.USERS) {            
             this.setState({
                 showUsersResults: true,
             });

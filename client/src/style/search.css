@@ -306,6 +306,10 @@ h5.card-title {
     background-color: #5cb85c; 
 }
 
+#search-results-books, #search-results-events, #search-results-users {
+    margin-bottom: 11%;
+}
+
 @media only screen and (max-width: 1097px) {
     .search-form {
         margin-left: 5%;

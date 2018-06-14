@@ -272,7 +272,6 @@ export function searchBooks(searchValue, searchType, filters, languageFilters) {
                 }
 
                 if (filters && filters.size > 0) {
-                    console.log('genre filters');
                     booksResult = booksResult.filter(book => {
                         const genres = book.genres.map(genre => genre.name);
                         return containsFilters(genres, filters);
@@ -280,7 +279,6 @@ export function searchBooks(searchValue, searchType, filters, languageFilters) {
                 }
 
                 if (languageFilters && languageFilters.size > 0) {
-                    console.log('language filters');
                     booksResult = booksResult.filter(book => {
                         return  languageFilters.has(book.language);
                     });

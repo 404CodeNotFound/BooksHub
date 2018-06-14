@@ -20,7 +20,7 @@ module.exports = class AuthorsData {
     searchBooksByAuthor(searchValue) {
         return new Promise((resolve, reject) => {
             const searchWords = searchValue.split(" ");
-            console.log(searchWords);
+            
             return Author.find({ $or:[ { "first_name": { $in: searchWords}}, { "last_name": { $in: searchWords}} ], 'isDeleted': false })
                 .select('books -_id')
                 .populate({ path: 'books', populate: { path: 'author', select: 'first_name last_name' }, select: 'title photo genres author date_published language'})

@@ -85,7 +85,7 @@ class BooksResultPartial extends Component {
                         </div>
                     </div>
 
-                    <div className="col-md-8">
+                    <div className="col-md-8 books-result">
                         <div className="row">
                         {this.props.books.length > 0 ?
                             this.props.books.map(book =>
@@ -124,9 +124,11 @@ class BooksResultPartial extends Component {
             this.state.filters.delete(event.target.value);
         }
 
-        if (this.props.searchValue) {
-            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilters);
-        }
+        this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilters);
+        
+        // if (this.props.searchValue) {
+        //     this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilters);
+        // }
     }
 
     handleLanguageFilterChange = (event) => {
@@ -136,9 +138,11 @@ class BooksResultPartial extends Component {
             this.state.languageFilters.delete(event.target.value);
         }
 
-        if (this.props.searchValue) {
-            this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilters);
-        }
+        this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilters);
+        
+        // if (this.props.searchValue) {
+        //     this.props.search(this.props.searchValue, this.state.searchType, this.state.filters, this.state.languageFilters);
+        // }
     }
 
     handleSearchByChange = (event) => {

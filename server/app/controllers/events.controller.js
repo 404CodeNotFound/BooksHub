@@ -207,7 +207,6 @@ module.exports = (data) => {
                         });
                 })
                 .catch(error => {
-                    console.log(error);
                     generateErrorResponse(res, error.message);
                 });
         },
@@ -252,7 +251,6 @@ module.exports = (data) => {
                         .json(result);
                 })
                 .catch(error => {
-                    console.log(error);
                     res.status(500)
                         .json({ message: errors.SERVER_ERROR });
                 });

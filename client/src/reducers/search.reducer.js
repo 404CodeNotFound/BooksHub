@@ -20,7 +20,6 @@ export default function search(state = {
                 usersCount: action.usersCount
             };
         case 'SEARCH_BOOKS_SUCCESS':
-            console.log(action.books);
             return {
                 ...state,
                 books: action.books,

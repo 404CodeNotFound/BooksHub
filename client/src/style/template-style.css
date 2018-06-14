@@ -19,11 +19,6 @@ a, a:link, a:visited, a:hover, a:active {
     color: #777;
 }
 
-a:hover {
-    font-weight: bolder !important;
-    color: #4eb980 !important;
-}
-
 #logout-btn {
     background: transparent;
     border: none;

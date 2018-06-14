@@ -239,7 +239,6 @@ export function searchEvent(searchValue, filters) {
     return function (dispatch) {
         return requester.get(`${api.EVENTS_SEARCH}?phrase=${searchValue}`)
             .done(response => {
-                console.log(response);
                 let eventsResult = response.events;
                 if (filters) {
                     eventsResult = response.events.filter(event => {

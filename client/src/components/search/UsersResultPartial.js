@@ -25,27 +25,7 @@ class UsersResultPartial extends Component {
                                 }
 
                             </div>
-                            {/* <div className="row">
-                                <div className="col-md-offset-5 pages total center">
-                                    Page 1 of 1
-                                    <div className="pagination-container center">
-                                        <ul className="pagination">
-                                            <li className="active">
-                                                <a>1</a>
-                                            </li>
-                                            <li>
-                                                <a>2</a>
-                                            </li>
-                                            <li>
-                                                <a>3</a>
-                                            </li>
-                                            <li>
-                                                <a>4</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> */}
+                            
                         </div>
                     </div>
                 </div>
