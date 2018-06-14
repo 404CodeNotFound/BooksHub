@@ -25,12 +25,16 @@ class SearchPage extends Component {
             showUsersResults: false,
             arrowImageSrc: "img/arrow-object-dark.svg"          
         };
+
+        this.backgroundImage = {
+            backgroundImage: "url(img/banner-blurred.jpg)"
+        };
     }
 
     render() {
         return (
             [
-                <header className="section background-image text-center" key="header">
+                <header className="section text-center" style={this.backgroundImage} key="header">
                     <div className="search-panel" id="banner">
                         <div className="container col-md-6 col-md-offset-2 col-sm-12" id="search-form">
                             <div className="row search-input-options">

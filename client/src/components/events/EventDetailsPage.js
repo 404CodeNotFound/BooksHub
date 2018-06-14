@@ -48,7 +48,7 @@ class EventDetailsPage extends Component {
                                 <h4>
                                     by
                                     <b>
-                                        <Link to={"/users/" + this.props.event.creator.username} className="green-link"> {this.props.event.creator.username}</Link>
+                                        <Link to={"/users/" + this.props.event.creator.username + '/profile'} className="green-link"> {this.props.event.creator.username}</Link>
                                     </b>
                                 </h4>
                                 </div>
@@ -136,7 +136,7 @@ class EventDetailsPage extends Component {
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-padding joined-friends">
                                         <div className="media">
                                             {this.props.event.participants.slice(0, 3).map(participant => 
-                                                <Link key={participant._id} to={"/users/" + participant.username} className="green-link">
+                                                <Link key={participant._id} to={"/users/" + participant.username + '/profile'} className="green-link">
                                                     <img className="media-object dp img-circle" alt={participant.username} title={participant.username} src={participant.photo} />
                                                 </Link>
                                             )}

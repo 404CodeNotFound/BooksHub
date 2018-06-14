@@ -16,11 +16,14 @@ import { BarLoader } from 'react-css-loaders';
 import '../../style/profile.css';
 
 class ProfilePage extends Component {
-    state = { links: ['active', '', '', '', '', '', '', '', '', '', ''], isOpen: false };
+    state = { links: ['active', '', '', '', '', '', '', '', '', '', ''] };
+    style = {
+        backgroundImage: "url(../../img/banner-blurred.jpg)"
+    };
 
     render() {
         return (
-                [<header key="profile-header" className="section background-image text-center">
+                [<header key="profile-header" className="section text-center" style={this.style}>
                     <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
                         {this.props.user === null ? "Profile ": 
                             (this.props.user.username === this.props.currentUser.username) ?
@@ -46,10 +49,8 @@ class ProfilePage extends Component {
                                     <p>{this.props.user.username}</p>
                                     {this.props.currentUser.username === this.props.user.username ?
                                         <button type="button" className="btn btn-main-green" onClick={() => this.props.openEditUserModal(this.props.user)}>Edit Profile</button> :
-                                        (this.showInviteButton() &&
-                                            (!this.props.hideInviteButton &&
+                                        (this.showInviteButton() && !this.props.hideInviteButton &&
                                                 <button type="button" className="btn btn-main-green" onClick={this.sendInvitation}>Send Invitation</button>
-                                            )
                                         )
                                     }
                                 </div>
@@ -174,6 +175,10 @@ class ProfilePage extends Component {
     }
 
     showInviteButton = () => {
+        if(!this.props.currentUser.id) {
+            return false;
+        }
+
         const friendIndex = this.props.user.friends.findIndex(friend => friend === this.props.currentUser.id);
         const requestIndex = this.props.user.requests.findIndex(request => request.sender === this.props.currentUser.id);
         if (friendIndex >= 0 || requestIndex >= 0) {
