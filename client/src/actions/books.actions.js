@@ -285,6 +285,7 @@ export function searchBooks(searchValue, searchType, filters, languageFilters) {
                 }
 
                 dispatch(searchBooksSuccess(booksResult, booksResult.length ? booksResult.length : response.booksCount));
+                dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));

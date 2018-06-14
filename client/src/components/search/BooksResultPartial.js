@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
+import { BarLoader } from 'react-css-loaders';
 import * as genresActions from '../../actions/genres.actions';
 import * as booksActions from '../../actions/books.actions';
+import * as loadersActions from '../../actions/loaders.actions';
 import * as constants from '../../utils/constants';
 
 const LANGUAGES = [
@@ -25,7 +27,10 @@ class BooksResultPartial extends Component {
     }
 
     componentDidMount() {
+        this.props.showLoader();
+        
         this.props.getAllGenres();
+        
         this.props.updateSearchType(constants.SEARCH_BOOK_BY_TITLE);
     }
 
@@ -87,7 +92,11 @@ class BooksResultPartial extends Component {
 
                     <div className="col-md-8 books-result">
                         <div className="row">
-                        {this.props.books.length > 0 ?
+                        {this.props.isLoaderVisible ?
+                        <div className="loader-page">
+                            <BarLoader color="#4eb980" size="11" />
+                        </div> :
+                        (this.props.books.length > 0) ?
                             this.props.books.map(book =>
                                 <div key={book._id} className="card col-md-3">
                                     <Link to={"/books/" + book._id}>
@@ -107,8 +116,7 @@ class BooksResultPartial extends Component {
                                 </div>
                             ) :
                             <p>No books were found.</p>
-                        }
-                                                        
+                        }                                                        
                         </div>
                         
                     </div>
@@ -158,12 +166,14 @@ class BooksResultPartial extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        genres: state.administration.genres,        
+        genres: state.administration.genres,
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
+        showLoader: () => dispatch(loadersActions.showLoader()),
         getAllGenres: () => dispatch(genresActions.getAllGenres()),
         updateSearchType: (searchType) => dispatch(booksActions.updateSearchType(searchType)),
     };

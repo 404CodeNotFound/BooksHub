@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { BarLoader } from 'react-css-loaders';
 import * as genresActions from '../../actions/genres.actions';
+import * as loadersActions from '../../actions/loaders.actions';
 
 class EventsResultPartial extends Component {
     constructor(props) {
@@ -12,6 +14,8 @@ class EventsResultPartial extends Component {
     }
 
     componentDidMount() {
+        this.props.showLoader();
+
         this.props.getAllGenres();
     }
 
@@ -36,7 +40,11 @@ class EventsResultPartial extends Component {
                     </div>
                     <div className="col-md-8">
                         <div className="row">
-                            {this.props.events.length > 0 ?
+                            {this.props.isLoaderVisible ?
+                            <div className="loader-page">
+                                <BarLoader color="#4eb980" size="11" />
+                            </div> :
+                            (this.props.events.length > 0) ?
                                 this.props.events.map(event =>
                                     <div key={event._id} className="card col-lg-3">
                                         <Link to={"/events/" + event._id}>
@@ -84,11 +92,13 @@ class EventsResultPartial extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         genres: state.administration.genres,
+        isLoaderVisible: state.loaders.showLoader
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
+        showLoader: () => dispatch(loadersActions.showLoader()),
         getAllGenres: () => dispatch(genresActions.getAllGenres()),
     };
 }

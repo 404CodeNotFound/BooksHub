@@ -248,6 +248,7 @@ export function searchEvent(searchValue, filters) {
                 }
 
                 dispatch(searchEventSuccess(eventsResult, eventsResult.length ? eventsResult.length : response.eventsCount));
+                dispatch(loadersActions.hideLoader());
             })
             .fail(error => {
                 dispatch(errorActions.actionFailed(error.responseJSON.message));
