@@ -18,6 +18,10 @@ span small {
     font-size: 12pt;
 }
 
+.filter h4 {
+    font-weight: 300;
+}
+
 .btn input[type=radio] {
     position: absolute;
     clip: rect(0,0,0,0);
@@ -57,10 +61,6 @@ span small {
     width: 92%;
     padding-left: 5%;
 }
-
-/* .search-submit {
-    padding-top: 5%;
-} */
 
 .options {
     width: 40%;

@@ -64,7 +64,7 @@ class AdminPanelPage extends Component {
                                     </div>
                                 </div>
 
-                                <div className="line col-md-9">
+                                <div className="col-md-9">
                                     <Route path="/administration/books" render={() => <AllBooksList />} />
                                     <Route path="/administration/authors" render={() => <AllAuthorsList />} />
                                     <Route path="/administration/genres" render={() => <AllGenresList />} />
