@@ -687,18 +687,19 @@ nav.fixed .left-menu, nav.fixed .right-menu {
 }
 
 .downArrow{
-    /* position: fixed; */
     padding-top: 6px;
 	bottom: 45%;
     left: 50%;
     font-size: 26pt;
     color: white;
 }
+
 .bounce {
 	-moz-animation: bounce 3s infinite;
 	-webkit-animation: bounce 3s infinite;
 	animation: bounce 4s infinite;
 }
+
 @-moz-keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     -moz-transform: translateY(0);

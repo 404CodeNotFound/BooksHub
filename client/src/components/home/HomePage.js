@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as homeActions from '../../actions/home.actions';
 
 const style = {
     backgroundImage: `url("img/banner.jpg")`
@@ -14,8 +16,8 @@ class HomePage extends Component {
                         Today a reader, tomorrow a leader.
                     </h1>
                     <p className="text-white">- Margaret Fuller</p>
-                    <div class="downArrow bounce">
-                        <i class="fa fa-angle-double-down"></i>
+                    <div className="downArrow bounce">
+                        <i className="fa fa-angle-double-down"></i>
                     </div>
                     <img className="arrow-object" src="img/arrow-object-white.svg" alt="" />
                 </header>,
@@ -32,7 +34,7 @@ class HomePage extends Component {
                                     <i className="icon-users text-primary text-size-40 text-line-height-1"></i>
                                 </div>
                                 <div className="margin-left-60">
-                                    <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">10000k</h3>
+                                    <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">{this.props.info.usersCount}</h3>
                                     <p>happy readers that browse tons of books and literary events</p>
                                     <Link className="text-more-info text-primary" to="/login">Join us now</Link>
                                 </div>
@@ -42,7 +44,7 @@ class HomePage extends Component {
                                     <i className="icon-sli-book-open text-primary text-size-40 text-line-height-1"></i>
                                 </div>
                                 <div className="margin-left-60">
-                                    <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">10000k</h3>
+                                    <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">{this.props.info.booksCount}</h3>
                                     <p>books to browse, rate, review and recommend to your friends</p>
                                     <Link className="text-more-info text-primary" to="/books">Browse books</Link>
                                 </div>
@@ -52,7 +54,7 @@ class HomePage extends Component {
                                     <i className="icon-placepin text-primary text-size-40 text-line-height-1"></i>
                                 </div>
                                 <div className="margin-left-60">
-                                    <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">10000k</h3>
+                                    <h3 className="text-strong text-size-40 text-line-height-1 margin-bottom-20">{this.props.info.eventsCount}</h3>
                                     <p>various literary events to browse, discuss and join</p>
                                     <Link className="text-more-info text-primary" to="/events">Browse events</Link>
                                 </div>
@@ -65,4 +67,16 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+function mapStateToProps(state, ownProps) {
+    return {
+        info: state.home.info,
+    };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        getInfo: dispatch(homeActions.getInfo()),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

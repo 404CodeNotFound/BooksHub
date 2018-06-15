@@ -13,7 +13,8 @@ const api = {
     LATEST_EVENTS: 'http://localhost:3003/latestevents',
     BOOKS_SEARCH: 'http://localhost:3003/books/search',
     EVENTS_SEARCH: 'http://localhost:3003/events/search',
-    USERS_SEARCH: 'http://localhost:3003/users/search',    
+    USERS_SEARCH: 'http://localhost:3003/users/search',  
+    INFO: 'http://localhost:3003/info'  
 };
 
 module.exports = api;

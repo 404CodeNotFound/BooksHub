@@ -1,7 +1,7 @@
 const { Book } = require('../models')
 const getPageOfCollection = require('../utils/pagination');
-const {calculateNewRating} = require('../utils/rating');
-const {calculateRating} = require('../utils/rating');
+const { calculateNewRating } = require('../utils/rating');
+const { calculateRating } = require('../utils/rating');
 const itemsPerPage = 10;
 
 module.exports = class BooksData {
@@ -26,7 +26,7 @@ module.exports = class BooksData {
     getBookById(id) {
         return new Promise((resolve, reject) => {
             return Book.findOne({ '_id': id, 'isDeleted': false })
-                .populate({path: 'author', select: 'first_name last_name'})
+                .populate({ path: 'author', select: 'first_name last_name' })
                 .exec((err, book) => {
                     if (err) {
                         return reject(err);
@@ -60,7 +60,7 @@ module.exports = class BooksData {
                         return reject(err);
                     } else {
                         book.rating = calculateNewRating(book.ratings, rating);
-                        book.ratings.push(rating._id);                        
+                        book.ratings.push(rating._id);
                         book.save();
                         return resolve({ bookRating: book.rating });
                     }
@@ -214,7 +214,7 @@ module.exports = class BooksData {
 
     getBooksByGenres(genres) {
         return new Promise((resolve, reject) => {
-            Book.find({ 'isDeleted': false, genres: { $in: genres }})
+            Book.find({ 'isDeleted': false, genres: { $in: genres } })
                 .sort({ 'start_date': '1' })
                 .limit(4)
                 .populate({ path: 'genres', select: 'name' })
@@ -253,7 +253,7 @@ module.exports = class BooksData {
 
     searchBooksBySummary(keywords) {
         return new Promise((resolve, reject) => {
-            Book.find({'isDeleted': false })
+            Book.find({ 'isDeleted': false })
                 .select('title photo genres author date_published summary language')
                 .populate({ path: 'author', select: 'first_name last_name' })
                 .populate({ path: 'genres', select: 'name' })
@@ -275,10 +275,24 @@ module.exports = class BooksData {
                 });
         });
     }
+
+
+    getTotalCount() {
+        return new Promise((resolve, reject) => {
+            Book.count({ 'isDeleted': false },
+                (err, count) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(count);
+                    }
+                });
+        });
+    }
 }
 
 function containsKeywords(text, keywords) {
-    for (let i=0; i < keywords.length; i++) {
+    for (let i = 0; i < keywords.length; i++) {
         if (!text.toLowerCase().includes(keywords[i].toLowerCase())) {
             return false;
         }

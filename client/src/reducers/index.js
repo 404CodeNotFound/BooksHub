@@ -12,6 +12,7 @@ import loaders from './loaders.reducer';
 import { reducer as toastr } from 'react-redux-toastr';
 import success from './success.reducer';
 import search from './search.reducer';
+import home from './home.rediucer';
 
 const reducer = combineReducers({
     users,
@@ -26,6 +27,7 @@ const reducer = combineReducers({
     administration,
     success,
     search,
+    home,
     toastr
 });
 

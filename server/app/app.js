@@ -17,6 +17,7 @@ const init = (data) => {
     const eventsController = require('./controllers/events.controller')(data); 
     const genresController = require('./controllers/genres.controller')(data);
     const authorsController = require('./controllers/authors.controller')(data);   
+    const informationController = require('./controllers/information.controller')(data);       
     
     app.use('/libs', express.static('node_modules'));
     app.use(bodyParser.json());
@@ -33,6 +34,7 @@ const init = (data) => {
 
     app.post('/login', usersController.login);
     app.post('/register', usersController.register);
+    app.get('/info', informationController.getInfo);
 
     // Users
     app.get('/users', auth.authenticate(passport), usersController.getAllUsers);

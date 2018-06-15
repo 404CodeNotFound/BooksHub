@@ -556,4 +556,17 @@ module.exports = class UserData {
             });
         });
     }
+
+    getTotalCount() {
+        return new Promise((resolve, reject) => {
+            User.count({ 'isDeleted': false },
+                (err, count) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(count);
+                    }
+                });
+        });
+    }
 }
