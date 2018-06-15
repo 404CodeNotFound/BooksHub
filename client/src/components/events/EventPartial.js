@@ -24,7 +24,7 @@ class EventPartial extends Component {
                     </span>
                 </div>
                 <Link to={"/events/" + this.props.event._id}>
-                    <img src={this.props.event.photo} width="200px" alt={this.props.event._id} />
+                    <img src={this.props.event.photo} width="200px" alt={this.props.event._id} className="events-imgs" />
                 </Link>
               </div>
             </div>

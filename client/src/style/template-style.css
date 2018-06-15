@@ -1,6 +1,9 @@
-html {
-    height: 100%;
-    width: 100%;
+html, body, {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
 body {
@@ -17,6 +20,11 @@ p {
 
 a, a:link, a:visited, a:hover, a:active {
     color: #777;
+}
+
+a:hover {
+    font-weight: bolder !important;
+    color: #4eb980 !important;
 }
 
 #logout-btn {
@@ -676,6 +684,68 @@ nav.fixed .left-menu, nav.fixed .right-menu {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+.downArrow{
+    /* position: fixed; */
+    padding-top: 6px;
+	bottom: 45%;
+    left: 50%;
+    font-size: 26pt;
+    color: white;
+}
+.bounce {
+	-moz-animation: bounce 3s infinite;
+	-webkit-animation: bounce 3s infinite;
+	animation: bounce 4s infinite;
+}
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -moz-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
 }
 
 @media screen and (max-width:768px) {

@@ -37,36 +37,38 @@ class EventsListPage extends Component {
                         <div className="loader-page">
                             <BarLoader color="#4eb980" size="11" />
                         </div> :
-                        (this.props.events.length <= 0) ? 
-                        <div>
-                            {this.props.currentUser.id &&
-                            <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
-                                <i className="fa fa-plus"></i> Create new event
+                        (this.props.events.length <= 0) ?
+                            <div>
+                                {this.props.currentUser.id &&
+                                    <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
+                                        <i className="fa fa-plus"></i> Create new event
                             </button>
-                            } 
-                            {this.props.isVisibleAddEventModal &&
-                                <AddEventModal />
-                            }
-                            <div className="no-events"> There is no events. </div>
-                        </div> :
-                        <div className="line">
-                            {this.props.currentUser.id &&
-                            <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
-                                <i className="fa fa-plus"></i> Create new event
+                                }
+                                {this.props.isVisibleAddEventModal &&
+                                    <AddEventModal />
+                                }
+                                <div className="no-events"> There is no events. </div>
+                            </div> :
+                            <div className="container">
+                                <div className="line">
+                                    {this.props.currentUser.id &&
+                                        <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
+                                            <i className="fa fa-plus"></i> Create new event
                             </button>
-                            }
-                            
-                            {this.props.isVisibleAddEventModal &&
-                                <AddEventModal />
-                            }
-                            <div className="row">
-                                {
-                                    this.props.events.map(event =>
+                                    }
 
-                                    <EventPartial event={event} key={event._id} />
-                                )}
+                                    {this.props.isVisibleAddEventModal &&
+                                        <AddEventModal />
+                                    }
+                                    <div className="row">
+                                        {
+                                            this.props.events.map(event =>
+
+                                                <EventPartial event={event} key={event._id} />
+                                            )}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     }
                 </section>
             </article>
@@ -82,7 +84,7 @@ function mapStateToProps(state, ownProps) {
         events: state.events.events,
         currentUser: { username: username, id: userId },
         isLoaderVisible: state.loaders.showLoader,
-        isVisibleAddEventModal: state.modals.showAddEventModal,        
+        isVisibleAddEventModal: state.modals.showAddEventModal,
     };
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const style = {
     backgroundImage: `url("img/banner.jpg")`
@@ -14,6 +14,9 @@ class HomePage extends Component {
                         Today a reader, tomorrow a leader.
                     </h1>
                     <p className="text-white">- Margaret Fuller</p>
+                    <div class="downArrow bounce">
+                        <i class="fa fa-angle-double-down"></i>
+                    </div>
                     <img className="arrow-object" src="img/arrow-object-white.svg" alt="" />
                 </header>,
                 <section key="statistics" className="background-white statistics">

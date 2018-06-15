@@ -7,8 +7,10 @@
 }
 
 .box-item img {
-    width: 150%;
+    /* width: 150%; */
+    width:  500px;    
 }
+
 .box-item .box-post .label a, .box-item .box-post .post-title, .label-success {
     margin-left: 1%;
     color:#FFF;
@@ -55,6 +57,14 @@
 .event-cover:hover img {
     webkit-filter: blur(9px);
     filter: blur(9px);
+}
+
+.events-imgs {
+    float: left;
+    height: 300px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .event-cover:hover i {
