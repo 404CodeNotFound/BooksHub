@@ -22,16 +22,16 @@ class BookDetailsPage extends Component {
 
     render() {
         return (
-                <article>
-                    <header className="section text-center" style={this.backgroundImage}>
-                        <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
-                            Book Details
+            <article>
+                <header className="section text-center" style={this.backgroundImage}>
+                    <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
+                        Book Details
                       </h1>
-                        <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
-                    </header>
+                    <img className="arrow-object" src="../img/arrow-object-white.svg" alt="arrow" />
+                </header>
 
-                    <div className="container">
-                        {this.props.isLoaderVisible ? 
+                <div className="container">
+                    {this.props.isLoaderVisible ?
                         <div className="loader-page">
                             <BarLoader color="#4eb980" size="11" />
                         </div>
@@ -48,7 +48,7 @@ class BookDetailsPage extends Component {
                               </div>
                                             <form id="rating-form" method="post">
                                                 <fieldset className="rating">
-                                                    <input type="radio" value="5"/>
+                                                    <input type="radio" value="5" />
                                                     <label className={this.shouldBeMarked(5) ? 'marked-star' : ''} title="Rocks!" value='5' onClick={() => this.handleRateBook(5)}></label>
 
                                                     <input type="radio" value="4" />
@@ -149,26 +149,24 @@ class BookDetailsPage extends Component {
                                         <button className="btn-main-sm col-md-3 col-sm-12" id="all-reviews-link" onClick={event => this.handleScrollToElement(event, "reviews")}>
                                             <i className="fa fa-comments"></i> See reviews</button>
                                         {this.props.currentUser.username &&
-                                            (this.props.currentUser.role !== "Admin" &&
-                                                [<button key="recommend-btn" className="btn-main-sm col-md-3 col-sm-12" onClick={this.props.openRecommendBookModal}>
-                                                    <i className="fa fa-user"></i> Recommend
+                                            [<button key="recommend-btn" className="btn-main-sm col-md-3 col-sm-12" onClick={this.props.openRecommendBookModal}>
+                                                <i className="fa fa-user"></i> Recommend
                                                 </button>,
-                                                (this.props.isVisibleRecommendBookModal &&
-                                                    <RecommendBookModal key="recommend-modal" book={{ title: this.props.book.title, id: this.props.book._id }}/>
-                                                )]
-                                            )
+                                            (this.props.isVisibleRecommendBookModal &&
+                                                <RecommendBookModal key="recommend-modal" book={{ title: this.props.book.title, id: this.props.book._id }} />
+                                            )]
                                         }
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        }
-                    </div>
-                    {(this.props.currentUser.username && this.props.canWriteReview) &&
-                        <WriteReview />
                     }
-                    <BookReviewsList />
-                </article>
+                </div>
+                {(this.props.currentUser.username && this.props.canWriteReview) &&
+                    <WriteReview />
+                }
+                <BookReviewsList />
+            </article>
         )
     }
 
@@ -191,7 +189,7 @@ class BookDetailsPage extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        if(!nextProps.book.title && nextProps.error) {
+        if (!nextProps.book.title && nextProps.error) {
             this.props.history.push("/NotFound");
         }
     }
