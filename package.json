@@ -30,7 +30,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon ./server/server.js",
     "client": "cd client && npm start",
-    "start": "cd client && npm run build && cd .. && node ./server/server.js"
+    "start": "npm install && cd client && npm install && npm run build && cd .. && node ./server/server.js"
   },
   "repository": {
     "type": "git",
