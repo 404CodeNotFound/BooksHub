@@ -31,7 +31,7 @@
     "server": "nodemon ./server/server.js",
     "client": "cd client && npm start",
     "start": "node ./server/server.js",
-    "postinstall": "cd client && npm install cd .. && npm install",
+    "postinstall": "cd client && npm install && cd .. && npm install",
     "heroku-postbuild": "cd client && npm run build && cd .."  
   },
   "repository": {
