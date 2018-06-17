@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "autoprefixer": "^8.6.2",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -46,7 +47,7 @@
     "sweetalert2-react": "^0.7.2",
     "url-loader": "^1.0.1",
     "webpack": "^4.1.1",
-    "webpack-cli": "^3.0.8"    
+    "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
