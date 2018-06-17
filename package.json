@@ -32,7 +32,8 @@
     "client": "cd client && npm start",
     "start": "node ./server/server.js",
     "postinstall": "cd client && npm install && cd ..",
-    "heroku-postbuild": "cd client && npm run build && cd .."  
+    "heroku-postbuild": "cd client && npm run build && cd ..",
+    "app": "cd client && npm run build && cd .. && node ./server/server.js"  
   },
   "repository": {
     "type": "git",

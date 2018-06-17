@@ -104,5 +104,6 @@ module.exports = {
     }),
     new webpack.NamedModulesPlugin(),
     new CaseSensitivePathsPlugin(),
-  ]
+  ],
+  target: 'node'
 };
