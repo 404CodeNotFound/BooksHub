@@ -1,6 +1,6 @@
 const protocol = 'mongodb:/';
 const server = 'ds261540.mlab.com:61540';
-const port = process.env.port;
+const port = process.env.PORT;
 const databaseName = 'bookshub';
 const dbuser = 'root';
 const dbpassword = 'bookshub123456';
