@@ -30,7 +30,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon ./server/server.js",
     "client": "cd client && npm start",
-    "start": "npm install && cd client && npm install && npm run build && cd .. && node ./server/server.js"
+    "start": "node ./server/server.js",
+    "postinstall": "cd client && npm install cd .. && npm install",
+    "heroku-postbuild": "cd client && npm run build && cd .."  
   },
   "repository": {
     "type": "git",
