@@ -58,5 +58,6 @@ typings/
 .env
 
 build/
+public/
 
 bash.exe.stackdump

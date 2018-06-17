@@ -1,9 +1,11 @@
 const protocol = 'mongodb:/';
-const server = 'localhost:27017';
-const port = '3003';
-const databaseName = 'BooksHub';
+const server = 'ds261540.mlab.com:61540';
+const port = process.env.port;
+const databaseName = 'bookshub';
+const dbuser = 'root';
+const dbpassword = 'bookshub123456';
 const secret = 'purple-unicorn';
 
-const connectionString = `${protocol}/${server}/${databaseName}`;
+const connectionString = `${protocol}/${dbuser}:${dbpassword}@${server}/${databaseName}`;
 
 module.exports = { port, connectionString, secret };
