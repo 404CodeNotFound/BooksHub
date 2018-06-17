@@ -1,46 +1,108 @@
 const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+
 
 module.exports = {
-  entry: [
-    'babel-polyfill',
-    ".src/index.js"
-  ],
+  entry:
+    "./src/index.js"
+  ,
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: "bundle.js"
+    path: path.join(__dirname, './build'),
+    filename: './bundle.js',
+    publicPath: '/'
+  },
+  resolve: {
+    modules: ['node_modules', 'node_modules'],
+    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+    alias: {
+        'react-native': 'react-native-web'
+    },
+    plugins: [
+        new ModuleScopePlugin(path.join(__dirname, './src')),
+    ],
   },
   module: {
+    strictExportPresence: true,
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015', 'react']
-        }
-
+        exclude: [
+            /\.html$/,
+            /\.(js|jsx)$/,
+            /\.css$/,
+            /\.json$/,
+            /\.bmp$/,
+            /\.gif$/,
+            /\.jpe?g$/,
+            /\.png$/,
+        ],
+        loader: require.resolve('file-loader'),
+        options: {
+            name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: require.resolve('url-loader'),
+        options: {
+            limit: 10000,
+            name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        include: path.join(__dirname, './src'),
+        loader: require.resolve('babel-loader'),
+        options: {
+          presets: ['es2015', 'react'],
+          plugins: [ "transform-object-rest-spread",
+              "transform-class-properties"
+          ],
+          compact: true,
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test:  /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
         use: [
-          {
-            loader: 'file-loader',
-            options: {}
-          }
-        ]
+            require.resolve('style-loader'),
+            {
+                loader: require.resolve('css-loader'),
+                options: {
+                    importLoaders: 1,
+                },
+            },
+            {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                    plugins: () => [
+                        require('postcss-flexbugs-fixes'),
+                        autoprefixer({
+                            browsers: [
+                                '>1%',
+                                'last 4 versions',
+                                'Firefox ESR',
+                                'not ie < 9',
+                            ],
+                            flexbox: 'no-2009',
+                        }),
+                    ],
+                },
+            },
+        ],
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
-          }
-        ]
-      }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+        inject: true,
+        template: './public/index.html',
+    }),
+    new webpack.NamedModulesPlugin(),
+    new CaseSensitivePathsPlugin(),
+  ]
 };
