@@ -1,3 +1,6 @@
+const errors = require('../../utils/error.constants');
+const generateErrorResponse = require('../../utils/error.responses');
+
 module.exports = (data) => {
     return {
         getPendingUserRequests: (req, res) => {
@@ -6,89 +9,53 @@ module.exports = (data) => {
 
             if (!userId) {
                 res.status(400)
-                    .json({ message: "You should provide user id." });
+                    .json({ message: errors.MISSING_USER_ID });
+            } else if (userId != req.user._id) {
+                res.status(403)
+                    .json({ message: errors.PERMISSIONS_DENIED });
             } else {
                 data.users.getUserById(userId)
                     .then(user => {
                         if (!user) {
-                            res.status(404)
-                                .json({ message: "User was not found." })
-
-                            return res;
+                            throw Error(erros.USER_NOT_FOUND);
                         }
                     })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
-                        return res;
-                    });
-
-                data.requests.getPendingRequests(userId, page)
+                    .then(() => data.requests.getPendingRequests(userId, page))
                     .then(requests => {
                         res.status(200)
                             .json(requests);
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' })
+                        generateErrorResponse(res, error.message);
                     });
             }
 
             return res;
         },
-        sendRequests: (req, res) => {
+        sendRequest: (req, res) => {
             const receiverId = req.params.id;
-            const senderId = req.body.id;
+            const senderId = req.user._id;
 
             if (!receiverId) {
                 res.status(400)
-                    .json({ message: "You should provide id of receiver." });
-            } else if (!senderId) {
-                res.status(400)
-                    .json({ message: "You should provide id of sender." });
+                    .json({ message: errors.MISSING_USER_ID });
             } else {
                 data.users.getUserById(receiverId)
                     .then(user => {
                         if (!user) {
-                            res.status(404)
-                                .json({ message: "Receiver was not found." });
-
-                            return res;
+                            throw Error(errors.USER_NOT_FOUND);
                         }
                     })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
-
-                        return res;
-                    });
-
-                data.users.getUserById(senderId)
-                    .then(user => {
-                        if (!user) {
-                            res.status(404)
-                                .json({ message: "Sender was not found." });
-
-                            return res;
-                        }
-                    })
-                    .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
-
-                        return res;
-                    });
-
-                data.requests.postRequest(receiverId, senderId)
+                    .then(() => data.requests.postRequest(receiverId, senderId))
                     .then(request => {
                         return data.users.addRequest(receiverId, request._id);
                     })
                     .then(user => {
-                        res.status(201).json("Created");
+                        res.status(201)
+                            .json("Created");
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                        generateErrorResponse(res, error.message);
                     });
             }
 
@@ -98,19 +65,25 @@ module.exports = (data) => {
             const requestId = req.params.id;
             if (!requestId) {
                 res.status(400)
-                    .json({ message: "You should provide id of request." });
+                    .json({ message: errors.MISSING_REQUEST_ID });
             } else {
-                data.requests.getAndDeleteRequest(requestId)
+                data.requests.getRequest(requestId)
                     .then(request => {
-                        const receiverId = request.receiver;
-                        const senderId = request.sender;
+                        if (!request) {
+                            throw Error(errors.REQUEST_NOT_FOUND);
+                        }
 
-                        return data.users.connectUsers(receiverId, senderId);
+                        if (!req.user._id.equals(request.receiver)) {
+                            throw Error(errors.PERMISSIONS_DENIED);
+                        }
+
+                        return request;
                     })
+                    .then(request => data.requests.deleteRequest(request))
+                    .then((request) => data.users.connectUsers(request.receiver, request.sender))
                     .then(() => res.status(201).json("Accepted"))
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                        generateErrorResponse(res, error.message);
                     });
             }
 
@@ -120,19 +93,28 @@ module.exports = (data) => {
             const requestId = req.params.id;
             if (!requestId) {
                 res.status(400)
-                    .json({ message: "You should provide id of request." });
+                    .json({ message: errors.MISSING_REQUEST_ID });
             } else {
-                data.requests.getAndDeleteRequest(requestId)
+                data.requests.getRequest(requestId)
                     .then(request => {
-                        const userId = request.receiver;
-                        return data.users.deleteRequest(userId, requestId);
+                        if (!request) {
+                            throw Error(errors.REQUEST_NOT_FOUND);
+                        }
+
+                        if (!req.user._id.equals(request.receiver)) {
+                            throw Error(errors.PERMISSIONS_DENIED);
+                        }
+
+                        return request;
                     })
+                    .then(request => data.requests.deleteRequest(request))
+                    .then(request => data.users.deleteRequest(request.receiver, requestId))
                     .then(() => {
-                        res.status(200).json("Removed");
+                        res.status(200)
+                            .json("Removed");
                     })
                     .catch(error => {
-                        res.status(500)
-                            .json({ message: 'Something went wrong!' });
+                        generateErrorResponse(res, error.message);
                     });
             }
 

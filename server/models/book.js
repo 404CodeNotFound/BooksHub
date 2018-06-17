@@ -27,7 +27,8 @@ module.exports = function init(mongoose) {
         summary: String,
         rating: {
             type: Number,
-            max: 5
+            max: 5,
+            default: 0
         },
         photo: {
             type: String,
@@ -41,8 +42,20 @@ module.exports = function init(mongoose) {
         }],
         reviews: [{
             type: Schema.ObjectId,
-            ref: 'Comment'
-        }]
+            ref: 'Review'
+        }],
+        ratings: [{
+            type: Schema.ObjectId,
+            ref: 'Rating'
+        }],
+        statuses: [{
+            type: Schema.ObjectId,
+            ref: 'Status'
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
     });
 
     const Book = mongoose.model('Book', BookSchema);

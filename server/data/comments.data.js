@@ -1,6 +1,6 @@
 const { Comment } = require('../models');
 const getPageOfCollection = require('../utils/pagination');
-const itemsPerPage = 1;
+const itemsPerPage = 8;
 
 module.exports = class CommentsData {
     getComments(id, page) {
@@ -24,6 +24,24 @@ module.exports = class CommentsData {
         });
     }
 
+    createComment(comment, userId, eventId) {
+        return new Promise((resolve, reject) => {
+            const newComment = new Comment();
+            newComment.content = comment.content;
+            newComment.posted_on = comment.posted_on;
+            newComment.user = userId;
+            newComment.event = eventId;
+
+            newComment.save((err, createdComment) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(createdComment);
+                }
+            });
+        });
+    }
+
     deleteComment(id) {
         return new Promise((resolve, reject) => {
             Comment.remove({ '_id': id }, (err) => {
@@ -33,6 +51,19 @@ module.exports = class CommentsData {
                     return resolve();
                 }
             });
+        });
+    }
+
+    getComment(id) {
+        return new Promise((resolve, reject) => {
+            Comment.findById(id)
+                .exec((err, comment) => {
+                    if (err) {
+                        return reject(err);
+                    } else {                        
+                        return resolve(comment);
+                    }
+                });
         });
     }
 }

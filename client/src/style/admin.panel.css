@@ -1,39 +1,40 @@
 .user-dashboard-menu li {
     margin-bottom: 5px;
 }
-  
-  .user-dashboard-menu li.active {
-    background: #4eb980;;
+
+.user-dashboard-menu li.active {
+    background: #4eb980;
+    ;
     color: #fff;
-  }
-  
-  .user-dashboard-menu li.active a:hover {
+}
+
+.user-dashboard-menu li.active a:hover {
     color: #fff;
-  }
-  
-  .user-dashboard-menu li {
+}
+
+.user-dashboard-menu li {
     padding: 10px;
     font-size: 15px;
     display: block;
     font-weight: 600;
     color: #555;
     cursor: pointer;
-  }
-  
-  .user-dashboard-menu li a:hover {
+}
+
+.user-dashboard-menu li a:hover {
     color: #4eb980;
-  }
-  
-  .user-dashboard-menu li a:hover span {
+}
+
+.user-dashboard-menu li a:hover span {
     background: #4eb980;
     color: #fff;
-  }
-  
-  .user-dashboard-menu li a i {
+}
+
+.user-dashboard-menu li a i {
     margin-right: 5px;
-  }
-  
-  .user-dashboard-menu li a span {
+}
+
+.user-dashboard-menu li a span {
     float: right;
     background: #F4F7F9;
     float: right;
@@ -41,24 +42,25 @@
     border-radius: 8px;
     padding: 3px 8px;
     color: #84919B;
-  }
+}
 
-  ul {
+ul {
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-  
-  .btn-main-sm {
-    background: #4eb980;;
+}
+
+.btn-main-sm {
+    background: #4eb980;
+    ;
     color: #fff !important;
     border: none;
     padding: 5px 15px 5px 15px;
-  }
+}
 
-  td a {
-      color: #4eb980 !important;
-  }
+td a {
+    color: #4eb980 !important;
+}
 
 .pagination {
     margin-top: 10%;
@@ -71,14 +73,46 @@
     padding: 5px 10px 5px;
     margin-right: 2px;
 }
+
 .pagination li.active {
-    background-color: #4eb980;    
+    background-color: #4eb980;
     color: white;
 }
+
 .pages {
     margin-top: 10%;
 }
 
-.background-image {
-  background-image: url(../img/banner-blurred.jpg);
+.modal {
+    display: block !important;
+}
+
+#admin-page-content {
+    margin-left: 5%;
+}
+
+#admin-menu {
+    padding-left: 0;
+}
+
+#admin-menu>li.active>a {
+    color: white;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #4eb980;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.action-btn:hover {
+    font-weight: 500;
+}
+
+td>img {
+    margin-left: auto;
+    margin-right: auto;
 }

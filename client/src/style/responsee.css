@@ -198,6 +198,14 @@ nav {
   -webkit-transition: background 0.20s linear 0s;
 }
 
+.top-nav > ul.show-menu,.aside-nav.minimize-on-small > ul.show-menu {height:auto;}
+.top-nav ul ul {
+  left:0;
+  margin-top:0;
+  position:relative;
+  right:0;
+} 
+
 .margin, .margin2x {
   display: block;
 }

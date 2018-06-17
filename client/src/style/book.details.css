@@ -34,6 +34,10 @@
     color: #f70;
 }
 
+.marked-star {
+    color: gold !important;    
+}
+
 .rating:not(:checked) > label:hover,
 .rating:not(:checked) > label:hover ~ label {
     color: gold;
@@ -74,10 +78,6 @@ dt {
 
 dd {
     margin-left: 15% !important;
-}
-
-.background-image {
-    background-image: url(../img/banner-blurred.jpg);
 }
 
 .icon-sli-pencil.text-primary, 
@@ -135,6 +135,11 @@ blockquote cite {
 
 blockquote cite:before {
     content: "\2014 \2009";
+}
+
+#review-content {
+    width: 100%;
+    margin: auto;
 }
 
 @media only screen and (max-width: 600px) {

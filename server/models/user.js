@@ -21,6 +21,12 @@ module.exports = function init(mongoose) {
             type: String,
             required: true
         },
+        role: {
+            type: String,
+            required: true,
+            enum: ['Admin', 'User'],
+            default: 'User'
+        },
         email: {
             type: String
         },
@@ -32,7 +38,8 @@ module.exports = function init(mongoose) {
         birth_date: Date,
         favourite_quote: String,
         favourite_genres: [{
-            type: String
+            type: Schema.ObjectId,
+            ref: 'Genre'
         }],
         languages: [{
             type: String
@@ -69,10 +76,18 @@ module.exports = function init(mongoose) {
             type: Schema.ObjectId,
             ref: 'Event'
         }],
+        ratings: [{
+            type: Schema.ObjectId,
+            ref: 'Rating'
+        }],
         recommended_books: [{
             type: Schema.ObjectId,
             ref: 'Book'
-        }]
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        }
     });
 
     const User = mongoose.model('User', UserSchema);

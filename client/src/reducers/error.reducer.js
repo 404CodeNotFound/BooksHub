@@ -5,9 +5,12 @@ export default function errors(state = { validationErrors: [], error: null }, ac
                 ...state,
                 error: null
             };
-        case 'REMOVE_VALIDATION_ERRORS':
+        case 'REMOVE_VALIDATION_ERROR':
             return {
-                ...state,
+                validationErrors: removeFromCollection(state.validationErrors, action.param)
+            };
+        case 'REMOVE_ALL_VALIDATION_ERRORS':
+            return {
                 validationErrors: []
             };
         case 'ACTION_FAILED':
@@ -23,4 +26,16 @@ export default function errors(state = { validationErrors: [], error: null }, ac
         default:
             return state;
     }
+}
+
+function removeFromCollection(collection, param) {
+    debugger;
+    const length = collection.length;
+    const index = collection.findIndex(item => item.param === param);
+    const newCollection = [
+        ...collection.slice(0, index),
+        ...collection.slice(index + 1, length)
+    ];
+
+    return newCollection;
 }

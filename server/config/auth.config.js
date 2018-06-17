@@ -1,4 +1,3 @@
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -7,12 +6,13 @@ const { secret } = require('./config');
 
 const configAuth = {
     init: (app, { users }, passport, db) => {
-        app.use(cookieParser('keyboard cat'));
         app.use(bodyParser.urlencoded({
             extended: true,
         }));
+
         app.use(bodyParser.json());
         app.use(passport.initialize());
+        
         const options = {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: secret
@@ -27,12 +27,9 @@ const configAuth = {
                     const userProfile = {
                         _id: user._id,
                         username: user.username,
-                        firstName: user.first_Name,
-                        lastName: user.last_Name,
-                        nationality: user.nationality,
-                        age: user.age,
-                        favouriteQuote: user.favourite_quote,
-                        photo: user.photo,
+                        firstName: user.first_name,
+                        lastName: user.last_name,
+                        role: user.role
                     };
                     return done(null, userProfile);
                 } else {

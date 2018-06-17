@@ -1,6 +1,31 @@
-.icon .fa {
-    font-size: 14pt !important;
+.icon .fa:not(selected) {
+    font-size: 14pt !important;    
     cursor: pointer;
+    color: #555555;
+}
+
+span small {
+    color: #555555;
+}
+
+.selected {
+    color: #4eb980 !important;
+}
+
+.genre-label, .filter label {
+    color: rgb(69, 69, 69);
+    font-weight: 200;
+    font-size: 12pt;
+}
+
+.filter h4 {
+    font-weight: 300;
+}
+
+.btn input[type=radio] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
 }
 
 .input {
@@ -28,13 +53,13 @@
     width: 50%;
 }
 
+.search-form div.row {
+    align-items: center;
+}
+
 .search-input {
     width: 92%;
     padding-left: 5%;
-}
-
-.search-submit {
-    padding-top: 5%;
 }
 
 .options {
@@ -44,10 +69,7 @@
 .search-panel {
     border: 0px !important;
     margin-bottom: 0px !important;
-}
-
-.selected {
-    color: #4eb980;
+    margin-top: 12%;
 }
 
 .checkbox {
@@ -153,6 +175,10 @@ div.card {
     margin-bottom: 2px;
 }
 
+h5.card-title {
+    color: #4eb980;
+}
+
 .card-footer {
     background: none;
     border: 0;
@@ -196,6 +222,92 @@ div.card {
 
 .background-image {
     background-color: #4eb980;
+}
+
+
+.radio {
+    padding-left: 20px; 
+}
+.radio label {
+    display: inline-block;
+    position: relative;
+    padding-left: 5px; 
+}
+.radio label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    margin-left: -20px;
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out; 
+}
+.radio label::after {
+    display: inline-block;
+    position: absolute;
+    content: " ";
+    width: 11px;
+    height: 11px;
+    left: 3px;
+    top: 3px;
+    margin-left: -20px;
+    border-radius: 50%;
+    background-color: #555555;
+    -webkit-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+    -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+    -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+    -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+    transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33); 
+}
+
+.radio input[type="radio"] {
+    opacity: 0; 
+}
+
+.radio input[type="radio"]:focus + label::before {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; 
+}
+    
+.radio input[type="radio"]:checked + label::after {
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1); 
+}
+
+.radio input[type="radio"]:disabled + label {
+    opacity: 0.65; 
+}
+
+.radio input[type="radio"]:disabled + label::before {
+    cursor: not-allowed; 
+}
+  
+.radio-selected input[type="radio"] + label::after {
+    background-color: #5cb85c; 
+}
+
+.radio-selected input[type="radio"]:checked + label::before {
+    border-color: #5cb85c; 
+}
+
+.radio-selected input[type="radio"]:checked + label::after {
+    background-color: #5cb85c; 
+}
+
+#search-results-books, #search-results-events, #search-results-users {
+    margin-bottom: 11%;
 }
 
 @media only screen and (max-width: 1097px) {

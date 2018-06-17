@@ -13,7 +13,10 @@ module.exports = function init(mongoose) {
             required: true
         },
         nationality: String,
-        birth_date: Date,
+        birth_date: {
+            type: Date,
+            default: new Date()
+        },
         age: Number,
         biography: String,
         website: String,
@@ -24,7 +27,11 @@ module.exports = function init(mongoose) {
         books: [{
             type: Schema.ObjectId,
             ref: 'Book'
-        }]
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
     });
 
     AuthorSchema.index({ first_name: 1, last_name: 1 }, { unique: true });

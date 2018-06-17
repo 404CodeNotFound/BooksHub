@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import $ from 'jquery';
 import * as usersActions from '../../../actions/users.actions';
 
 class Header extends Component {
     state = {
-        links:['active-item', '', '', '', '', '']
+        links: ['active-item', '', '', '', '', ''],
+        isMobile: false
     };
 
     render() {
         return (
-            <header role="banner" className="position-absolute">
+            <header role="banner" className="header-absolute">
                 <nav className="background-transparent background-primary-dott full-width sticky">
                     <div className="top-nav">
                         <div className="logo hide-l hide-xl hide-xxl">
@@ -20,18 +21,18 @@ class Header extends Component {
                                 <img className="logo-dark" src="../img/book-logo.png" alt="book-logo" />
                             </Link>
                         </div>
-                        <p className="nav-text"></p>
+                        <p className="nav-text" onClick={this.changeNavigationVisibility}></p>
 
                         <div className="top-nav left-menu">
-                            <ul className="right top-ul chevron">
+                            <ul className={"right top-ul chevron " + (this.state.isMobile ? 'show-menu' : '')}>
                                 <li className={this.state.links[0]}>
                                     <Link to="/" onClick={() => this.changeActiveLink(0)}>Home</Link>
                                 </li>
-                                <li className={this.state.links[1]}>
-                                    <Link to="/books" onClick={() => this.changeActiveLink(1)}>Books</Link>
+                                <li>
+                                    <NavLink exact to="/books" activeClassName="active-item">Books</NavLink>
                                 </li>
-                                <li className={this.state.links[2]}>
-                                    <Link to="/events" onClick={() => this.changeActiveLink(2)}>Events</Link>
+                                <li>
+                                    <NavLink exact to="/events" activeClassName="active-item">Events</NavLink>
                                 </li>
                             </ul>
                         </div>
@@ -44,22 +45,22 @@ class Header extends Component {
                         </ul>
 
                         <div className="top-nav right-menu">
-                            <ul className="top-ul chevron">
+                            <ul className={"top-ul chevron " + (this.state.isMobile ? 'show-menu' : '')}>
                                 <li className={this.state.links[3]}>
                                     <Link to="/search" onClick={() => this.changeActiveLink(3)}>Search</Link>
                                 </li>
-                                <li className={this.state.links[4]}>
+                                <li>
                                     {!this.props.currentUser ?
-                                        <Link to="/login" onClick={() => this.changeActiveLink(4)}>Log in</Link> :
-                                        (this.props.currentUser.role === 'admin' ?
-                                            <Link to="/administration" onClick={() => this.changeActiveLink(4)}>Admin Panel</Link> :
-                                            <Link to={"/users/" + this.props.currentUser + "/profile"} onClick={() => this.changeActiveLink(4)}>My Profile</Link>
+                                        <NavLink exact to="/login" activeClassName="active-item">Log in</NavLink> :
+                                        (this.props.currentUserRole === 'Admin' ?
+                                            <NavLink exact to="/administration/books" activeClassName="active-item">Admin Panel</NavLink> :
+                                            <NavLink exact to={"/users/" + this.props.currentUser + "/profile"} activeClassName="active-item">My Profile</NavLink>
                                         )
                                     }
                                 </li>
-                                <li className={this.state.links[5]}>
+                                <li>
                                     {!this.props.currentUser ?
-                                        <Link to="/register" onClick={() => this.changeActiveLink(5)}>Register</Link> :
+                                        <NavLink exact to="/register" activeClassName="active-item">Register</NavLink> :
                                         <Link to="/" onClick={this.props.logout}>Logout</Link>
                                     }
                                 </li>
@@ -83,12 +84,18 @@ class Header extends Component {
 
         this.setState({ links: changedLinks });
     }
+
+    changeNavigationVisibility = () => {
+        this.setState({ ...this.state, isMobile: !this.state.isMobile });
+    }
 }
 
 function mapStateToProps(state, ownProps) {
     const currentUser = localStorage.getItem('username');
+    const currentUserRole = localStorage.getItem('role');
     return {
-        currentUser: currentUser
+        currentUser: currentUser,
+        currentUserRole: currentUserRole
     };
 }
 
@@ -105,6 +112,11 @@ $(window).scroll(function () {
     else {
         $('.sticky').removeClass("fixed");
     }
+});
+
+$('.nav-text').click(function () {
+    console.log('navigation')
+    $('.top-nav > ul').toggleClass('show-menu', 'fast');
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

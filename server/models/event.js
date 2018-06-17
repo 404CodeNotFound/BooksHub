@@ -6,11 +6,13 @@ module.exports = function init(mongoose) {
             type: String,
             required: true
         },
-        start_time: {
+        start_date: {
             type: Date,
             required: true
         },
-        end_time: Date,
+        end_date: Date,
+        start_time:String,
+        end_time: String,
         place: {
             type: String,
             required: true
@@ -40,7 +42,11 @@ module.exports = function init(mongoose) {
         participants: [{
             type: Schema.ObjectId,
             ref: 'User'
-        }]
+        }],
+        isDeleted: {
+            type: Boolean,
+            default: false
+        }
     });
 
     const Event = mongoose.model('Event', EventSchema);

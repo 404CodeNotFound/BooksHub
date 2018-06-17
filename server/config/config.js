@@ -1,5 +1,5 @@
 const protocol = 'mongodb:/';
-const server = 'localhost';
+const server = 'localhost:27017';
 const port = '3003';
 const databaseName = 'BooksHub';
 const secret = 'purple-unicorn';

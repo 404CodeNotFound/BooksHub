@@ -26,6 +26,7 @@ const requester = {
         return $.ajax({
             url: url,
             type: "POST",
+            dataType: 'json',
             data: body
         });
     },

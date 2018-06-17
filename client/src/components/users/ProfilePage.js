@@ -11,30 +11,32 @@ import FriendsList from './profile-partials/FriendsList';
 import InvitationsList from './profile-partials/InvitationsList';
 import ReviewsList from './profile-partials/ReviewsList';
 import EditUserModal from './common/EditUserModal';
+import * as modalsActions from '../../actions/modals.actions';
 import { BarLoader } from 'react-css-loaders';
 import '../../style/profile.css';
 
 class ProfilePage extends Component {
-    state = { links: ['active', '', '', '', '', '', '', '', '', '', ''], isOpen: false };
-
-    toggleModal = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+    state = { links: ['active', '', '', '', '', '', '', '', '', '', ''] };
+    style = {
+        backgroundImage: "url(../../img/banner-blurred.jpg)"
+    };
 
     render() {
         return (
-            this.props.user !== null ?
-                [<header key="profile-header" className="section background-image text-center">
+                [<header key="profile-header" className="section text-center" style={this.style}>
                     <h1 className="animated-element slow text-extra-thin text-white text-s-size-30 text-m-size-40 text-size-50 text-line-height-1 margin-bottom-30 margin-top-130">
-                        {this.props.user.username === this.props.currentUser.username ?
+                        {this.props.user === null ? "Profile ": 
+                            (this.props.user.username === this.props.currentUser.username) ?
                             <span>Hello, {this.props.user.first_name} {this.props.user.last_name}!</span> :
                             <span>{this.props.user.first_name} {this.props.user.last_name}</span>
                         }
                     </h1>
                     <img className="arrow-object" src="../../img/arrow-object-white.svg" alt="arrow" />
                 </header>,
+                this.props.user === null ?
+                <div className="loader-page" key="loader">
+                    <BarLoader color="#4eb980" size="11" />
+                </div> :
                 <section key="profile-section" className="background-white dashboard section">
                     <div className="row">
                         <div className="col-md-3">
@@ -46,11 +48,9 @@ class ProfilePage extends Component {
                                     <h5 className="text-center">{this.props.user.first_name} {this.props.user.last_name}</h5>
                                     <p>{this.props.user.username}</p>
                                     {this.props.currentUser.username === this.props.user.username ?
-                                        <button type="button" className="btn btn-main-green" onClick={this.toggleModal}>Edit Profile</button> :
-                                        (this.showInviteButton() &&
-                                            (!this.props.hideInviteButton &&
+                                        <button type="button" className="btn btn-main-green" onClick={() => this.props.openEditUserModal(this.props.user)}>Edit Profile</button> :
+                                        (this.showInviteButton() && !this.props.hideInviteButton &&
                                                 <button type="button" className="btn btn-main-green" onClick={this.sendInvitation}>Send Invitation</button>
-                                            )
                                         )
                                     }
                                 </div>
@@ -147,12 +147,11 @@ class ProfilePage extends Component {
                                     title="Pending Invitations Collection" />} />
                         </div>
                     </div>
-                    <EditUserModal isVisible={this.state.isOpen} toggleModal={this.toggleModal} user={this.props.user} />
+                    {this.props.isVisibleEditUserModal &&
+                        <EditUserModal />
+                    }
                 </section >
-                ] :
-                <div className="loader-page">
-                    <BarLoader color="#4eb980" size="11" />
-                </div>
+                ]
         )
     }
 
@@ -170,13 +169,16 @@ class ProfilePage extends Component {
     }
 
     sendInvitation = () => {
-        const senderId = localStorage.getItem('id');
         const receiverId = this.props.user._id;
 
-        this.props.sendInvitation(senderId, receiverId);
+        this.props.sendInvitation(receiverId);
     }
 
     showInviteButton = () => {
+        if(!this.props.currentUser.id) {
+            return false;
+        }
+
         const friendIndex = this.props.user.friends.findIndex(friend => friend === this.props.currentUser.id);
         const requestIndex = this.props.user.requests.findIndex(request => request.sender === this.props.currentUser.id);
         if (friendIndex >= 0 || requestIndex >= 0) {
@@ -184,6 +186,12 @@ class ProfilePage extends Component {
         }
 
         return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if(!nextProps.user) {
+            this.props.history.push("/NotFound");
+        }
     }
 }
 
@@ -194,14 +202,16 @@ function mapStateToProps(state, ownProps) {
     return {
         user: state.users.profile,
         currentUser: { username: username, id: userId },
-        hideInviteButton: state.invitations.hideInviteButton
+        hideInviteButton: state.invitations.hideInviteButton,
+        isVisibleEditUserModal: state.modals.showEditUserModal,
     };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         getProfile: dispatch(usersActions.getProfile(ownProps.match.params.username)),
-        sendInvitation: (senderId, receiverId) => dispatch(invitationsActions.sendInvitation(senderId, receiverId))
+        sendInvitation: (receiverId) => dispatch(invitationsActions.sendInvitation(receiverId)),
+        openEditUserModal: (user) => dispatch(modalsActions.openEditUserModal(user))
     };
 }
 

@@ -47,10 +47,6 @@ dd {
     margin-left: 15% !important;
 }
 
-.background-image {
-    background-image: url(../img/banner-blurred.jpg);
-}
-
 .no-padding.col-lg-3, .no-padding.col-md-3, .no-padding.col-sm-10, .no-padding.col-lg-6, .no-padding.col-md-6, .no-padding.col-sm-12 {
      padding-left: 0px; 
      padding-right: 0px;
@@ -158,4 +154,51 @@ dd {
 
 #reviews .row {
     margin-bottom: 3%;
+}
+
+#joined-users-text a {
+    color: #4eb980;
+}
+
+#joined-users-text a:hover {
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.friend-list .friend-card{
+    border-radius: 4px;
+    border-bottom: 1px solid #f1f2f2;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.friend-list .friend-card .card-info{
+    padding: 0 20px 10px;
+}
+
+.friend-list .friend-card .card-info img.profile-photo-lg{
+    border: 7px solid #fff;
+}
+
+img.profile-photo-lg {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.text-green {
+    color: #8dc63f;
+}
+
+#link-to-map {
+    color: #4eb980 !important;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+}
+
+#link-to-map:hover {
+    border: 1px solid #4eb980;
+    text-decoration: none;
+    border-radius: 11%;
 }
