@@ -215,6 +215,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     const userId = localStorage.getItem('id');
+    
     return {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.id, userId)),
         rateBook: (bookId, rating) => dispatch(booksActions.rateBook(bookId, rating)),

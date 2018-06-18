@@ -29,7 +29,6 @@ export default function errors(state = { validationErrors: [], error: null }, ac
 }
 
 function removeFromCollection(collection, param) {
-    debugger;
     const length = collection.length;
     const index = collection.findIndex(item => item.param === param);
     const newCollection = [
