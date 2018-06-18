@@ -11,7 +11,7 @@ class ParticipantPartial extends Component {
                         <img src={this.props.participant.photo} alt="user" className="profile-photo-lg" />
                         <div className="friend-info">
                             <h5>
-                                <Link to={"/users/" + this.props.participant.username} className="profile-link">{this.props.participant.username}</Link>
+                                <Link to={"/users/" + this.props.participant.username + "/profile"} className="profile-link">{this.props.participant.username}</Link>
                             </h5>
                         </div>
                     </div>

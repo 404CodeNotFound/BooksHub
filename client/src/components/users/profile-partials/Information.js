@@ -51,14 +51,6 @@ class Information extends Component {
                 <dd>
                     {this.props.user.age ? this.props.user.age : "-"}
                 </dd>
-
-                <dt>
-                    Gender
-                </dt>
-                <dd>
-                    {this.props.user.gender ? this.props.user.gender : "-"}
-                </dd>
-
                 <dt>
                     Languages
                 </dt>

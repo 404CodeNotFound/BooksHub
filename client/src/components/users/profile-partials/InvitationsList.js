@@ -26,12 +26,12 @@ class InvitationsList extends Component {
                                 <div key={invitation._id} className="nearby-user">
                                     <div className="row">
                                         <div className="col-md-2 col-sm-2">
-                                            <Link to={"/users/" + invitation.sender.username}>
+                                            <Link to={"/users/" + invitation.sender.username + "/profile"}>
                                                 <img src={invitation.sender.photo} alt="user" className="profile-photo-lg" />
                                             </Link>
                                         </div>
                                         <div className="col-md-6 col-sm-6">
-                                            <Link to={"/users/" + invitation.sender.username}>
+                                            <Link to={"/users/" + invitation.sender.username + "/profile"}>
                                                 <h5 className="profile-link">{invitation.sender.first_name} {invitation.sender.last_name}</h5>
                                                 <p>{invitation.sender.username}</p>
                                             </Link>

@@ -59,7 +59,7 @@ class EventsList extends Component {
                                             </Link>
                                             <h5>
                                                 <small>by
-                                                <Link to={"/users/" + event.creator.username}> {event.creator.username}</Link>
+                                                <Link to={"/users/" + event.creator.username + "/profile"}> {event.creator.username}</Link>
                                                 </small>
                                             </h5>
                                         </div>
