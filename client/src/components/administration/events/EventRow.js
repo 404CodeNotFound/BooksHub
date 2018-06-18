@@ -16,10 +16,10 @@ class EventRow extends Component {
                     {this.props.event.title}
                 </td>
                 <td>
-                    {this.props.event.start_date.split('T')[0]}
+                    {this.props.event.start_date ? this.props.event.start_date.split('T')[0] : '-'}
                 </td>
                 <td>
-                    {this.props.event.end_date.split('T')[0]}
+                    {this.props.event.end_date ? this.props.event.end_date.split('T')[0] : '-'}
                 </td>
                 <td>
                     {this.props.event.place}

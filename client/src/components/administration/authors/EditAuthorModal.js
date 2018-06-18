@@ -15,7 +15,7 @@ class EditAuthorModal extends Component {
             lastname: this.props.author.last_name,
             nationality: this.props.author.nationality,
             age: this.props.author.age,
-            birthdate: new Date(this.props.author.birth_date.split('T')[0]),
+            birthdate: this.props.author.birth_date ? new Date(this.props.author.birth_date.split('T')[0]) : new Date(),
             biography: this.props.author.biography,
             website: this.props.author.website,
             photo: this.props.author.photo
@@ -73,7 +73,7 @@ class EditAuthorModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="biography">Biography</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="biography" name="biography" type="text" value={this.state.biography || ''} onChange={this.handleBiographyChange} />
+                            <textarea className="form-control" id="biography" name="biography" value={this.state.biography || ''} onChange={this.handleBiographyChange}></textarea>
                         </div>
                     </div>
 

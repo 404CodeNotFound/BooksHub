@@ -218,7 +218,7 @@ module.exports = class BooksData {
                 .sort({ 'start_date': '1' })
                 .limit(4)
                 .populate({ path: 'genres', select: 'name' })
-                .populate({ path: 'author', select: 'frist_name last_name' })
+                .populate({ path: 'author', select: 'first_name last_name' })
                 .exec((err, books) => {
                     if (err) {
                         return reject(err);

@@ -145,7 +145,7 @@ export function getAllUserFriends(id) {
 
 export function updateProfile(user, isAdminPage) {
     const token = localStorage.getItem('token');
-    
+
     return function (dispatch) {
         return requester.putAuthorized(token, `${api.USERS}/${user.username}`, user)
             .done(response => {
@@ -168,10 +168,19 @@ export function updateProfile(user, isAdminPage) {
                 }
                 
                 dispatch(modalsActions.closeEditUserModal());
-                dispatch(successActions.actionSucceeded('Your profile was updated!'));                                                        
+
+                if (isAdminPage) {
+                    dispatch(successActions.actionSucceeded('User was updated!'));                                                        
+                } else {
+                    dispatch(successActions.actionSucceeded('Your profile was updated!'));
+                }
             })
             .fail(error => {
-                dispatch(errorActions.actionFailed(error.responseJSON.message));
+                if (error.responseJSON.hasOwnProperty('message')) {
+                    dispatch(errorActions.actionFailed(error.responseJSON.message));
+                } else {
+                    dispatch(errorActions.validationFailed(error.responseJSON));
+                }
             });
     }
 }
