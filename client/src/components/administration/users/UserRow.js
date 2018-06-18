@@ -25,7 +25,7 @@ class UserRow extends Component {
                     {this.props.user.nationality}
                 </td>
                 <td>
-                    {this.props.user.birth_date.split('T')[0]}
+                    {this.props.user.birth_date ? this.props.user.birth_date.split('T')[0] : '-'}
                 </td>
                 <td>
                     {this.props.user.role}

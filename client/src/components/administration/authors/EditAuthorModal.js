@@ -15,7 +15,7 @@ class EditAuthorModal extends Component {
             lastname: this.props.author.last_name,
             nationality: this.props.author.nationality,
             age: this.props.author.age,
-            birthdate: new Date(this.props.author.birth_date.split('T')[0]),
+            birthdate: this.props.author.birth_date ? new Date(this.props.author.birth_date.split('T')[0]) : new Date(),
             biography: this.props.author.biography,
             website: this.props.author.website,
             photo: this.props.author.photo

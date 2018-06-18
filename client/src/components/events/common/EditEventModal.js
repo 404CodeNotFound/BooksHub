@@ -13,8 +13,8 @@ class EditEventModal extends Component {
         super(props);
         this.state = {
             title: this.props.event.title,
-            start_date: new Date(this.props.event.start_date),
-            end_date: new Date(this.props.event.end_date),
+            start_date: this.props.event.start_date ? new Date(this.props.event.start_date) : new Date(),
+            end_date: this.props.event.end_date ? new Date(this.props.event.end_date) : new Date(),
             place: this.props.event.place,
             city: this.props.event.city,
             details: this.props.event.details,

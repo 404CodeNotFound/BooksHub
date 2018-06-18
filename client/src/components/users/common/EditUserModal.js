@@ -27,7 +27,7 @@ class EditUserModal extends Component {
             lastname: this.props.user.last_name,
             nationality: this.props.user.nationality,
             age: this.props.user.age,
-            birthdate: new Date(this.props.user.birth_date.split('T')[0]),
+            birthdate: this.props.user.birth_date ? new Date(this.props.user.birth_date.split('T')[0]) : new Date(),
             gender: this.props.user.gender,
             favourite_quote: this.props.user.favourite_quote,
             languages: this.props.user.languages,

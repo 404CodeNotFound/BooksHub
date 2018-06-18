@@ -18,7 +18,7 @@ class AuthorRow extends Component {
                     {this.props.author.nationality}
                 </td>
                 <td>
-                    {this.props.author.birth_date.split('T')[0]}
+                    {this.props.author.birth_date ? this.props.author.birth_date.split('T')[0] : '-'}
                 </td>
                 <td>
                     <a href={this.props.author.website}>{this.props.author.website}</a>
