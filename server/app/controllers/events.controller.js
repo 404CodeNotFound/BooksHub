@@ -60,8 +60,16 @@ module.exports = (data) => {
                     return data.events.getLatestEvents();
                 })
                 .then(events => {
-                    res.status(200)
-                        .json({ events: events });
+                    if (events.length <= 0) {
+                        return data.events.getLatestEvents()
+                            .then(latestEvents => {
+                                res.status(200)
+                                    .json({ events: latestEvents });
+                            });
+                    } else {
+                        res.status(200)
+                            .json({ events: events });
+                    }
                 })
                 .catch(error => {
                     generateErrorResponse(res, error.message);

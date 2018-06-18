@@ -402,10 +402,8 @@ module.exports = (data) => {
             req.checkBody('first_name', 'First name is required.').notEmpty();
             req.checkBody('last_name', 'Last name is required.').notEmpty();
             req.checkBody('genres', 'At least one genre must be selected.').notEmpty();
-            
-            const errors = req.validationErrors();
 
-            console.log(req.body);
+            const errors = req.validationErrors();
 
             if (errors) {
                 res.status(400)
@@ -420,7 +418,6 @@ module.exports = (data) => {
                             .json({ user: updatedUser });
                     })
                     .catch(error => {
-                        console.log(error);
                         return res.status(500)
                             .json({ message: 'Something went wrong.' });
                     });

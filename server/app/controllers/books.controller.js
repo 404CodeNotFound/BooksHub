@@ -152,8 +152,16 @@ module.exports = (data) => {
                     return data.books.getLatestBooks();
                 })
                 .then(books => {
-                    res.status(200)
-                        .json({ books: books });
+                    if (books.length <= 0) {
+                        return data.books.getLatestBooks()
+                            .then(latestBooks => {
+                                res.status(200)
+                                    .json({ books: latestBooks });
+                            });
+                    } else {
+                        res.status(200)
+                            .json({ books: books });
+                    }
                 })
                 .catch(error => {
                     generateErrorResponse(res, error.message);
