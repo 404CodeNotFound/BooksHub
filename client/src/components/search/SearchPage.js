@@ -83,7 +83,7 @@ class SearchPage extends Component {
                     <img className="arrow-object" src={this.state.arrowImageSrc} alt="" />
                 </header>,
                 <section className="full-width background-white text-center" id="results" key="results">
-                    <div className="margin2x">
+                    <div>
                         {this.state.showBooksResults &&
                             <BooksResultPage books={this.props.books} searchValue={this.state.searchValue} search={this.props.searchBook} />
                         }
