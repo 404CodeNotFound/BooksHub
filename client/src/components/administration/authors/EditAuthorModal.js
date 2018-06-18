@@ -73,7 +73,7 @@ class EditAuthorModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="biography">Biography</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="biography" name="biography" type="text" value={this.state.biography || ''} onChange={this.handleBiographyChange} />
+                            <textarea className="form-control" id="biography" name="biography" value={this.state.biography || ''} onChange={this.handleBiographyChange}></textarea>
                         </div>
                     </div>
 

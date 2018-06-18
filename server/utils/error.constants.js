@@ -25,5 +25,5 @@ module.exports = {
     EVENT_NOT_FOUND: "Event was not found.",   
     PERMISSIONS_DENIED: "Permissions denied!",
     SERVER_ERROR: "Something went wrong!",
-    GENRE_CONFLICT: "Genre with that name already exists.",
+    GENRE_CONFLICT: "Genre with that name already exists."
 }

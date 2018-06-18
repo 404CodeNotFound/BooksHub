@@ -28,7 +28,7 @@ class EventsList extends Component {
                     <hr className="break background-primary break-small break-center margin-bottom-50" />
                 </div>,
                 this.props.title === "Events Collection" && (this.props.userId === this.props.currentUser.id) &&
-                <div className="row new-event-row">
+                <div className="row new-event-row" key="new-event-btn">
                     <button key="add-event" type="button" className="btn btn-main-green" id="create-event-btn" onClick={this.props.openAddEventModal}>
                         <i className="fa fa-plus"></i> New
                 </button>
@@ -41,7 +41,7 @@ class EventsList extends Component {
                                     <div className="float-left">
                                         {event.creator._id === this.props.currentUser.id && (this.props.userId === this.props.currentUser.id) ?
                                             <div className="event-cover">
-                                                <img src={event.photo} height="200px" alt="event" />
+                                                <img src={event.photo} className="my-events-imgs" alt="event" />
                                                 <div>
                                                     <i className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => this.props.deleteEvent(event._id, false)}></i>
                                                     <i className="fa fa-pencil fa-2x" aria-hidden="true" onClick={() => this.props.openEditEventModal(event)}></i>
@@ -59,7 +59,7 @@ class EventsList extends Component {
                                             </Link>
                                             <h5>
                                                 <small>by
-                                                <Link to={"/users/" + event.creator.username}> {event.creator.username}</Link>
+                                                <Link to={"/users/" + event.creator.username + "/profile"}> {event.creator.username}</Link>
                                                 </small>
                                             </h5>
                                         </div>

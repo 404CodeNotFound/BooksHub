@@ -48,7 +48,7 @@ class EventsResultPartial extends Component {
                                 this.props.events.map(event =>
                                     <div key={event._id} className="card col-lg-3">
                                         <Link to={"/events/" + event._id}>
-                                            <img height="100px" className="card-img-top img-thumbnail" src={event.photo} alt="" />
+                                            <img className="card-img-top img-thumbnail found-event-img" src={event.photo} alt="" />
                                         </Link>
                                         <div className="card-block">
                                             <h4 className="card-title">

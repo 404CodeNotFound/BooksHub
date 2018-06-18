@@ -28,7 +28,7 @@ class AddAuthorModal extends Component {
                 </div>
                 <div className="modal-body">
                     <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="firstname">Firstname</label>
+                        <label className="col-md-2 control-label" htmlFor="firstname">First Name</label>
                         <div className="col-md-8">
                             <input className="form-control" id="firstname" name="firstname" type="text" onChange={this.handleFirstnameChange} />
                             {this.props.firstnameError &&
@@ -38,7 +38,7 @@ class AddAuthorModal extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label className="col-md-2 control-label" htmlFor="lastname">Lastname</label>
+                        <label className="col-md-2 control-label" htmlFor="lastname">Last Name</label>
                         <div className="col-md-8">
                             <input className="form-control" id="lastname" name="lastname" type="text" onChange={this.handleLastnameChange} />
                             {this.props.lastnameError &&
@@ -71,7 +71,7 @@ class AddAuthorModal extends Component {
                     <div className="form-group row">
                         <label className="col-md-2 control-label" htmlFor="biography">Biography</label>
                         <div className="col-md-8">
-                            <input className="form-control" id="biography" name="biography" type="text" onChange={this.handleBiographyChange} />
+                            <textarea className="form-control" id="biography" name="biography" onChange={this.handleBiographyChange}></textarea>
                         </div>
                     </div>
 
@@ -141,7 +141,6 @@ class AddAuthorModal extends Component {
             website: this.state.website
         };
 
-        debugger;
         this.props.addAuthor(author);
     }
 }

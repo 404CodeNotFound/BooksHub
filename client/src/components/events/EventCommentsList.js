@@ -25,10 +25,10 @@ class EventCommentsList extends Component {
                                     <div className="mbr-author card-footer">
                                         <div className="mbr-author-name">
                                             by
-                                        <Link to={"/users/" + comment.user.username} className="green-link">
+                                        <Link to={"/users/" + comment.user.username + "/profile"} className="green-link">
                                                 <img src={comment.user.photo} id="review-user-img" alt="" className="img-circle" width="2%" />
                                             </Link>
-                                            <Link to={"/users/" + comment.user.username}>{comment.user.username}</Link>
+                                            <Link to={"/users/" + comment.user.username + "/profile"}>{comment.user.username}</Link>
                                         </div>
                                     </div>
                                 </div>

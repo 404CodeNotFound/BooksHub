@@ -19,7 +19,6 @@ export function getUserReviews(id, page) {
     return function (dispatch) {
         return requester.get(`${api.USERS}/${id}/reviews?page=${page}`)
             .done(response => {
-                debugger;
                 dispatch(getUserReviewsSuccess(response));
             })
             .fail(error => {

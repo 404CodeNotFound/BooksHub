@@ -13,11 +13,11 @@ class UsersResultPartial extends Component {
                                 {this.props.users.length > 0 ?
                                     this.props.users.map(user =>
                                         <div key={user._id} className="col-md-2 col-sm-4 col-xs-2 text-center">
-                                            <Link to={"/users/" + user.username}>
+                                            <Link to={"/users/" + user.username + "/profile"}>
                                                 <img src={user.photo} className="img-circle" alt={user.username} styles="width: 70px;" />
                                             </Link>
                                             <p>
-                                                <Link to={"/users/" + user.username}>{user.username}</Link>
+                                                <Link to={"/users/" + user.username + "/profile"}>{user.username}</Link>
                                             </p>
                                         </div>
                                     ) :

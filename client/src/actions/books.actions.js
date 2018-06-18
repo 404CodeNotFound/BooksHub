@@ -97,7 +97,7 @@ export function getBookDetails(bookId, userId) {
 
                 let bookStatus = response.book.statuses.find(status => status.user === userId);
                 if (!bookStatus) {
-                    bookStatus = { name: 'WantToRead' };
+                    bookStatus = { name: 'None' };
                 }
 
                 dispatch(getBookDetailsSuccess(response.book, userCanWriteReview, currentUserRating.stars, bookStatus.name));
