@@ -36,7 +36,7 @@ module.exports = (data) => {
                         .then(genreName => {
                             if (genreName) {
                                 res.status(400)
-                                    .json({ message: errors.GENRE_CONFLICT });
+                                    .json({ message: 'Genre with that name already exists.' });
                             } else {
                                 data.genres.createGenre(genre)
                                     .then(createdGenre => {
