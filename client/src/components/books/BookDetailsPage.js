@@ -138,7 +138,8 @@ class BookDetailsPage extends Component {
                                     <div className="row buttons">
                                         {this.props.currentUser.username &&
                                             <form className="col-md-3 col-sm-12" id="status-form">
-                                                <select defaultValue={this.props.bookStatus} className="btn-main-sm" name="CurrentStatus" id="mark-book" onChange={(event) => this.markBook(event)}>
+                                                <select defaultValue={this.props.bookStatus || "--Select--"} className="btn-main-sm" name="CurrentStatus" id="mark-book" onChange={(event) => this.markBook(event)}>
+                                                    <option value="None" disabled>--Select--</option>
                                                     <option value="CurrentlyReading">Currently Reading</option>
                                                     <option value="Read">Read</option>
                                                     <option value="WantToRead">Want To Read</option>
@@ -214,6 +215,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     const userId = localStorage.getItem('id');
+    
     return {
         getBookDetails: () => dispatch(booksActions.getBookDetails(ownProps.match.params.id, userId)),
         rateBook: (bookId, rating) => dispatch(booksActions.rateBook(bookId, rating)),

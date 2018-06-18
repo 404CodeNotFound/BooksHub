@@ -134,7 +134,6 @@ class AuthorBiographyPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     return {
         author: state.authors.author,
         books: state.authors.author.books,

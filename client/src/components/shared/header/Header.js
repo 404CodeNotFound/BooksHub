@@ -115,7 +115,6 @@ $(window).scroll(function () {
 });
 
 $('.nav-text').click(function () {
-    console.log('navigation')
     $('.top-nav > ul').toggleClass('show-menu', 'fast');
 });
 

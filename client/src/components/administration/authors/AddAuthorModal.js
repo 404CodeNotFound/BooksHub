@@ -141,7 +141,6 @@ class AddAuthorModal extends Component {
             website: this.state.website
         };
 
-        debugger;
         this.props.addAuthor(author);
     }
 }

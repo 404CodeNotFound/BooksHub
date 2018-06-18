@@ -14,7 +14,6 @@ class BooksListPage extends Component {
         this.props.showLoader();
 
         if (this.props.currentUser.id) {
-            debugger;
             this.props.getRecommendedBooks();
         } else {
             this.props.getLatestBooks();
