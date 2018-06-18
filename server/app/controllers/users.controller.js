@@ -401,6 +401,7 @@ module.exports = (data) => {
             req.checkBody('email', 'Email is required.').notEmpty();
             req.checkBody('first_name', 'First name is required.').notEmpty();
             req.checkBody('last_name', 'Last name is required.').notEmpty();
+            req.checkBody('photo', 'Photo is required.').notEmpty();
             req.checkBody('genres', 'At least one genre must be selected.').notEmpty();
 
             const errors = req.validationErrors();

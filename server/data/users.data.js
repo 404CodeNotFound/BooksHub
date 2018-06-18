@@ -404,6 +404,7 @@ module.exports = class UserData {
                     languages: user.languages.split(', '),
                     favourite_quote: user.favouriteQuote,
                     favourite_genres: user.genres.split(', '),
+                    photo: user.photo
                 }
             }, { new: true })
             .populate('favourite_genres')

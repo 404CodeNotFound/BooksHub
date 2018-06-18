@@ -31,7 +31,8 @@ class EditUserModal extends Component {
             gender: this.props.user.gender,
             favourite_quote: this.props.user.favourite_quote,
             languages: this.props.user.languages,
-            genres: this.props.user.genres
+            genres: this.props.user.genres,
+            photo: this.props.user.photo
         };
     }
 
@@ -75,6 +76,16 @@ class EditUserModal extends Component {
                                 <input className="form-control" id="lastname" name="lastname" type="text" value={this.state.lastname || ''} onChange={this.handleLastnameChange} />
                                 {this.props.lastNameError &&
                                     <div className="error">{this.props.lastNameError.msg}</div>
+                                }
+                            </div>
+                        </div>
+
+                        <div className="form-group row">
+                            <label className="col-md-2 control-label" htmlFor="photo">Photo</label>
+                            <div className="col-md-8">
+                                <input className="form-control" id="photo" name="photo" type="text" value={this.state.photo || ''} onChange={this.handlePhotoChange} />
+                                {this.props.photoError &&
+                                    <div className="error">{this.props.photoError.msg}</div>
                                 }
                             </div>
                         </div>
@@ -186,6 +197,14 @@ class EditUserModal extends Component {
         this.setState({ lastname: event.target.value });
     }
 
+    handlePhotoChange = (event) => {
+        if (this.props.photoError) {
+            this.props.removeValidationError('photo');
+        }
+
+        this.setState({ photo: event.target.value });
+    }
+
     handleNationalityChange = (event) => {
         this.setState({ nationality: event.target.value });
     }
@@ -233,7 +252,8 @@ class EditUserModal extends Component {
             age: this.state.age,
             birthdate: this.state.birthdate,
             gender: this.state.gender,
-            favouriteQuote: this.state.favourite_quote
+            favouriteQuote: this.state.favourite_quote,
+            photo: this.state.photo
         };
 
         this.props.updateProfile(user, this.props.isAdminPage);
@@ -245,6 +265,7 @@ function mapStateToProps(state, ownProps) {
     const lastNameError = state.errors.validationErrors.find(error => error.param === 'last_name');
     const emailError = state.errors.validationErrors.find(error => error.param === 'email');
     const genresError = state.errors.validationErrors.find(error => error.param === 'genres');
+    const photoError = state.errors.validationErrors.find(error => error.param === 'photo');    
 
     return {
         user: state.modals.userToEdit,
@@ -252,7 +273,8 @@ function mapStateToProps(state, ownProps) {
         emailError: emailError,
         firstNameError: firstNameError,
         lastNameError: lastNameError,
-        genresError: genresError,        
+        photoError: photoError,
+        genresError: genresError,
     };
 }
 
