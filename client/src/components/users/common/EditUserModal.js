@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as usersActions from '../../../actions/users.actions';
 import * as modalsActions from '../../../actions/modals.actions';
 import * as genresActions from '../../../actions/genres.actions';
+import * as errorsActions from '../../../actions/error.actions';
 
 const LANGUAGES = [
 	{ label: 'Bulgarian', value: 'Bulgarian' },
@@ -52,6 +53,9 @@ class EditUserModal extends Component {
                             <label className="col-md-2 control-label" htmlFor="email">Email</label>
                             <div className="col-md-8">
                                 <input className="form-control" id="email" name="email" type="text" value={this.state.email || ''} onChange={this.handleEmailChange} />
+                                {this.props.emailError &&
+                                    <div className="error">{this.props.emailError.msg}</div>
+                                }
                             </div>
                         </div>
 
@@ -59,6 +63,9 @@ class EditUserModal extends Component {
                             <label className="col-md-2 control-label" htmlFor="firstname">First Name</label>
                             <div className="col-md-8">
                                 <input className="form-control" id="firstname" name="firstname" type="text" value={this.state.firstname || ''} onChange={this.handleFirstnameChange} />
+                                {this.props.firstNameError &&
+                                    <div className="error">{this.props.firstNameError.msg}</div>
+                                }
                             </div>
                         </div>
 
@@ -66,6 +73,9 @@ class EditUserModal extends Component {
                             <label className="col-md-2 control-label" htmlFor="lastname">Last Name</label>
                             <div className="col-md-8">
                                 <input className="form-control" id="lastname" name="lastname" type="text" value={this.state.lastname || ''} onChange={this.handleLastnameChange} />
+                                {this.props.lastNameError &&
+                                    <div className="error">{this.props.lastNameError.msg}</div>
+                                }
                             </div>
                         </div>
 
@@ -134,7 +144,11 @@ class EditUserModal extends Component {
                                     joinValues
                                     value={this.state.genres}
                                 />
-                            </div>                            
+                                {this.props.genresError &&
+                                    <div className="error">{this.props.genresError.msg}</div>
+                                }
+                            </div>
+                                                        
                         </div>
 
                     </div>
@@ -149,14 +163,26 @@ class EditUserModal extends Component {
     }
 
     handleEmailChange = (event) => {
+        if (this.props.emailError) {
+            this.props.removeValidationError('email');
+        }
+
         this.setState({ email: event.target.value });
     }
 
     handleFirstnameChange = (event) => {
+        if (this.props.firstNameError) {
+            this.props.removeValidationError('first_name');
+        }
+
         this.setState({ firstname: event.target.value });
     }
 
     handleLastnameChange = (event) => {
+        if (this.props.lastNameError) {
+            this.props.removeValidationError('last_name');
+        }
+
         this.setState({ lastname: event.target.value });
     }
 
@@ -185,6 +211,10 @@ class EditUserModal extends Component {
     }
 
     handleGenresChange = (value) => {
+        if (this.props.genresError) {
+            this.props.removeValidationError('genres');
+        }
+
         this.setState({ genres: value });
     }
 
@@ -195,8 +225,8 @@ class EditUserModal extends Component {
         const user = {
             username: this.state.username,
             email: this.state.email,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
+            first_name: this.state.firstname,
+            last_name: this.state.lastname,
             nationality: this.state.nationality,
             languages: languages.join(', '),
             genres: genres.join(', '),
@@ -211,9 +241,18 @@ class EditUserModal extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    const firstNameError = state.errors.validationErrors.find(error => error.param === 'first_name');
+    const lastNameError = state.errors.validationErrors.find(error => error.param === 'last_name');
+    const emailError = state.errors.validationErrors.find(error => error.param === 'email');
+    const genresError = state.errors.validationErrors.find(error => error.param === 'genres');
+
     return {
         user: state.modals.userToEdit,
         genresSelectValues: state.genres.genresSelectValues,
+        emailError: emailError,
+        firstNameError: firstNameError,
+        lastNameError: lastNameError,
+        genresError: genresError,        
     };
 }
 
@@ -221,7 +260,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         updateProfile: (user, isAdminPage) => dispatch(usersActions.updateProfile(user, isAdminPage)),
         closeEditUserModal: () => dispatch(modalsActions.closeEditUserModal()),
-        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues())
+        getAllGenres: () => dispatch(genresActions.getAllGenresAsSelectValues()),
+        removeValidationError: (param) => dispatch(errorsActions.removeValidationError(param))
     };
 }
 

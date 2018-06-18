@@ -398,18 +398,33 @@ module.exports = (data) => {
                     .json({ message: "Users can only edit their profiles." });
             }
 
-            const userData = req.body;
-            userData.username = req.body.username;
+            req.checkBody('email', 'Email is required.').notEmpty();
+            req.checkBody('first_name', 'First name is required.').notEmpty();
+            req.checkBody('last_name', 'Last name is required.').notEmpty();
+            req.checkBody('genres', 'At least one genre must be selected.').notEmpty();
+            
+            const errors = req.validationErrors();
 
-            data.users.updateUser(userData)
-                .then((updatedUser) => {
-                    return res.status(201)
-                        .json({ user: updatedUser });
-                })
-                .catch(error => {
-                    return res.status(500)
-                        .json({ message: 'Something went wrong.' });
-                });
+            console.log(req.body);
+
+            if (errors) {
+                res.status(400)
+                    .json(errors);
+            } else {
+                const userData = req.body;
+                userData.username = req.body.username;
+
+                data.users.updateUser(userData)
+                    .then((updatedUser) => {
+                        return res.status(201)
+                            .json({ user: updatedUser });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        return res.status(500)
+                            .json({ message: 'Something went wrong.' });
+                    });
+            }
         },
         getAllUsers: (req, res) => {
             if (req.user.role !== 'Admin') {

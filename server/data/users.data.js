@@ -394,8 +394,8 @@ module.exports = class UserData {
         return new Promise((resolve, reject) => {
             User.findOneAndUpdate({ username: user.username }, {
                 $set: {
-                    first_name: user.firstname,
-                    last_name: user.lastname,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
                     email: user.email,
                     nationality: user.nationality,
                     age: user.age,
